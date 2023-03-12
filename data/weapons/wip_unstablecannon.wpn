@@ -1,0 +1,30 @@
+{
+  "id":"wip_unstablecannon",
+  "specClass":"projectile",
+  "type":"ENERGY",
+  "size":"LARGE",
+  "turretSprite":"graphics/weapons/wip_unstablecannon_turret.png",
+  "turretGlowSprite":"graphics/weapons/wip_unstablecannon_turret_glow.png",
+  "hardpointSprite":"graphics/weapons/wip_unstablecannon_hardpoint.png",
+  "hardpointGlowSprite":"graphics/weapons/wip_unstablecannon_hardpoint_glow.png",
+  "everyFrameEffect":"untitled.combat.scripts.UnstableCannonEffect",
+  "onFireEffect":"untitled.combat.scripts.UnstableCannonEffect",
+  "glowColor":[255,128,255,255],
+  "turretOffsets":[15, 0],
+  "turretAngleOffsets":[0],
+  "hardpointOffsets":[20, 0],
+  "hardpointAngleOffsets":[0],
+  "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
+  "animationType":"GLOW_AND_FLASH",
+  "muzzleFlashSpec":{"length":30.0,   # only used if animationType = MUZZLE_FLASH
+    "spread":25.0,
+    "particleSizeMin":15.0,
+    "particleSizeRange":10.0,
+    "particleDuration":0.12,
+    "particleCount":15,
+    "particleColor":[255,128,255,255]},
+  "autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
+  #"requiresFullCharge":true,  # for pulse weapons - whether the weapon will fire at a lower strength partial charge
+  "projectileSpecId":"wip_unstablecannon_shot",  # projectile that will be fired
+  "fireSoundTwo":"pulse_laser_fire",
+}
