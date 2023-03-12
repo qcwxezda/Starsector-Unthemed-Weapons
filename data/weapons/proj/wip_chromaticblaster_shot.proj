@@ -1,0 +1,19 @@
+{
+  "id":"wip_chromaticblaster_shot",
+  "specClass":"projectile",
+  "spawnType":"BALLISTIC",
+  "collisionClass":"NONE",
+  "collisionClassByFighter":"NONE",
+  "width":100.0,
+  "length":100.0,
+  "fadeTime":0.5,
+  "fringeColor":[64,128,255,0],
+  "coreColor":[64,128,255,0],
+  "glowColor": [64, 128, 255, 0],
+  #"glowRadius":50.0,
+  "hitGlowRadius":50.0,
+  "textureScrollSpeed":64.0,
+  "pixelsPerTexel":15.0,
+  "passThroughMissiles":true,
+  "bulletSprite":"graphics/missiles/shell_large_blue.png"
+}
