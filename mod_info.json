@@ -1,0 +1,9 @@
+{
+	"id":"untitledmod",
+	"name":"Untitled Mod",
+	"author":"this_is_a_username",
+	"version":"0.0.1", 
+	"description":"A WIP mod...",
+    "gameVersion": "0.95.1a-RC6",
+	"jars": ["jars/Untitled.jar"]
+}

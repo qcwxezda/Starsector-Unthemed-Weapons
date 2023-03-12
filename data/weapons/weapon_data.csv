@@ -1,0 +1,20 @@
+name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn rate,OPs,ammo,ammo/sec,reload size,type,energy/shot,energy/second,chargeup,chargedown,burst size,burst delay,min spread,max spread,spread/shot,spread decay/sec,beam speed,proj speed,launch speed,flight time,proj hitpoints,autofireAccBonus,extraArcForAI,hints,tags,groupTag,tech/manufacturer,for weapon tooltip>>,primaryRoleStr,speedStr,trackingStr,turnRateStr,accuracyStr,customPrimary,customPrimaryHL,customAncillary,customAncillaryHL,noDPSInTooltip,number
+
+##### LARGE ENERGY
+
+Energy Bolt Repeater,wip_plasmarepeater,3,0.5,9000,800,,250,75,,24,25,,,,ENERGY,250,,0.2,0.2,,,,10,0.5,3,,500,,,250,,,,"energy15, rare_bp, hist1t, merc",,,,General,,,,,,,,,,0
+Energy Missile Test,wip_energymissiletest,3,0.5,9000,800,,250,75,,15,25,,,,ENERGY,250,,0.2,0.2,,,,10,0.5,3,,500,500,3,250,,,,"energy15, rare_bp, hist1t, merc",,,,General,,,,,,,,,,1
+Graviton Array,wip_impactlance,1,0.75,4500,1000,700,,,10,15,22,9,0.3,3,KINETIC,,600,,,1,0.5,,,,,5000,,,,,,,,"beam15, kinetic15, LR, rare_bp, hist1t, merc",,,,Suppression,,,,,,,,,,2
+Voidbeam Emitter,wip_voidray,3,0.25,10000,1000,2500,,,,5,30,,,,FRAGMENTATION,,750,5,1,,,,,,,3000,,,,,,,FIRE_WHEN_INEFFICIENT,"beam20, LR, rare_bp, hist1t, merc",,,,Anti Large Craft,,,,,"At full strength, hits on hull or armor may arc to weapons and engines, dealing extra EMP and energy damage. Hits on shields may generate a shield-penetrating arc based on the target's hard flux level. The chance to generate an EMP arc is greatest at maximum range and falls off at close range. ",,"Deals %s of damage as hard flux to shields at close range, degrading to %s at maximum range.",100% | 0%,,3
+Chromatic Bolt Carrier,wip_chromaticblaster,2,0.5,6000,800,,300,,,15,25,,,,ENERGY,3000,,0.5,5.5,,,,,,,,200,,,400,,,STRIKE,"energy18, rare_bp, hist1t, merc",,,,General,,,,,"Generates a cloud of unstable energy that deals no damage and passes through inert and small objects. When in close proximity to a ship or fighter, the cloud instantaneously condenses into a volley of %s projectiles that converge on the target and deal %s damage each.
+
+The energy cloud's affinity cycles continuously and heavily influences its projectiles' composition.",12 | 300,,,,4
+Ultra Blaster,wip_ultrablaster,2,0.75,5000,700,,1250,,,9,24,,,,HIGH_EXPLOSIVE,1800,,0.5,4.5,,,,,,,,1500,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 100,,,,5
+Chaos Pulser,wip_unstablecannon,2,0.5,7500,800,,166.7,,,12,27,,,,ENERGY,150,,0.25,,,,,,,,,1000,,,250,,,,"energy20, rare_p, hist1t, merc",,,,General,,,,Varies,Fires projectiles of varying strength that deal anywhere from %s to %s damage. Weaker projectiles are significantly more likely to be generated. Stronger projectiles are unstable and prone to erratic movement.,100 | 500,,,,6
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Chromatic Bolt,wip_chromaticblaster_spawn,,,,300,,300,,,,,,,,ENERGY,0,,0	,0.1,,,,,,,,500,,,100,,,SYSTEM,,,,,,,,,,,,,,
+
+
+
+### MEDIUM ENERGY
+Sustained PD Laser,wip_fragpdbeam
