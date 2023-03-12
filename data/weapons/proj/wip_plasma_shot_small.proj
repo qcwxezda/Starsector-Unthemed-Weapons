@@ -1,0 +1,12 @@
+{
+	"id":"wip_plasma_shot_small",
+	"specClass":"projectile",
+	"spawnType":"PLASMA",
+	"onHitEffect":"untitled.combat.scripts.SmallPlasmaOnHitEffect",
+	"collisionClass":"PROJECTILE_FF",
+	"collisionClassByFighter":"PROJECTILE_FIGHTER",
+	"width":25.0,
+	"fadeTime":0.5,
+	"fringeColor":[255,255,0,255],
+	"coreColor":[0,255,255,255]
+}
