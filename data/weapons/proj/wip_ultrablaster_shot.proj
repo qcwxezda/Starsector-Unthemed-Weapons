@@ -1,0 +1,20 @@
+{
+  "id":"wip_ultrablaster_shot",
+  "specClass":"projectile",
+  "spawnType":"BALLISTIC_AS_BEAM",
+  "collisionClass":"RAY",
+  "collisionClassByFighter":"RAY_FIGHTER",
+  "onHitEffect":"untitled.combat.scripts.UltraBlasterOnHitEffect",
+  "length":85.0,
+  "width":15,
+  "fadeTime":0.3,
+  "fringeColor":[255,100,100,255],
+  "coreColor":[255,255,255,255],
+  "glowColor":[255,0,0,125],
+  "glowRadius":60,
+  "hitGlowRadius":120,
+  "textureScrollSpeed":64.0,
+  "pixelsPerTexel":5.0,
+  "passThroughMissiles": true,
+  "bulletSprite":"graphics/missiles/shell_gauss_cannon.png"
+}
