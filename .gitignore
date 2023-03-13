@@ -1,6 +1,4 @@
 out/
-*.idea/
-jars/
 
 # Compiled class file
 *.class
