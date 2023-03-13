@@ -1,15 +1,15 @@
 {
-  "id":"wip_voidray",
+  "id":"wpnxt_voidray",
   "specClass":"beam",
   "type":"ENERGY",
   "size":"LARGE",
   "collisionClass":"RAY",
   "collisionClassByFighter":"RAY_FIGHTER",
-  "beamEffect":"untitled.combat.scripts.VoidRayEffect",
-  "turretSprite":"graphics/weapons/wip_voidray_turret.png",
-  "turretGlowSprite":"graphics/weapons/wip_voidray_turret_glow.png",
-  "hardpointSprite":"graphics/weapons/wip_voidray_hardpoint.png",
-  "hardpointGlowSprite":"graphics/weapons/wip_voidray_hardpoint_glow.png",
+  "beamEffect":"weaponexpansion.combat.scripts.VoidRayEffect",
+  "turretSprite":"graphics/weapons/wpnxt_voidray_turret.png",
+  "turretGlowSprite":"graphics/weapons/wpnxt_voidray_turret_glow.png",
+  "hardpointSprite":"graphics/weapons/wpnxt_voidray_hardpoint.png",
+  "hardpointGlowSprite":"graphics/weapons/wpnxt_voidray_hardpoint_glow.png",
   "turretOffsets":[15, 0],
   "turretAngleOffsets":[0],
   "hardpointOffsets":[18, 0],
@@ -23,5 +23,5 @@
   "pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER,MISSILE_FF,MISSILE_NO_FF],
   "textureScrollSpeed":120.0,
   "pixelsPerTexel":8.0,
-  "fireSoundTwo":"wip_impactlance_fire"
+  "fireSoundTwo":"wpnxt_impactlance_fire"
 }

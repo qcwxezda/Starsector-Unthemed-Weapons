@@ -1,10 +1,10 @@
 {
-  "id":"wip_ultrablaster_shot",
+  "id":"wpnxt_ultrablaster_shot",
   "specClass":"projectile",
   "spawnType":"BALLISTIC_AS_BEAM",
   "collisionClass":"RAY",
   "collisionClassByFighter":"RAY_FIGHTER",
-  "onHitEffect":"untitled.combat.scripts.UltraBlasterOnHitEffect",
+  "onHitEffect":"weaponexpansion.combat.scripts.UltraBlasterOnHitEffect",
   "length":85.0,
   "width":15,
   "fadeTime":0.3,

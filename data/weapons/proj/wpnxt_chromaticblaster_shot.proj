@@ -1,5 +1,5 @@
 {
-  "id":"wip_chromaticblaster_shot",
+  "id":"wpnxt_chromaticblaster_shot",
   "specClass":"projectile",
   "spawnType":"BALLISTIC",
   "collisionClass":"NONE",

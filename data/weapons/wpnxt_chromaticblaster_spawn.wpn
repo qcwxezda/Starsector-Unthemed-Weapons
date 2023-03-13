@@ -1,5 +1,5 @@
 {
-  "id":"wip_chromaticblaster_spawn",
+  "id":"wpnxt_chromaticblaster_spawn",
   "specClass":"projectile",
   "type":"SYSTEM",
   "size":"SMALL",
@@ -20,7 +20,7 @@
     "particleCount":16,
     "particleColor":[255,100,255,25],
   },
-  "projectileSpecId":"wip_chromaticblaster_spawn_proj",
+  "projectileSpecId":"wpnxt_chromaticblaster_spawn_proj",
   "fireSoundTwo":"heavy_blaster_fire",
 }
 
