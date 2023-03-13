@@ -1,14 +1,14 @@
 {
-  "id":"wip_unstablecannon",
+  "id":"wpnxt_unstablecannon",
   "specClass":"projectile",
   "type":"ENERGY",
   "size":"LARGE",
-  "turretSprite":"graphics/weapons/wip_unstablecannon_turret.png",
-  "turretGlowSprite":"graphics/weapons/wip_unstablecannon_turret_glow.png",
-  "hardpointSprite":"graphics/weapons/wip_unstablecannon_hardpoint.png",
-  "hardpointGlowSprite":"graphics/weapons/wip_unstablecannon_hardpoint_glow.png",
-  "everyFrameEffect":"untitled.combat.scripts.UnstableCannonEffect",
-  "onFireEffect":"untitled.combat.scripts.UnstableCannonEffect",
+  "turretSprite":"graphics/weapons/wpnxt_unstablecannon_turret.png",
+  "turretGlowSprite":"graphics/weapons/wpnxt_unstablecannon_turret_glow.png",
+  "hardpointSprite":"graphics/weapons/wpnxt_unstablecannon_hardpoint.png",
+  "hardpointGlowSprite":"graphics/weapons/wpnxt_unstablecannon_hardpoint_glow.png",
+  "everyFrameEffect":"weaponexpansion.combat.scripts.UnstableCannonEffect",
+  "onFireEffect":"weaponexpansion.combat.scripts.UnstableCannonEffect",
   "glowColor":[255,128,255,255],
   "turretOffsets":[15, 0],
   "turretAngleOffsets":[0],
@@ -25,6 +25,6 @@
     "particleColor":[255,128,255,255]},
   "autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
   #"requiresFullCharge":true,  # for pulse weapons - whether the weapon will fire at a lower strength partial charge
-  "projectileSpecId":"wip_unstablecannon_shot",  # projectile that will be fired
+  "projectileSpecId":"wpnxt_unstablecannon_shot",  # projectile that will be fired
   "fireSoundTwo":"pulse_laser_fire",
 }

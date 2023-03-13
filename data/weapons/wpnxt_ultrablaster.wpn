@@ -1,12 +1,12 @@
 {
-  "id":"wip_ultrablaster",
+  "id":"wpnxt_ultrablaster",
   "specClass":"projectile",
   "type":"ENERGY",
   "size":"LARGE",
-  "turretSprite":"graphics/weapons/wip_ultrablaster_turret.png",
-  "turretGlowSprite":"graphics/weapons/wip_ultrablaster_turret_glow.png",
-  "hardpointSprite":"graphics/weapons/wip_ultrablaster_hardpoint.png",
-  "hardpointGlowSprite":"graphics/weapons/wip_ultrablaster_hardpoint_glow.png",
+  "turretSprite":"graphics/weapons/wpnxt_ultrablaster_turret.png",
+  "turretGlowSprite":"graphics/weapons/wpnxt_ultrablaster_turret_glow.png",
+  "hardpointSprite":"graphics/weapons/wpnxt_ultrablaster_hardpoint.png",
+  "hardpointGlowSprite":"graphics/weapons/wpnxt_ultrablaster_hardpoint_glow.png",
   "glowColor":[255,100,100,255],
   "turretOffsets":[15, 0],
   "turretAngleOffsets":[0],
@@ -23,6 +23,6 @@
     "particleColor":[255,100,100,255]},
   #"autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
   #"requiresFullCharge":true,  # for pulse weapons - whether the weapon will fire at a lower strength partial charge
-  "projectileSpecId":"wip_ultrablaster_shot",  # projectile that will be fired
-  "fireSoundTwo":"wip_ultrablaster_fire",
+  "projectileSpecId":"wpnxt_ultrablaster_shot",  # projectile that will be fired
+  "fireSoundTwo":"wpnxt_ultrablaster_fire",
 }
