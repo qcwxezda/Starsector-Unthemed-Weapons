@@ -1,4 +1,4 @@
-package untitled.combat.scripts;
+package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
 
@@ -7,8 +7,8 @@ public class EnhTaclaserEffect implements BeamEffectPluginWithReset {
 
     ShipAPI affectedShip;
 
-    static final String customDataKey = "wip_enhtaclasercount";
-    static final String modificationSource = "wip_enhtaclasereffect";
+    static final String customDataKey = "wpnxt_enhtaclasercount";
+    static final String modificationSource = "wpnxt_enhtaclasereffect";
     static final float debuffPerBeam = 0.03f, maxDebuff = 0.15f;
 
     @Override

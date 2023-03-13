@@ -1,5 +1,5 @@
 {
-  "id":"wip_unstablecannon_shot",
+  "id":"wpnxt_unstablecannon_shot",
   "specClass":"projectile",
   "spawnType":"BALLISTIC_AS_BEAM",
   "collisionClass":"RAY",

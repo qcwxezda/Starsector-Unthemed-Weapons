@@ -1,12 +1,12 @@
 {
-	"id":"wip_chromaticblaster",
+	"id":"wpnxt_chromaticblaster",
 	"specClass":"projectile",
 	"type":"ENERGY",
 	"size":"LARGE",
-	"turretSprite":"graphics/weapons/wip_chromaticblaster_turret.png",
-	"turretGlowSprite":"graphics/weapons/wip_chromaticblaster_turret_glow.png",
-	"hardpointSprite":"graphics/weapons/wip_chromaticblaster_hardpoint.png",
-	"hardpointGlowSprite":"graphics/weapons/wip_chromaticblaster_hardpoint_glow.png",
+	"turretSprite":"graphics/weapons/wpnxt_chromaticblaster_turret.png",
+	"turretGlowSprite":"graphics/weapons/wpnxt_chromaticblaster_turret_glow.png",
+	"hardpointSprite":"graphics/weapons/wpnxt_chromaticblaster_hardpoint.png",
+	"hardpointGlowSprite":"graphics/weapons/wpnxt_chromaticblaster_hardpoint_glow.png",
 	"glowColor":[180,180,235,255],
 	"turretOffsets":[16, 0],
 	"turretAngleOffsets":[0],
@@ -22,8 +22,8 @@
 					   "particleCount":30,
 					   "particleColor":[150,255,50,255]},
 	"autoCharge":true,
-	"projectileSpecId":"wip_chromaticblaster_shot",
+	"projectileSpecId":"wpnxt_chromaticblaster_shot",
 	"fireSoundTwo":"plasma_cannon_fire",
-	"everyFrameEffect":"untitled.combat.scripts.ChromaticBlasterEffect",
-	"onFireEffect":"untitled.combat.scripts.ChromaticBlasterEffect"
+	"everyFrameEffect":"weaponexpansion.combat.scripts.ChromaticBlasterEffect",
+	"onFireEffect":"weaponexpansion.combat.scripts.ChromaticBlasterEffect"
 }

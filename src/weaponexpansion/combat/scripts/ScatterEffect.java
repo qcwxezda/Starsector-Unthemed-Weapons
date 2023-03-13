@@ -1,4 +1,4 @@
-package untitled.combat.scripts;
+package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.DamagingProjectileAPI;
