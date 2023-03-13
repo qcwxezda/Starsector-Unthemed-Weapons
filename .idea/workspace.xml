@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Untitled" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Remove jars and .idea folder" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="c2af34f7-fb80-4a1e-a29e-442182bcfe5c" />
+        <option name="url" value="https://github.com/qcwxezda/Starsector-Weapon-Expansion" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MhpGRTT2bgsu4tDAjFz2sfr55H" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/Alex/Documents/My Games/Starsector/mods/Untitled/data/weapons/chromaticblaster",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons\chromaticblaster" />
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons" />
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons\proj" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons\proj" />
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons" />
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons\proj\chromaticblaster" />
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons\chromaticblaster" />
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\sounds\weapons" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Run Starsector" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.7" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.fs.starfarer.StarfarerLauncher" />
+      <module name="Untitled" />
+      <selectedOptions>
+        <option name="environmentVariables" visible="false" />
+      </selectedOptions>
+      <option name="VM_PARAMETERS" value="-Djava.library.path=native\windows -Xms1536m -Xmx1536m -Xss2048k -Dcom.fs.starfarer.settings.paths.logs=. -Dcom.fs.starfarer.settings.paths.saves=../saves -Dcom.fs.starfarer.settings.paths.screenshots=../screenshots -Dcom.fs.starfarer.settings.paths.mods=../mods -classpath janino.jar;commons-compiler.jar;commons-compiler-jdk.jar;starfarer.res.jar;starfarer.api.jar;starfarer_obf.jar;jogg-0.0.7.jar;jorbis-0.0.15.jar;json.jar;lwjgl.jar;lwjgl_util_applet.jar;jinput.jar;lwjgl_test.jar;log4j-1.2.9.jar;lwjgl_util.jar;fs.sound_obf.jar;fs.common_obf.jar;xstream-1.4.10.jar com.fs.starfarer.StarfarerLauncher" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../starsector-core" />
+      <method v="2">
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="Untitled" />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="" />
+      <created>1678229574800</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678229574800</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Added 3 medium energy weapons: frag pd, shotgun, debuffing beam">
+      <created>1678684649969</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678684649969</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added 3 medium energy weapons: frag pd, shotgun, debuffing beam">
+      <created>1678684731089</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678684731089</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Remove jars and .idea folder">
+      <created>1678684885199</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678684885199</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added 3 medium energy weapons: frag pd, shotgun, debuffing beam" />
+    <MESSAGE value="Remove jars and .idea folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove jars and .idea folder" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Remote">
+        <watch expression="target.getHitpoints()" language="JAVA" />
+        <watch expression="damageResult" language="JAVA" />
+        <watch expression="damageResult.getDamageToHull()" language="JAVA" />
+      </configuration>
+      <configuration name="Application">
+        <watch expression="target" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
