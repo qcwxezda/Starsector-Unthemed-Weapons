@@ -1,8 +1,8 @@
 {
-  "wip_impactlance_fire":[
-    {"file": "sounds/weapons/wip_impactlance_fire.ogg", "pitch": 1, "volume": 1}
+  "wpnxt_impactlance_fire":[
+    {"file": "sounds/weapons/wpnxt_impactlance_fire.ogg", "pitch": 1, "volume": 1}
   ],
-  "wip_ultrablaster_fire":[
-    {"file": "sounds/weapons/wip_ultrablaster_fire.wav", "pitch": 1, "volume": 1}
+  "wpnxt_ultrablaster_fire":[
+    {"file": "sounds/weapons/wpnxt_ultrablaster_fire.wav", "pitch": 1, "volume": 1}
   ]
 }

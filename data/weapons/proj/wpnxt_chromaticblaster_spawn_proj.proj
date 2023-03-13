@@ -1,5 +1,5 @@
 {
-	"id":"wip_chromaticblaster_spawn_proj",
+	"id":"wpnxt_chromaticblaster_spawn_proj",
 	"specClass":"projectile",
 	"spawnType":"BALLISTIC_AS_BEAM",
 	"collisionClass":"RAY",

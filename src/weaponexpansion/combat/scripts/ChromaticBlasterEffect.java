@@ -1,4 +1,4 @@
-package untitled.combat.scripts;
+package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
@@ -39,12 +39,12 @@ public class ChromaticBlasterEffect extends CombatEntityPluginWithParticles impl
         private static final float growthRate = 100f;
         private float size = 40f;
         private static final int nProjectiles = 12;
-        private final ProjectileSpecAPI spawnSpec = (ProjectileSpecAPI) Global.getSettings().getWeaponSpec("wip_chromaticblaster_spawn").getProjectileSpec();
+        private final ProjectileSpecAPI spawnSpec = (ProjectileSpecAPI) Global.getSettings().getWeaponSpec("wpnxt_chromaticblaster_spawn").getProjectileSpec();
 
         private ChromaticBlasterOverlay(DamagingProjectileAPI proj, CombatEngineAPI engine) {
             this.proj = proj;
             this.engine = engine;
-            setSpriteSheetKey("wip_chromaticblaster_texture");
+            setSpriteSheetKey("wpnxt_chromaticblaster_texture");
         }
 
         @Override
@@ -129,7 +129,7 @@ public class ChromaticBlasterEffect extends CombatEntityPluginWithParticles impl
                         engine.spawnProjectile(
                                 proj.getSource(),
                                 proj.getWeapon(),
-                                "wip_chromaticblaster_spawn",
+                                "wpnxt_chromaticblaster_spawn",
                                 spawnLocation,
                                 Misc.getAngleInDegrees(proj.getLocation(), ship.getLocation()) + (float) (Math.random() * 30f - 15f),
                                 new Vector2f(0f, 0f));
