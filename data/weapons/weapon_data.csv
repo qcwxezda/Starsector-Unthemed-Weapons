@@ -1,21 +1,22 @@
 name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn rate,OPs,ammo,ammo/sec,reload size,type,energy/shot,energy/second,chargeup,chargedown,burst size,burst delay,min spread,max spread,spread/shot,spread decay/sec,beam speed,proj speed,launch speed,flight time,proj hitpoints,autofireAccBonus,extraArcForAI,hints,tags,groupTag,tech/manufacturer,for weapon tooltip>>,primaryRoleStr,speedStr,trackingStr,turnRateStr,accuracyStr,customPrimary,customPrimaryHL,customAncillary,customAncillaryHL,noDPSInTooltip,number
 
-##### LARGE ENERGY
+# LARGE ENERGY
 
 Graviton Array,wpnxt_impactlance,1,0.75,4500,1000,700,,,10,15,22,9,0.3,3,KINETIC,,600,,,1,0.5,,,,,5000,,,,,,,,"beam15, kinetic15, LR, rare_bp, hist1t, merc",,,,Suppression,,,,,Gravitic effects slow and push target off-course. ,,,,,2
 Voidbeam Emitter,wpnxt_voidray,3,0.25,10000,1000,2500,,,,5,30,,,,FRAGMENTATION,,750,5,1,,,,,,,3000,,,,,,,FIRE_WHEN_INEFFICIENT,"beam20, LR, rare_bp, hist1t, merc",,,,Anti Large Craft,,,,,"At full strength, hits on hull or armor may arc to weapons and engines, dealing extra EMP and energy damage. Hits on shields may generate a shield-penetrating arc based on the target's hard flux level. The chance to generate an EMP arc is greatest at maximum range and falls off at close range. ",,"Deals %s of damage as hard flux to shields at close range, degrading to %s at maximum range.",100% | 0%,,3
-Ultra Blaster,wpnxt_ultrablaster,2,0.75,5000,700,,1250,,,9,24,,,,HIGH_EXPLOSIVE,1800,,0.5,4.5,,,,,,,,1500,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 100,,,,5
+Ultra Blaster,wpnxt_ultrablaster,2,0.75,5000,700,,800,,,9,24,,,,HIGH_EXPLOSIVE,1800,,0.5,4.5,,,,,,,,1500,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 150,,,,5
 Chaos Pulser,wpnxt_unstablecannon,2,0.5,7500,800,,166.7,,,12,27,,,,ENERGY,150,,0.25,,,,,,,,,1000,,,250,,,,"energy20, rare_p, hist1t, merc",,,,General,,,,Varies,Fires projectiles of varying strength that deal anywhere from %s to %s damage. Weaker projectiles are significantly more likely to be generated. Stronger projectiles are unstable and prone to erratic movement.,100 | 500,,,,6
 ,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,
 # MEDIUM ENERGY
-Dispersion PD Laser,wpnxt_fragpdbeam,2,0.75,3000,400,400,,,,50,12,,,,FRAGMENTATION,,75,,,,,,,,,5000,,,,,,,"PD,ANTI_FTR","pd15, beam10, rare_bp, merc",,,,Point Defense,,,,,,,,,,7
-Bolt Scrambler,wpnxt_energyscatterer,2,0.75,2500,700,,1000,,,25,12,,,,ENERGY,800,,0.5,2.5,,,18,18,0,0,,1000,,,50,,,,"energy10, rare_bp, merc",,,,General,,,,,"Fires a spread of %s projectiles, each of which deals %s damage.",20 | 50,,,,8
-Subduing Laser,wpnxt_enhtaclaser,2,0.5,3500,1000,150,,,,18,9,,,,ENERGY,,135,0.1,0.1,,,,,,,2400,,,,,,,,"beam12, LR, rare_bp, merc",,,,Suppression,,,,,"Hinders the target's flux grid, increasing energy and ballistic weapons' flux generation by %s per beam, up to a maximum of %s.",3% | 15%,,,,9
-
+Dispersion PD Laser,wpnxt_fragpdbeam,1,0.75,3000,400,400,,,,50,12,,,,FRAGMENTATION,,75,,,,,,,,,5000,,,,,,,"PD,ANTI_FTR","pd15, beam10, rare_bp, merc",,,,Point Defense,,,,,,,,,,7
+Bolt Scrambler,wpnxt_energyscatterer,1,0.75,2500,700,,1000,,,25,11,,,,ENERGY,750,,,3,,,18,18,0,0,,1000,,,30,,,,"energy10, rare_bp, merc",,,,General,,,,,"Fires a spread of %s projectiles, each of which deals %s damage.",20 | 50,,,,8
+Enhanced Tactical Laser,wpnxt_enhtaclaser,2,0.5,3000,1000,150,,,,18,9,,,,ENERGY,,135,0.1,0.1,,,,,,,2400,,,,,,,,"beam12, LR, rare_bp, merc",,,,Suppression,,,,,"Suppresses the target's flux grid, increasing energy and ballistic weapons' flux generation by %s per beam, up to a maximum of %s.",3% | 15%,,,,9
+Bolt Streamer,wpnxt_boltstreamer,2,0.5,3500,700,,50,,,18,12,,,,ENERGY,37.5,,,1.5,12,.05,,,,,,1000,,,30,,,,"energy11, rare_bp, merc",,,,General,,,,,,,,,,10
+Needle Driver,wpnxt_needledriver,3,0.25,6000,800,,250,150,,15,14,,,,KINETIC,500,,0.5,2,,,,,,,,1250,,,200,,,"STRIKE, USE_VS_FRIGATES","energy12, strike12, rare_bp, merc",,,,General,,,,,"Projectiles attach to non-fighter craft on hull or armor hits. After %s seconds, attached projectiles explode, triggering a chain reaction that causes all other attached projectiles to explode. Each explosion deals energy damage equal to %s times the number of attached projectiles, up to a maximum of %s.",12 | 50 | 500,,,,11
 # Unused
 # Chromatic Bolt Carrier,wpnxt_chromaticblaster,2,0.5,6000,800,,300,,,15,25,,,,ENERGY,3000,,0.5,5.5,,,,,,,,200,,,400,,,STRIKE,"energy18, rare_bp, hist1t, merc",,,,General,,,,,"Generates a cloud of unstable energy that deals no damage and passes through inert and small objects. When in close proximity to a ship or fighter, the cloud instantaneously condenses into a volley of %s projectiles that converge on the target and deal %s damage each.
-
+,,,,,,,,,,,,,,,,,,,
 # The energy cloud's affinity cycles continuously and heavily influences its projectiles' composition.",12 | 300,,,,4
 # Chromatic Bolt,wpnxt_chromaticblaster_spawn,,,,300,,300,,,,,,,,ENERGY,0,,0	,0.1,,,,,,,,500,,,100,,,SYSTEM,,,,,,,,,,,,,,

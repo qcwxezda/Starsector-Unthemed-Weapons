@@ -1,0 +1,18 @@
+{
+  "id":"wpnxt_needledriver_shot",
+  "specClass":"projectile",
+  "spawnType":"BALLISTIC_AS_BEAM",
+  "collisionClass":"RAY",
+  "collisionClassByFighter":"RAY_FIGHTER",
+  "length":75.0,
+  "width":24,
+  "fadeTime":0.25,
+  "fringeColor":[128,64,128,255],
+  "coreColor":[255,192,255,255],
+  "glowColor":[128,64,128,16],
+  "hitGlowRadius":90,
+  "textureScrollSpeed":64.0,
+  "pixelsPerTexel":5.0,
+  "bulletSprite":"graphics/missiles/wpnxt_needle.png",
+  "onHitEffect":"weaponexpansion.combat.scripts.NeedleDriverEffect"
+}
