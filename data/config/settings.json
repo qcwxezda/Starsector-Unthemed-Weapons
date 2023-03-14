@@ -3,5 +3,9 @@
     "misc": {
       "wpnxt_chromaticblaster_texture": "graphics/fx/wpnxt_fog_circle_sprite_sheet.png"
     }
+  },
+
+  "plugins": {
+    "wpnxt_needledriver_plugin": "weaponexpansion.combat.plugins.NeedleDriverPlugin"
   }
 }

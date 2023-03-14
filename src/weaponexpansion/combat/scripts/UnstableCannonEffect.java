@@ -1,19 +1,16 @@
 package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
-import com.fs.starfarer.ui.P;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.*;
 
-public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin {
+@SuppressWarnings("unused")
+public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin, WeaponEffectPluginWithInit {
 
     List<Pair<DamagingProjectileAPI, Vector2f>> projectiles = new LinkedList<>();
-
-    boolean isFirstFrame = true;
 
     float damage = 167f, minDamage = 100f, maxDamage = 500f;
 
@@ -23,17 +20,11 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
         projectiles.add(new Pair<>(proj, Misc.getPerp(Misc.getUnitVectorAtDegreeAngle(weapon.getCurrAngle()))));
 
         // Change the projectile spec's stats every time the weapon fires
-        randomizeDamage(proj.getProjectileSpec());
+        randomizeDamage();
     }
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        // So that the first shot isn't always the same
-        if (isFirstFrame) {
-            isFirstFrame = false;
-            randomizeDamage((ProjectileSpecAPI) weapon.getSpec().getProjectileSpec());
-        }
-
         Iterator<Pair<DamagingProjectileAPI, Vector2f>> itr = projectiles.iterator();
         while (itr.hasNext()) {
             Pair<DamagingProjectileAPI, Vector2f> proj_vec = itr.next();
@@ -55,7 +46,7 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
         }
     }
 
-    private void randomizeDamage(ProjectileSpecAPI spec) {
+    private void randomizeDamage() {
         float r1 = scaledValue(minDamage, maxDamage, Misc.random.nextFloat());
         float r2 = scaledValue(minDamage, maxDamage, Misc.random.nextFloat());
         float r3 = scaledValue(minDamage, maxDamage, Misc.random.nextFloat());
@@ -68,5 +59,10 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
 
     private float scaledValue(float min, float max, float frac) {
         return min + frac * (max - min);
+    }
+
+    @Override
+    public void init(WeaponAPI weapon) {
+        randomizeDamage();
     }
 }

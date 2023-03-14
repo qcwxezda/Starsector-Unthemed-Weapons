@@ -9,86 +9,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Remove jars and .idea folder">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/WeaponExpansion.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Untitled.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Add needle driver, redo medium energy sprites">
+      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_needledriver_shot.proj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_boltstreamer.wpn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_needledriver.wpn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/fx/wpnxt_trail.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_needle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/old/wpnxt_boltstreamer_hardpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/old/wpnxt_boltstreamer_hardpoint_glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/old/wpnxt_boltstreamer_turret.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/old/wpnxt_boltstreamer_turret_glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/old/wpnxt_energyscatterer_hardpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/old/wpnxt_energyscatterer_hardpoint_glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/old/wpnxt_energyscatterer_turret.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/old/wpnxt_energyscatterer_turret_glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/boltstreamer.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/energyscatterer.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/enhtaclaser.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/fragpdbeam.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/needledriver.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_needledriver_hardpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_needledriver_hardpoint_glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_needledriver_turret.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_needledriver_turret_glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/NeedleDriverPlugin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/NeedleDriverEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Untitled.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Weapon Expansion.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wip_chromaticblaster_shot.proj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wip_chromaticblaster_spawn_proj.proj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wip_energy_missile_projectile.proj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wip_energybolt.proj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wip_plasma_shot_small.proj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wip_ultrablaster_shot.proj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wip_unstablecannon_shot.proj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energybolt.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energybolt.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_chromaticblaster.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_chromaticblaster_spawn.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_energymissiletest.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_energyscatterer.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_enhtaclaser.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_fragpdbeam.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_impactlance.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_plasmarepeater.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_ultrablaster.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_unstablecannon.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wip_voidray.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/fx/fog_circle_sprite_sheet.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/fx/wip_fog_circle_sprite_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/fx/wpnxt_fog_circle_sprite_sheet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/missiles/wip_bolt.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_bolt.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_chromaticblaster_hardpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_chromaticblaster_hardpoint_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_chromaticblaster_turret.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_chromaticblaster_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_energyscatterer_hardpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_energyscatterer_hardpoint_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_energyscatterer_turret.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_energyscatterer_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_enhtaclaser_hardpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_enhtaclaser_hardpoint_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_enhtaclaser_turret.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_enhtaclaser_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_fragpdbeam_hardpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_fragpdbeam_hardpoint_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_fragpdbeam_turret.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_fragpdbeam_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_impactlance_hardpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_impactlance_hardpoint_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_impactlance_turret.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_impactlance_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_plasmarepeater_hardpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_plasmarepeater_hardpoint_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_plasmarepeater_turret.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_plasmarepeater_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_ultrablaster_hardpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_ultrablaster_hardpoint_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_ultrablaster_turret.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_ultrablaster_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_unstablecannon_hardpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_unstablecannon_hardpoint_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_unstablecannon_turret.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_unstablecannon_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_voidray_hardpoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_voidray_hardpoint_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_voidray_turret.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_voidray_turret.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_voidray_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wip_voidray_turret_glow.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/mod_info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wip_impactlance_fire.ogg" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_impactlance_fire.ogg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wip_ultrablaster_fire.ogg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wip_ultrablaster_fire.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_ultrablaster_fire.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/untitled/combat/scripts/ChromaticBlasterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ChromaticBlasterEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/untitled/combat/scripts/EnhTaclaserEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnhTaclaserEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/untitled/combat/scripts/ScatterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ScatterEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/untitled/combat/scripts/SmallPlasmaOnHitEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SmallPlasmaOnHitEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/untitled/combat/scripts/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/untitled/combat/scripts/UltraBlasterOnHitEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UltraBlasterOnHitEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/untitled/combat/scripts/UnstableCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/untitled/combat/scripts/VoidRayEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidRayEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstreamer_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstreamer_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstreamer_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstreamer_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstreamer_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstreamer_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstreamer_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstreamer_turret_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_energyscatterer_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_energyscatterer_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_energyscatterer_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_energyscatterer_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_energyscatterer_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_energyscatterer_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_energyscatterer_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_energyscatterer_turret_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_enhtaclaser_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_enhtaclaser_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_enhtaclaser_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_enhtaclaser_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_enhtaclaser_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_enhtaclaser_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_enhtaclaser_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_enhtaclaser_turret_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_fragpdbeam_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_fragpdbeam_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_fragpdbeam_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_fragpdbeam_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_fragpdbeam_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_fragpdbeam_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_fragpdbeam_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_fragpdbeam_turret_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ScatterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ScatterEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UltraBlasterOnHitEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UltraBlasterOnHitEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,13 +183,22 @@
       <option name="project" value="LOCAL" />
       <updated>1678685395408</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Mass renaming">
+      <created>1678733295610</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678733295610</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added 3 medium energy weapons: frag pd, shotgun, debuffing beam" />
     <MESSAGE value="Remove jars and .idea folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove jars and .idea folder" />
+    <MESSAGE value="Mass renaming" />
+    <MESSAGE value="Add needle driver, redo medium energy sprites" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add needle driver, redo medium energy sprites" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -230,7 +208,8 @@
         <watch expression="damageResult.getDamageToHull()" language="JAVA" />
       </configuration>
       <configuration name="Application">
-        <watch expression="target" language="JAVA" />
+        <watch expression="data.proj" language="JAVA" />
+        <watch expression="engine" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
