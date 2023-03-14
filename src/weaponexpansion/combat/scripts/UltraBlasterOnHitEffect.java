@@ -8,15 +8,16 @@ import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
+@SuppressWarnings("unused")
 public class UltraBlasterOnHitEffect implements OnHitEffectPlugin {
 
     private static final float effectRadius = 120f;
     private static final float effectArc = 90f;
-    private static final float explosionRadius = 60f;
+    private static final float explosionRadius = 80f;
 
     private static final int minExplosionCount = 5;
     private static final int maxExplosionCount = 10;
-    private static final float explosionDamage = 100f;
+    private static final float explosionDamage = 150f;
 
     @Override
     public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
@@ -32,6 +33,9 @@ public class UltraBlasterOnHitEffect implements OnHitEffectPlugin {
         }
 
         int numExplosions = Misc.random.nextInt(maxExplosionCount - minExplosionCount + 1) + minExplosionCount;
+        if (proj.isFading()) {
+            numExplosions *= proj.getBrightness();
+        }
         for (int i = 0; i < numExplosions; i++) {
             Vector2f explosionLocation = new Vector2f(proj.getLocation());
             float locOffset = Misc.random.nextFloat() * effectRadius;

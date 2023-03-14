@@ -8,8 +8,8 @@
   "hardpointSprite":"graphics/weapons/wpnxt_energyscatterer_hardpoint.png",
   "hardpointGlowSprite":"graphics/weapons/wpnxt_energyscatterer_hardpoint.png",
   "glowColor":[255,192,192,255],
-  "turretOffsets":[15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0],
-  "turretAngleOffsets":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  "turretOffsets":[15, 0],
+  "turretAngleOffsets":[0],
   "hardpointOffsets":[15, 0],
   "hardpointAngleOffsets":[0],
   "barrelMode":"ALTERNATING",
@@ -23,5 +23,7 @@
     "particleCount":10,
     "particleColor":[255,192,192,192]},
   "projectileSpecId":"wpnxt_energybolt",  # projectile that will be fired,
-  "fireSoundTwo":"pulse_laser_fire"
+  "fireSoundTwo":"pulse_laser_fire",
+  "onFireEffect":"weaponexpansion.combat.scripts.ScatterEffect",
+  "everyFrameEffect":"weaponexpansion.combat.scripts.ScatterEffect"
 }
