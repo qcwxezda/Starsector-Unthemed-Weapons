@@ -1,13 +1,10 @@
 package weaponexpansion.combat.scripts;
 
-import com.fs.starfarer.api.combat.CombatEngineAPI;
-import com.fs.starfarer.api.combat.DamagingProjectileAPI;
-import com.fs.starfarer.api.combat.OnFireEffectPlugin;
-import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.Misc;
 
 @SuppressWarnings("unused")
-public class ScatterEffect implements OnFireEffectPlugin {
+public class ScatterEffect implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin {
 
     /** As a percentage of the original values */
     static final float speedVariance = 0.15f;
@@ -37,5 +34,11 @@ public class ScatterEffect implements OnFireEffectPlugin {
             spawn.setDamageAmount(proj.getBaseDamageAmount() * (1 + Misc.random.nextFloat() * damageVariance - damageVariance / 2));
         }
         proj.getProjectileSpec().setMoveSpeed(temp);
+    }
+
+    @Override
+    public void advance(float v, CombatEngineAPI combatEngineAPI, WeaponAPI weaponAPI) {
+        // Nothing here; this only exists because OnFireEffect only works on weapons if
+        // they also have an EveryFrameEffect
     }
 }
