@@ -11,9 +11,11 @@ import java.util.LinkedList;
 public class NeedleDriverEffect implements OnHitEffectPlugin  {
 
     public static final String attachDataKey = "wpnxt_needleDriverData";
+    public static final float attachedLength = 30f;
 
     @Override
     public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
+
         // Only care about ships, must be full damage shot
         if (proj.isFading() || !(target instanceof ShipAPI)) {
             return;
@@ -32,14 +34,22 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
 
         ProjectileSpecAPI spec = proj.getProjectileSpec();
         float maxRange = spec.getMaxRange();
+        float glowRadius = spec.getGlowRadius();
+        float length = spec.getLength();
         spec.setMaxRange(100000f);
+        spec.setGlowRadius(0f);
+        spec.setLength(attachedLength);
         Vector2f scaledVelocity = new Vector2f(proj.getVelocity());
-        scaledVelocity.scale(0.8f * engine.getElapsedInLastFrame());
+        float adjustAmount = 0.7f * engine.getElapsedInLastFrame() * proj.getVelocity().length();
+        scaledVelocity.scale(0.7f * engine.getElapsedInLastFrame());
         Vector2f spawnLocation = Misc.getDiff(pt, scaledVelocity);
-        CombatEntityAPI spawn = engine.spawnProjectile(proj.getSource(), proj.getWeapon(), proj.getWeapon().getId(), spawnLocation, proj.getFacing(), new Vector2f());
+        DamagingProjectileAPI spawn = (DamagingProjectileAPI) engine.spawnProjectile(proj.getSource(), proj.getWeapon(), proj.getWeapon().getId(), spawnLocation, proj.getFacing(), new Vector2f());
         spec.setMaxRange(maxRange);
+        spec.setGlowRadius(glowRadius);
+        spec.setLength(length);
         spawn.setCollisionClass(CollisionClass.NONE);
-        ((DamagingProjectileAPI) spawn).setFromMissile(true);
+        spawn.setDamageAmount(0f);
+        spawn.setFromMissile(true);
         Vector2f offset = Misc.getDiff(spawnLocation, ship.getLocation());
 
         if (!ship.getCustomData().containsKey(attachDataKey)) {
@@ -48,7 +58,7 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
 
         //noinspection unchecked
         ((LinkedList<AttachData>) (ship.getCustomData().get(attachDataKey)))
-                .add(new AttachData((DamagingProjectileAPI) spawn, offset, proj.getFacing(), ship.getFacing()));
+                .add(new AttachData(spawn, offset, adjustAmount, proj.getFacing(), ship.getFacing()));
     }
 
     public static class AttachData {
@@ -57,11 +67,17 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
         public float facing;
         public float initialShipAngle;
 
-        AttachData(DamagingProjectileAPI proj, Vector2f offset, float facing, float initialShipAngle) {
+        // Move the projectile a bit in the opposite direction so that it doesn't appear
+        // completely embedded in the ship; this amount is recorded so that the original
+        // hit location (known to be in bounds of the target ship) can be recomputed
+        public float adjustAmount;
+
+        AttachData(DamagingProjectileAPI proj, Vector2f offset, float adjustAmount, float facing, float initialShipAngle) {
             this.proj = proj;
             this.offset = offset;
             this.facing = facing;
             this.initialShipAngle = initialShipAngle;
+            this.adjustAmount = adjustAmount;
         }
     }
 }

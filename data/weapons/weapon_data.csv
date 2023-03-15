@@ -10,13 +10,18 @@ Chaos Pulser,wpnxt_unstablecannon,2,0.5,7500,800,,166.7,,,12,27,,,,ENERGY,150,,0
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,
 # MEDIUM ENERGY
-Dispersion PD Laser,wpnxt_fragpdbeam,1,0.75,3000,400,400,,,,50,12,,,,FRAGMENTATION,,75,,,,,,,,,5000,,,,,,,"PD,ANTI_FTR","pd15, beam10, rare_bp, merc",,,,Point Defense,,,,,,,,,,7
-Bolt Scrambler,wpnxt_energyscatterer,1,0.75,2500,700,,1000,,,25,11,,,,ENERGY,750,,,3,,,18,18,0,0,,1000,,,30,,,,"energy10, rare_bp, merc",,,,General,,,,,"Fires a spread of %s projectiles, each of which deals %s damage.",20 | 50,,,,8
-Enhanced Tactical Laser,wpnxt_enhtaclaser,2,0.5,3000,1000,150,,,,18,9,,,,ENERGY,,135,0.1,0.1,,,,,,,2400,,,,,,,,"beam12, LR, rare_bp, merc",,,,Suppression,,,,,"Suppresses the target's flux grid, increasing energy and ballistic weapons' flux generation by %s per beam, up to a maximum of %s.",3% | 15%,,,,9
-Bolt Streamer,wpnxt_boltstreamer,2,0.5,3500,700,,50,,,18,12,,,,ENERGY,37.5,,,1.5,12,.05,,,,,,1000,,,30,,,,"energy11, rare_bp, merc",,,,General,,,,,,,,,,10
-Needle Driver,wpnxt_needledriver,3,0.25,6000,800,,250,150,,15,14,,,,KINETIC,500,,0.5,2,,,,,,,,1250,,,200,,,"STRIKE, USE_VS_FRIGATES","energy12, strike12, rare_bp, merc",,,,General,,,,,"Projectiles attach to non-fighter craft on hull or armor hits. After %s seconds, attached projectiles explode, triggering a chain reaction that causes all other attached projectiles to explode. Each explosion deals energy damage equal to %s times the number of attached projectiles, up to a maximum of %s.",12 | 50 | 500,,,,11
+Dispersion PD Laser,wpnxt_fragpdbeam,1,0.75,2000,400,400,,,,50,12,,,,FRAGMENTATION,,75,,,,,,,,,5000,,,,,,,"PD,ANTI_FTR","pd15, beam10, SR, rare_bp, merc",,,,Point Defense,,,,,,,,,,7
+Bolt Scrambler,wpnxt_energyscatterer,1,0.75,1500,700,,1000,,,25,11,,,,ENERGY,750,,,3,,,20,20,0,0,,1000,,,30,,,,"energy10, rare_bp, merc",,,,General,,,,,"Fires a spread of %s projectiles, each of which deals %s damage.",20 | 50,,,,8
+Enhanced Tactical Laser,wpnxt_enhtaclaser,2,0.5,1500,1000,150,,,,18,9,,,,ENERGY,,135,0.1,0.1,,,,,,,2400,,,,,,,,"beam12, LR, rare_bp, merc",,,,Suppression,,,,,"Suppresses the target's flux grid, increasing energy and ballistic weapons' flux generation by %s per beam, up to a maximum of %s.",3% | 15%,,,,9
+Bolt Streamer,wpnxt_boltstreamer,2,0.5,2500,700,,50,,,18,12,,,,ENERGY,50,,,1.5,12,.05,,,,,,1000,,,30,,,,"energy11, rare_bp, merc",,,,General,,,,,,,,,,10
+Needle Driver,wpnxt_needledriver,3,0.25,4500,800,,220,150,,15,14,,,,KINETIC,400,,0.2,2,,,,,,,,1500,,,200,,,,"energy12, rare_bp, merc",,,,Pressure,,,,,"Projectiles attach to non-fighter craft on hull or armor hits. After %s seconds, attached projectiles explode, triggering a chain reaction that causes all other attached projectiles to explode. Each explosion deals energy damage equal to %s times the number of attached projectiles, up to a maximum of %s.",12 | 50 | 500,,,,11
+,,,,,,,,,,,,,,
+"# SMALL ENERGY",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Mining Laser Mk. 2,wpnxt_mininglasermk2,1,0.75,250,1000,150,,,,25,5,1200,,,HIGH_EXPLOSIVE,,200,0.15,0.15,,,,,,,2400,,,,,,,CONSERVE_FOR_ANTI_ARMOR,"energy3, he3, rare_bp, merc",,,,Suppression,,,,,,,,,,12
+Bolt Repeater,wpnxt_boltrepeater,2,0.5,750,700,,50,,,30,7,25,2,5,ENERGY,50,,,0.2,,,8,8,0,0,,1000,,,30,,,,"energy9, rare_bp, merc",,,,General,,,,,,,,,,13
+Boltgun,wpnxt_boltgun,0,,150,700,,50,,,50,2,,,,ENERGY,50,,,0.6667,,,,,,,,1000,,,30,,,,"energy3, rare_bp, merc",,,,General,,,,,,,,,,14
 # Unused
 # Chromatic Bolt Carrier,wpnxt_chromaticblaster,2,0.5,6000,800,,300,,,15,25,,,,ENERGY,3000,,0.5,5.5,,,,,,,,200,,,400,,,STRIKE,"energy18, rare_bp, hist1t, merc",,,,General,,,,,"Generates a cloud of unstable energy that deals no damage and passes through inert and small objects. When in close proximity to a ship or fighter, the cloud instantaneously condenses into a volley of %s projectiles that converge on the target and deal %s damage each.
-,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # The energy cloud's affinity cycles continuously and heavily influences its projectiles' composition.",12 | 300,,,,4
 # Chromatic Bolt,wpnxt_chromaticblaster_spawn,,,,300,,300,,,,,,,,ENERGY,0,,0	,0.1,,,,,,,,500,,,100,,,SYSTEM,,,,,,,,,,,,,,
