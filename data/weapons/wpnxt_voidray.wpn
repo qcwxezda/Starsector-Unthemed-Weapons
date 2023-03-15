@@ -18,7 +18,7 @@
   "coreColor":[255,180,215,255],
   "glowColor":[255,180,215,255],
   "darkCore":false,
-  "width":30.0,
+  "width":18.0,
   "textureType":["graphics/fx/beam_weave_core.png","graphics/fx/beam_chunky_fringe.png"],
   "pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER,MISSILE_FF,MISSILE_NO_FF],
   "textureScrollSpeed":120.0,
