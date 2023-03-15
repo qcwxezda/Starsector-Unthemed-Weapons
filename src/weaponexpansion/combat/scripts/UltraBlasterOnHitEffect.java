@@ -27,7 +27,7 @@ public class UltraBlasterOnHitEffect implements OnHitEffectPlugin {
             return;
         }
 
-        // No hull or armor damage
+        // Doesn't trigger on shield hits
         if (damageResult.getDamageToHull() <= 0 && damageResult.getDamageToPrimaryArmorCell() <= 0) {
             return;
         }
@@ -38,7 +38,8 @@ public class UltraBlasterOnHitEffect implements OnHitEffectPlugin {
         }
         for (int i = 0; i < numExplosions; i++) {
             Vector2f explosionLocation = new Vector2f(proj.getLocation());
-            float locOffset = Misc.random.nextFloat() * effectRadius;
+            // sqrt for uniform distribution on the circular segment
+            float locOffset = (float) Math.sqrt(Misc.random.nextFloat()) * effectRadius;
             float angleOffset = (float) Math.PI / 180 * (proj.getFacing() + Misc.random.nextFloat() * effectArc - effectArc / 2);
             explosionLocation.x += locOffset * (float) Math.cos(angleOffset);
             explosionLocation.y += locOffset * (float) Math.sin(angleOffset);
