@@ -12,7 +12,7 @@
   "turretAngleOffsets":[0],
   "hardpointOffsets":[15, 0],
   "hardpointAngleOffsets":[0],
-  "barrelMode":"ALTERNATING",
+  "barrelMode":"LINKED",
   "animationType":"GLOW_AND_FLASH",
   "autocharge":true,
   "muzzleFlashSpec":{"length":15.0,   # only used if animationType = MUZZLE_FLASH

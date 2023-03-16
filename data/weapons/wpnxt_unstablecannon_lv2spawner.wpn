@@ -1,0 +1,16 @@
+{
+  "id":"wpnxt_unstablecannon_lv2spawner",
+  "specClass":"projectile",
+  "type":"SYSTEM",
+  "size":"SMALL",
+  "turretSprite":"",
+  "hardpointSprite":"",
+  "hardpointOffsets":[0, 0],
+  "turretOffsets":[0, 0],
+  "hardpointAngleOffsets":[0],
+  "turretAngleOffsets":[0],
+  "barrelMode":"LINKED",
+  "animationType":"NONE",
+  "projectileSpecId":"wpnxt_unstablecannon_lv2shot"
+}
+
