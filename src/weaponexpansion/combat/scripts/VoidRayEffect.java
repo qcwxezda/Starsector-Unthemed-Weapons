@@ -25,7 +25,7 @@ public class VoidRayEffect implements BeamEffectPlugin {
         }
 
         ShipAPI source = beam.getSource();
-        if (source == null || !source.getVariant().hasHullMod(HullMods.HIGH_SCATTER_AMP)) {
+        if (source == null || source.getVariant().hasHullMod(HullMods.HIGH_SCATTER_AMP)) {
             return;
         }
 
