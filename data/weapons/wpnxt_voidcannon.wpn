@@ -1,0 +1,27 @@
+{
+  "id":"wpnxt_voidcannon",
+  "specClass":"projectile",
+  "type":"ENERGY",
+  "size":"SMALL",
+  "turretSprite":"graphics/weapons/wpnxt_voidcannon_turret.png",
+  "turretGlowSprite":"graphics/weapons/wpnxt_voidcannon_turret_glow.png",
+  "hardpointSprite":"graphics/weapons/wpnxt_voidcannon_hardpoint.png",
+  "hardpointGlowSprite":"graphics/weapons/wpnxt_voidcannon_hardpoint_glow.png",
+  "glowColor":[255,64,200,255],
+  "turretOffsets":[8, 0, 8, 0, 8, 0, 8, 0],
+  "turretAngleOffsets":[-5, -2, 2, 5],
+  "hardpointOffsets":[12, 0, 12, 0, 12, 0, 12, 0],
+  "hardpointAngleOffsets":[-5, -2, 2, 5],
+  "barrelMode":"LINKED", # or LINKED.  whether barrels fire at the same time or alternate.
+  "animationType":"GLOW_AND_FLASH",
+  "autocharge":true,
+  "muzzleFlashSpec":{"length":25.0,   # only used if animationType = MUZZLE_FLASH
+    "spread":25.0,
+    "particleSizeMin":15.0,
+    "particleSizeRange":20.0,
+    "particleDuration":0.12,
+    "particleCount":25,
+    "particleColor":[255,64,200,255]},
+  "projectileSpecId":"wpnxt_voidcannon_shot",  # projectile that will be fired
+  "fireSoundTwo":"pulse_laser_fire"
+}
