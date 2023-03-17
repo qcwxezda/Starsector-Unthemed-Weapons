@@ -23,5 +23,5 @@
     "particleColor":[255,128,255,255]},
   "autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
   "projectileSpecId":"wpnxt_needledriver_shot",  # projectile that will be fired
-  "fireSoundTwo":"pulse_laser_fire"
+  "fireSoundTwo":"wpnxt_needledriver_fire"
 }

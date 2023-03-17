@@ -23,5 +23,5 @@
   "textureType": ROUGH,
   "pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER],
   "fireSoundOne":"laser_intro",
-  "fireSoundTwo":"laser_loop"
+  "fireSoundTwo":"wpnxt_he_laser_loop"
 }
