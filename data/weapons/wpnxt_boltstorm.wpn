@@ -12,7 +12,7 @@
   "glowColor":[255,192,192,255],
   "turretOffsets":[22, 0],
   "turretAngleOffsets":[0],
-  "hardpointOffsets":[27, 0],
+  "hardpointOffsets":[37, 0],
   "hardpointAngleOffsets":[0],
   "barrelMode":"LINKED",
   "animationType":"GLOW_AND_FLASH",
@@ -24,5 +24,5 @@
     "particleCount":10,
     "particleColor":[255,192,192,192]},
   "projectileSpecId":"wpnxt_energybolt",  # projectile that will be fired,
-  "fireSoundTwo":"pulse_laser_fire"
+  "fireSoundTwo":"wpnxt_bolt_fire"
 }

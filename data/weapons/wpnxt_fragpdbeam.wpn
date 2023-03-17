@@ -22,5 +22,5 @@
   "pixelsPerTexel":5.0,
   "pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER],
   "fireSoundOne":"laser_intro",
-  "fireSoundTwo":"laser_loop"
+  "fireSoundTwo":"wpnxt_fragbeam_loop"
 }

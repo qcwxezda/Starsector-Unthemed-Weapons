@@ -1,5 +1,6 @@
 package weaponexpansion.combat.scripts;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
@@ -24,15 +25,21 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
     static final String lv3SpawnWeapon = "wpnxt_unstablecannon_lv3spawner";
     static final String lv2SpawnProjectile = "wpnxt_unstablecannon_lv2shot";
     static final String lv3SpawnProjectile = "wpnxt_unstablecannon_lv3shot";
+    static final String lv1Sound = "wpnxt_unstablecannon_fire";
+    static final String lv2Sound = "wpnxt_unstablecannon_fire2";
+    static final String lv3Sound = "wpnxt_unstablecannon_fire3";
 
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
 
         DamagingProjectileAPI newProj;
+        Vector2f loc = proj.getWeapon().getLocation();
+        Vector2f vel = proj.getSource().getVelocity();
 
         if (damage < lv2threshold) {
             newProj = proj;
             proj.setDamageAmount(damage);
+            Global.getSoundPlayer().playSound(lv1Sound, 0.9f + Misc.random.nextFloat() * 0.1f, 1f, loc, vel);
         } else {
             newProj = (DamagingProjectileAPI)
                     engine.spawnProjectile(
@@ -44,6 +51,7 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
                             proj.getSource().getVelocity());
             newProj.setDamageAmount(damage);
             engine.removeEntity(proj);
+            Global.getSoundPlayer().playSound(damage < lv3threshold ? lv2Sound : lv3Sound, 0.9f + Misc.random.nextFloat() * 0.1f, 1f, loc, vel);
         }
 
         projectiles.add(newProj);

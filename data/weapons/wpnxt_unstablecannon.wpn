@@ -10,9 +10,9 @@
   "everyFrameEffect":"weaponexpansion.combat.scripts.UnstableCannonEffect",
   "onFireEffect":"weaponexpansion.combat.scripts.UnstableCannonEffect",
   "glowColor":[255,128,255,255],
-  "turretOffsets":[37, 0],
+  "turretOffsets":[35, 0],
   "turretAngleOffsets":[0],
-  "hardpointOffsets":[45, 0],
+  "hardpointOffsets":[50, 0],
   "hardpointAngleOffsets":[0],
   "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
   "animationType":"GLOW_AND_FLASH",
@@ -24,7 +24,5 @@
     "particleCount":15,
     "particleColor":[255,128,255,255]},
   "autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
-  #"requiresFullCharge":true,  # for pulse weapons - whether the weapon will fire at a lower strength partial charge
   "projectileSpecId":"wpnxt_unstablecannon_shot",  # projectile that will be fired
-  "fireSoundTwo":"pulse_laser_fire",
 }
