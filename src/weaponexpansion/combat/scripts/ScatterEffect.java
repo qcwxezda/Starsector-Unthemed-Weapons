@@ -14,9 +14,6 @@ public class ScatterEffect implements OnFireEffectPlugin, EveryFrameWeaponEffect
 
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
-
-        proj.setDamageAmount(proj.getBaseDamageAmount() / numProjectiles);
-
         float spread = weapon.getCurrSpread();
         float temp = proj.getProjectileSpec().getMoveSpeed(null, null);
         for (int i = 0; i < numProjectiles - 1; i++) {
@@ -34,6 +31,9 @@ public class ScatterEffect implements OnFireEffectPlugin, EveryFrameWeaponEffect
             spawn.setDamageAmount(proj.getBaseDamageAmount() * (1 + Misc.random.nextFloat() * damageVariance - damageVariance / 2));
         }
         proj.getProjectileSpec().setMoveSpeed(temp);
+
+        weapon.setRemainingCooldownTo(weapon.getCooldown());
+        weapon.setRefireDelay(weapon.getCooldown());
     }
 
     @Override
