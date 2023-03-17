@@ -22,5 +22,5 @@
     "particleCount":10,
     "particleColor":[255,100,100,255]},
   "projectileSpecId":"wpnxt_miniblaster_shot",  # projectile that will be fired
-  "fireSoundTwo":"wpnxt_ultrablaster_fire",
+  "fireSoundTwo":"wpnxt_miniblaster_fire"
 }

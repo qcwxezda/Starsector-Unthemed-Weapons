@@ -23,5 +23,5 @@
     "particleCount":25,
     "particleColor":[255,64,200,255]},
   "projectileSpecId":"wpnxt_voidcannon_shot",  # projectile that will be fired
-  "fireSoundTwo":"pulse_laser_fire"
+  "fireSoundTwo":"wpnxt_voidcannon_fire"
 }

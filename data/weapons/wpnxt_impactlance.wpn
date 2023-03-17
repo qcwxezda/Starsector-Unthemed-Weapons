@@ -23,5 +23,5 @@
   "pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER],
   "textureScrollSpeed":250.0,
   "pixelsPerTexel":5.0,
-  "fireSoundTwo":"wpnxt_impactlance_fire"
+  "fireSoundTwo":"wpnxt_impactlance_loop"
 }

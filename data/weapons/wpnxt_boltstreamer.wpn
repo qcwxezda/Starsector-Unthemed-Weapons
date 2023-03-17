@@ -23,5 +23,5 @@
     "particleCount":10,
     "particleColor":[255,192,192,192]},
   "projectileSpecId":"wpnxt_energybolt",  # projectile that will be fired,
-  "fireSoundTwo":"pulse_laser_fire"
+  "fireSoundTwo":"wpnxt_bolt_fire"
 }
