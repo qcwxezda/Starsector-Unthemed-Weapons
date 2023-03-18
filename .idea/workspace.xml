@@ -9,35 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Update graphics, add unique sounds, add EMP damage to bolts">
-      <change afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/BoltScramblerEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/InstantaneousBurst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Change voidbeam emitter to fire multiple converging beams">
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidRayWeaponEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/starfarer_api.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/starfarer_api.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_voidcannon_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_voidcannon_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/strings/descriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_boltgun.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_boltgun.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_boltstreamer.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_boltstreamer.wpn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_impactlance.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_impactlance.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_miniblaster.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_miniblaster.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_mininglasermk2.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_mininglasermk2.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_voidcannon.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_voidcannon.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_impactlance_loop.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_impactlance_loop.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_voidray.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_voidray.wpn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_needledriver_fire.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_needledriver_fire.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_ultrablaster_fire.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_ultrablaster_fire.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire2.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire2.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire3.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire3.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidcannon_fire.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidcannon_fire.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidray_loop.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidray_loop.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/BoltScramblerEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/NeedleDriverEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/NeedleDriverEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ScatterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ScatterEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/EmptyShipStats.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidRayEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/InstantaneousBurst.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,18 +73,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alex/Documents/My Games/Starsector/mods/Weapon Expansion/data/weapons/proj&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/Alex/Documents/My Games/Starsector/starsector-core/fs.common_obf.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\weapons\proj" />
@@ -211,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679034628721</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Add descriptions, upload some failed files before deleting them">
+      <created>1679107639851</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679107639851</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -224,7 +218,9 @@
     <MESSAGE value="Add boltstorm, voidcannon, miniblaster, impact beam + balancing" />
     <MESSAGE value="Fix voidbeam bug + slight buff" />
     <MESSAGE value="Update graphics, add unique sounds, add EMP damage to bolts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update graphics, add unique sounds, add EMP damage to bolts" />
+    <MESSAGE value="Add descriptions, upload some failed files before deleting them" />
+    <MESSAGE value="Change voidbeam emitter to fire multiple converging beams" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change voidbeam emitter to fire multiple converging beams" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
@@ -241,13 +237,14 @@
         <watch expression="damageResult.getDamageToHull()" language="JAVA" />
       </configuration>
       <configuration name="Application">
-        <watch expression="engine" language="JAVA" />
-        <watch expression="weapon.getCooldownRemaining()" language="JAVA" />
-        <watch expression="proj" language="JAVA" />
-        <watch expression="((o)beam.getWeapon().getDerivedStats()).burstFireDuration" custom="com.fs.starfarer.loading.WeaponSpreadsheetLoader.o" />
-        <watch expression="weapon.getCooldown()" language="JAVA" />
-        <watch expression="weapon.getMuzzleFlashSpec()" language="JAVA" />
-        <watch expression="weapon.getGlowSpriteAPI()" language="JAVA" />
+        <watch expression="weapon.getBeams().get(0).getDamage().getBaseDamage()" language="JAVA" />
+        <watch expression="weapon.getBeams().get(1).getDamage().getBaseDamage()" language="JAVA" />
+        <watch expression="weapon.getBeams().get(2).getDamage().getBaseDamage()" language="JAVA" />
+        <watch expression="weapon.getBeams().get(3).getDamage().getBaseDamage()" language="JAVA" />
+        <watch expression="weapon.getBeams().get(3).getDamage().getDamage()" language="JAVA" />
+        <watch expression="weapon.getBeams().get(0).getDamage().getDamage()" language="JAVA" />
+        <watch expression="weapon.getBeams().get(2).getDamage().getDamage()" language="JAVA" />
+        <watch expression="weapon.getBeams().get(1).getDamage().getDamage()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

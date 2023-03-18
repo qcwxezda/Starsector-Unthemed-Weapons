@@ -8,13 +8,13 @@ import com.fs.starfarer.api.combat.*;
  *    */
 @SuppressWarnings("unused")
 public class VoidCannonEffect implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin {
-    static final int numProjectiles = 6;
 
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
         engine.removeEntity(proj);
 
         float spread = weapon.getCurrSpread();
+        int numProjectiles = weapon.getSpec().getBurstSize();
         float spreadIncrement = spread / (numProjectiles - 1);
         for (float x = -spread / 2f; x <= spread / 2f; x += spreadIncrement) {
             engine.spawnProjectile(
