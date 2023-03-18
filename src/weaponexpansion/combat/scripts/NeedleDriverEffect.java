@@ -11,7 +11,7 @@ import java.util.LinkedList;
 public class NeedleDriverEffect implements OnHitEffectPlugin  {
 
     public static final String attachDataKey = "wpnxt_needleDriverData";
-    public static final float attachedLength = 30f;
+    public static final float attachedLength = 40f;
 
     @Override
     public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {

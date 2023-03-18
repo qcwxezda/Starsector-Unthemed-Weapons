@@ -10,11 +10,10 @@ public class ScatterEffect implements OnFireEffectPlugin, EveryFrameWeaponEffect
     static final float speedVariance = 0.15f;
     static final float damageVariance = 0.15f;
 
-    static final int numProjectiles = 20;
-
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
         float spread = weapon.getCurrSpread();
+        int numProjectiles = weapon.getSpec().getBurstSize();
         float temp = proj.getProjectileSpec().getMoveSpeed(null, null);
         for (int i = 0; i < numProjectiles - 1; i++) {
             float angle = weapon.getCurrAngle() + Misc.random.nextFloat() * spread - spread / 2;

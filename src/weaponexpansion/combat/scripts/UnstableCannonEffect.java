@@ -2,7 +2,6 @@ package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -14,12 +13,11 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
 
     List<DamagingProjectileAPI> projectiles = new LinkedList<>();
 
-    float damage = 200f, minDamage = 100f, maxDamage = 600f;
-    float lv2threshold = 300f, lv3threshold = 500f;
+    float damage = 200f, minDamage = 100f, maxDamage = 500f;
+    float lv2threshold = 230f, lv3threshold = 360f;
 
     // Maximum angle deviation per second
-    float maxJitter = 150f;
-    IntervalUtil jitterInterval = new IntervalUtil(0.05f, 0.05f);
+    float maxJitter = 250f;
 
     static final String lv2SpawnWeapon = "wpnxt_unstablecannon_lv2spawner";
     static final String lv3SpawnWeapon = "wpnxt_unstablecannon_lv3spawner";
@@ -62,13 +60,6 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-
-        jitterInterval.advance(amount);
-
-        if (!jitterInterval.intervalElapsed()) {
-            return;
-        }
-
         Iterator<DamagingProjectileAPI> itr = projectiles.iterator();
         while (itr.hasNext()) {
             DamagingProjectileAPI proj = itr.next();
@@ -78,7 +69,7 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
             }
             float jitter = Misc.random.nextFloat() * maxJitter - maxJitter / 2;
             jitter *= (proj.getBaseDamageAmount() - minDamage) / (maxDamage - minDamage);
-            jitter *= jitterInterval.getIntervalDuration();
+            jitter *= amount;
 
             Vector2f newTail = Misc.rotateAroundOrigin(proj.getTailEnd(), jitter, proj.getLocation());
 
@@ -89,9 +80,10 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
     private void randomizeDamage() {
         float r1 = scaledValue(minDamage, maxDamage, Misc.random.nextFloat());
         float r2 = scaledValue(minDamage, maxDamage, Misc.random.nextFloat());
+        float r3 = scaledValue(minDamage, maxDamage, Misc.random.nextFloat());
 
-        // Minimum of 2 damage rolls
-        damage = Math.min(r1, r2);
+        // Minimum of 3 damage rolls
+        damage = Math.min(r1, Math.min(r2, r3));
     }
 
     private float scaledValue(float min, float max, float frac) {
