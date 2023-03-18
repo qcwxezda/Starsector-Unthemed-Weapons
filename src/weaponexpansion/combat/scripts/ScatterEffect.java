@@ -37,7 +37,7 @@ public class ScatterEffect implements OnFireEffectPlugin, EveryFrameWeaponEffect
     }
 
     @Override
-    public void advance(float v, CombatEngineAPI combatEngineAPI, WeaponAPI weaponAPI) {
+    public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
         // Nothing here; this only exists because OnFireEffect only works on weapons if
         // they also have an EveryFrameEffect
     }
