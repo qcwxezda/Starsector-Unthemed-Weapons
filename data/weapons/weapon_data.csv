@@ -6,25 +6,25 @@ Graviton Array,wpnxt_impactlance,1,0.75,4500,1000,700,,,10,15,22,9,0.3,3,KINETIC
 Voidbeam Emitter,wpnxt_voidray,3,0.25,10000,1000,2000,,,,5,30,,,,FRAGMENTATION,,600,5,3,,,,,,,3000,,,,,,,,"beam20, LR, rare_bp, hist1t, merc",,,,Anti Hull,,,,,,,Deals a proportion of damage as hard flux equal to the firing ship's hard flux level.,,,3
 Ultra Blaster,wpnxt_ultrablaster,2,0.5,5000,700,,900,,,9,24,,,,HIGH_EXPLOSIVE,1800,,0.5,4.5,,,,,,,,1500,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 150,,,,5
 Chaos Pulser,wpnxt_unstablecannon,3,0.25,10000,800,,266.667,,,12,30,,,,ENERGY,225,,0.3333,,,,,,,,,1000,,,100,,,,"energy20, rare_bp, hist1t, merc",,,,General,,,,Varies,"Each projectile deals between %s and %s damage, with weaker projectiles being more likely to be generated. Projectiles' trajectories become increasingly erratic the stronger they are.",100 | 600,,,,6
-Boltstorm,wpnxt_boltstorm,1,0.75,4000,750,,50,25,,10,18,,,,ENERGY,35,,,0.09090909,,,10,10,0,0,,1250,,,30,,,,"energy10, rare_bp, hist1t, merc",,,,Suppression,,,,,,,,,,1
+Boltstorm,wpnxt_boltstorm,1,0.75,4000,750,,50,20,,10,18,,,,ENERGY,35,,,0.09090909,,,10,10,0,0,,1250,,,30,,,,"energy10, rare_bp, hist1t, merc",,,,Suppression,,,,,,,,,,1
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,wpnxt_unstablecannon_lv2spawner,,,,800,,,,,,,,,,ENERGY,,,,,,,,,,,,1000,,,250,,,SYSTEM,,,,,,,,,,,,,,,6.2
 ,wpnxt_unstablecannon_lv3spawner,,,,800,,,,,,,,,,ENERGY,,,,,,,,,,,,1000,,,400,,,SYSTEM,,,,,,,,,,,,,,,6.3
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # MEDIUM ENERGY
 Dispersion PD Laser,wpnxt_fragpdbeam,1,0.75,2000,450,400,,,,50,12,,,,FRAGMENTATION,,125,,,,,,,,,5000,,,,,,,"PD,ANTI_FTR","pd15, beam10, SR, rare_bp, merc",,,,Point Defense,,,,,,,,,,7
-Bolt Scrambler,wpnxt_energyscatterer,1,0.75,1500,750,,50,25,,25,11,,,,ENERGY,40,,,3,20,,20,20,0,0,,1250,,,30,,,,"energy10, rare_bp, merc",,,,General,,,,,,,,,,8
+Bolt Scrambler,wpnxt_energyscatterer,1,0.75,1500,750,,50,20,,25,12,,,,ENERGY,40,,,3,20,,20,20,0,0,,1250,,,30,,,,"energy10, rare_bp, merc",,,,General,,,,,,,,,,8
 Enhanced Tactical Laser,wpnxt_enhtaclaser,2,0.5,1500,1000,150,,,,18,9,,,,ENERGY,,135,0.1,0.1,,,,,,,2400,,,,,,,,"beam12, LR, rare_bp, merc",,,,Suppression,,,,,"Suppresses the target's flux grid, increasing energy and ballistic weapons' flux generation by %s per beam, up to a maximum of %s.",3% | 15%,,,,9
-Bolt Streamer,wpnxt_boltstreamer,2,0.5,2500,750,,50,25,,18,12,,,,ENERGY,50,,,1.8,13,.05,,,,,,1250,,,30,,,,"energy11, rare_bp, merc",,,,General,,,,,,,,,,10
+Bolt Streamer,wpnxt_boltstreamer,2,0.5,2500,750,,50,20,,18,13,,,,ENERGY,50,,,1.8,13,.05,,,,,,1250,,,30,,,,"energy11, rare_bp, merc",,,,General,,,,,,,,,,10
 Needle Driver,wpnxt_needledriver,3,0.25,4500,800,,220,150,,15,14,,,,KINETIC,400,,0.2,2,,,,,,,,1500,,,200,,,,"energy12, rare_bp, hist1t, merc",,,,Pressure,,,,,"Projectiles attach to non-fighter craft on hull or armor hits. After %s seconds, attached projectiles explode, triggering a chain reaction that causes all other attached projectiles to explode. Each explosion deals energy damage equal to %s times the number of attached projectiles, up to a maximum of %s. ",12 | 50 | 500,,,,11
 ,,,,,,,,,,,,,,,
 "# SMALL ENERGY",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Mining Laser Mk.II,wpnxt_mininglasermk2,1,0.75,250,1000,150,,,,25,3,1200,,,HIGH_EXPLOSIVE,,200,0.15,0.15,,,,,,,2400,,,,,,,CONSERVE_FOR_ANTI_ARMOR,"beam3, energy3, he3, rare_bp, merc",,,,Suppression,,,,,,,,,,12
-Bolt Repeater,wpnxt_boltrepeater,2,0.5,750,750,,50,25,,30,7,25,2,5,ENERGY,50,,,0.1667,,,8,8,0,0,,1250,,,30,,,,"energy9, rare_bp, merc",,,,General,,,,,,,,,,13
-Boltgun,wpnxt_boltgun,0,,150,750,,50,25,,50,2,,,,ENERGY,50,,,0.6,,,,,,,,1250,,,30,,,,"energy1, rare_bp, merc",,,,General,,,,,,,,,,14
-Miniblaster,wpnxt_miniblaster,0,,300,500,,250,,,25,6,,,,HIGH_EXPLOSIVE,350,,,1,,,,,,,,1000,,,,,,ANTI_FTR,"energy8, rare_bp, merc",,,,Anti Armor,,,,,,,,,,15
+Bolt Repeater,wpnxt_boltrepeater,2,0.5,750,750,,50,20,,30,7,28,1.75,7,ENERGY,50,,,0.142857,,,8,8,0,0,,1250,,,30,,,,"energy9, rare_bp, merc",,,,General,,,,,,,,,,13
+Boltgun,wpnxt_boltgun,0,,150,750,,50,20,,50,2,,,,ENERGY,50,,,0.6,,,,,,,,1250,,,30,,,,"energy1, rare_bp, merc",,,,General,,,,,,,,,,14
+Miniblaster,wpnxt_miniblaster,0,,300,500,,200,,,25,6,,,,HIGH_EXPLOSIVE,300,,,1,,,,,,,,1000,,,,,,ANTI_FTR,"energy8, rare_bp, merc",,,,Anti Armor,,,,,,,,,,15
 Light Impact Beam,wpnxt_impactbeam,1,0.75,500,750,100,,,,18,5,,,,KINETIC,,100,0.1,0.1,,,,,,,2400,,,,,,,,"beam5, kinetic5, LR, rare_bp, merc",,,,Suppression,,,,,,,,,,16
-Voidcannon,wpnxt_voidcannon,3,0.25,1500,600,,450,,,25,10,24,1,24,FRAGMENTATION,300,,0.5,,,,,,,,,1500,,,,,,"STRIKE, USE_VS_FRIGATES","strike9, energy10, SR, rare_bp, hist1t, merc",,,,Finisher,,,,,Fires a tight spread of %s projectiles. Projectiles carry an explosive charge that deals an additional %s fragmentation damage over a moderate area.,4 | 450,,,,17
+Voidcannon,wpnxt_voidcannon,3,0.25,1500,600,,350,,,25,10,36,1.5,36,FRAGMENTATION,125,,,0.5,6,,15,15,0,0,,1500,,,,,,"STRIKE, USE_VS_FRIGATES","strike9, energy10, SR, rare_bp, hist1t, merc",,,,Finisher,,,,,"Fires a tight spread of %s projectiles. Projectiles explode, dealing their damage over a moderate area.",6,,,,17
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Unused
 # Chromatic Bolt Carrier,wpnxt_chromaticblaster,2,0.5,6000,800,,300,,,15,25,,,,ENERGY,3000,,0.5,5.5,,,,,,,,200,,,400,,,STRIKE,"energy18, rare_bp, hist1t, merc",,,,General,,,,,"Generates a cloud of unstable energy that deals no damage and passes through inert and small objects. When in close proximity to a ship or fighter, the cloud instantaneously condenses into a volley of %s projectiles that converge on the target and deal %s damage each.

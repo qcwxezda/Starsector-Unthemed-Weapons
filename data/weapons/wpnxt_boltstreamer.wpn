@@ -6,7 +6,7 @@
   "turretSprite":"graphics/weapons/wpnxt_boltstreamer_turret.png",
   "turretGlowSprite":"graphics/weapons/wpnxt_boltstreamer_turret_glow.png",
   "hardpointSprite":"graphics/weapons/wpnxt_boltstreamer_hardpoint.png",
-  "hardpointGlowSprite":"graphics/weapons/wpnxt_boltstreamer_hardpoint.png",
+  "hardpointGlowSprite":"graphics/weapons/wpnxt_boltstreamer_hardpoint_glow.png",
   "glowColor":[255,192,192,255],
   "turretOffsets":[15, 0],
   "turretAngleOffsets":[0],
