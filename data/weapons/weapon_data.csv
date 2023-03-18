@@ -3,14 +3,14 @@ name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn r
 # LARGE ENERGY
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Graviton Array,wpnxt_impactlance,1,0.75,4500,1000,700,,,10,15,22,9,0.3,3,KINETIC,,600,,,1,0.5,,,,,5000,,,,,,,,"beam15, kinetic15, LR, rare_bp, hist1t, merc",,,,Suppression,,,,,Gravitic effects slow and push target off-course. ,,,,,2
-Voidbeam Emitter,wpnxt_voidray,4,0.125,15000,1000,1750,,,,5,32,,,,FRAGMENTATION,,550,0.5,2,,,,,,,3000,,,,,,,FIRE_WHEN_INEFFICIENT,"beam20, energy18, LR, rare_bp, hist1t, merc",,,,General,,,,,Fires %s beams dealing %s fragmentation DPS each that converge into a single beam.,5 | 350,Deals a proportion of damage as hard flux equal to the firing ship's hard flux level.,,,3
+Voidbeam Emitter,wpnxt_voidray,4,0.125,15000,1000,1800,,,,5,32,,,,FRAGMENTATION,,550,0.5,1.5,,,,,,,3000,,,,,,,FIRE_WHEN_INEFFICIENT,"beam20, energy18, LR, rare_bp, hist1t, merc",,,,General,,,,,Fires %s beams dealing %s fragmentation DPS each that converge into a single beam.,4 | 450,Deals a proportion of damage as hard flux equal to the firing ship's hard flux level.,,,3
 Ultra Blaster,wpnxt_ultrablaster,2,0.5,5000,700,,900,,,9,24,,,,HIGH_EXPLOSIVE,1800,,0.5,4.5,,,,,,,,1500,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 150,,,,5
 Chaos Pulser,wpnxt_unstablecannon,3,0.25,10000,800,,200,,,12,30,,,,ENERGY,180,,0.25,,,,,,,,,1000,,,100,,,,"energy20, rare_bp, hist1t, merc",,,,General,,,,Varies,"Each projectile deals between %s and %s damage, with weaker projectiles being more likely to be generated. Projectiles' trajectories become increasingly erratic the stronger they are.",100 | 500,,,,6
 Boltstorm,wpnxt_boltstorm,1,0.75,4000,750,,50,20,,10,18,,,,ENERGY,35,,,0.09090909,,,10,10,0,0,,800,,,30,,,,"energy10, rare_bp, hist1t, merc",,,,Suppression,,,,,,,,,,1
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,wpnxt_unstablecannon_lv2spawner,,,,800,,,,,,,,,,ENERGY,,,,,,,,,,,,1000,,,250,,,SYSTEM,,,,,,,,,,,,,,,6.2
 ,wpnxt_unstablecannon_lv3spawner,,,,800,,,,,,,,,,ENERGY,,,,,,,,,,,,1000,,,400,,,SYSTEM,,,,,,,,,,,,,,,6.3
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # MEDIUM ENERGY
 Dispersion PD Laser,wpnxt_fragpdbeam,1,0.75,2000,450,400,,,,50,12,,,,FRAGMENTATION,,125,,,,,,,,,5000,,,,,,,"PD,ANTI_FTR","pd15, beam10, SR, rare_bp, merc",,,,Point Defense,,,,,,,,,,7
 Bolt Scrambler,wpnxt_energyscatterer,1,0.75,1500,750,,50,20,,25,12,,,,ENERGY,40,,,3,20,,20,20,0,0,,800,,,30,,,,"energy10, rare_bp, merc",,,,General,,,,,,,,,,8

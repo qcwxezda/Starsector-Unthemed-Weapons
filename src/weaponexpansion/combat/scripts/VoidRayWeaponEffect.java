@@ -16,10 +16,10 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
     static float beamAngleSpeed = 15f;
     static float maxWidth = 15f;
     /** Per second */
-    static float fullChargeGrowRate = 6f;
+    static float fullChargeGrowRate = 1.5f;
 
     /** Amount of damage to transfer to full strength first beam per second. Approximate */
-    static float transferPerSecond = 0.5f;
+    static float transferPerSecond = 0.2f;
 
     /** Need both spreads and angleOffsets since angleOffsets is shared between every voidray weapon */
     float spread = 20f;
