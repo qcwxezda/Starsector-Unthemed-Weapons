@@ -21,7 +21,7 @@
   "textureScrollSpeed":72.0,
   "pixelsPerTexel":5.0,
   "textureType": ROUGH,
-  "pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER],
+  "pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER,MISSILE_FF,MISSILE_NO_FF],
   "fireSoundOne":"laser_intro",
   "fireSoundTwo":"wpnxt_he_laser_loop"
 }

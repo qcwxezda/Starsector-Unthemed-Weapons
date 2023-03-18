@@ -1,6 +1,6 @@
 {
   "wpnxt_impactlance_loop":[
-    {"file": "sounds/weapons/wpnxt_impactlance_loop.wav", "pitch": 1, "volume": 1}
+    {"file": "sounds/weapons/wpnxt_impactlance_loop.wav", "pitch": 1, "volume": 0.4}
   ],
   "wpnxt_voidray_loop":[
     {"file": "sounds/weapons/wpnxt_voidray_loop.wav", "pitch": 1, "volume": 1}
@@ -20,18 +20,18 @@
     {"file": "sounds/weapons/wpnxt_unstablecannon_fire3.wav", "pitch": 1, "volume": 1}
   ],
   "wpnxt_bolt_fire":[
-    {"file": "sounds/weapons/wpnxt_bolt1.wav", "pitch": 1, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt1.wav", "pitch": 0.98, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt1.wav", "pitch": 0.96, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt2.wav", "pitch": 1, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt2.wav", "pitch": 0.98, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt2.wav", "pitch": 0.96, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt3.wav", "pitch": 1, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt3.wav", "pitch": 0.98, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt3.wav", "pitch": 0.96, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt4.wav", "pitch": 1, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt4.wav", "pitch": 0.98, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_bolt4.wav", "pitch": 0.96, "volume": 1}
+    {"file": "sounds/weapons/wpnxt_bolt1.wav", "pitch": 1, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt1.wav", "pitch": 0.98, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt1.wav", "pitch": 0.96, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt2.wav", "pitch": 1, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt2.wav", "pitch": 0.98, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt2.wav", "pitch": 0.96, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt3.wav", "pitch": 1, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt3.wav", "pitch": 0.98, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt3.wav", "pitch": 0.96, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt4.wav", "pitch": 1, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt4.wav", "pitch": 0.98, "volume": 0.7},
+    {"file": "sounds/weapons/wpnxt_bolt4.wav", "pitch": 0.96, "volume": 0.7}
   ],
   "wpnxt_boltshotgun_fire":[
     {"file": "sounds/weapons/wpnxt_boltshotgun.wav", "pitch": 1, "volume": 1},

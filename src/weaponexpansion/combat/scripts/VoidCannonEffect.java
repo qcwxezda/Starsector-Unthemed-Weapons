@@ -1,43 +1,39 @@
 package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
-import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import org.lwjgl.util.vector.Vector2f;
 
-import java.awt.*;
-
+/** A script is used instead of just setting extra hidden turret angles because:
+ *    - setting the spread in the csv actually shows it in the weapon arc
+ *    - Having too many hidden turrets makes glow effects like high energy focus look weird
+ *    */
 @SuppressWarnings("unused")
-public class VoidCannonEffect implements OnHitEffectPlugin {
-
-    float explosionRadius = 100f;
-    float explosionDamage = 300f;
+public class VoidCannonEffect implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin {
+    static final int numProjectiles = 6;
 
     @Override
-    public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
-        DamagingExplosionSpec spec = new DamagingExplosionSpec(
-                0.5f,
-                explosionRadius,
-                explosionRadius / 2,
-                explosionDamage,
-                explosionDamage / 2,
-                CollisionClass.PROJECTILE_FF,
-                CollisionClass.PROJECTILE_FIGHTER,
-                2f,
-                4f,
-                1f,
-                30,
-                new Color(255,128,200,255),
-                new Color(255,128,200,64)
-        );
+    public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
+        engine.removeEntity(proj);
 
-        spec.setUseDetailedExplosion(false);
-        spec.setDamageType(DamageType.FRAGMENTATION);
+        float spread = weapon.getCurrSpread();
+        float spreadIncrement = spread / (numProjectiles - 1);
+        for (float x = -spread / 2f; x <= spread / 2f; x += spreadIncrement) {
+            engine.spawnProjectile(
+                    proj.getSource(),
+                    weapon,
+                    weapon.getId(),
+                    weapon.getFirePoint(0),
+                    weapon.getCurrAngle() + x,
+                    proj.getSource().getVelocity()
+            );
+        }
+        weapon.getAmmoTracker().setAmmo(Math.max(0, weapon.getAmmo() - numProjectiles + 1));
+        weapon.setRemainingCooldownTo(weapon.getCooldown());
+        weapon.setRefireDelay(weapon.getCooldown());
+    }
 
-        engine.spawnDamagingExplosion(
-                spec,
-                proj.getSource(),
-                proj.getLocation()
-        );
+    @Override
+    public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
+        // Nothing here; this only exists because OnFireEffect only works on weapons if
+        // they also have an EveryFrameEffect
     }
 }

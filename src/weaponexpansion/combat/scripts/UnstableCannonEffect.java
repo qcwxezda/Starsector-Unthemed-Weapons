@@ -18,7 +18,7 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
     float lv2threshold = 300f, lv3threshold = 500f;
 
     // Maximum angle deviation per second
-    float maxJitter = 120f;
+    float maxJitter = 150f;
     IntervalUtil jitterInterval = new IntervalUtil(0.05f, 0.05f);
 
     static final String lv2SpawnWeapon = "wpnxt_unstablecannon_lv2spawner";
@@ -33,7 +33,7 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
 
         DamagingProjectileAPI newProj;
-        Vector2f loc = proj.getWeapon().getLocation();
+        Vector2f loc = proj.getWeapon().getFirePoint(0);
         Vector2f vel = proj.getSource().getVelocity();
 
         if (damage < lv2threshold) {
@@ -80,8 +80,9 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
             jitter *= (proj.getBaseDamageAmount() - minDamage) / (maxDamage - minDamage);
             jitter *= jitterInterval.getIntervalDuration();
 
-            Vector2f newLoc = Misc.rotateAroundOrigin(proj.getLocation(), jitter, proj.getTailEnd());
-            proj.getLocation().set(newLoc);
+            Vector2f newTail = Misc.rotateAroundOrigin(proj.getTailEnd(), jitter, proj.getLocation());
+
+            proj.getTailEnd().set(newTail);
         }
     }
 

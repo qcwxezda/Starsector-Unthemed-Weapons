@@ -10,65 +10,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Update graphics, add unique sounds, add EMP damage to bolts">
-      <change afterPath="$PROJECT_DIR$/graphics/missiles/orig/voidcannonshot.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_voidshot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/voidray2.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_bolt1.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_bolt2.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_bolt3.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_bolt4.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_boltshotgun.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_fragbeam.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_he_laser_loop.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_impactlance_loop.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_miniblaster_fire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_needledriver_fire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire2.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire3.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidcannon_fire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidray_loop.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/EmptyShipStats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/BoltScramblerEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/InstantaneousBurst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energybolt.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energybolt.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_voidcannon_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_voidcannon_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_boltgun.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_boltgun.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_boltrepeater.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_boltrepeater.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_boltstorm.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_boltstorm.wpn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_boltstreamer.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_boltstreamer.wpn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_fragpdbeam.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_fragpdbeam.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_impactbeam.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_impactbeam.wpn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_impactlance.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_impactlance.wpn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_miniblaster.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_miniblaster.wpn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_mininglasermk2.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_mininglasermk2.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_needledriver.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_needledriver.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_unstablecannon.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_unstablecannon.wpn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_voidcannon.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_voidcannon.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_voidray.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_voidray.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/missiles/wpnxt_bolt.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_bolt.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/boltstorm.psd" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/orig/boltstorm.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/unstablecannon.psd" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/orig/unstablecannon.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/voidray.psd" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/orig/voidray.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstorm_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstorm_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstorm_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstorm_hardpoint_glow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstorm_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstorm_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstorm_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_boltstorm_turret_glow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_unstablecannon_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_unstablecannon_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_unstablecannon_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_unstablecannon_hardpoint_glow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_unstablecannon_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_unstablecannon_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_unstablecannon_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_unstablecannon_turret_glow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidcannon_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidcannon_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidray_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidray_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidray_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidray_hardpoint_glow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidray_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidray_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidray_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/wpnxt_voidray_turret_glow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_impactlance_fire.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_impactlance_loop.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_impactlance_loop.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_needledriver_fire.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_needledriver_fire.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_ultrablaster_fire.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_ultrablaster_fire.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire2.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire2.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire3.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_unstablecannon_fire3.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidcannon_fire.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidcannon_fire.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidray_loop.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_voidray_loop.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ScatterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ScatterEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/EmptyShipStats.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,18 +86,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Alex/Documents/My Games/Starsector/mods/Weapon Expansion/data/weapons/proj",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alex/Documents/My Games/Starsector/mods/Weapon Expansion/data/weapons/proj&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\weapons\proj" />
@@ -235,7 +204,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678946661846</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Update graphics, add unique sounds, add EMP damage to bolts">
+      <created>1679034628721</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1679034628721</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -251,17 +227,9 @@
     <option name="LAST_COMMIT_MESSAGE" value="Update graphics, add unique sounds, add EMP damage to bolts" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonEffect.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="com.fs.starfarer.loading.WeaponSpreadsheetLoader$o" memberName="spec" />
         <PinnedItemInfo parentTag="com.fs.starfarer.combat.E.return" memberName="new" />
         <PinnedItemInfo parentTag="com.fs.starfarer.combat.E.return" memberName="Ô00000" />
       </pinned-members>
@@ -277,6 +245,9 @@
         <watch expression="weapon.getCooldownRemaining()" language="JAVA" />
         <watch expression="proj" language="JAVA" />
         <watch expression="((o)beam.getWeapon().getDerivedStats()).burstFireDuration" custom="com.fs.starfarer.loading.WeaponSpreadsheetLoader.o" />
+        <watch expression="weapon.getCooldown()" language="JAVA" />
+        <watch expression="weapon.getMuzzleFlashSpec()" language="JAVA" />
+        <watch expression="weapon.getGlowSpriteAPI()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
