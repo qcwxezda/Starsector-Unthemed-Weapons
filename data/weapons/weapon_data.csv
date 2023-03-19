@@ -18,14 +18,22 @@ Enhanced Tactical Laser,wpnxt_enhtaclaser,2,0.5,1500,1000,150,,,,18,9,,,,ENERGY,
 Bolt Streamer,wpnxt_boltstreamer,2,0.5,2500,750,,50,20,,18,13,,,,ENERGY,50,,,1.5,12,.066667,,,,,,800,,,30,,,,"energy11, rare_bp, merc",,,,General,,,,,,,,,,10
 Needle Driver,wpnxt_needledriver,3,0.25,4500,800,,220,150,,15,14,,,,KINETIC,400,,0.2,2,,,,,,,,1250,,,200,,,,"energy12, rare_bp, hist1t, merc",,,,Pressure,,,,,"Projectiles attach to non-fighter craft on hull or armor hits. After %s seconds, attached projectiles explode, triggering a chain reaction that causes all other attached projectiles to explode. Each explosion deals energy damage equal to %s times the number of attached projectiles, up to a maximum of %s. ",12 | 50 | 500,,,,11
 ,,,,,,,,,,,,,,,,,,,,,,,,
-"# SMALL ENERGY",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+# SMALL ENERGY,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Mining Laser Mk.II,wpnxt_mininglasermk2,1,0.75,250,1000,150,,,,25,3,1200,,,HIGH_EXPLOSIVE,,200,0.15,0.15,,,,,,,2400,,,,,,,CONSERVE_FOR_ANTI_ARMOR,"beam3, energy3, he3, rare_bp, merc",,,,Suppression,,,,,,,,,,12
 Bolt Repeater,wpnxt_boltrepeater,2,0.5,750,750,,50,20,,30,7,28,1.75,7,ENERGY,50,,,0.142857,,,8,8,0,0,,800,,,30,,,,"energy9, rare_bp, merc",,,,General,,,,,,,,,,13
 Boltgun,wpnxt_boltgun,0,,150,750,,50,20,,50,2,,,,ENERGY,50,,,0.6,,,,,,,,800,,,30,,,,"energy1, rare_bp, merc",,,,General,,,,,,,,,,14
 Miniblaster,wpnxt_miniblaster,0,,300,500,,200,,,25,6,,,,HIGH_EXPLOSIVE,300,,,1,,,,,,,,1000,,,,,,ANTI_FTR,"energy8, rare_bp, merc",,,,Anti Armor,,,,,,,,,,15
 Light Impact Beam,wpnxt_impactbeam,1,0.75,500,750,100,,,,18,5,,,,KINETIC,,100,0.1,0.1,,,,,,,2400,,,,,,,,"beam5, kinetic5, LR, rare_bp, merc",,,,Suppression,,,,,,,,,,16
 Voidcannon,wpnxt_voidcannon,3,0.25,1500,600,,350,,,25,10,36,1.5,36,FRAGMENTATION,125,,,0.5,6,,15,15,0,0,,1500,,,,,,"STRIKE, USE_VS_FRIGATES","strike9, energy10, SR, rare_bp, hist1t, merc",,,,Finisher,,,,,"Fires a tight spread of %s projectiles. Projectiles explode, dealing their damage over a moderate area.",6,,,,17
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+# Large Ballistic
+Helios Mortar,wpnxt_explosiveshelllauncher,2,0.5,5000,1200,,1200,,250,10,30,,,,HIGH_EXPLOSIVE,1500,,,5,,,0,3,1,0.3,,700,,,,,,,"he20, rare_bp, hist1t, merc",,,,Anti Armor (Area),,,,,"Projectiles explode on contact, dealing their damage over a large area.",,,,,18
+Pummeler,wpnxt_minigun,2,0.5	,6000,900,,125,,3,6,22,,,,FRAGMENTATION,20,,,0.125,,,0,10,0.2,3,,800,,,,,,,kinetic10,,,,General,,,,,Fire rate doubles over %s seconds of sustained fire.,10,,,,19
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,
+
 # Unused
 # Chromatic Bolt Carrier,wpnxt_chromaticblaster,2,0.5,6000,800,,300,,,15,25,,,,ENERGY,3000,,0.5,5.5,,,,,,,,200,,,400,,,STRIKE,"energy18, rare_bp, hist1t, merc",,,,General,,,,,"Generates a cloud of unstable energy that deals no damage and passes through inert and small objects. When in close proximity to a ship or fighter, the cloud instantaneously condenses into a volley of %s projectiles that converge on the target and deal %s damage each.
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
