@@ -1,0 +1,27 @@
+{
+  "id":"wpnxt_explosiveshelllauncher",  # this id must match what's in the spreadsheet
+  "specClass":"projectile",
+  "type":"BALLISTIC",
+  "size":"LARGE",
+  "turretSprite":"graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_turret.png",
+  "turretGunSprite":"graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_turret_recoil.png",
+  "hardpointSprite":"graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_hardpoint.png",
+  "hardpointGunSprite":"graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_hardpoint_recoil.png",
+  "visualRecoil":10.0,  # the gun sprites are only used if this is non-0
+  "renderHints":["RENDER_BARREL_BELOW"],
+  "turretOffsets":[35, 0],
+  "turretAngleOffsets":[0],
+  "hardpointOffsets":[40, 0],
+  "hardpointAngleOffsets":[0],
+  "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
+  "animationType":"MUZZLE_FLASH",
+  "muzzleFlashSpec":{"length":75.0,   # only used if animationType = MUZZLE_FLASH
+    "spread":15.0,
+    "particleSizeMin":20.0,
+    "particleSizeRange":40.0,
+    "particleDuration":0.75,
+    "particleCount":75,
+    "particleColor":[255,192,128,255]},
+  "projectileSpecId":"wpnxt_explosiveshell_shot",  # projectile that will be fired
+  "fireSoundTwo":"wpnxt_explosiveshelllauncher_fire"
+}
