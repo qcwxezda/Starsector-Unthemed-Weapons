@@ -58,5 +58,15 @@
     {"file": "sounds/weapons/wpnxt_voidcannon_fire.wav", "pitch": 1, "volume": 1},
     {"file": "sounds/weapons/wpnxt_voidcannon_fire.wav", "pitch": 0.98, "volume": 1},
     {"file": "sounds/weapons/wpnxt_voidcannon_fire.wav", "pitch": 0.96, "volume": 1}
+  ],
+  "wpnxt_explosiveshelllauncher_fire":[
+    {"file": "sounds/weapons/wpnxt_explosiveshelllauncher_fire.wav", "pitch": 1, "volume": 1},
+    {"file": "sounds/weapons/wpnxt_explosiveshelllauncher_fire.wav", "pitch": 0.98, "volume": 1},
+    {"file": "sounds/weapons/wpnxt_explosiveshelllauncher_fire.wav", "pitch": 0.96, "volume": 1}
+  ],
+  "wpnxt_minigun_fire":[
+    {"file": "sounds/weapons/wpnxt_minigun_fire.wav", "pitch": 1, "volume": 0.25},
+    {"file": "sounds/weapons/wpnxt_minigun_fire.wav", "pitch": 0.98, "volume": 0.25},
+    {"file": "sounds/weapons/wpnxt_minigun_fire.wav", "pitch": 0.96, "volume": 0.25}
   ]
 }
