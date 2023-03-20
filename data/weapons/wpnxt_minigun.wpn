@@ -8,10 +8,10 @@
   "turretGlowSprite":"graphics/weapons/ballistic/minigun/wpnxt_minigun_turret_glow.png",
   "hardpointGlowSprite":"graphics/weapons/ballistic/minigun/wpnxt_minigun_hardpoint_glow.png",
   "numFrames":5,
-  "frameRate":30,
-  "turretOffsets":[47, -12, 47, 8],
+  "frameRate":40,
+  "turretOffsets":[46, -13, 46, 7],
   "turretAngleOffsets":[0, 0],
-  "hardpointOffsets":[49, -11, 49, 5],
+  "hardpointOffsets":[58, -10, 58, 6],
   "hardpointAngleOffsets":[0, 0],
   "glowColor":[255, 32, 32, 255],
   "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.

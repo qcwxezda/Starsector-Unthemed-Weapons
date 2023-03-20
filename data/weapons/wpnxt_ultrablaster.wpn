@@ -25,4 +25,5 @@
   #"requiresFullCharge":true,  # for pulse weapons - whether the weapon will fire at a lower strength partial charge
   "projectileSpecId":"wpnxt_ultrablaster_shot",  # projectile that will be fired
   "fireSoundTwo":"wpnxt_ultrablaster_fire",
+  "everyFrameEffect": "weaponexpansion.combat.scripts.SuperRailgunEffect"
 }
