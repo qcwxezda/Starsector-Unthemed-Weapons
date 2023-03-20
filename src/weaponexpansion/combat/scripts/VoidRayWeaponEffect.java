@@ -13,7 +13,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
     static float maxSpread = 6f;
 
     /** Per second */
-    static float beamAngleSpeed = 15f;
+    static float beamAngleSpeed = 20f;
     static float maxWidth = 15f;
     /** Per second */
     static float fullChargeGrowRate = 1.5f;
@@ -80,7 +80,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
         // In between min and max strength, lower the beam dispersion
         spread = maxSpread * (1f - convergeLevel); //Math.min(spread, maxSpread * (1f - weapon.getChargeLevel()));
         for (int i = 0; i < spreads.size(); i++) {
-            float newSpread = spreads.get(i) + beamAngleSpeed * randomFloats.get(i) * amount * (dirs.get(i) ? 1f : -1f);
+            float newSpread = spreads.get(i) + beamAngleSpeed * spread / maxSpread * randomFloats.get(i) * amount * (dirs.get(i) ? 1f : -1f);
             if (Math.abs(newSpread) >= spread) {
                 newSpread = Math.min(spread, Math.max(-spread, newSpread));
                 dirs.set(i, !dirs.get(i));

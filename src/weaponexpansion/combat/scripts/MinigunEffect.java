@@ -36,7 +36,7 @@ public class MinigunEffect implements EveryFrameWeaponEffectPlugin, OnFireEffect
 
     @Override
     public void init(WeaponAPI weapon) {
-        heatGlowRenderer = new HeatGlowRenderer(weapon);
+        heatGlowRenderer = new HeatGlowRenderer(weapon, false);
         Global.getCombatEngine().addLayeredRenderingPlugin(heatGlowRenderer);
     }
 }
