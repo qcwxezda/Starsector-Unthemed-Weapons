@@ -1,19 +1,23 @@
 package weaponexpansion.util;
 
-import com.fs.starfarer.api.combat.BaseCombatLayeredRenderingPlugin;
-import com.fs.starfarer.api.combat.CombatEngineLayers;
-import com.fs.starfarer.api.combat.ViewportAPI;
-import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.graphics.SpriteAPI;
+import com.fs.starfarer.api.util.Misc;
+import org.lwjgl.util.vector.Vector2f;
 
 public class HeatGlowRenderer extends BaseCombatLayeredRenderingPlugin {
 
     private final WeaponAPI weapon;
-    private float alpha = 1f;
+    private float alpha = 0f;
     private final float originalWidth;
+    private final float originalWeaponWidth;
+    private final boolean barrelRecoil;
 
-    public HeatGlowRenderer(WeaponAPI weapon) {
+    public HeatGlowRenderer(WeaponAPI weapon, boolean barrelRecoil) {
         this.weapon = weapon;
         originalWidth = weapon.getGlowSpriteAPI().getWidth();
+        this.barrelRecoil = barrelRecoil;
+        originalWeaponWidth = weapon.getSprite().getWidth();
     }
 
     @Override
@@ -36,13 +40,40 @@ public class HeatGlowRenderer extends BaseCombatLayeredRenderingPlugin {
         alpha = f;
     }
 
+    public void modifyAlpha(float f) {
+        alpha += f;
+        alpha = Math.max(0f, Math.min(1f, alpha));
+    }
+
     @Override
     public void render(CombatEngineLayers layer, ViewportAPI viewport) {
-        weapon.getGlowSpriteAPI().setAlphaMult(alpha);
         weapon.getGlowSpriteAPI().setWidth(originalWidth);
-        weapon.getGlowSpriteAPI().setAngle(weapon.getCurrAngle() - 90f);
-        weapon.getGlowSpriteAPI().renderAtCenter(weapon.getLocation().x, weapon.getLocation().y);
+        if (barrelRecoil) {
+            weapon.getSprite().setWidth(originalWeaponWidth);
+        }
+
+        Vector2f location = weapon.getLocation();
+        SpriteAPI glowSprite = weapon.getGlowSpriteAPI();
+        glowSprite.setAlphaMult(alpha);
+        glowSprite.setAngle(weapon.getCurrAngle() - 90f);
+
+        if (barrelRecoil && weapon.getBarrelSpriteAPI() != null) {
+            if (alpha > 0f) {
+                SpriteAPI barrelSprite = weapon.getBarrelSpriteAPI();
+                float recoilAmount = (weapon.getSlot().isHardpoint() ? barrelSprite.getHeight() / 4f : barrelSprite.getHeight() / 2f) - barrelSprite.getCenterY();
+                glowSprite.renderAtCenter(
+                        recoilAmount * (float) Math.cos(Misc.RAD_PER_DEG * weapon.getCurrAngle()) + location.x,
+                        recoilAmount * (float) Math.sin(Misc.RAD_PER_DEG * weapon.getCurrAngle()) + location.y);
+            }
+            weapon.getSprite().renderAtCenter(location.x, location.y);
+        } else if (alpha > 0f) {
+            glowSprite.renderAtCenter(location.x, location.y);
+        }
+
         // Cheap hack to prevent glow on fire (setting MUZZLE_FLASH Only makes glow sprite null)
         weapon.getGlowSpriteAPI().setWidth(0f);
+        if (barrelRecoil) {
+            weapon.getSprite().setWidth(0f);
+        }
     }
 }

@@ -21,7 +21,7 @@
     "particleSizeRange":40.0,
     "particleDuration":0.75,
     "particleCount":75,
-    "particleColor":[255,192,128,255]},
+    "particleColor":[255,128,128,255]},
   "projectileSpecId":"wpnxt_explosiveshell_shot",  # projectile that will be fired
   "fireSoundTwo":"wpnxt_explosiveshelllauncher_fire"
 }
