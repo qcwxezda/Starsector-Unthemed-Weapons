@@ -23,6 +23,5 @@
     "particleColor":[255,192,192,192]},
   "projectileSpecId":"wpnxt_energybolt",  # projectile that will be fired,
   "fireSoundTwo":"wpnxt_boltshotgun_fire",
-  "onFireEffect":"weaponexpansion.combat.scripts.ScatterEffect",
   "everyFrameEffect":"weaponexpansion.combat.scripts.ScatterEffect"
 }

@@ -10,14 +10,13 @@ import java.awt.*;
 @SuppressWarnings("unused")
 public class ExplosiveShellEffect implements OnHitEffectPlugin {
 
-    static final float explosionRadius = 200f;
+    static final float explosionRadius = 175f;
 
     static final Color color1 = new Color(255, 125, 25, 255);
     static final Color color2 = new Color(255, 192, 128, 255);
 
     @Override
     public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
-
         if (!proj.didDamage()) {
             return;
         }
@@ -30,10 +29,10 @@ public class ExplosiveShellEffect implements OnHitEffectPlugin {
                 proj.getDamageAmount() / 2,
                 CollisionClass.PROJECTILE_FF,
                 CollisionClass.PROJECTILE_FIGHTER,
-                4f,
-                4f,
-                1.5f,
-                250,
+                2f,
+                6f,
+                1f,
+                150,
                 color1,
                 color2
         );

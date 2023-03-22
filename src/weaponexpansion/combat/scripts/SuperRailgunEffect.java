@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.BoundsAPI.SegmentAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.util.HeatGlowRenderer;
+import weaponexpansion.util.GlowRenderer;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,14 +14,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class SuperRailgunEffect implements EveryFrameWeaponEffectPlugin, OnFireEffectPlugin, WeaponEffectPluginWithInit {
+public class SuperRailgunEffect extends GlowOnFirePlugin {
 
     static final int maxPierce = 3;
-    static final float glowDecayPerSecond = 0.15f;
-    static final float minTimeBetweenHits = 0.045f;
+    static final float minTimeBetweenHits = 0.08f;
     /** Fraction of current damage lost per pierce (not base damage) */
-    static final float damageDecayPerHit = 0.4f;
+    static final float damageDecayPerHit = 0.3f;
+    static final float speedLossDuringHit = 0.6f;
     static final Color hitGlowColor = new Color(255, 225, 128);
+    static final Color chargeGlowColor = new Color(65, 130, 195);
 
     /** Whether hitting missiles counts toward the pierce limit */
     static final boolean passThroughMissiles = true;
@@ -29,31 +30,63 @@ public class SuperRailgunEffect implements EveryFrameWeaponEffectPlugin, OnFireE
     /** Whether hitting fighters counts toward the pierce limit */
     static final boolean passThroughFighters = true;
 
-    HeatGlowRenderer heatGlowRenderer;
+    GlowRenderer glowRenderer2;
 
     @Override
     public void init(WeaponAPI weapon) {
-        heatGlowRenderer = new HeatGlowRenderer(weapon, true);
-        Global.getCombatEngine().addLayeredRenderingPlugin(heatGlowRenderer);
+        glowRenderer2 = new GlowRenderer(weapon, true);
+        glowRenderer2.setRenderColor(chargeGlowColor);
+        Global.getCombatEngine().addLayeredRenderingPlugin(glowRenderer2);
+        super.init(weapon);
     }
 
     private static class ProjectileData {
         private final DamagingProjectileAPI proj;
         private int timesPierced;
         private float timeSinceLastHit;
+        private final Vector2f initialVelocity;
+        //private float actualDamage, actualEmpDamage;
 
         private ProjectileData(DamagingProjectileAPI proj) {
             this.proj = proj;
             timesPierced = 0;
             timeSinceLastHit = 0f;
+            initialVelocity = new Vector2f(proj.getVelocity());
+//            float totalDamageRatio = getTotalBaseDamageMultiplier();
+//            actualDamage = proj.getBaseDamageAmount();
+//            actualEmpDamage = proj.getEmpAmount();
+//            proj.setDamageAmount(totalDamageRatio * proj.getBaseDamageAmount());
+//            proj.getDamage().setFluxComponent(totalDamageRatio * proj.getEmpAmount());
         }
 
         private void advance(float amount) {
             timeSinceLastHit += amount;
         }
 
-        private void registerHit() {
+        private void registerHit(CombatEntityAPI target) {
             timeSinceLastHit = 0f;
+            boolean incrementPierced = !(target instanceof MissileAPI) || !passThroughMissiles;
+            if (target instanceof ShipAPI && ((ShipAPI) target).isFighter() && passThroughFighters) {
+                incrementPierced = false;
+            }
+            if (incrementPierced) {
+                timesPierced++;
+                proj.setDamageAmount(proj.getBaseDamageAmount() * (1 - damageDecayPerHit));
+                proj.getDamage().setFluxComponent(proj.getEmpAmount() * (1 - damageDecayPerHit));
+//                proj.setDamageAmount(proj.getBaseDamageAmount() - actualDamage);
+//                proj.getDamage().setFluxComponent(proj.getEmpAmount() - actualEmpDamage);
+//                actualDamage *= 1 - damageDecayPerHit;
+//                actualEmpDamage *= 1 - damageDecayPerHit;
+            }
+        }
+
+        private float getTotalBaseDamageMultiplier() {
+            float sum = 0f, multiplier = 1f;
+            for (int i = 0; i <= maxPierce; i++) {
+                sum += multiplier;
+                multiplier *= 1 - damageDecayPerHit;
+            }
+            return sum;
         }
     }
 
@@ -81,18 +114,22 @@ public class SuperRailgunEffect implements EveryFrameWeaponEffectPlugin, OnFireE
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        heatGlowRenderer.modifyAlpha(-amount * glowDecayPerSecond);
+        glowRenderer2.setAlpha(weapon.getChargeLevel());
+
+        super.advance(amount, engine, weapon);
 
         Iterator<ProjectileData> itr = projectiles.iterator();
         while (itr.hasNext()) {
             ProjectileData data = itr.next();
+            DamagingProjectileAPI proj = data.proj;
+
             data.advance(amount);
 
             if (data.timeSinceLastHit <= minTimeBetweenHits) {
                 continue;
+            } else {
+                proj.getVelocity().set(data.initialVelocity);
             }
-
-            DamagingProjectileAPI proj = data.proj;
 
             if (proj.isExpired()) {
                 itr.remove();
@@ -121,6 +158,17 @@ public class SuperRailgunEffect implements EveryFrameWeaponEffectPlugin, OnFireE
                 if ((obj instanceof DamagingProjectileAPI) && !(obj instanceof MissileAPI)) continue;
 
                 CombatEntityAPI o = (CombatEntityAPI) obj;
+
+                // Pre-check collision radius, exit early if outside to prevent unnecessary computation
+                Vector2f collisionRadiusPoint =
+                        Misc.intersectSegmentAndCircle(
+                                prevLocation,
+                                location,
+                                o.getLocation(),
+                                o.getCollisionRadius());
+                if (collisionRadiusPoint == null) {
+                    continue;
+                }
 
                 // If it's a ship, check collision with shields
                 if (o instanceof ShipAPI) {
@@ -163,17 +211,9 @@ public class SuperRailgunEffect implements EveryFrameWeaponEffectPlugin, OnFireE
                         break;
                     }
 
-                    Vector2f collisionPoint =
-                            Misc.intersectSegmentAndCircle(
-                                    prevLocation,
-                                    location,
-                                    o.getLocation(),
-                                    o.getCollisionRadius());
-                    if (collisionPoint != null) {
-                        float dist = Misc.getDistance(prevLocation, collisionPoint);
-                        if (dist < closest.distance) {
-                            closest.updateClosest(collisionPoint, o, dist);
-                        }
+                    float dist = Misc.getDistance(prevLocation, collisionRadiusPoint);
+                    if (dist < closest.distance) {
+                            closest.updateClosest(collisionRadiusPoint, o, dist);
                     }
                     continue;
                 }
@@ -211,25 +251,27 @@ public class SuperRailgunEffect implements EveryFrameWeaponEffectPlugin, OnFireE
             }
 
             CombatEntityAPI target = closest.entity;
-            Vector2f newLoc = new Vector2f(closest.point);
+//            Vector2f newLoc = new Vector2f(closest.point);
+//
+//            // If timeSinceLastHit - minTimeBetweenHits is less than the frame time (amount), the hit was registered
+//            // on the first possible frame. Move the projectile back based on how "late" this frame was.
+//            if (data.timeSinceLastHit - minTimeBetweenHits < amount) {
+//                float amountToMove = data.timeSinceLastHit - minTimeBetweenHits;
+//                Vector2f.sub(newLoc, new Vector2f(proj.getVelocity().x * amountToMove, proj.getVelocity().y * amountToMove), newLoc);
+//            }
+//
+//            // Now we have every collision point for this frame, we set the location of the projectile to
+//            // be the closest one and apply the appropriate amount of damage
+//            proj.getLocation().set(newLoc);
 
-            // If timeSinceLastHit - minTimeBetweenHits is less than the frame time (amount), the hit was registered
-            // on the first possible frame. Move the projectile back based on how "late" this frame was.
-            if (data.timeSinceLastHit - minTimeBetweenHits < amount) {
-                float amountToMove = data.timeSinceLastHit - minTimeBetweenHits;
-                Vector2f.sub(newLoc, new Vector2f(proj.getVelocity().x * amountToMove, proj.getVelocity().y * amountToMove), newLoc);
-            }
-
-            // Now we have every collision point for this frame, we set the location of the projectile to
-            // be the closest one and apply the appropriate amount of damage
-            proj.getLocation().set(newLoc);
+            proj.getVelocity().set(new Vector2f(data.initialVelocity.x * (1f - speedLossDuringHit), data.initialVelocity.y * (1f - speedLossDuringHit)));
 
             engine.applyDamage(
                     target,
                     closest.point,
                     proj.getDamageAmount(),
                     proj.getDamageType(),
-                    0f,
+                    proj.getEmpAmount(),
                     false,
                     proj.isFading(),
                     weapon.getShip(),
@@ -240,18 +282,7 @@ public class SuperRailgunEffect implements EveryFrameWeaponEffectPlugin, OnFireE
                     proj.getProjectileSpec().getHitGlowRadius(),
                     1f,
                     hitGlowColor);
-            data.registerHit();
-
-            if (target instanceof MissileAPI && passThroughMissiles) {
-                continue;
-            }
-
-            if (target instanceof ShipAPI && ((ShipAPI) target).isFighter() && passThroughFighters) {
-                continue;
-            }
-
-            proj.setDamageAmount(proj.getBaseDamageAmount() * (1f - damageDecayPerHit));
-            data.timesPierced++;
+            data.registerHit(target);
 
             if (data.timesPierced > maxPierce) {
                 engine.removeEntity(proj);
@@ -262,7 +293,7 @@ public class SuperRailgunEffect implements EveryFrameWeaponEffectPlugin, OnFireE
 
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
+        super.onFire(proj, weapon, engine);
         projectiles.add(new ProjectileData(proj));
-        heatGlowRenderer.setAlpha(1f);
     }
 }

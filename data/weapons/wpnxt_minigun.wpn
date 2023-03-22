@@ -7,11 +7,11 @@
   "hardpointSprite":"graphics/weapons/ballistic/minigun/wpnxt_minigun_hardpoint_00.png",
   "turretGlowSprite":"graphics/weapons/ballistic/minigun/wpnxt_minigun_turret_glow.png",
   "hardpointGlowSprite":"graphics/weapons/ballistic/minigun/wpnxt_minigun_hardpoint_glow.png",
-  "numFrames":5,
-  "frameRate":40,
-  "turretOffsets":[46, -13, 46, 7],
+  "numFrames":4,
+  "frameRate":20,
+  "turretOffsets":[36, -10, 36, 10],
   "turretAngleOffsets":[0, 0],
-  "hardpointOffsets":[58, -10, 58, 6],
+  "hardpointOffsets":[42, -8, 42, 8],
   "hardpointAngleOffsets":[0, 0],
   "glowColor":[255, 32, 32, 255],
   "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
@@ -25,6 +25,5 @@
     "particleColor":[255,240,165,200]},
   "projectileSpecId":"wpnxt_minigun_shot",  # projectile that will be fired
   "fireSoundTwo":"wpnxt_minigun_fire",
-  "onFireEffect":"weaponexpansion.combat.scripts.MinigunEffect",
   "everyFrameEffect":"weaponexpansion.combat.scripts.MinigunEffect"
 }
