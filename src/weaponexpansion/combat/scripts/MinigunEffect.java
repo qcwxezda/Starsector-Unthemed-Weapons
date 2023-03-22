@@ -2,18 +2,18 @@ package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import weaponexpansion.util.HeatGlowRenderer;
+import weaponexpansion.util.GlowRenderer;
 
 @SuppressWarnings("unused")
 public class MinigunEffect implements EveryFrameWeaponEffectPlugin, OnFireEffectPlugin, WeaponEffectPluginWithInit {
 
     float bonusFireRate = 0f;
     static final float maxBonusFireRate = 1f;
-    static final float timeToMaxBonus = 10f;
+    static final float timeToMaxBonus = 15f;
     float timeSinceLastFired = 0f;
     static final float timeUntilDecay = 0.15f;
-    static final float decayRate = 0.333f;
-    HeatGlowRenderer heatGlowRenderer;
+    static final float decayRate = 0.2f;
+    GlowRenderer heatGlowRenderer;
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
@@ -36,7 +36,7 @@ public class MinigunEffect implements EveryFrameWeaponEffectPlugin, OnFireEffect
 
     @Override
     public void init(WeaponAPI weapon) {
-        heatGlowRenderer = new HeatGlowRenderer(weapon, false);
+        heatGlowRenderer = new GlowRenderer(weapon, false);
         Global.getCombatEngine().addLayeredRenderingPlugin(heatGlowRenderer);
     }
 }

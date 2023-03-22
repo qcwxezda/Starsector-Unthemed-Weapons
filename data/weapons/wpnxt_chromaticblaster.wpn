@@ -25,5 +25,4 @@
 	"projectileSpecId":"wpnxt_chromaticblaster_shot",
 	"fireSoundTwo":"plasma_cannon_fire",
 	"everyFrameEffect":"weaponexpansion.combat.scripts.ChromaticBlasterEffect",
-	"onFireEffect":"weaponexpansion.combat.scripts.ChromaticBlasterEffect"
 }
