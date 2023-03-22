@@ -8,7 +8,6 @@
   "hardpointSprite":"graphics/weapons/energy/wpnxt_unstablecannon_hardpoint.png",
   "hardpointGlowSprite":"graphics/weapons/energy/wpnxt_unstablecannon_hardpoint_glow.png",
   "everyFrameEffect":"weaponexpansion.combat.scripts.UnstableCannonEffect",
-  "onFireEffect":"weaponexpansion.combat.scripts.UnstableCannonEffect",
   "glowColor":[255,128,255,255],
   "turretOffsets":[35, 0],
   "turretAngleOffsets":[0],

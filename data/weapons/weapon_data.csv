@@ -4,7 +4,7 @@ name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn r
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Graviton Array,wpnxt_impactlance,1,0.75,4500,1000,700,,,10,15,22,9,0.3,3,KINETIC,,600,,,1,0.5,,,,,5000,,,,,,,,"beam15, kinetic15, LR, rare_bp, hist1t, merc",,,,Suppression,,,,,Gravitic effects slow and push target off-course. ,,,,,2
 Void Ray,wpnxt_voidray,4,0.125,15000,1000,1875,,,,5,32,,,,FRAGMENTATION,,550,0.5,1.5,,,,,,,3000,,,,,,,FIRE_WHEN_INEFFICIENT,"beam20, energy18, LR, rare_bp, hist1t, merc",,,,General,,,,,Fires %s beams dealing %s fragmentation DPS each that converge into a single beam.,5 | 375,Deals a proportion of damage as hard flux equal to the firing ship's hard flux level.,,,3
-Ultra Blaster,wpnxt_ultrablaster,2,0.5,5000,700,,900,,,9,24,,,,HIGH_EXPLOSIVE,1800,,0.5,4.5,,,,,,,,1500,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 150,,,,5
+Ultra Blaster,wpnxt_ultrablaster,2,0.5,5000,700,,900,,,9,24,,,,HIGH_EXPLOSIVE,1800,,0.5,4.5,,,,,,,,1250,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 150,,,,5
 Chaos Pulser,wpnxt_unstablecannon,3,0.25,10000,800,,200,,,12,30,,,,ENERGY,180,,0.25,,,,,,,,,1000,,,100,,,,"energy20, rare_bp, hist1t, merc",,,,General,,,,Varies,"Each projectile deals between %s and %s damage, with weaker projectiles being more likely to be generated. Projectiles' trajectories become increasingly erratic the stronger they are.",100 | 500,,,,6
 Boltstorm,wpnxt_boltstorm,1,0.75,4000,750,,50,20,,10,18,,,,ENERGY,35,,,0.09090909,,,10,10,0,0,,800,,,30,,,,"energy10, rare_bp, hist1t, merc",,,,Suppression,,,,,,,,,,1
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -24,12 +24,12 @@ Bolt Repeater,wpnxt_boltrepeater,2,0.5,750,750,,50,20,,30,7,28,1.75,7,ENERGY,50,
 Boltgun,wpnxt_boltgun,0,,150,750,,50,20,,50,2,,,,ENERGY,50,,,0.6,,,,,,,,800,,,30,,,,"energy1, rare_bp, merc",,,,General,,,,,,,,,,14
 Light Mining Blaster,wpnxt_miniblaster,0,,300,500,,200,,,25,6,,,,HIGH_EXPLOSIVE,300,,,1,,,,,,,,1000,,,,,,,"energy8, rare_bp, merc",,,,Anti Armor,,,,,,,,,,15
 Light Impact Beam,wpnxt_impactbeam,1,0.75,500,750,100,,,,18,5,,,,KINETIC,,100,0.1,0.1,,,,,,,2400,,,,,,,,"beam5, kinetic5, LR, rare_bp, merc",,,,Suppression,,,,,,,,,,16
-Voidcannon,wpnxt_voidcannon,3,0.25,1500,600,,350,,,25,10,36,1.5,36,FRAGMENTATION,125,,,0.5,6,,15,15,0,0,,1500,,,,,,"STRIKE, USE_VS_FRIGATES","strike9, energy10, SR, rare_bp, hist1t, merc",,,,Finisher,,,,,"Fires a tight spread of %s projectiles. Projectiles explode, dealing their damage over a moderate area.",6,,,,17
+Voidcannon,wpnxt_voidcannon,3,0.25,1500,600,,350,,,25,10,36,1.5,36,FRAGMENTATION,125,,,0.5,6,,15,15,0,0,,1250,,,,,,"STRIKE, USE_VS_FRIGATES","strike9, energy10, SR, rare_bp, hist1t, merc",,,,Finisher,,,,,"Fires a tight spread of %s projectiles. Projectiles explode, dealing their damage over a moderate area.",6,,,,17
 ,
 # Large Ballistic
-Helios Mortar,wpnxt_explosiveshelllauncher,2,0.5,5000,1200,,1200,,250,10,25,,,,HIGH_EXPLOSIVE,1500,,,5,,,0,3,1,0.3,,700,,,,,,,"he20, LR, rare_bp, hist1t, merc",,,,Anti Armor (Area),,,,,"Projectiles explode on contact, dealing their damage over a large area.",,,,,18
-Pummeler,wpnxt_minigun,1,0.75	,6000,900,,125,,3,12,18,,,,FRAGMENTATION,35,,,0.125,,,0,8,0.1,2,,800,,,,,,,"kinetic13, rare_bp, hist1t, merc",,,,General,,,,,Fire rate increases by %s over %s seconds of sustained fire.,100% | 10,,,,19
-Hyperlight Artillery,wpnxt_superrailgun,3,0.25,8000,1200,,1000,,300,6,30,,,,KINETIC,2500,,2,5,,,,,,,,1600,,,,,,,"kinetic18, LR, rare_bp, hist1t, merc",,,,Anti Shield,,,,,Projectile pierces up to %s times. Damage is reduced by %s per pierce. Can hit the same target multiple times.,3 | 40%,,,,20
+Helios Artillery,wpnxt_explosiveshelllauncher,2,0.5,5000,1200,,600,,250,10,25,,,,HIGH_EXPLOSIVE,750,,,4.5,2,0.5,0,3,2,1,,700,,,,,,,"he20, LR, rare_bp, hist1t, merc",,,,Anti Armor (Area),,,,,"Projectiles explode on contact, dealing their damage over a large area.",,,,,18
+Pummeler,wpnxt_minigun,1,0.75	,6000,800,,125,,3,12,20,,,,FRAGMENTATION,30,,,0.1,,,0,8,0.1,2,,800,,,,,,,"kinetic13, rare_bp, hist1t, merc",,,,General,,,,,Fire rate increases by %s over %s seconds of sustained fire.,100% | 15,,,,19
+Prototype Megarail,wpnxt_superrailgun,3,0.25,10000,1000,,900,900,300,4,30,,,,KINETIC,2400,,1,6,,,,,,,,1500,,,,,,,"kinetic18, LR, rare_bp, hist1t, merc",,,,Anti Shield,,,,,Projectiles pierce up to %s times. Damage is reduced by %s per pierce. Can hit the same target multiple times.,3 | 30%,,,,20
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -19,6 +19,7 @@
   "hardpointAngleOffsets":[0],
   "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
   "animationType":"GLOW_AND_FLASH",
+  "autocharge":true,
   "muzzleFlashSpec":{"length":75.0,   # only used if animationType = MUZZLE_FLASH
     "spread":15.0,
     "particleSizeMin":20.0,
@@ -27,5 +28,6 @@
     "particleCount":50,
     "particleColor":[255,255,128,255]},
   "projectileSpecId":"wpnxt_superrailgun_shot",  # projectile that will be fired
-  "fireSoundTwo":"wpnxt_explosiveshelllauncher_fire"
+  "fireSoundTwo":"wpnxt_superrailgun_fire",
+  "fireSoundOne":"wpnxt_superrailgun_loop"
 }
