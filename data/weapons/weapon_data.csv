@@ -27,7 +27,7 @@ Light Impact Beam,wpnxt_impactbeam,1,0.75,500,750,100,,,,18,5,,,,KINETIC,,100,0.
 Voidcannon,wpnxt_voidcannon,3,0.25,1500,600,,350,,,25,10,36,1.5,36,FRAGMENTATION,125,,,0.5,6,,15,15,0,0,,1250,,,,,,"STRIKE, USE_VS_FRIGATES","strike9, energy10, SR, rare_bp, hist1t, merc",,,,Finisher,,,,,"Fires a tight spread of %s projectiles. Projectiles explode, dealing their damage over a moderate area.",6,,,,17
 ,
 # Large Ballistic
-Helios Artillery,wpnxt_explosiveshelllauncher,2,0.5,5000,1200,,600,,250,10,27,,,,HIGH_EXPLOSIVE,750,,,4.5,2,0.5,0,3,2,1,,700,,,,,,,"he20, LR, rare_bp, hist1t, merc",,,,Anti Armor (Area),,,,,"Projectiles explode on contact, dealing their damage over a large area.",,,,,18
+Helios Artillery,wpnxt_explosiveshelllauncher,2,0.5,5000,1200,,600,,250,10,27,,,,HIGH_EXPLOSIVE,900,,,4.5,2,0.5,0,3,2,1,,700,,,,,,,"he20, LR, rare_bp, hist1t, merc",,,,Anti Armor (Area),,,,,"Projectiles explode on contact, dealing their damage over a large area.",,,,,18
 Pummeler,wpnxt_minigun,1,0.75	,6000,800,,155,,3,12,20,,,,FRAGMENTATION,35,,,0.125,,,0,8,0.1,2,,800,,,,,,,"kinetic13, rare_bp, hist1t, merc",,,,General,,,,,Fire rate increases by %s over %s seconds of sustained fire.,100% | 15,,,,19
 Prototype Megarail,wpnxt_superrailgun,3,0.25,10000,1000,,900,900,500,4,30,,,,KINETIC,2400,,1,6,,,,,,,,1500,,,,,,,"kinetic18, LR, rare_bp, hist1t, merc",,,,Anti Shield,,,,,Projectiles pierce up to %s times. Damage is reduced by %s per pierce. Can hit the same target multiple times.,3 | 30%,,,,20
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
