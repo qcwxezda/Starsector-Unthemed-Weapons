@@ -1,7 +1,7 @@
 id,type,text1,text2,text3,text4,notes
 wpnxt_boltgun,WEAPON,"The availability and low cost of this weapon match its lackluster damage output. Still, it has unusually good range for such a small energy weapon.",,,,
 wpnxt_mininglasermk2,WEAPON,"An abomination of a weapon. Its undersized frame can't properly accommodate the long range anti-armor beam it fires. Accordingly, the weapon burns out immediately after internal capacitors run dry, which occurs after just two minutes of sustained fire.",,,,
-wpnxt_impactbeam,WEAPON,"A downscaled graviton beam. Contrary to its name, it doesn't generate enough force to push even the lightest of targets. Nevertheless, it's just as capable at pressuring shields as its full-sized counterpart. Has lower than usual range for a beam weapon.",,,,
+wpnxt_impactbeam,WEAPON,"A downscaled graviton beam. Contrary to its name, it doesn't generate enough force to affect even the lightest of targets. Nevertheless, it's just as capable at pressuring shields as its full-sized counterpart. Has lower than usual range for a beam weapon.",,,,
 wpnxt_miniblaster,WEAPON,"Short range anti-armor weapon originally intended for small mining operations. Capable of cracking light armor, but, like its larger cousin, is dreadfully flux-inefficient.",,,,
 wpnxt_boltrepeater,WEAPON,"A generalist small weapon with good range and excellent burst DPS, only held back by its poor accuracy and sustained firepower.",,,,
 wpnxt_voidcannon,WEAPON,"A poorly understood weapon that devastates exposed hull and does decent burst damage against shields, but is abysmal against any form of armor. Only suited for short range engagements despite its listed range due to its unusual firing pattern." ,,,,
