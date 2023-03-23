@@ -9,46 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Polish large ballistics">
-      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_shotgun_shot.proj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_shotgun.wpn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/old/wpnxt_superrailgun_hardpoint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/old/wpnxt_superrailgun_hardpoint_glow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/old/wpnxt_superrailgun_hardpoint_glow2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/old/wpnxt_superrailgun_hardpoint_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/old/wpnxt_superrailgun_turret.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/old/wpnxt_superrailgun_turret_glow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/old/wpnxt_superrailgun_turret_glow2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/old/wpnxt_superrailgun_turret_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_shotgun_hardpoint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_shotgun_hardpoint_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_shotgun_turret.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_shotgun_turret_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/shotgun.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/superrailgun3.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/greeblesheet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyScattererEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ShotgunEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/ScatterPlugin.java" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Add ballistic scattergun, modularize scatter effect, change some sprites">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/strings/descriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_hardpoint_glow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_hardpoint_recoil.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_hardpoint_recoil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_turret_glow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_turret_recoil.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_explosiveshelllauncher_turret_recoil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_superrailgun_hardpoint_glow2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_superrailgun_turret_glow2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_mininglasermk2_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_mininglasermk2_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_mininglasermk2_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_mininglasermk2_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/explosiveshelllauncher.psd" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/orig/explosiveshelllauncher.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ScatterEffect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SuperRailgunEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SuperRailgunEffect.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679520215154</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Add ballistic scattergun, modularize scatter effect, change some sprites">
+      <created>1679549302426</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1679549302426</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -283,7 +253,8 @@
     <MESSAGE value="Add subfolders to weapons graphics,&#10;add helios mortar,&#10;add pummeler" />
     <MESSAGE value="Add superrailgun" />
     <MESSAGE value="Polish large ballistics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Polish large ballistics" />
+    <MESSAGE value="Add ballistic scattergun, modularize scatter effect, change some sprites" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add ballistic scattergun, modularize scatter effect, change some sprites" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
