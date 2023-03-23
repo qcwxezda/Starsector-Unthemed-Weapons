@@ -123,7 +123,15 @@ public class SuperRailgunEffect extends GlowOnFirePlugin {
             ProjectileData data = itr.next();
             DamagingProjectileAPI proj = data.proj;
 
-            data.advance(amount);
+            // TIme since last hit should advance in world time, not ship time
+            float realAmount = amount;
+            if (weapon.getShip() != null) {
+                MutableStat timeMult = weapon.getShip().getMutableStats().getTimeMult();
+                if (timeMult != null) {
+                    realAmount /= timeMult.getModifiedValue();
+                }
+            }
+            data.advance(realAmount);
 
             if (data.timeSinceLastHit <= minTimeBetweenHits) {
                 continue;
