@@ -27,13 +27,18 @@ Light Impact Beam,wpnxt_impactbeam,1,0.75,500,750,100,,,,18,5,,,,KINETIC,,100,0.
 Voidcannon,wpnxt_voidcannon,3,0.25,1500,600,,350,,,25,10,36,1.5,36,FRAGMENTATION,125,,,0.5,6,,15,15,0,0,,1250,,,,,,"STRIKE, USE_VS_FRIGATES","strike9, energy10, SR, rare_bp, hist1t, merc",,,,Finisher,,,,,"Fires a tight spread of %s projectiles. Projectiles explode, dealing their damage over a moderate area.",6,,,,17
 ,
 # Large Ballistic
-Helios Artillery,wpnxt_explosiveshelllauncher,2,0.5,5000,1200,,600,,250,10,25,,,,HIGH_EXPLOSIVE,750,,,4.5,2,0.5,0,3,2,1,,700,,,,,,,"he20, LR, rare_bp, hist1t, merc",,,,Anti Armor (Area),,,,,"Projectiles explode on contact, dealing their damage over a large area.",,,,,18
-Pummeler,wpnxt_minigun,1,0.75	,6000,800,,125,,3,12,20,,,,FRAGMENTATION,30,,,0.1,,,0,8,0.1,2,,800,,,,,,,"kinetic13, rare_bp, hist1t, merc",,,,General,,,,,Fire rate increases by %s over %s seconds of sustained fire.,100% | 15,,,,19
-Prototype Megarail,wpnxt_superrailgun,3,0.25,10000,1000,,900,900,300,4,30,,,,KINETIC,2400,,1,6,,,,,,,,1500,,,,,,,"kinetic18, LR, rare_bp, hist1t, merc",,,,Anti Shield,,,,,Projectiles pierce up to %s times. Damage is reduced by %s per pierce. Can hit the same target multiple times.,3 | 30%,,,,20
+Helios Artillery,wpnxt_explosiveshelllauncher,2,0.5,5000,1200,,600,,250,10,27,,,,HIGH_EXPLOSIVE,750,,,4.5,2,0.5,0,3,2,1,,700,,,,,,,"he20, LR, rare_bp, hist1t, merc",,,,Anti Armor (Area),,,,,"Projectiles explode on contact, dealing their damage over a large area.",,,,,18
+Pummeler,wpnxt_minigun,1,0.75	,6000,800,,155,,3,12,20,,,,FRAGMENTATION,35,,,0.125,,,0,8,0.1,2,,800,,,,,,,"kinetic13, rare_bp, hist1t, merc",,,,General,,,,,Fire rate increases by %s over %s seconds of sustained fire.,100% | 15,,,,19
+Prototype Megarail,wpnxt_superrailgun,3,0.25,10000,1000,,900,900,500,4,30,,,,KINETIC,2400,,1,6,,,,,,,,1500,,,,,,,"kinetic18, LR, rare_bp, hist1t, merc",,,,Anti Shield,,,,,Projectiles pierce up to %s times. Damage is reduced by %s per pierce. Can hit the same target multiple times.,3 | 30%,,,,20
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+# Medium Ballistic
+Infernal Scattergun,wpnxt_shotgun,2,0.5,1750,900,,90,,3,15,13,60,2,30,HIGH_EXPLOSIVE,70,,,0.85,,,24,24,0,0,,700,,,,,,,"he15, rare_bp, merc",,,,Anti Armor,,,,,Weapon spread is not reduced when mounted on a hardpoint. Sustained fire reduces spread by up to %s.,50%,,,,21
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+
+
 # Unused
 # Chromatic Bolt Carrier,wpnxt_chromaticblaster,2,0.5,6000,800,,300,,,15,25,,,,ENERGY,3000,,0.5,5.5,,,,,,,,200,,,400,,,STRIKE,"energy18, rare_bp, hist1t, merc",,,,General,,,,,"Generates a cloud of unstable energy that deals no damage and passes through inert and small objects. When in close proximity to a ship or fighter, the cloud instantaneously condenses into a volley of %s projectiles that converge on the target and deal %s damage each.
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

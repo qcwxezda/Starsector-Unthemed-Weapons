@@ -78,5 +78,10 @@
     {"file": "sounds/weapons/wpnxt_superrailgun_loop.wav", "pitch": 1, "volume": 0.5},
     {"file": "sounds/weapons/wpnxt_superrailgun_loop.wav", "pitch": 0.98, "volume": 0.5},
     {"file": "sounds/weapons/wpnxt_superrailgun_loop.wav", "pitch": 0.96, "volume": 0.5}
+  ],
+  "wpnxt_shotgun_fire": [
+    {"file": "sounds/weapons/wpnxt_shotgun_fire.wav", "pitch": 1, "volume": 0.8},
+    {"file": "sounds/weapons/wpnxt_shotgun_fire.wav", "pitch": 0.98, "volume": 0.8},
+    {"file": "sounds/weapons/wpnxt_shotgun_fire.wav", "pitch": 0.96, "volume": 0.8}
   ]
 }
