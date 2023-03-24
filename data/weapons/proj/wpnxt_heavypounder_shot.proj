@@ -1,0 +1,18 @@
+{
+  "id":"wpnxt_heavypounder_shot",
+  "specClass":"projectile",
+  "spawnType":"BALLISTIC",
+  "collisionClass":"PROJECTILE_FF",
+  "collisionClassByFighter":"PROJECTILE_FIGHTER",
+  "length":100.0,
+  "hitGlowRadius":100,
+  "width":8.0,
+  "fadeTime":0.3,
+  "fringeColor":[225,128,128,175],
+  "coreColor":[200,160,100,200],
+  "glowColor":[128,100,100,105],
+  "glowRadius":35,
+  "textureScrollSpeed":64.0,
+  "pixelsPerTexel":5.0,
+  "bulletSprite":"graphics/missiles/shell_hellbore.png"
+}

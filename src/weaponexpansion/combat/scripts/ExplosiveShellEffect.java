@@ -4,6 +4,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import org.lwjgl.util.vector.Vector2f;
+import weaponexpansion.util.ExplosionRingRenderer;
 
 import java.awt.*;
 
@@ -37,7 +38,11 @@ public class ExplosiveShellEffect implements OnHitEffectPlugin {
                 color2
         );
 
-        spec.setUseDetailedExplosion(false);
+        spec.setUseDetailedExplosion(true);
+        spec.setDetailedExplosionRadius(explosionRadius);
+        spec.setDetailedExplosionFlashRadius(explosionRadius * 1.5f);
+        spec.setDetailedExplosionFlashColorCore(color1);
+        spec.setDetailedExplosionFlashColorFringe(color2);
         spec.setDamageType(DamageType.HIGH_EXPLOSIVE);
 
         engine.spawnDamagingExplosion(
@@ -45,5 +50,9 @@ public class ExplosiveShellEffect implements OnHitEffectPlugin {
                 proj.getSource(),
                 pt
         ).addDamagedAlready(target);
+
+        engine.addLayeredRenderingPlugin(new ExplosionRingRenderer(explosionRadius / 4f, explosionRadius * 1.5f, 0.75f, color2))
+                .getLocation()
+                .set(pt);
     }
 }
