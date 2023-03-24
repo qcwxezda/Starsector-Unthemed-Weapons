@@ -99,27 +99,27 @@ public class GlowRenderer extends BaseCombatLayeredRenderingPlugin {
         if (layer.equals(CombatEngineLayers.CONTRAILS_LAYER)) {
             sprite.setWidth(originalWidth);
             Vector2f location = weapon.getLocation();
-            SpriteAPI glowSprite = sprite;
-            glowSprite.setAlphaMult(alpha);
-            glowSprite.setColor(renderColor);
-            glowSprite.setAngle(weapon.getCurrAngle() - 90f);
+            sprite.setAlphaMult(alpha);
+            sprite.setColor(renderColor);
+            sprite.setAngle(weapon.getCurrAngle() - 90f);
             if (alpha > 0f) {
-                if (barrelRecoil && weapon.getBarrelSpriteAPI() != null) {
-                    SpriteAPI barrelSprite = weapon.getBarrelSpriteAPI();
-                    float recoilAmount = (weapon.getSlot().isHardpoint() ? barrelSprite.getHeight() / 4f : barrelSprite.getHeight() / 2f) - barrelSprite.getCenterY();
-                    glowSprite.renderAtCenter(
-                            recoilAmount * (float) Math.cos(Misc.RAD_PER_DEG * weapon.getCurrAngle()) + location.x,
-                            recoilAmount * (float) Math.sin(Misc.RAD_PER_DEG * weapon.getCurrAngle()) + location.y);
+                if (barrelRecoil) {
+                    weapon.renderBarrel(sprite, location, alpha);
+//                    SpriteAPI barrelSprite = weapon.getBarrelSpriteAPI();
+//                    float recoilAmount = (weapon.getSlot().isHardpoint() ? barrelSprite.getHeight() / 4f : barrelSprite.getHeight() / 2f) - barrelSprite.getCenterY();
+//                    glowSprite.renderAtCenter(
+//                            recoilAmount * (float) Math.cos(Misc.RAD_PER_DEG * weapon.getCurrAngle()) + location.x,
+//                            recoilAmount * (float) Math.sin(Misc.RAD_PER_DEG * weapon.getCurrAngle()) + location.y);
                 }
                 else {
-                    glowSprite.renderAtCenter(location.x, location.y);
+                    sprite.renderAtCenter(location.x, location.y);
                 }
             }
         }
 
-        if (barrelRecoil) {
-            weapon.getSprite().setWidth(originalWeaponWidth);
-        }
+//        if (barrelRecoil) {
+//            weapon.getSprite().setWidth(originalWeaponWidth);
+//        }
 //
 //        Vector2f location = weapon.getLocation();
 //        SpriteAPI glowSprite = sprite;
