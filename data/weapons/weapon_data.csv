@@ -4,8 +4,8 @@ name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn r
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Graviton Array,wpnxt_impactlance,1,0.75,4500,1000,700,,,10,15,22,9,0.3,3,KINETIC,,600,,,1,0.5,,,,,5000,,,,,,,,"beam15, kinetic15, LR, rare_bp, hist1t, merc",,,,Suppression,,,,,Gravitic effects slow and push target off-course. ,,,,,2
 Void Ray,wpnxt_voidray,4,0.125,15000,1000,1875,,,,5,32,,,,FRAGMENTATION,,550,0.5,1.5,,,,,,,3000,,,,,,,FIRE_WHEN_INEFFICIENT,"beam20, energy18, LR, rare_bp, hist1t, merc",,,,General,,,,,Fires %s beams dealing %s fragmentation DPS each that converge into a single beam.,5 | 375,Deals a proportion of damage as hard flux equal to the firing ship's hard flux level.,,,3
-Ultra Blaster,wpnxt_ultrablaster,2,0.5,5000,700,,900,,,9,24,,,,HIGH_EXPLOSIVE,1800,,0.5,4.5,,,,,,,,1250,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 150,,,,5
-Chaos Pulser,wpnxt_unstablecannon,3,0.25,10000,800,,200,,,12,30,,,,ENERGY,180,,0.25,,,,,,,,,1000,,,100,,,,"energy20, rare_bp, hist1t, merc",,,,General,,,,Varies,"Each projectile deals between %s and %s damage, with weaker projectiles being more likely to be generated. Projectiles' trajectories become increasingly erratic the stronger they are.",100 | 500,,,,6
+Ultra Blaster,wpnxt_ultrablaster,2,0.5,5000,700,,900,,,9,24,,,,HIGH_EXPLOSIVE,2000,,0.5,4.5,,,,,,,,1250,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 150,,,,5
+Chaos Pulser,wpnxt_unstablecannon,3,0.25,10000,800,,200,,,12,32,,,,ENERGY,180,,0.25,,,,,,,,,1000,,,100,,,,"energy20, rare_bp, hist1t, merc",,,,General,,,,Varies,"Each projectile deals between %s and %s damage, with weaker projectiles being more likely to be generated. Projectiles' trajectories become increasingly erratic the stronger they are.",100 | 500,,,,6
 Boltstorm,wpnxt_boltstorm,1,0.75,4000,750,,50,20,,10,18,,,,ENERGY,35,,,0.09090909,,,10,10,0,0,,800,,,30,,,,"energy10, rare_bp, hist1t, merc",,,,Suppression,,,,,,,,,,1
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,wpnxt_unstablecannon_lv2spawner,,,,800,,,,,,,,,,ENERGY,,,,,,,,,,,,1000,,,250,,,SYSTEM,,,,,,,,,,,,,,,6.2
@@ -29,18 +29,23 @@ Voidcannon,wpnxt_voidcannon,3,0.25,1500,600,,350,,,25,10,36,1.5,36,FRAGMENTATION
 # Large Ballistic
 Helios Artillery,wpnxt_explosiveshelllauncher,2,0.5,5000,1200,,600,,250,10,27,,,,HIGH_EXPLOSIVE,900,,,4.5,2,0.5,0,3,2,1,,700,,,,,,,"he20, LR, rare_bp, hist1t, merc",,,,Anti Armor (Area),,,,,"Projectiles explode on contact, dealing their damage over a large area.",,,,,18
 Pummeler,wpnxt_minigun,1,0.75	,6000,800,,155,,3,12,20,,,,FRAGMENTATION,35,,,0.125,,,0,8,0.1,2,,800,,,,,,,"kinetic13, rare_bp, hist1t, merc",,,,General,,,,,Fire rate increases by %s over %s seconds of sustained fire.,100% | 15,,,,19
-Prototype Megarail,wpnxt_superrailgun,3,0.25,10000,1000,,900,900,500,4,30,,,,KINETIC,2400,,1,6,,,,,,,,1500,,,,,,,"kinetic18, LR, rare_bp, hist1t, merc",,,,Anti Shield,,,,,Projectiles pierce up to %s times. Damage is reduced by %s per pierce. Can hit the same target multiple times.,3 | 30%,,,,20
+Rail Ballista,wpnxt_superrailgun,3,0.25,10000,1000,,900,900,500,6,30,,,,KINETIC,2400,,1,6,,,,,,,,1500,,,,,,,"kinetic18, LR, rare_bp, hist1t, merc",,,,Anti Shield,,,,,Projectiles pierce up to %s times. Damage is reduced by %s per pierce. Can hit the same target multiple times.,3 | 30%,,,,20
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Medium Ballistic
-Infernal Scattergun,wpnxt_shotgun,2,0.5,1750,900,,90,,3,15,13,60,2,30,HIGH_EXPLOSIVE,70,,,0.85,,,24,24,0,0,,700,,,,,,,"he15, rare_bp, merc",,,,Anti Armor,,,,,Weapon spread is not reduced when mounted on a hardpoint. Sustained fire reduces spread by up to %s.,50%,,,,21
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,
-
-
+Spreadfire Cannon,wpnxt_shotgun,3,0.25,1750,900,,90,,3,15,13,60,2,30,HIGH_EXPLOSIVE,75,,,0.85,,,24,24,0,0,,700,,,,,,,"he15, rare_bp, merc",,,,Anti Armor,,,,,Weapon spread is not reduced when mounted on a hardpoint. Sustained fire reduces spread by up to %s.,50%,,,,21
+Heavy Pounder,wpnxt_heavypounder,2,0.5,1250,800,,400,,150,18,14,10,0.333,5,HIGH_EXPLOSIVE,500,,,1.33333,,,0,8,2,2.5,,400,,,,,,,"he16, rare_bp, merc",,,,Anti Armor,,,,,,,,,,22
+Railburst Rifle,wpnxt_heavyrailgun,2,0.5,1250,900,,100,,10,20,12,30,1.25,15,KINETIC,100,,1,,5,0.1,0,,,,,1000,,,,,,,"kinetic14, LR, rare_bp, merc",,,,Anti Shield,,,,,,,,,,23
+Mini-Mortar Battery,wpnxt_minimortarbattery,0,,750,450,,50,,6,45,8,,,,HIGH_EXPLOSIVE,25,,,0.1666667,,,0,25,2,5,,500,,,,,,,"he8, SR, rare_bp, merc",,,,Anti Fighter,,,,,,,,,,24
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+# Small Ballistic
+Light Railburst,wpnxt_lightrailburst,3,0.25,750,800,,75,,7,25,8,18,1.25,9,KINETIC,75,,0.6,,3,0.15,,,,,,1000,,,,,,,"kinetic8, LR, rare_bp, merc",,,,Anti Shield,,,,,,,,,,25
+Light Pounder,wpnxt_lightpounder,2,0.5,600,800,,200,,50,30,6,6,0.33333,3,HIGH_EXPLOSIVE,275,,,1.333333,,,0,8,2,2.5,,350,,,,,,,"he7, LR, rare_bp, merc",,,,Anti armor,,,,,,,,,,26
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Unused
 # Chromatic Bolt Carrier,wpnxt_chromaticblaster,2,0.5,6000,800,,300,,,15,25,,,,ENERGY,3000,,0.5,5.5,,,,,,,,200,,,400,,,STRIKE,"energy18, rare_bp, hist1t, merc",,,,General,,,,,"Generates a cloud of unstable energy that deals no damage and passes through inert and small objects. When in close proximity to a ship or fighter, the cloud instantaneously condenses into a volley of %s projectiles that converge on the target and deal %s damage each.
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # The energy cloud's affinity cycles continuously and heavily influences its projectiles' composition.",12 | 300,,,,4
 # Chromatic Bolt,wpnxt_chromaticblaster_spawn,,,,300,,300,,,,,,,,ENERGY,0,,0	,0.1,,,,,,,,500,,,100,,,SYSTEM,,,,,,,,,,,,,,

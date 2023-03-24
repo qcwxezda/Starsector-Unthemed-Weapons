@@ -37,7 +37,7 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
         if (damage < lv2threshold) {
             newProj = proj;
             proj.setDamageAmount(damage);
-            Global.getSoundPlayer().playSound(lv1Sound, 0.9f + Misc.random.nextFloat() * 0.1f, 1f, loc, vel);
+            Global.getSoundPlayer().playSound(lv1Sound, 0.9f + Misc.random.nextFloat() * 0.1f, 0.7f, loc, vel);
         } else {
             newProj = (DamagingProjectileAPI)
                     engine.spawnProjectile(
@@ -49,7 +49,7 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
                             proj.getSource().getVelocity());
             newProj.setDamageAmount(damage);
             engine.removeEntity(proj);
-            Global.getSoundPlayer().playSound(damage < lv3threshold ? lv2Sound : lv3Sound, 0.9f + Misc.random.nextFloat() * 0.1f, 1f, loc, vel);
+            Global.getSoundPlayer().playSound(damage < lv3threshold ? lv2Sound : lv3Sound, 0.9f + Misc.random.nextFloat() * 0.1f, 0.7f, loc, vel);
         }
 
         projectiles.add(newProj);

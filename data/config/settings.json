@@ -1,7 +1,8 @@
 {
   "graphics": {
     "misc": {
-      "wpnxt_chromaticblaster_texture": "graphics/fx/wpnxt_fog_circle_sprite_sheet.png"
+      "wpnxt_chromaticblaster_texture": "graphics/fx/wpnxt_fog_circle_sprite_sheet.png",
+      "wpnxt_explosion_ring": "graphics/fx/wpnxt_explosion_ring.png"
     }
   },
 
