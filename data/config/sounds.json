@@ -90,9 +90,9 @@
     {"file": "sounds/weapons/wpnxt_heavypounder_fire.wav", "pitch": 0.96, "volume": 0.8}
   ],
   "wpnxt_lightpounder_fire": [
-    {"file": "sounds/weapons/wpnxt_heavypounder_fire.wav", "pitch": 1, "volume": 0.6},
-    {"file": "sounds/weapons/wpnxt_heavypounder_fire.wav", "pitch": 0.98, "volume": 0.6},
-    {"file": "sounds/weapons/wpnxt_heavypounder_fire.wav", "pitch": 0.96, "volume": 0.6}
+    {"file": "sounds/weapons/wpnxt_heavypounder_fire.wav", "pitch": 1.41, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_heavypounder_fire.wav", "pitch": 1.37, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_heavypounder_fire.wav", "pitch": 1.33, "volume": 0.6}
   ],
   "wpnxt_heavyrailgun_fire": [
     {"file": "sounds/weapons/wpnxt_heavyrailgun_fire.wav", "pitch": 1, "volume": 0.8},
@@ -100,13 +100,18 @@
     {"file": "sounds/weapons/wpnxt_heavyrailgun_fire.wav", "pitch": 0.96, "volume": 0.8}
   ],
   "wpnxt_lightrailburst_fire": [
-    {"file": "sounds/weapons/wpnxt_heavyrailgun_fire.wav", "pitch": 1, "volume": 0.6},
-    {"file": "sounds/weapons/wpnxt_heavyrailgun_fire.wav", "pitch": 0.98, "volume": 0.6},
-    {"file": "sounds/weapons/wpnxt_heavyrailgun_fire.wav", "pitch": 0.96, "volume": 0.6}
+    {"file": "sounds/weapons/wpnxt_heavyrailgun_fire.wav", "pitch": 1.41, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_heavyrailgun_fire.wav", "pitch": 1.37, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_heavyrailgun_fire.wav", "pitch": 1.33, "volume": 0.6}
   ],
   "wpnxt_minimortarbattery_fire": [
-    {"file": "sounds/sfx_wpn_guns/light_mortar_fire_01.ogg", "pitch": 1, "volume": 0.5},
-    {"file": "sounds/sfx_wpn_guns/light_mortar_fire_01.ogg", "pitch": 0.98, "volume": 0.5},
-    {"file": "sounds/sfx_wpn_guns/light_mortar_fire_01.ogg", "pitch": 0.96, "volume": 0.5}
+    {"file": "sounds/sfx_wpn_guns/light_mortar_fire_01.ogg", "pitch": 1.41, "volume": 0.5},
+    {"file": "sounds/sfx_wpn_guns/light_mortar_fire_01.ogg", "pitch": 1.37, "volume": 0.5},
+    {"file": "sounds/sfx_wpn_guns/light_mortar_fire_01.ogg", "pitch": 1.33, "volume": 0.5}
+  ],
+  "wpnxt_fragcannon_fire": [
+    {"file": "sounds/weapons/wpnxt_fragcannon_fire.wav", "pitch": 1, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_fragcannon_fire.wav", "pitch": 0.98, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_fragcannon_fire.wav", "pitch": 0.96, "volume": 0.6}
   ]
 }
