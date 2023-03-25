@@ -8,7 +8,6 @@
   "hardpointSprite":"graphics/weapons/ballistic/wpnxt_heavypounder_hardpoint.png",
   "hardpointGunSprite":"graphics/weapons/ballistic/wpnxt_heavypounder_hardpoint_recoil.png",
   "renderHints":[RENDER_BARREL_BELOW],
-  "glowColor":[255, 64, 32, 255],
   "visualRecoil":5.0,  # the gun sprites are only used if this is non-0
   "turretOffsets":[22, 0],
   "turretAngleOffsets":[0],
@@ -18,11 +17,11 @@
   "animationType":"MUZZLE_FLASH",
   "muzzleFlashSpec":{"length":40.0,   # only used if animationType = MUZZLE_FLASH
     "spread":10.0,
-    "particleSizeMin":10.0,
+    "particleSizeMin":20.0,
     "particleSizeRange":20.0,
-    "particleDuration":0.5,
-    "particleCount":30,
-    "particleColor":[255,128,128,255]},
+    "particleDuration":0.6,
+    "particleCount":40,
+    "particleColor":[255,160,128,255]},
   "projectileSpecId":"wpnxt_heavypounder_shot",  # projectile that will be fired
   "fireSoundTwo":"wpnxt_heavypounder_fire"
 }
