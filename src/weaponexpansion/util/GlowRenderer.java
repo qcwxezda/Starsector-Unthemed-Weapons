@@ -3,9 +3,11 @@ package weaponexpansion.util;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.lwjgl.opengl.*;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
+import java.nio.IntBuffer;
 import java.util.EnumSet;
 
 public class GlowRenderer extends BaseCombatLayeredRenderingPlugin {
