@@ -1,0 +1,27 @@
+{
+  "id":"wpnxt_fragcannon",  # this id must match what's in the spreadsheet
+  "specClass":"projectile",
+  "type":"BALLISTIC",
+  "size":"SMALL",
+  "turretSprite":"graphics/weapons/ballistic/wpnxt_fragcannon_turret.png",
+  "turretGunSprite":"graphics/weapons/ballistic/wpnxt_fragcannon_turret_recoil.png",
+  "hardpointSprite":"graphics/weapons/ballistic/wpnxt_fragcannon_hardpoint.png",
+  "hardpointGunSprite":"graphics/weapons/ballistic/wpnxt_fragcannon_hardpoint_recoil.png",
+  "renderHints":[RENDER_BARREL_BELOW],
+  "visualRecoil":5.0,  # the gun sprites are only used if this is non-0
+  "turretOffsets":[16, 0],
+  "turretAngleOffsets":[0],
+  "hardpointOffsets":[20, 0],
+  "hardpointAngleOffsets":[0],
+  "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
+  "animationType":"MUZZLE_FLASH",
+  "muzzleFlashSpec":{"length":20.0,   # only used if animationType = MUZZLE_FLASH
+    "spread":15.0,
+    "particleSizeMin":10.0,
+    "particleSizeRange":15.0,
+    "particleDuration":0.5,
+    "particleCount":25,
+    "particleColor":[255,128,128,125]},
+  "projectileSpecId":"wpnxt_fragcannon_shot",  # projectile that will be fired
+  "fireSoundTwo":"wpnxt_fragcannon_fire"
+}
