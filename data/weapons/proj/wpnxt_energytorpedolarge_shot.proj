@@ -1,0 +1,53 @@
+{
+  "id":"wpnxt_energytorpedolarge_shot",
+  "specClass":"missile",
+  "missileType":"MISSILE",
+  "onHitEffect":"weaponexpansion.combat.scripts.EnergyTorpedoLargeEffect",
+  "sprite":"graphics/missiles/wpnxt_energytorpedo.png",
+  "size":[14,27],
+  "center":[7,14],
+  "collisionRadius":25,
+  "collisionClass":"MISSILE_FF",
+  "explosionColor":[170,150,255,255],  # purely visual, will get a white additively blended core on top of this color
+  "explosionRadius":175, # purely visual
+  "explosionSpec":{"duration":0.1f, # not visual
+    "radius":175,
+    "coreRadius":85, # full damage within core radius
+    "collisionClass":PROJECTILE_FF,
+    "collisionClassByFighter":PROJECTILE_FIGHTER,
+    "particleSizeMin":5.0,
+    "particleSizeRange":3.0,
+    "particleDuration":1,
+    "particleCount":75,
+    "particleColor":[150,150,200,255],
+  },
+  "flameoutTime":3, # total time from flameout to full fadeout
+  "armingTime":0.25,
+  "noEngineGlowTime":0.5, # time spent without the engine glow being rendered
+  "fadeTime":0.5, # fadeout duration
+  "engineSpec":{"turnAcc":200,
+    "turnRate":75,
+    "acc":500,
+    "dec":250},
+  "engineSlots":[{"id":"ES1",
+    "loc":[-5, 0],
+    "style":"CUSTOM",
+    "styleSpec":{
+      "mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
+      "engineColor":[175,150,255,255],
+      "contrailDuration":2,
+      "contrailWidthMult":1,
+      "contrailWidthAddedFractionAtEnd":3,  # can be negative. makes trail spread out/narrow at the end
+      "contrailMinSeg":5, # min segment length, in pixels
+      "contrailMaxSpeedMult":0f,
+      "contrailAngularVelocityMult":0.5f,
+      "contrailSpawnDistMult":0f, # how far away from engine it starts
+      "contrailColor":[120,120,255,50],
+      "glowSizeMult":0.8,
+      "glowAlternateColor":[80,60,200,255],
+      "type":"GLOW" # GLOW or SMOKE; additive or regular blend mode
+    },
+    "width":30.0,
+    "length":90.0,
+    "angle":180.0}]
+}

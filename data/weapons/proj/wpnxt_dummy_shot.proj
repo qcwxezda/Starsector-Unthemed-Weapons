@@ -1,0 +1,14 @@
+{
+  "id":"wpnxt_dummy_shot",
+  "specClass":"projectile",
+  "spawnType":"BALLISTIC_AS_BEAM",
+  "collisionClass":"NONE",
+  "collisionClassByFighter":"NONE",
+  "length":30,
+  "width":5,
+  "fadeTime":0,
+  "fringeColor":[255,255,255,0],
+  "coreColor":[255,255,255,0],
+  "textureScrollSpeed":64.0,
+  "pixelsPerTexel":5.0
+}

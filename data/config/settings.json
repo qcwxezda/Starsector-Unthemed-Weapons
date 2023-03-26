@@ -7,6 +7,7 @@
   },
 
   "plugins": {
-    "wpnxt_needledriver_plugin": "weaponexpansion.combat.plugins.NeedleDriverPlugin"
+    "wpnxt_needledriver_plugin": "weaponexpansion.combat.plugins.NeedleDriverPlugin",
+    "wpnxt_combat_plugin": "weaponexpansion.combat.plugins.CombatPlugin"
   }
 }
