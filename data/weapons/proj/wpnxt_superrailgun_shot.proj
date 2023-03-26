@@ -15,5 +15,5 @@
   "textureScrollSpeed":64.0,
   "pixelsPerTexel":5.0,
   "passThroughMissiles":true,
-  "bulletSprite":"graphics/missiles/wpnxt_mortar_shot_thin.png",
+  "bulletSprite":"graphics/missiles/wpnxt_mortar_shot_thin.png"
 }
