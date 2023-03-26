@@ -24,7 +24,7 @@ public class NeedleDriverPlugin extends BaseEveryFrameCombatPlugin {
     public void advance(float amount, List<InputEventAPI> events) {
 
         CombatEngineAPI engine = Global.getCombatEngine();
-        if (engine.isPaused()) return;
+        if (engine == null || engine.isPaused()) return;
 
         for (ShipAPI ship : engine.getShips()) {
             //noinspection unchecked
