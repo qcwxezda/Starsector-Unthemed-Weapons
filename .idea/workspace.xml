@@ -9,41 +9,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Add a bunch of ballistics">
-      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_fragcannon_shot.proj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_fragcannon.wpn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_minivulcan.wpn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/missiles/orig/minivulcan.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_fragcannon_hardpoint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_fragcannon_hardpoint_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_fragcannon_turret.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_fragcannon_turret_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_minivulcan_hardpoint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_minivulcan_hardpoint_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_minivulcan_turret.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_minivulcan_turret_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/fragcannon.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/heavypounder3.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/lightpounder2.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_fragcannon_fire.wav" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Add 2 small ballistics, add descriptions">
+      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_dummy_shot.proj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedo_shot.proj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedolarge_shot.proj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_dummy.wpn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energytorpedo.wpn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energytorpedolarge.wpn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energytorpedomed.wpn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/missiles/orig/energytorpedo.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_energytorpedo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedo_hardpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedo_turret.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedolarge_hardpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedolarge_turret.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_hardpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_turret.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedo.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedo2.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedolarge.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedomed.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_explosion1.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/Action.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/CombatPlugin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/EmpArcAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ExplosionAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/strings/descriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_heavypounder_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_heavypounder_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_lightpounder_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_lightpounder_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_superrailgun_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_superrailgun_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_heavypounder.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_heavypounder.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_lightpounder.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_lightpounder.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_minimortarbattery.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_minimortarbattery.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_heavypounder_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_heavypounder_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_heavypounder_hardpoint_recoil.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_heavypounder_hardpoint_recoil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_heavypounder_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_heavypounder_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_heavypounder_turret_recoil.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_heavypounder_turret_recoil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_lightpounder_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_lightpounder_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_lightpounder_hardpoint_recoil.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_lightpounder_hardpoint_recoil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_lightpounder_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_lightpounder_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_lightpounder_turret_recoil.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_lightpounder_turret_recoil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/GlowRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/GlowRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/NeedleDriverPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/NeedleDriverPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SuperRailgunEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SuperRailgunEffect.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +53,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -280,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679638477413</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Add 2 small ballistics, add descriptions">
+      <created>1679716710761</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1679716710761</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -302,7 +310,8 @@
     <MESSAGE value="Add ballistic scattergun, modularize scatter effect, change some sprites" />
     <MESSAGE value="Helios Artillery flux efficiency 1.2 -&gt; 1.5" />
     <MESSAGE value="Add a bunch of ballistics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add a bunch of ballistics" />
+    <MESSAGE value="Add 2 small ballistics, add descriptions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add 2 small ballistics, add descriptions" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
