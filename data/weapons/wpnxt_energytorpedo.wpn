@@ -14,16 +14,16 @@
   "renderHints":[RENDER_LOADED_MISSILES],
   "smokeSpec":{"particleSizeMin":8.0,
     "particleSizeRange":8.0,
-    "cloudParticleCount":8,
+    "cloudParticleCount":15,
     "cloudDuration":1.5,
     "cloudRadius":10.0,
-    "blowbackParticleCount":4,
+    "blowbackParticleCount":5,
     "blowbackDuration":2.0,
     "blowbackLength":22.0,
     "blowbackSpread":15.0,
-    "particleColor":[15,25,125,105]},
+    "particleColor":[50,60,150,105]},
   "projectileSpecId":"wpnxt_energytorpedo_shot",
-  "fireSoundTwo":"reaper_fire"
+  "fireSoundTwo":"wpnxt_energytorpedo_fire"
 }
 
 
