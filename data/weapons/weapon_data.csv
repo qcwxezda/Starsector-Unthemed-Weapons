@@ -1,5 +1,5 @@
 name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn rate,OPs,ammo,ammo/sec,reload size,type,energy/shot,energy/second,chargeup,chargedown,burst size,burst delay,min spread,max spread,spread/shot,spread decay/sec,beam speed,proj speed,launch speed,flight time,proj hitpoints,autofireAccBonus,extraArcForAI,hints,tags,groupTag,tech/manufacturer,for weapon tooltip>>,primaryRoleStr,speedStr,trackingStr,turnRateStr,accuracyStr,customPrimary,customPrimaryHL,customAncillary,customAncillaryHL,noDPSInTooltip,number
-,wpnxt_dummy,,,,500,,500,,,,,,,,ENERGY,,,,,,,,,,,,1000,,,,,,SYSTEM,,,,,,,,,,,,,,,0
+,wpnxt_dummy,,,,500,,500,,,,,,,,ENERGY,,,,,,,,,,,,,0,10,,,,SYSTEM,,,,,,,,,,,,,,,0
 ,,,,,,
 # LARGE ENERGY
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -46,18 +46,18 @@ Light Vulcan,wpnxt_minivulcan,0,,100,350,,25,,1,75,1,,,,FRAGMENTATION,1,,,0.125,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Large Missile
-Megabloom Projector,wpnxt_energytorpedolarge,4,0.125,15000,1500,,800,,30,10,30,3,0.02,1,ENERGY,2500,,,10,,,,,,,,200,200,10,1600,,,GUIDED_POOR,"strike19, missile19, rare_bp, hist1t, merc",,,,Torpedo,,,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",8 | 800,,,TRUE,31
+Megabloom Projector,wpnxt_energytorpedolarge,4,0.125,15000,1500,,800,,30,10,30,3,0.04,1,ENERGY,2500,,,15,,,,,,,,200,200,16,1600,,,DO_NOT_AIM,"strike19, missile19, rare_bp, hist1t, merc",,,,Torpedo,,,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",8 | 800,,,TRUE,31
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Medium Missile
-Bloom Autolauncher,wpnxt_energytorpedomed,3,0.25,2500,1500,,500,,30,15,14,1,0.04,1,ENERGY,1000,,,7.5,,,,,,,,250,200,10,800,,,GUIDED_POOR,"strike14, missile14, rare_bp, merc",,,,Torpedo,,,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 500,,,TRUE,30
+Bloom Autolauncher,wpnxt_energytorpedomed,3,0.25,2500,1500,,500,,30,15,14,3,0.05,1,ENERGY,1000,,,7.5,,,,,,,,250,200,10,800,,,DO_NOT_AIM,"strike14, missile14, rare_bp, hist1t, merc",,,,Torpedo,,,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 500,,,TRUE,30
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Small Missile
-Bloom-class Torpedo,wpnxt_energytorpedo,3,0.25,1000,1500,,500,,30,15,3,1,,,ENERGY,,,,15,,,,,,,,250,200,10,800,,,GUIDED_POOR,"strike10, missile2, rare_bp, merc",,,,Torpedo,,,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 500,,,TRUE,29
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Bloom-class Torpedo,wpnxt_energytorpedo,3,0.25,1000,1500,,500,,30,15,2,1,,,ENERGY,,,,15,,,,,,,,250,200,10,800,,,DO_NOT_AIM,"strike10, missile2, rare_bp, merc",,,,Torpedo,,,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 500,,,TRUE,29
+Spiker SRM,wpnxt_minispiker,1,0.75,400,1200,,80,,10,45,4,40,0.5,8,KINETIC,50,,,4,8,0.125,,,,,,350,100,5,80,,,"DO_NOT_AIM, DO_NOT_CONSERVE, ANTI_FTR","utility5, missile1, kinetic3, rare_bp, merc",,,,Anti Shield,,,,,Deals an additional %s kinetic soft-flux damage on shield hits.,50%,,,,32
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Unused

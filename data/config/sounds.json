@@ -118,5 +118,15 @@
     {"file": "sounds/weapons/wpnxt_explosion1.wav", "pitch": 1, "volume": 0.6},
     {"file": "sounds/weapons/wpnxt_explosion1.wav", "pitch": 0.98, "volume": 0.6},
     {"file": "sounds/weapons/wpnxt_explosion1.wav", "pitch": 0.96, "volume": 0.6}
+  ],
+  "wpnxt_energytorpedo_fire": [
+    {"file": "sounds/weapons/wpnxt_energytorpedo_fire.wav", "pitch": 1, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_energytorpedo_fire.wav", "pitch": 0.98, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_energytorpedo_fire.wav", "pitch": 0.96, "volume": 0.6}
+  ],
+  "wpnxt_energytorpedo_fire2": [
+    {"file": "sounds/weapons/wpnxt_energytorpedo_fire2.wav", "pitch": 1, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_energytorpedo_fire2.wav", "pitch": 0.98, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_energytorpedo_fire2.wav", "pitch": 0.96, "volume": 0.6}
   ]
 }

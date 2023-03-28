@@ -2,15 +2,13 @@ package weaponexpansion.combat.plugins;
 
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
-import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import org.lwjgl.util.vector.Vector2f;
 
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/** Allows actions to be performed with a delay. */
 public class CombatPlugin extends BaseEveryFrameCombatPlugin {
 
     private float currentTime;
