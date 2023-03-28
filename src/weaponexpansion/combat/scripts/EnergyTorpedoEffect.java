@@ -4,12 +4,13 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
+import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.combat.entities.Missile;
 import org.lwjgl.util.vector.Vector2f;
+import weaponexpansion.combat.plugins.Action;
 import weaponexpansion.combat.plugins.CombatPlugin;
-import weaponexpansion.combat.plugins.EmpArcAction;
-import weaponexpansion.combat.plugins.ExplosionAction;
 
 import java.awt.*;
 import java.util.Collections;
@@ -29,10 +30,10 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
     }
 
     @Override
-    public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
+    public void onHit(final DamagingProjectileAPI proj, CombatEntityAPI target, final Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, final CombatEngineAPI engine) {
         float offset = Misc.random.nextFloat() * 360f;
 
-        DamagingExplosionSpec spec = ((MissileAPI) proj).getSpec().getExplosionSpec();
+        final DamagingExplosionSpec spec = ((MissileAPI) proj).getSpec().getExplosionSpec();
         List<CombatEntityAPI> thisAsList = Collections.singletonList((CombatEntityAPI) proj);
 
         CombatPlugin plugin = (CombatPlugin) engine.getCustomData().get(CombatPlugin.customDataKey);
@@ -41,24 +42,54 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
         if (plugin == null) return;
 
         // Set the dummy spec to the appropriate values
-        ProjectileSpecAPI dummyProjSpec = (ProjectileSpecAPI) Global.getSettings().getWeaponSpec(dummyWeapon).getProjectileSpec();
+        MissileSpecAPI dummyProjSpec = (MissileSpecAPI) Global.getSettings().getWeaponSpec(dummyWeapon).getProjectileSpec();
         dummyProjSpec.getDamage().setDamage(proj.getBaseDamageAmount());
-        dummyProjSpec.setMaxRange(maxSpawnDistance);
-        dummyProjSpec.setMoveSpeed(maxSpawnDistance / maxDelay);
+        dummyProjSpec.setLaunchSpeed(0f);
         dummyProjSpec.getDamage().setType(proj.getDamageType());
 
+        // Spawn mine to telegraph the delayed explosions
+        // so the AI doesn't just overload
+        Vector2f dummyPos = new Vector2f(pt);
+        Vector2f scaledVelocity = new Vector2f(proj.getVelocity());
+        scaledVelocity.scale(-0.1f);
+        Vector2f.add(dummyPos, scaledVelocity, dummyPos);
+
+        final MissileAPI dummyProj = (MissileAPI) engine.spawnProjectile(null, null, dummyWeapon, dummyPos, 0f, new Vector2f());
+        dummyProj.setMine(true);
+        dummyProj.setNoMineFFConcerns(true);
+        dummyProj.setMinePrimed(true);
+        dummyProj.setUntilMineExplosion(0f);
+        dummyProj.setMineExplosionRange(((MissileAPI) proj).getSpec().getExplosionSpec().getRadius());
+        plugin.queueAction(new Action() {
+            @Override
+            public void perform() {
+                engine.removeEntity(dummyProj);
+            }
+        }, maxDelay);
+
         for (int i = 0; i < numSpawns; i++) {
-            Vector2f spawnLoc = new Vector2f(pt);
-            float angle = offset + angleDeviation * Misc.random.nextFloat() - angleDeviation / 2f;
+            final Vector2f spawnLoc = new Vector2f(pt);
+            final float angle = offset + angleDeviation * Misc.random.nextFloat() - angleDeviation / 2f;
             Vector2f dirVec = Misc.getUnitVectorAtDegreeAngle(angle);
-            dirVec.scale(minSpawnDistance + Misc.random.nextFloat() * (maxSpawnDistance - minSpawnDistance));
+            // Should be uniformly distributed inside the ring
+            float dist = (float) Math.sqrt(Misc.random.nextFloat() * (maxSpawnDistance*maxSpawnDistance - minSpawnDistance*minSpawnDistance) + minSpawnDistance*minSpawnDistance);
+            dirVec.scale(dist);
             Vector2f.add(spawnLoc, dirVec, spawnLoc);
-            float delay = minDelay + Misc.random.nextFloat() * (maxDelay - minDelay);
-            plugin.queueAction(new ExplosionAction(spec, proj.getSource(), spawnLoc), delay);
-            plugin.queueAction(new EmpArcAction(pt, proj, spawnLoc, proj, 5f, empFringe, empCore), delay / 2f);
-            // Spawn projectile to telegraph the delayed explosions
-            // so the AI doesn't just overload
-            DamagingProjectileAPI dummyProj = (DamagingProjectileAPI) engine.spawnProjectile(proj.getSource(), proj.getWeapon(), dummyWeapon, pt, angle, new Vector2f());
+            final float delay = minDelay + Misc.random.nextFloat() * (maxDelay - minDelay);
+
+            plugin.queueAction(new Action() {
+
+                @Override
+                public void perform() {
+                    engine.spawnEmpArcVisual(pt, null, spawnLoc, null, 5f, empFringe, empCore);
+                }
+            }, delay / 2f);
+            plugin.queueAction(new Action() {
+                @Override
+                public void perform() {
+                    engine.spawnDamagingExplosion(spec, proj.getSource(), spawnLoc);
+                }
+            }, delay);
             offset = (offset + 360f / numSpawns) % 360f;
         }
     }
