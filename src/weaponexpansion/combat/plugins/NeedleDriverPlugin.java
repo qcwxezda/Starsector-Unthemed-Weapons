@@ -88,11 +88,15 @@ public class NeedleDriverPlugin extends BaseEveryFrameCombatPlugin {
                     engine.spawnExplosion(explosionLoc, ship.getVelocity(), new Color(255, 200, 255, 192), explosionRadius, 1f);
                     if (!ship.isPhased()) {
                         engine.applyDamage(ship, explosionLoc, explosionDamage, DamageType.ENERGY, 0f, true, false, data.proj.getSource());
-                        if (explosionDamage < maxExplosionDamage) {
-                            Global.getSoundPlayer().playSound("hit_solid_energy", 1f, 1f, explosionLoc, ship.getVelocity());
-                        } else {
-                            Global.getSoundPlayer().playSound("hit_heavy_energy", 1f, 1f, explosionLoc, ship.getVelocity());
-                        }
+                        Global.getSoundPlayer().playSound(
+                                explosionDamage < maxExplosionDamage ?
+                                        "hit_solid_energy" :
+                                        "hit_heavy_energy",
+                                0.9f + Misc.random.nextFloat() * 0.1f,
+                                1f,
+                                explosionLoc,
+                                ship.getVelocity()
+                        );
                     }
                 }
 

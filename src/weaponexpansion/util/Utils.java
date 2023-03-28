@@ -141,4 +141,76 @@ public class Utils {
 
         return closest;
     }
+
+    public static float angleDiff(float a, float b) {
+        return ((b - a) % 360 + 540) % 360 - 180;
+    }
+
+    public static float randBetween(float a, float b) {
+        return Misc.random.nextFloat() * (b - a) + a;
+    }
+
+    public static float estimateInterceptTime(MissileAPI missile, CombatEntityAPI entity) {
+        float dirToShip = Misc.getAngleInDegrees(missile.getLocation(), entity.getLocation());
+        // If the missile were turned toward the ship, how long to close the distance?
+        float v0 = Vector2f.dot(missile.getVelocity(), Misc.getUnitVectorAtDegreeAngle(dirToShip));
+        float vM = missile.getMaxSpeed();
+        float a = missile.getAcceleration();
+        float d = Misc.getDistance(missile.getLocation(), entity.getLocation());
+        float T = (vM - v0) / a; // time for missile to reach max speed
+        // interception before T
+        float t = (float) (Math.sqrt(4*v0*v0 + 4*a*d) - 2*v0) / (2*a);
+        // interception after T
+        if (t > T) {
+            t = (d + vM*T - a*T*T/2f - v0*T) / (vM);
+        }
+        return t;
+    }
+
+    public static Vector2f estimateInterceptPoint(MissileAPI missile, CombatEntityAPI entity, float frameTime, Vector2f shipVelLastFrame) {
+        float t = estimateInterceptTime(missile, entity);
+
+        // Where will the target have moved to in timeEst, assuming constant acceleration?
+        Vector2f V0 = new Vector2f(entity.getVelocity());
+        Vector2f acc = new Vector2f();
+        Vector2f.sub(V0, shipVelLastFrame, acc);
+        acc.scale(1f / frameTime);
+
+        // How long will the target take to reach maximum speed?
+        float aDotV0 = Vector2f.dot(V0, acc);
+        float maxSpeed = entity instanceof ShipAPI ? ((ShipAPI) entity).getMaxSpeed() : entity.getVelocity().length();
+        float TMax;
+        if (acc.lengthSquared() > 0) {
+            TMax = (float) (Math.sqrt(4*aDotV0*aDotV0 + 4*acc.lengthSquared()*(maxSpeed*maxSpeed - V0.lengthSquared())) - 2*aDotV0) / (2*acc.lengthSquared());
+        }
+        else {
+            TMax = 0f;
+        }
+
+        Vector2f newPos = new Vector2f(entity.getLocation());
+        if (t <= TMax) {
+            V0.scale(t);
+            acc.scale(0.5f*t*t);
+            Vector2f.add(newPos, V0, newPos);
+            Vector2f.add(newPos, acc, newPos);
+        }
+        else {
+            Vector2f VT = new Vector2f(V0);
+            Vector2f ATemp = new Vector2f(acc);
+            ATemp.scale(TMax);
+            Vector2f.add(VT, ATemp, VT);
+            VT.scale(t - TMax);
+
+            V0.scale(TMax);
+            acc.scale(0.5f*TMax*TMax);
+            Vector2f.add(newPos, V0, newPos);
+            Vector2f.add(newPos, acc, newPos);
+            Vector2f.add(newPos, VT, newPos);
+        }
+        return newPos;
+    }
+
+    public static boolean isClockwise(Vector2f v1, Vector2f v2) {
+        return v1.y * v2.x > v1.x * v2.y;
+    }
 }
