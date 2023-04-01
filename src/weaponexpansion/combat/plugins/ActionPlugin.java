@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /** Allows actions to be performed with a delay. */
-public class CombatPlugin extends BaseEveryFrameCombatPlugin {
+public class ActionPlugin extends BaseEveryFrameCombatPlugin {
 
     private float currentTime;
     private CombatEngineAPI engine;
@@ -30,8 +30,8 @@ public class CombatPlugin extends BaseEveryFrameCombatPlugin {
 
         ActionItem firstItem;
         while ((firstItem = actionList.peek()) != null && firstItem.timeToPerform <= currentTime) {
-            firstItem.action.perform();
             actionList.poll();
+            firstItem.action.perform();
         }
 
         currentTime += amount;

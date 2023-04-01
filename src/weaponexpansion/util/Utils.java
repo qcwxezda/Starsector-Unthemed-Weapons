@@ -1,10 +1,9 @@
 package weaponexpansion.util;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.combat.plugins.CombatPlugin;
-import weaponexpansion.combat.scripts.SuperRailgunEffect;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -64,7 +63,7 @@ public class Utils {
             // If it's a ship, check collision with shields
             if (o instanceof ShipAPI) {
                 ShipAPI ship = (ShipAPI) o;
-                if (ship.isPhased()) continue;
+                if (ship.isPhased() || CollisionClass.NONE.equals(ship.getCollisionClass())) continue;
 
                 if (ship.getShield() != null) {
                     // Actual point itself is inside shield
@@ -143,7 +142,7 @@ public class Utils {
     }
 
     public static float angleDiff(float a, float b) {
-        return ((b - a) % 360 + 540) % 360 - 180;
+        return ((a - b) % 360 + 540) % 360 - 180;
     }
 
     public static float randBetween(float a, float b) {
@@ -212,5 +211,59 @@ public class Utils {
 
     public static boolean isClockwise(Vector2f v1, Vector2f v2) {
         return v1.y * v2.x > v1.x * v2.y;
+    }
+
+    /** The Misc version requires a ShipAPI as the anchor location, this can take an arbitrary anchor point */
+    public static ShipAPI getClosestEnemyShip(
+            Vector2f location,
+            int side,
+            ShipAPI.HullSize smallestToNote,
+            float maxRange,
+            boolean considerShipRadius,
+            Misc.FindShipFilter filter) {
+        ShipAPI closest = null;
+        float closestDist = Float.MAX_VALUE;
+        for (ShipAPI ship : Global.getCombatEngine().getShips()) {
+            if (ship.isHulk()
+                    || ship.getOwner() == side
+                    || ship.getOwner() == 100
+                    || ship.isShuttlePod()
+                    || ship.getHullSize().compareTo(smallestToNote) < 0
+                    || (filter != null && !filter.matches(ship))) {
+                continue;
+            }
+
+            float dist = Misc.getDistance(location, ship.getLocation());
+            if (dist <= maxRange + (ship.getCollisionRadius() * (considerShipRadius ? 1f : 0f))
+                    && dist < closestDist) {
+                closest = ship;
+                closestDist = dist;
+            }
+        }
+        return closest;
+    }
+
+    public static float clamp(float value, float min, float max) {
+        return Math.max(min, Math.min(max, value));
+    }
+
+    public static void safeNormalize(Vector2f v) {
+        if (v.x*v.x + v.y*v.y > 0) {
+            v.normalise();
+        }
+    }
+
+    public static float modPositive(float x, float mod) {
+        x = x % mod;
+        return x < 0 ? x + mod : x;
+    }
+
+    /** returns f(b) - f(a) */
+    public static float applyAtLimits(Function f, float a, float b) {
+        return f.apply(b) - f.apply(a);
+    }
+
+    public interface Function {
+        float apply(float x);
     }
 }
