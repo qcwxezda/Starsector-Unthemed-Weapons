@@ -13,15 +13,15 @@
   "animationType":"SMOKE",
   "interruptibleBurst":false,
   "smokeSpec":{"particleSizeMin":10.0,
-    "particleSizeRange":16.0,
+    "particleSizeRange":10.0,
     "cloudParticleCount":3,
     "cloudDuration":0.9,
     "cloudRadius":8.0,
     "blowbackParticleCount":4,
-    "blowbackDuration":1.1,
+    "blowbackDuration":0.5,
     "blowbackLength":20.0,
     "blowbackSpread":10.0,
-    "particleColor":[170,160,120,100]},
+    "particleColor":[150,150,140,100]},
   "projectileSpecId":"wpnxt_minispiker_shot",
-  "fireSoundTwo":"swarmer_fire"
+  "fireSoundTwo":"wpnxt_minispiker_fire"
 }

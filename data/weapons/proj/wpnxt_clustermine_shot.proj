@@ -1,0 +1,44 @@
+{
+  "id":"wpnxt_clustermine_shot",
+  "specClass":"missile",
+  "missileType":"MIRV",
+  "sprite":"graphics/missiles/phase_charge_base.png",
+  "size":[9,18],
+  "center":[4.5,9],
+  "collisionRadius":16,
+  "collisionClass":"MISSILE_FF",
+  "explosionColor":[255,165,0,255],  # purely visual, will get a white additively blended core on top of this color
+  "explosionRadius":125, # purely visual
+  "engineSpec":{"turnAcc":1000,
+    "turnRate":1000,
+    "acc":0,
+    "dec":0},
+  "behaviorSpec":{"behavior":"MIRV",
+    "splitRange":400,
+    "splitRangeRange":0,
+    "minTimeToSplit":2,
+    "canSplitEarly":true,
+    "numShots":5,
+    "damage":150,
+    "emp":0, # needs to match highlight in weapon_data.csv
+    "damageType":HIGH_EXPLOSIVE,
+    "hitpoints":500,
+    "evenSpread":false,
+    "arc":360,
+    "spreadInaccuracy":5,
+    "spreadSpeed":50,
+    "spreadSpeedRange":20,
+    "projectileSpec":"wpnxt_clustermine_spawn",
+    "smokeSpec":{"particleSizeMin":20.0,
+      "particleSizeRange":20.0,
+      "cloudParticleCount":11,
+      "cloudDuration":1.0,
+      "cloudRadius":20.0,
+      "blowbackParticleCount":0,
+      "blowbackDuration":0,
+      "blowbackLength":0,
+      "blowbackSpread":0,
+      "particleColor":[100,100,100,200]}
+  }
+}
+
