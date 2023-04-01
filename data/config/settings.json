@@ -8,6 +8,7 @@
 
   "plugins": {
     "wpnxt_needledriver_plugin": "weaponexpansion.combat.plugins.NeedleDriverPlugin",
-    "wpnxt_combat_plugin": "weaponexpansion.combat.plugins.CombatPlugin"
+    "wpnxt_combat_plugin": "weaponexpansion.combat.plugins.ActionPlugin",
+    "wpnxt_listener_plugin": "weaponexpansion.combat.plugins.ListenerPlugin"
   }
 }
