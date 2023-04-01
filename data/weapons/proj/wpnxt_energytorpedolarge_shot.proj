@@ -9,25 +9,25 @@
   "collisionRadius":25,
   "collisionClass":"MISSILE_FF",
   "explosionColor":[170,150,255,255],  # purely visual, will get a white additively blended core on top of this color
-  "explosionRadius":175, # purely visual
+  "explosionRadius":150, # purely visual
   "explosionSpec":{"duration":0.1f, # not visual
-    "radius":175,
-    "coreRadius":85, # full damage within core radius
+    "radius":150,
+    "coreRadius":75, # full damage within core radius
     "collisionClass":PROJECTILE_FF,
     "collisionClassByFighter":PROJECTILE_FIGHTER,
     "particleSizeMin":5.0,
     "particleSizeRange":3.0,
     "particleDuration":1,
-    "particleCount":75,
+    "particleCount":100,
     "particleColor":[150,150,200,255],
   },
   "flameoutTime":3, # total time from flameout to full fadeout
   "armingTime":0.25,
   "noEngineGlowTime":0.5, # time spent without the engine glow being rendered
   "fadeTime":0.5, # fadeout duration
-  "engineSpec":{"turnAcc":400,
+  "engineSpec":{"turnAcc":300,
     "turnRate":80,
-    "acc":1000,
+    "acc":500,
     "dec":0},
   "engineSlots":[{"id":"ES1",
     "loc":[-5, 0],
@@ -49,5 +49,6 @@
     },
     "width":30.0,
     "length":90.0,
-    "angle":180.0}]
+    "angle":180.0}],
+  "onFireEffect":"weaponexpansion.combat.scripts.SetEmpResistance"
 }

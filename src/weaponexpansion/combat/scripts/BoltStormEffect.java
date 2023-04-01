@@ -6,26 +6,20 @@ import org.lwjgl.util.vector.Vector2f;
 
 @SuppressWarnings("unused")
 public class BoltStormEffect implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin, WeaponEffectPluginWithInit {
-
-    float angleOffset = 0f;
-    float maxAngleOffset = 10f;
     int shotsPerCycle = 42;
-    float offsetDir = 1;
+    float phase = 0f, amplitude = 0f;
     float hasntFiredDuration = 0f;
 
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
 
-        Vector2f v = Misc.getUnitVectorAtDegreeAngle(weapon.getCurrAngle() + angleOffset + 180f);
+        Vector2f v = Misc.getUnitVectorAtDegreeAngle(weapon.getCurrAngle() + amplitude * (float) Math.sin(phase) + 180f);
         v.scale(proj.getProjectileSpec().getLength());
         Vector2f.add(v, proj.getLocation(), v);
 
         proj.getTailEnd().set(v);
 
-        if (Math.abs(angleOffset) >= maxAngleOffset) {
-            offsetDir *= -1;
-        }
-        angleOffset += offsetDir * 4 * (maxAngleOffset / shotsPerCycle);
+        phase += 2f * Math.PI / (shotsPerCycle);
 
         hasntFiredDuration = 0f;
     }
@@ -33,12 +27,7 @@ public class BoltStormEffect implements OnFireEffectPlugin, EveryFrameWeaponEffe
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
         if (hasntFiredDuration >= 3f * weapon.getCooldown())  {
-            if (angleOffset > 0f) {
-                angleOffset -= Math.min(angleOffset, 0.5f);
-            }
-            if (angleOffset < 0f) {
-                angleOffset += Math.min(-angleOffset, 0.5f);
-            }
+            phase = 0f;
         }
 
         hasntFiredDuration += amount;
@@ -46,9 +35,9 @@ public class BoltStormEffect implements OnFireEffectPlugin, EveryFrameWeaponEffe
 
     @Override
     public void init(WeaponAPI weapon) {
-        maxAngleOffset = weapon.getSpec().getMaxSpread() / 2f;
+        amplitude = weapon.getSpec().getMaxSpread() / 2f;
         if (weapon.getSlot().isHardpoint()) {
-            maxAngleOffset /= 2f;
+            amplitude /= 2f;
         }
     }
 }

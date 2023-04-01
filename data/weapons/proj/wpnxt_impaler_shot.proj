@@ -1,0 +1,37 @@
+{
+  "id":"wpnxt_impaler_shot",
+  "specClass":"missile",
+  "missileType":"MISSILE",
+  "sprite":"graphics/missiles/wpnxt_impaler_shot.png",
+  "size":[6,24],
+  "center":[3,12],
+  "collisionRadius":14,
+  "collisionClass":"MISSILE_NO_FF",
+  "explosionColor":[255,100,50,255],  # purely visual, will get a white additively blended core on top of this color
+  "explosionRadius":80, # purely visual,
+  "armingTime":0.25,
+  "engineSpec":{
+    "turnAcc":500,
+    "turnRate":150,
+    "acc":2000,
+    "dec":250},
+  "engineSlots":[{"id":"ES1",
+    "loc":[-12, 0],
+    "style":"CUSTOM",
+    "styleSpec":{
+      "mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
+      "engineColor":[255,180,75,255],
+      "contrailDuration":0.75,
+      "contrailWidthMult":1.5,
+      "contrailWidthAddedFractionAtEnd":2,  # can be negative. makes trail spread out/narrow at the end
+      "contrailMinSeg":10, # min segment length, in pixels
+      "contrailMaxSpeedMult":.0f,
+      "contrailAngularVelocityMult":0.5f,
+      "contrailSpawnDistMult":.75, # how far away from engine it starts
+      "contrailColor":[175,175,175,125],
+      "type":"SMOKE" # GLOW or SMOKE; additive or regular blend mode
+    },
+    "width":5.0,
+    "length":40.0,
+    "angle":180.0}],
+}

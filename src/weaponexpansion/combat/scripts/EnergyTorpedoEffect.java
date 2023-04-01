@@ -5,12 +5,10 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
-import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.combat.entities.Missile;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.combat.plugins.Action;
-import weaponexpansion.combat.plugins.CombatPlugin;
+import weaponexpansion.combat.plugins.ActionPlugin;
 
 import java.awt.*;
 import java.util.Collections;
@@ -19,15 +17,11 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class EnergyTorpedoEffect implements OnHitEffectPlugin {
 
-    int numSpawns;
+    int numSpawns = 5;
     float minSpawnDistance = 60f, maxSpawnDistance = 120f, minDelay = 0.33f, maxDelay = 0.67f, angleDeviation = 20f;
     final String dummyWeapon = "wpnxt_dummy";
     static final Color empCore = new Color(180, 200, 255);
     static final Color empFringe = new Color(100, 120, 255);
-
-    public EnergyTorpedoEffect() {
-        numSpawns = 5;
-    }
 
     @Override
     public void onHit(final DamagingProjectileAPI proj, CombatEntityAPI target, final Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, final CombatEngineAPI engine) {
@@ -36,7 +30,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
         final DamagingExplosionSpec spec = ((MissileAPI) proj).getSpec().getExplosionSpec();
         List<CombatEntityAPI> thisAsList = Collections.singletonList((CombatEntityAPI) proj);
 
-        CombatPlugin plugin = (CombatPlugin) engine.getCustomData().get(CombatPlugin.customDataKey);
+        ActionPlugin plugin = (ActionPlugin) engine.getCustomData().get(ActionPlugin.customDataKey);
 
         // Shouldn't be null, but just in case
         if (plugin == null) return;
@@ -51,7 +45,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
         // so the AI doesn't just overload
         Vector2f dummyPos = new Vector2f(pt);
         Vector2f scaledVelocity = new Vector2f(proj.getVelocity());
-        scaledVelocity.scale(-0.1f);
+        scaledVelocity.scale(-0.1f); // So that it doesn't spawn inside the target's collision radius
         Vector2f.add(dummyPos, scaledVelocity, dummyPos);
 
         final MissileAPI dummyProj = (MissileAPI) engine.spawnProjectile(null, null, dummyWeapon, dummyPos, 0f, new Vector2f());
@@ -59,7 +53,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
         dummyProj.setNoMineFFConcerns(true);
         dummyProj.setMinePrimed(true);
         dummyProj.setUntilMineExplosion(0f);
-        dummyProj.setMineExplosionRange(((MissileAPI) proj).getSpec().getExplosionSpec().getRadius());
+        dummyProj.setMineExplosionRange(((MissileAPI) proj).getSpec().getExplosionSpec().getRadius() + maxSpawnDistance);
         plugin.queueAction(new Action() {
             @Override
             public void perform() {
