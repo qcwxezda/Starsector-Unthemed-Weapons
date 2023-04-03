@@ -37,6 +37,9 @@ public abstract class ScatterPlugin implements OnFireEffectPlugin, EveryFrameWea
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
         // Nothing here; this only exists because OnFireEffect only works on weapons if
         // they also have an EveryFrameEffect
+
+        // Don't want to put the onFireEffect in the proj file as multiple weapons might want to use the
+        // same proj
     }
 
     /** As percentage of original value */

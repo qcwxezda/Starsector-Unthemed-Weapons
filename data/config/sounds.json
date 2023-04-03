@@ -143,5 +143,20 @@
     {"file": "sounds/weapons/wpnxt_orb_fire.wav", "pitch": 1, "volume": 0.6},
     {"file": "sounds/weapons/wpnxt_orb_fire.wav", "pitch": 0.98, "volume": 0.6},
     {"file": "sounds/weapons/wpnxt_orb_fire.wav", "pitch": 0.96, "volume": 0.6}
+  ],
+  "wpnxt_clustermine_fire": [
+    {"file": "sounds/weapons/wpnxt_clustermine_fire.wav", "pitch": 1, "volume": 0.8},
+    {"file": "sounds/weapons/wpnxt_clustermine_fire.wav", "pitch": 0.98, "volume": 0.8},
+    {"file": "sounds/weapons/wpnxt_clustermine_fire.wav", "pitch": 0.96, "volume": 0.8}
+  ],
+  "wpnxt_mine_strike": [
+    {"file": "sounds/weapons/wpnxt_mine_strike.wav", "pitch": 1, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_mine_strike.wav", "pitch": 0.98, "volume": 0.6},
+    {"file": "sounds/weapons/wpnxt_mine_strike.wav", "pitch": 0.96, "volume": 0.6}
+  ],
+  "wpnxt_ionrocket_fire": [
+    {"file": "sounds/weapons/wpnxt_ionrocket_fire.wav", "pitch": 1, "volume": 0.4},
+    {"file": "sounds/weapons/wpnxt_ionrocket_fire.wav", "pitch": 0.98, "volume": 0.4},
+    {"file": "sounds/weapons/wpnxt_ionrocket_fire.wav", "pitch": 0.96, "volume": 0.4}
   ]
 }

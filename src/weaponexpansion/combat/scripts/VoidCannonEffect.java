@@ -7,7 +7,7 @@ import com.fs.starfarer.api.combat.*;
  *    - Having too many hidden turrets makes glow effects like high energy focus look weird
  *    */
 @SuppressWarnings("unused")
-public class VoidCannonEffect implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin {
+public class VoidCannonEffect implements OnFireEffectPlugin {
 
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
@@ -29,11 +29,5 @@ public class VoidCannonEffect implements OnFireEffectPlugin, EveryFrameWeaponEff
         weapon.getAmmoTracker().setAmmo(Math.max(0, weapon.getAmmo() - numProjectiles + 1));
         weapon.setRemainingCooldownTo(weapon.getCooldown());
         weapon.setRefireDelay(weapon.getCooldown());
-    }
-
-    @Override
-    public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        // Nothing here; this only exists because OnFireEffect only works on weapons if
-        // they also have an EveryFrameEffect
     }
 }
