@@ -3,12 +3,10 @@ package weaponexpansion.util;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.util.Pair;
 import org.lwjgl.util.vector.Vector2f;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class Utils {
 
@@ -214,22 +212,16 @@ public class Utils {
     }
 
     /** The Misc version requires a ShipAPI as the anchor location, this can take an arbitrary anchor point */
-    public static ShipAPI getClosestEnemyShip(
+    public static ShipAPI getClosestEntity(
             Vector2f location,
-            int side,
             ShipAPI.HullSize smallestToNote,
             float maxRange,
             boolean considerShipRadius,
-            Misc.FindShipFilter filter) {
+            TargetChecker checker) {
         ShipAPI closest = null;
         float closestDist = Float.MAX_VALUE;
         for (ShipAPI ship : Global.getCombatEngine().getShips()) {
-            if (ship.isHulk()
-                    || ship.getOwner() == side
-                    || ship.getOwner() == 100
-                    || ship.isShuttlePod()
-                    || ship.getHullSize().compareTo(smallestToNote) < 0
-                    || (filter != null && !filter.matches(ship))) {
+            if (!checker.check(ship) || (smallestToNote != null && ship.getHullSize().compareTo(smallestToNote) < 0)) {
                 continue;
             }
 
@@ -241,6 +233,111 @@ public class Utils {
             }
         }
         return closest;
+    }
+
+    /** Can be negative for points inside the entity */
+    public static float getDistWithEntity(Vector2f location, CombatEntityAPI entity, boolean considerRadius) {
+        return Misc.getDistance(location, entity.getLocation()) - (considerRadius ? entity.getCollisionRadius() : 0f);
+    }
+
+    public final static float maxRangeUseGrid = 300f;
+
+    public static Collection<CombatEntityAPI> getKNearestEntities(
+            int k,
+            final Vector2f location,
+            ShipAPI.HullSize smallestToNote,
+            boolean includeMissiles,
+            float maxRange,
+            final boolean considerRadius,
+            TargetChecker checker) {
+
+        CombatEngineAPI engine = Global.getCombatEngine();
+        // second entry is distance to location
+        List<Pair<CombatEntityAPI, Float>> shipsAndMissiles = new ArrayList<>();
+
+        if (maxRange <= maxRangeUseGrid) {
+            Iterator<Object> itr = engine.getAllObjectGrid().getCheckIterator(location, 2f*maxRange, 2f*maxRange);
+            while (itr.hasNext()) {
+                Object o = itr.next();
+                if (o instanceof ShipAPI) {
+                    ShipAPI ship = (ShipAPI) o;
+                    float dist = getDistWithEntity(location, ship, considerRadius);
+                    if (dist <= maxRange && checker.check(ship) && (smallestToNote == null || ship.getHullSize().compareTo(smallestToNote) >= 0)) {
+                        shipsAndMissiles.add(new Pair<CombatEntityAPI, Float>(ship, dist));
+                    }
+                }
+                else if (o instanceof MissileAPI && includeMissiles) {
+                    MissileAPI missile = (MissileAPI) o;
+                    float dist = getDistWithEntity(location, missile, considerRadius);
+                    if (dist <= maxRange && checker.check(missile)) {
+                        shipsAndMissiles.add(new Pair<CombatEntityAPI, Float>(missile, dist));
+                    }
+                }
+            }
+        }
+        else {
+            for (ShipAPI ship : engine.getShips()) {
+                float dist = getDistWithEntity(location, ship, considerRadius);
+                if (dist <= maxRange && checker.check(ship) && (smallestToNote == null || ship.getHullSize().compareTo(smallestToNote) >= 0)) {
+                    shipsAndMissiles.add(new Pair<CombatEntityAPI, Float>(ship, dist));
+                }
+            }
+            if (includeMissiles) {
+                for (MissileAPI missile : engine.getMissiles()) {
+                    float dist = getDistWithEntity(location, missile, considerRadius);
+                    if (dist <= maxRange && checker.check(missile)) {
+                        shipsAndMissiles.add(new Pair<CombatEntityAPI, Float>(missile, dist));
+                    }
+                }
+            }
+        }
+        Collections.sort(shipsAndMissiles, new Comparator<Pair<CombatEntityAPI, Float>>() {
+            @Override
+            public int compare(Pair<CombatEntityAPI, Float> p1, Pair<CombatEntityAPI, Float> p2) {
+                return Float.compare(p1.two, p2.two);
+            }
+        });
+
+        List<CombatEntityAPI> kNearest = new ArrayList<>();
+        for (int i = 0; i < Math.min(k, shipsAndMissiles.size()); i++) {
+            kNearest.add(shipsAndMissiles.get(i).one);
+        }
+        return kNearest;
+    }
+
+    /** Uses the collision grid. For small maxRange values. Set smallestToNote to null to include missiles. */
+    public static boolean isEntityNearby(
+            Vector2f location,
+            ShipAPI.HullSize smallestToNote,
+            float maxShipRange,
+            float maxMissileRange,
+            boolean considerCollisionRadius,
+            TargetChecker checker) {
+        float maxRange = Math.max(maxShipRange, maxMissileRange);
+        Iterator<Object> itr = Global.getCombatEngine().getAllObjectGrid().getCheckIterator(location, 2f*maxRange, 2f*maxRange);
+        while (itr.hasNext()) {
+            Object obj = itr.next();
+            if (!(obj instanceof CombatEntityAPI)) continue;
+
+            CombatEntityAPI entity = (CombatEntityAPI) obj;
+            if (!checker.check(entity)) {
+                continue;
+            }
+
+            float dist = Misc.getDistance(location, entity.getLocation()) - (entity.getCollisionRadius() * (considerCollisionRadius ? 1f : 0f));
+
+            if (dist <= maxMissileRange && entity instanceof MissileAPI && smallestToNote == null) {
+                return true;
+            }
+
+            if (entity instanceof ShipAPI) {
+                ShipAPI ship = (ShipAPI) entity;
+                if (dist <= maxShipRange && (smallestToNote == null || ship.getHullSize().compareTo(smallestToNote) >= 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static float clamp(float value, float min, float max) {
@@ -265,5 +362,29 @@ public class Utils {
 
     public interface Function {
         float apply(float x);
+    }
+
+    public interface TargetChecker {
+        boolean check(CombatEntityAPI entity);
+    }
+
+    public static class CommonChecker implements TargetChecker {
+        public int side;
+
+        public CommonChecker() {
+            side = 100;
+        }
+        public CommonChecker(CombatEntityAPI owner) {
+            side = owner.getOwner();
+        }
+
+        public void setSide(int side) {
+            this.side = side;
+        }
+
+        @Override
+        public boolean check(CombatEntityAPI entity) {
+            return entity != null && Global.getCombatEngine().isEntityInPlay(entity) && entity.getHitpoints() > 0 && entity.getOwner() != side && entity.getOwner() != 100;
+        }
     }
 }

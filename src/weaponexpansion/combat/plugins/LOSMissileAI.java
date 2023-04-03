@@ -10,8 +10,8 @@ public class LOSMissileAI extends BaseMissileAI {
     private Vector2f targetVelLastFrame = new Vector2f();
     protected float N = 3f;
 
-    public LOSMissileAI(MissileAPI missile, float maxSeekRange) {
-        super(missile, maxSeekRange);
+    public LOSMissileAI(MissileAPI missile, float maxSeekRangeFactor) {
+        super(missile, maxSeekRangeFactor);
     }
 
     private void pursueTargetLOS(float amount) {
@@ -39,7 +39,7 @@ public class LOSMissileAI extends BaseMissileAI {
 
         // a = v^2 / r = w^2 r ==> w = a / v
         float acc = (a.length() + normalizer) * ((Utils.isClockwise(missile.getVelocity(), a) ? -1f : 1f));
-        float w = acc / missile.getMoveSpeed();
+        float w = acc / missile.getVelocity().length();
 
         // Don't let the PN algorithm intercept at too steep of an angle. This
         // also handles shots that were fired backwards.

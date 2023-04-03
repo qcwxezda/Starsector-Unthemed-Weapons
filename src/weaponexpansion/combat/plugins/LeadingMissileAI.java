@@ -18,8 +18,8 @@ public class LeadingMissileAI extends BaseMissileAI {
         }
     }
 
-    public LeadingMissileAI(MissileAPI missile, float maxSeekRange) {
-        super(missile, maxSeekRange);
+    public LeadingMissileAI(MissileAPI missile, float maxSeekRangeFactor) {
+        super(missile, maxSeekRangeFactor);
     }
 
     private SmoothTurnData smoothTurnExt(float targetAngle, boolean calculateResultingOffset) {
@@ -225,7 +225,8 @@ public class LeadingMissileAI extends BaseMissileAI {
 
         Vector2f interceptor = getInterceptionLoS();
         float interceptAngle = Misc.getAngleInDegrees(interceptor);
-        float velAngle = missile.getMoveSpeed() > 0f ? Misc.getAngleInDegrees(missile.getVelocity()) : missile.getFacing();
+        float moveSpeed = missile.getVelocity().length() + 0.01f;
+        float velAngle = moveSpeed > 0f ? Misc.getAngleInDegrees(missile.getVelocity()) : missile.getFacing();
 
         float velError = Utils.angleDiff(interceptAngle, velAngle);
 
@@ -239,7 +240,7 @@ public class LeadingMissileAI extends BaseMissileAI {
                 missile.giveCommand(turnData.command);
             }
             else {
-                missile.giveCommand(smoothTurnExt(interceptAngle + velError * Math.min(1f, interceptor.length() / missile.getMoveSpeed()), false).command);
+                missile.giveCommand(smoothTurnExt(interceptAngle + velError * Math.min(1f, interceptor.length() / moveSpeed), false).command);
             }//turnTowardTarget(interceptAngle + velError);
         }
         else if (Math.abs(velError) > 3f) {

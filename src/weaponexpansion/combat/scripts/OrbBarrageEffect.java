@@ -1,9 +1,9 @@
 package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.util.Misc;
 import weaponexpansion.combat.plugins.AngleApproachMissileAI;
 
+// TODO: Why does the AI autofire reset this weapon's cooldown if it vents in the middle of firing, but not the player?
 @SuppressWarnings("unused")
 public class OrbBarrageEffect implements EveryFrameWeaponEffectPlugin, OnFireEffectPlugin {
 
@@ -20,7 +20,7 @@ public class OrbBarrageEffect implements EveryFrameWeaponEffectPlugin, OnFireEff
         }
 
         AngleApproachMissileAI ai = (AngleApproachMissileAI)  missile.getUnwrappedMissileAI();
-        ai.setApproachDir(Misc.getUnitVectorAtDegreeAngle(missile.getFacing() + offset));
+        ai.setApproachOffset(offset);
         offset -= Math.signum(offset) * (180f / (weapon.getSpec().getBurstSize() - 1));
         offset *= -1;
     }

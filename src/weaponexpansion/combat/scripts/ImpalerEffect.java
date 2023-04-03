@@ -1,13 +1,13 @@
 package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.util.Misc;
 import weaponexpansion.combat.plugins.AngleApproachMissileAI;
+import weaponexpansion.util.Utils;
 
 @SuppressWarnings("unused")
 public class ImpalerEffect implements EveryFrameWeaponEffectPlugin, OnFireEffectPlugin {
 
-    private float offset = 90f;
+    private float offset = 60f;
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
         if (!(proj instanceof MissileAPI)) {
@@ -20,13 +20,13 @@ public class ImpalerEffect implements EveryFrameWeaponEffectPlugin, OnFireEffect
         }
 
         AngleApproachMissileAI ai = (AngleApproachMissileAI)  missile.getUnwrappedMissileAI();
-        ai.setApproachDir(Misc.getUnitVectorAtDegreeAngle(missile.getFacing() + offset));
-        offset -= 45f;
+        ai.setApproachOffset( offset + Utils.randBetween(-10f, 10f));
+        offset -= 30f;
     }
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
         // Reset offset after each set of shots
-        offset = 90f;
+        offset = 60f;
     }
 }

@@ -7,6 +7,7 @@
       <root url="jar://$PROJECT_DIR$/../../starsector-core/log4j-1.2.9.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../starsector-core/starfarer_obf.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../starsector-core/fs.common_obf.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../starsector-core/json.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -7,6 +7,7 @@ import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
+import weaponexpansion.ModPlugin;
 import weaponexpansion.combat.plugins.Action;
 import weaponexpansion.combat.plugins.ActionPlugin;
 
@@ -18,8 +19,7 @@ import java.util.List;
 public class EnergyTorpedoEffect implements OnHitEffectPlugin {
 
     int numSpawns = 5;
-    float minSpawnDistance = 60f, maxSpawnDistance = 120f, minDelay = 0.33f, maxDelay = 0.67f, angleDeviation = 20f;
-    final String dummyWeapon = "wpnxt_dummy";
+    float minSpawnDistance = 60f, maxSpawnDistance = 120f, minDelay = 0.67f, maxDelay = 1.33f, angleDeviation = 20f;
     static final Color empCore = new Color(180, 200, 255);
     static final Color empFringe = new Color(100, 120, 255);
 
@@ -35,6 +35,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
         // Shouldn't be null, but just in case
         if (plugin == null) return;
 
+        String dummyWeapon = ModPlugin.dummyMissileWeapon;
         // Set the dummy spec to the appropriate values
         MissileSpecAPI dummyProjSpec = (MissileSpecAPI) Global.getSettings().getWeaponSpec(dummyWeapon).getProjectileSpec();
         dummyProjSpec.getDamage().setDamage(proj.getBaseDamageAmount());

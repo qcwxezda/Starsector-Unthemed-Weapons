@@ -1,0 +1,40 @@
+{
+  "id":"wpnxt_ionrocket_shot",
+  "specClass":"missile",
+  "missileType":"ROCKET",
+  "sprite":"graphics/missiles/wpnxt_ionrocket.png",
+  "size":[11,21],
+  "center":[6,10],
+  "collisionRadius":13,
+  "collisionClass":"MISSILE_FF",
+  "explosionColor":[166,232,214,255],  # purely visual, will get a white additively blended core on top of this color
+  "explosionRadius":80, # purely visual,
+  "flameoutTime":1, # total time from flameout to full fadeout
+  "noEngineGlowTime":0.5, # time spent without the engine glow being rendered
+  "fadeTime":0.5, # fadeout duration
+  "engineSpec":{"turnAcc":0,
+    "turnRate":0,
+    "acc":500,
+    "dec":0},
+  "engineSlots":[{"id":"ES1",
+    "loc":[-12, 0],
+    "style":"CUSTOM",
+    "styleSpec":{
+      "mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
+      "engineColor":[180,240,200,255],
+      "contrailDuration":1,
+      "contrailWidthMult":2,
+      "contrailWidthAddedFractionAtEnd":2,  # can be negative. makes trail spread out/narrow at the end
+      "contrailMinSeg":5, # min segment length, in pixels
+      "contrailMaxSpeedMult":.0f,
+      "contrailAngularVelocityMult":0.5f,
+      "contrailSpawnDistMult":0f, # how far away from engine it starts
+      "contrailColor":[80,120,90,100],
+      "type":"SMOKE" # GLOW or SMOKE; additive or regular blend mode
+    },
+    "width":5.0,
+    "length":40.0,
+    "angle":180.0}],
+  "onHitEffect":"weaponexpansion.combat.scripts.IonRocketEffect"
+}
+
