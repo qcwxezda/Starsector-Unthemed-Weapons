@@ -12,16 +12,36 @@ public abstract class BaseMissileAI implements MissileAIPlugin, GuidedMissileAI 
     protected CombatEntityAPI target;
     protected MissileAPI missile;
     protected final float maxSeekRange;
-    private final boolean canTargetFighters;
-    private final IntervalUtil findTargetInterval = new IntervalUtil(0.2f, 0.3f);
+    protected final boolean canTargetFighters;
+    protected final IntervalUtil findTargetInterval = new IntervalUtil(0.2f, 0.3f);
+    protected final Utils.TargetChecker validTargetChecker = new Utils.TargetChecker() {
+        @Override
+        public boolean check(CombatEntityAPI entity) {
+            if (entity == null) return false;
+            if (!Global.getCombatEngine().isEntityInPlay(entity)) return false;
+            if (entity.getOwner() == missile.getOwner() || entity.getOwner() == 100) {
+                return false;
+            }
 
-    public BaseMissileAI(MissileAPI missile, float maxSeekRange) {
+            // This AI doesn't seek non-ship targets, so a non-ship target would have to have been
+            // forced via setTarget; assume it's valid.
+            if (!(entity instanceof ShipAPI)) return true;
+
+            ShipAPI ship = (ShipAPI) entity;
+            return ship.isAlive() && !ship.isShuttlePod();
+        }
+    };
+
+    /** maxSeekRangeFactor is a fraction of the missile's maximum range. */
+    public BaseMissileAI(MissileAPI missile, float maxSeekRangeFactor) {
         this.missile = missile;
-        this.maxSeekRange = maxSeekRange;
+        maxSeekRange = maxSeekRangeFactor * missile.getMaxRange();
         canTargetFighters =
                 missile.getWeapon() != null && missile.getWeapon().hasAIHint(WeaponAPI.AIHints.ANTI_FTR);
     }
 
+    /** If correctVelocity is true, will try to steer slightly off the targetAngle to correct the velocity
+     *  perpendicular to targetAngle. */
     protected void smoothTurn(float targetAngle, boolean clockwise) {
         float facingAngle = missile.getFacing();
         float turnSpeed = missile.getAngularVelocity();
@@ -51,29 +71,17 @@ public abstract class BaseMissileAI implements MissileAIPlugin, GuidedMissileAI 
     private ShipAPI findNewTarget() {
         if (missile.getSource() != null) {
             ShipAPI sourceTarget = missile.getSource().getShipTarget();
-            if (sourceTarget != null && Misc.getDistance(missile.getLocation(), sourceTarget.getLocation()) <= maxSeekRange + sourceTarget.getCollisionRadius()) {
+            if (validTargetChecker.check(sourceTarget) && Misc.getDistance(missile.getLocation(), sourceTarget.getLocation()) <= maxSeekRange + sourceTarget.getCollisionRadius()) {
                 return sourceTarget;
             }
         }
-        return Utils.getClosestEnemyShip(
+        return Utils.getClosestEntity(
                 missile.getLocation(),
-                missile.getOwner(),
                 canTargetFighters ? ShipAPI.HullSize.FIGHTER : ShipAPI.HullSize.FRIGATE,
                 maxSeekRange,
                 true,
-                null
+                validTargetChecker
         );
-    }
-
-    private boolean isTargetInvalid(CombatEntityAPI entity) {
-        if (entity == null) return true;
-        if (!Global.getCombatEngine().isEntityInPlay(entity)) return true;
-        // This AI doesn't seek non-ship targets, so a non-ship target would have to have been
-        // forced via setTarget; assume it's valid.
-        if (!(entity instanceof ShipAPI)) return false;
-
-        ShipAPI ship = (ShipAPI) entity;
-        return ship.isHulk() || ship.equals(missile.getSource()) || !ship.isAlive();
     }
 
     public Vector2f getInterceptionLoS() {
@@ -104,11 +112,11 @@ public abstract class BaseMissileAI implements MissileAIPlugin, GuidedMissileAI 
         }
 
         findTargetInterval.advance(amount);
-        if (isTargetInvalid(target) && findTargetInterval.intervalElapsed()) {
-            target = findNewTarget();
+        if (!validTargetChecker.check(target) && findTargetInterval.intervalElapsed()) {
+            setTarget(findNewTarget());
         }
 
-        if (isTargetInvalid(target)) {
+        if (!validTargetChecker.check(target)) {
             return false;
         }
 

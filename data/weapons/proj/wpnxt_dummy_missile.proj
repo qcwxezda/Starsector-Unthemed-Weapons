@@ -1,0 +1,23 @@
+{
+  "id":"wpnxt_dummy_missile",
+  "specClass":"missile",
+  "missileType":"NO_AI",
+  "sprite":"",
+  "size":[0,0],
+  "center":[0,0],
+  "collisionRadius":0,
+  "engineSpec":{"turnAcc":0,
+    "turnRate":0,
+    "acc":0,
+    "dec":0},
+  "renderTargetIndicator":false,
+  "collisionClass":"NONE",
+  "collisionClassByFighter":"NONE",
+  "length":30,
+  "width":5,
+  "fadeTime":0,
+  "fringeColor":[255,255,255,0],
+  "coreColor":[255,255,255,0],
+  "textureScrollSpeed":64.0,
+  "pixelsPerTexel":5.0
+}
