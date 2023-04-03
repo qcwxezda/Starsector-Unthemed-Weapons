@@ -5,6 +5,7 @@
   "collisionClass":"RAY",
   "collisionClassByFighter":"RAY_FIGHTER",
   "onHitEffect":"weaponexpansion.combat.scripts.VoidCannonShotEffect",
+  "onFireEffect":"weaponexpansion.combat.scripts.VoidCannonEffect",
   "length":50.0,
   "width":40,
   "fadeTime":0.25,

@@ -12,8 +12,8 @@
   "barrelMode":"ALTERNATING",
   "animationType":"SMOKE",
   "displayArcRadius":500,
-  "smokeSpec":{"particleSizeMin":15.0,
-    "particleSizeRange":20.0,
+  "smokeSpec":{"particleSizeMin":10.0,
+    "particleSizeRange":15.0,
     "cloudParticleCount":4,
     "cloudDuration":1.25,
     "cloudRadius":10.0,
@@ -21,7 +21,7 @@
     "blowbackDuration":1.0,
     "blowbackLength":8.0,
     "blowbackSpread":6.0,
-    "particleColor":[100,100,100,200]},
+    "particleColor":[85,85,85,200]},
   "projectileSpecId":"wpnxt_clustermine_shot",
-  "fireSoundTwo":"proximity_charge_launcher_fire"
+  "fireSoundTwo":"wpnxt_clustermine_fire"
 }

@@ -1,47 +1,45 @@
 {
   "id":"wpnxt_clustermine_spawn",
   "specClass":"missile",
-  "missileType":"PHASE_MINE",
-  "sprite":"graphics/missiles/phase_charge_base.png",
-  "glowSprite":"graphics/missiles/phase_charge_glow.png",
-  "glowColor":[190,60,255,255],
-  "size":[16,16],
-  "center":[8,8],
-  "collisionRadius":12,
+  "missileType":"PHASE_CHARGE",
+  "sprite":"graphics/missiles/wpnxt_clustermine.png",
+  "size":[10,10],
+  "center":[5,5],
+  "collisionRadius":10,
   "collisionClass":"MISSILE_FF",
-  "explosionColor":[148,0,211,255],  # purely visual, will get a white additively blended core on top of this color
-  "explosionRadius":150, # purely visual
+  "explosionColor":[255, 180, 110, 255],  # purely visual, will get a white additively blended core on top of this color
+  "explosionRadius":75, # purely visual
   "flameoutTime":0.1, # total time from flameout to full fadeout
   "fadeTime":0.1, # fadeout duration
   "noEngineGlowTime":0.05, # time spent without the engine glow being rendered
   "engineSpec":{"turnAcc":0,
     "turnRate":0,
     "maxSpeed":100,
-    "acc":250,
-    "dec":0},
+    "acc":100,
+    "dec":100},
   "behaviorSpec":{"behavior":"PROXIMITY_FUSE",
     "range":50,
     "slowToMaxSpeed":true,
-    "delay": 2,
+    "delay": 7,
     "explosionSpec":{"duration":0.12f,
-      "radius":150,
-      "coreRadius":75, # full damage within core radius
+      "radius":120,
+      "coreRadius":80, # full damage within core radius
       "collisionClass":PROJECTILE_FF,
       "collisionClassByFighter":PROJECTILE_FIGHTER,
       "particleSizeMin":3.0,
       "particleSizeRange":3.0,
       "particleDuration":1,
       "particleCount":50,
-      "particleColor":[148,70,211,255],
-      "explosionColor":[155,125,255,255],
+      "particleColor":[255, 125, 25, 255],
+      "explosionColor":[255, 180, 110, 255],
       "useDetailedExplosion":true,
       "useDetailedExplosionColorAlpha":true,
       "detailedExplosionRadius":100,
       "detailedExplosionFlashRadius":250,
       "detailedExplosionFlashDuration":0.5,
-      "detailedExplosionFlashColorFringe":[200,125,255,255],
-      "detailedExplosionFlashColorCore":[155,155,155,255],
-      "sound":"prox_charge_explosion"},
+      "detailedExplosionFlashColorFringe":[255, 125, 25, 255],
+      "detailedExplosionFlashColorCore":[255, 200, 150, 255],
+      "sound":"wpnxt_mine_strike"}
   }
 }
 

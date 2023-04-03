@@ -24,15 +24,13 @@ public class OrbOnHitEffect implements OnHitEffectPlugin {
             float emp = 2f * projectile.getEmpAmount();
             float dam = 0;
             engine.spawnEmpArcPierceShields(
-                    projectile.getSource(), point, target, target,
+                    projectile.getSource(), point, projectile, target,
                     DamageType.ENERGY,
                     dam, // damage
                     emp, // emp
                     100000f, // max range
                     "tachyon_lance_emp_impact",
                     20f, // thickness
-                    //new Color(25,100,155,255),
-                    //new Color(255,255,255,255)
                     new Color(125, 125, 100, 255),
                     new Color(255, 255, 255, 255)
             );

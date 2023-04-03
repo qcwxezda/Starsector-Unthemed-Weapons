@@ -1,0 +1,26 @@
+{
+  "id":"wpnxt_ionrocket",
+  "specClass":"projectile",
+  "type":"MISSILE",
+  "size":"MEDIUM",
+  "turretSprite":"graphics/weapons/missile/wpnxt_ionrocket_turret.png",
+  "hardpointSprite":"graphics/weapons/missile/wpnxt_ionrocket_hardpoint.png",
+  "hardpointOffsets":[30, -6, 30, 6],
+  "turretOffsets":[25, -6, 25, 6],
+  "hardpointAngleOffsets":[0, 0],
+  "turretAngleOffsets":[0, 0],
+  "barrelMode":"ALTERNATING",
+  "animationType":"SMOKE",
+  "smokeSpec":{"particleSizeMin":8.0,
+    "particleSizeRange":12.0,
+    "cloudParticleCount":4,
+    "cloudDuration":1.2,
+    "cloudRadius":10.0;
+    "blowbackParticleCount":3,
+    "blowbackDuration":0.6,
+    "blowbackLength":10.0,
+    "blowbackSpread":15.0,
+    "particleColor":[45,180,120,95]},
+  "projectileSpecId":"wpnxt_ionrocket_shot",
+  "fireSoundTwo":"wpnxt_ionrocket_fire"
+}
