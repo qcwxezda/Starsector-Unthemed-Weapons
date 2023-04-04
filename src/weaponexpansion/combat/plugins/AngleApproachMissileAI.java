@@ -7,7 +7,7 @@ import com.fs.starfarer.api.combat.CombatEntityAPI;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.util.Utils;
 
-public class AngleApproachMissileAI extends BaseMissileAI {
+public class AngleApproachMissileAI extends BaseGuidedMissileAI {
 
     private float approachDir = 0f, approachOffset = 0f;
     private final float circleDist;

@@ -7,7 +7,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.util.Utils;
 
-public abstract class BaseMissileAI implements MissileAIPlugin, GuidedMissileAI {
+public abstract class BaseGuidedMissileAI implements MissileAIPlugin, GuidedMissileAI {
 
     protected CombatEntityAPI target;
     protected MissileAPI missile;
@@ -33,7 +33,7 @@ public abstract class BaseMissileAI implements MissileAIPlugin, GuidedMissileAI 
     };
 
     /** maxSeekRangeFactor is a fraction of the missile's maximum range. */
-    public BaseMissileAI(MissileAPI missile, float maxSeekRangeFactor) {
+    public BaseGuidedMissileAI(MissileAPI missile, float maxSeekRangeFactor) {
         this.missile = missile;
         maxSeekRange = maxSeekRangeFactor * missile.getMaxRange();
         canTargetFighters =

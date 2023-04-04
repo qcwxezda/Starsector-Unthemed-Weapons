@@ -1,0 +1,46 @@
+{
+  "id":"wpnxt_spike_shot",
+  "specClass":"missile",
+  "missileType":"MISSILE",
+  "sprite":"graphics/missiles/wpnxt_spike.png",
+  "size":[8,57],
+  "center":[4,28],
+  "collisionRadius":8,
+  "collisionClass":"MISSILE_NO_FF",
+  "explosionColor":[125,150,255,255],  # purely visual, will get a white additively blended core on top of this color
+  "explosionRadius":50, # purely visual
+  "reduceDamageWhileFading":true,
+  "useHitGlowWhenDestroyed":false,
+  "fizzleOnReachingWeaponRange":true,
+  "alwaysAccelerate":true,
+  "dudProbabilityOnFlameout":0,
+  "armingTime":0,
+  "flameoutTime":0.01,
+  "noEngineGlowTime":0,
+  "fadeTime":0.25,
+  "engineSpec":{"turnAcc":500,
+    "turnRate":85,
+    "acc":10000,
+    "dec":2000},
+  "engineSlots":[{"id":"ES1",
+    "loc":[0, 0],
+    "style":"CUSTOM",
+    "styleSpec":{
+      "mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
+      "engineColor":[44,76,115,150],
+      "glowSizeMult":0,
+      "glowAlternateColor":[87,151,229,0],
+      "contrailDuration":0.8,
+      "contrailWidthMult":1,
+      "contrailWidthAddedFractionAtEnd":-1,  # can be negative. makes trail spread out/narrow at the end
+      "contrailMinSeg":16, # min segment length, in pixels
+      "contrailMaxSpeedMult":0f,
+      "contrailAngularVelocityMult":5f,
+      "contrailSpawnDistMult":0, # how far away from engine it starts
+      "contrailColor":[87,151,229,255],
+      "type":"SMOKE" # GLOW or SMOKE; additive or regular blend mode
+    },
+    "width":8,
+    "length":75,
+    "angle":180.0}],
+}
