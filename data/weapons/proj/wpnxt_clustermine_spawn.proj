@@ -3,10 +3,12 @@
   "specClass":"missile",
   "missileType":"PHASE_CHARGE",
   "sprite":"graphics/missiles/wpnxt_clustermine.png",
-  "size":[10,10],
-  "center":[5,5],
-  "collisionRadius":10,
+  "size":[12,12],
+  "center":[6,6],
+  "collisionRadius":12,
   "collisionClass":"MISSILE_FF",
+  "glowColor":[100,50,50,60],
+  "glowRadius":21,
   "explosionColor":[255, 180, 110, 255],  # purely visual, will get a white additively blended core on top of this color
   "explosionRadius":75, # purely visual
   "flameoutTime":0.1, # total time from flameout to full fadeout
@@ -14,11 +16,10 @@
   "noEngineGlowTime":0.05, # time spent without the engine glow being rendered
   "engineSpec":{"turnAcc":0,
     "turnRate":0,
-    "maxSpeed":100,
-    "acc":100,
-    "dec":100},
+    "acc":75,
+    "dec":75},
   "behaviorSpec":{"behavior":"PROXIMITY_FUSE",
-    "range":50,
+    "range":40,
     "slowToMaxSpeed":true,
     "delay": 7,
     "explosionSpec":{"duration":0.12f,

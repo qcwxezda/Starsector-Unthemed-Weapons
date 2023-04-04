@@ -6,7 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import weaponexpansion.util.Utils;
 
-public class LOSMissileAI extends BaseMissileAI {
+public class LOSMissileAI extends BaseGuidedMissileAI {
     private Vector2f targetVelLastFrame = new Vector2f();
     protected float N = 3f;
 
