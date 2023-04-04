@@ -1,16 +1,17 @@
 package weaponexpansion;
 
 import com.fs.starfarer.api.BaseModPlugin;
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.PluginPick;
 import com.fs.starfarer.api.campaign.CampaignPlugin;
 import com.fs.starfarer.api.combat.MissileAIPlugin;
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.combat.ai.ProximityFuseAI;
-import weaponexpansion.combat.plugins.AngleApproachMissileAI;
-import weaponexpansion.combat.plugins.LOSMissileAI;
-import weaponexpansion.combat.plugins.LeadingMissileAI;
-import weaponexpansion.combat.plugins.ProximityMineRandomDelay;
+import com.fs.starfarer.api.loading.MissileSpecAPI;
+import com.fs.starfarer.api.loading.ProjectileSpecAPI;
+import com.fs.starfarer.combat.ai.missile.MirvAI;
+import org.json.JSONObject;
+import weaponexpansion.combat.plugins.*;
 
 import java.util.*;
 
@@ -67,6 +68,32 @@ public class ModPlugin extends BaseModPlugin {
             @Override
             public MissileAIPlugin make(MissileAPI missile) {
                 return new ProximityMineRandomDelay(missile, 0.2f);
+            }
+        });
+
+        addDumbfireMirv("wpnxt_clusterminelauncher", "wpnxt_clustermine_shot");
+        addDumbfireMirv("wpnxt_clusterlauncherbig", "wpnxt_clusterminebig_shot");
+    }
+
+    public void addDumbfireMirv(String weaponSpec, String projSpec) {
+        MissileSpecAPI missileSpec = (MissileSpecAPI) Global.getSettings().getWeaponSpec(weaponSpec).getProjectileSpec();
+        JSONObject clusterBehaviorJSON = missileSpec.getBehaviorJSON();
+        final int numShots = clusterBehaviorJSON.optInt("spawnCount", 0);
+        final float timeToSplit = (float) clusterBehaviorJSON.optDouble("timeToSplit", 0);
+        final float splitArc = (float) clusterBehaviorJSON.optDouble("arc", 0);
+        final boolean evenSpread = clusterBehaviorJSON.optBoolean("evenSpread", false);
+        final String spawnSpec = clusterBehaviorJSON.optString("spawnSpec", "");
+        customMissiles.put(projSpec, new MakeMissilePlugin() {
+            @Override
+            public MissileAIPlugin make(MissileAPI missile) {
+                return new DumbfireTimedMirv(
+                        missile,
+                        spawnSpec,
+                        numShots,
+                        timeToSplit,
+                        splitArc,
+                        evenSpread
+                );
             }
         });
     }

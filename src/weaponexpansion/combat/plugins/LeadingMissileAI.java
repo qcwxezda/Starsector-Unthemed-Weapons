@@ -6,7 +6,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.util.Utils;
 
-public class LeadingMissileAI extends BaseMissileAI {
+public class LeadingMissileAI extends BaseGuidedMissileAI {
 
     private static class SmoothTurnData {
         ShipCommand command;
