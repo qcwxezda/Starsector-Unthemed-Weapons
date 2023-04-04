@@ -46,6 +46,9 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
         if (missile.getVelocity().length() > missile.getMaxSpeed() && slowToMaxSpeed) {
             missile.giveCommand(ShipCommand.DECELERATE);
         }
+        else {
+            missile.giveCommand(ShipCommand.ACCELERATE);
+        }
     }
 
     @Override

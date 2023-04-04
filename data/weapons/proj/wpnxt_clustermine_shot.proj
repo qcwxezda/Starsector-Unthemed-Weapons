@@ -3,44 +3,47 @@
   "specClass":"missile",
   "missileType":"MIRV",
   "sprite":"graphics/missiles/wpnxt_clustermine_dark.png",
-  "size":[14,14],
-  "center":[7,7],
-  "collisionRadius":14,
+  "size":[15,15],
+  "center":[8,8],
+  "collisionRadius":15,
   "collisionClass":"MISSILE_FF",
   "explosionColor":[255,180,110,255],  # purely visual, will get a white additively blended core on top of this color
-  "explosionRadius":100, # purely visual,
+  "explosionRadius":120, # purely visual,
+  "explosionSpec":{"duration":0.1f, # not visual
+    "radius":120,
+    "coreRadius":80, # full damage within core radius
+    "collisionClass":PROJECTILE_FF,
+    "collisionClassByFighter":PROJECTILE_FIGHTER,
+    "particleSizeMin":5.0,
+    "particleSizeRange":3.0,
+    "particleDuration":1,
+    "particleCount":75,
+    "particleColor":[255,180,110,255],
+  },
   "alwaysAccelerate":true,
   "engineSpec":{"turnAcc":0,
     "turnRate":0,
-    "acc":100,
-    "dec":0},
+    "acc":75,
+    "dec":75},
   "behaviorSpec":{"behavior":"MIRV",
-    "splitRange":1000,
+    "timeToSplit":0.5,
+    "spawnCount":3,
+    "spawnSpec":"wpnxt_clusterlauncher_spawn",
+    "evenSpread":false,
+    "arc":45, # Everything below this line is not used
+    "splitRange":0,
     "splitRangeRange":0,
-    "minTimeToSplit":1, # Should match the action delay in ClusterMineEffect
+    "minTimeToSplit":100, # Don't use the native MIRV behavior
     "canSplitEarly":false,
-    "numShots":3,
+    "numShots":3, # This is used for the weapon card, so make sure it matches for MIRVs that spawn MIRVs
     "damage":250, # Use MIRV behavior spec so the damage shows correctly
     "emp":0, # needs to match highlight in weapon_data.csv
     "damageType":HIGH_EXPLOSIVE,
     "hitpoints":200,
-    "evenSpread":false,
-    "arc":60,
     "spreadInaccuracy":5,
     "spreadSpeed":50,
     "spreadSpeedRange":100,
-    "projectileSpec":"wpnxt_clustermine_spawn",
-    "smokeSpec":{"particleSizeMin":10.0,
-      "particleSizeRange":10.0,
-      "cloudParticleCount":6,
-      "cloudDuration":1.0,
-      "cloudRadius":12.0,
-      "blowbackParticleCount":0,
-      "blowbackDuration":0,
-      "blowbackLength":0,
-      "blowbackSpread":0,
-      "particleColor":[100,100,100,200]}
-  },
-  "onFireEffect":"weaponexpansion.combat.scripts.ClusterMineEffect"
+    "projectileSpec":"wpnxt_clustermine_spawn"
+  }
 }
 
