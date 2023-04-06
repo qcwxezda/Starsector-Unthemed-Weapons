@@ -4,9 +4,21 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.util.vector.Vector2f;
+import weaponexpansion.ModPlugin;
 
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.FloatBuffer;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.List;
 
 public class Utils {
 
@@ -302,6 +314,7 @@ public class Utils {
         for (int i = 0; i < Math.min(k, shipsAndMissiles.size()); i++) {
             kNearest.add(shipsAndMissiles.get(i).one);
         }
+
         return kNearest;
     }
 
@@ -358,6 +371,60 @@ public class Utils {
     /** returns f(b) - f(a) */
     public static float applyAtLimits(Function f, float a, float b) {
         return f.apply(b) - f.apply(a);
+    }
+
+    public static boolean doesSegmentHitShield(Vector2f a, Vector2f b, ShieldAPI shield) {
+        if (shield == null) {
+            return false;
+        }
+
+        Vector2f pt = Misc.intersectSegmentAndCircle(a, b, shield.getLocation(), shield.getRadius());
+        return shield.isWithinArc(pt);
+    }
+
+    public static Color interpolateColor(Color c1, Color c2, float t) {
+        int red = (int) ((1-t) * c1.getRed() + t * c2.getRed());
+        int green = (int) ((1-t) * c1.getGreen() + t * c2.getGreen());
+        int blue = (int) ((1-t) * c1.getBlue() + t * c2.getBlue());
+        int alpha = (int) ((1-t) * c1.getAlpha() + t * c2.getAlpha());
+
+        return new Color(red, green, blue, alpha);
+    }
+
+    public static Vector2f randomPointInCircle(Vector2f center, float radius) {
+        float theta = Misc.random.nextFloat() * 2f *  (float) Math.PI;
+        float r = radius * (float) Math.sqrt(Misc.random.nextFloat());
+        return new Vector2f(center.x + r*(float)Math.cos(theta), center.y + r*(float)Math.sin(theta));
+    }
+
+    public static String readFile(String path) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(ModPlugin.class.getResourceAsStream(path))));
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line).append("\n");
+        }
+        return sb.toString();
+    }
+
+    /** Returns a vector in the range [0, 1]x[0, 1] */
+    public static Vector2f toScreenSpace(Vector2f worldCoords, ViewportAPI viewport) {
+        float x = viewport.convertWorldXtoScreenX(worldCoords.x);
+        float y = viewport.convertWorldYtoScreenY(worldCoords.y);
+        float width = viewport.convertWorldWidthToScreenWidth(viewport.getVisibleWidth());
+        float height = viewport.convertWorldHeightToScreenHeight(viewport.getVisibleHeight());
+        return new Vector2f(x/width, y/height);
+    }
+
+    /** 4x4 matrix, translation elements in 3rd dimension, 4th dimension is identity */
+    public static FloatBuffer getProjectionMatrix(ViewportAPI viewport) {
+        float W = viewport.getVisibleWidth();
+        float H = viewport.getVisibleHeight();
+        float llx = viewport.getLLX();
+        float lly = viewport.getLLY();
+        FloatBuffer buf = BufferUtils.createFloatBuffer(16);
+        buf.put(new float[] {2f/W, 0f, -2f*llx/W-1f, 0f, 0f, 2f/H, -2f*lly/H-1f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f}).flip();
+        return buf;
     }
 
     public interface Function {
