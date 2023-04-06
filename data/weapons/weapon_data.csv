@@ -49,8 +49,8 @@ Light Vulcan,wpnxt_minivulcan,0,,100,350,,25,,1,75,1,,,,FRAGMENTATION,1,,,0.125,
 # Large Missile
 Megabloom Projector,wpnxt_energytorpedolarge,4,0.125,15000,1500,,1200,,30,10,30,5,0.033333,1,ENERGY,3000,,,10,,,,,,,,200,200,12,1600,,,DO_NOT_AIM,"strike19, missile19, rare_bp, hist1t, merc",,,,Guided Torpedo,Very Slow,Excellent,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 1200,,,TRUE,31
 Ion Storm GMLRS,wpnxt_orbbarrage,3,0.25,8000,2000,,150,400,50,20,28,150,0.833333,25,ENERGY,60,,1,16.6,25,0.1,6,6,0,0,,500,0,5,350,,,"DO_NOT_AIM,STRIKE,USE_VS_FRIGATES","missile18, strike12, rare_bp, hist1t, merc",,,,Suppression,Fast,Special,,,Hits on hull or armor have a %s chance to spawn a %s EMP damage arc.,50% | 800,,,,34
-Minefield Launcher,wpnxt_clusterlauncherbig,1,0.75,5000,1400,,2000,,,15,20,25,,,HIGH_EXPLOSIVE,,,,8,,,,,,,,100,100,10,500,,,"ANTI_FTR, PD","he12, utility13, rare_bp, hist1t, merc",,,,Anti Fighter (Area),Very Slow,None,,,,,,,TRUE,37
-Heavy Energy Swarmer,wpnxt_spikebarrage,2,0.5,6000,1600,,250,,30,8,25,100,1.2,20,ENERGY,125,,,0.4,,,,,,,,750,300,3,250,,,DO_NOT_AIM,"missile16, rare_bp, hist1t, merc",,,,General,Very Fast,Poor,,,,,,,,38
+Heavy Cluster Launcher,wpnxt_clusterlauncherbig,1,0.75,5000,1400,,2000,,,15,20,25,,,HIGH_EXPLOSIVE,,,,8,,,,,,,,100,100,10,500,,,"ANTI_FTR, PD","he12, utility13, rare_bp, hist1t, merc",,,,Anti Fighter (Area),Very Slow,None,,,,,,,TRUE,37
+Helix Swarm Battery,wpnxt_spikebarrage,2,0.5,6000,1600,,250,,30,8,25,100,1.2,20,ENERGY,125,,,0.4,,,,,,,,750,300,3,250,,,DO_NOT_AIM,"missile16, rare_bp, hist1t, merc",,,,General,Very Fast,Poor,,,,,,,,38
 ,,,,,,,,,,,,,,,,,,,,,
 # Medium Missile
 Bloom Autolauncher,wpnxt_energytorpedomed,3,0.25,2500,1500,,600,,30,15,14,3,0.06667,1,ENERGY,1500,,,7.5,,,,,,,,250,200,8,800,,,DO_NOT_AIM,"strike14, missile14, rare_bp, hist1t, merc",,,,Guided Torpedo,Slow,Excellent,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 600,,,TRUE,30
@@ -63,6 +63,11 @@ Bloom-class Torpedo,wpnxt_energytorpedo,3,0.25,1000,1500,,600,,30,15,2,1,,,ENERG
 Spiker SRM,wpnxt_minispiker,1,0.75,400,1200,,100,,10,45,4,10,1,10,KINETIC,,,,1,5,0.4,,,,,,450,50,3,50,,,"DO_NOT_AIM, DO_NOT_CONSERVE, ANTI_FTR","missile1, kinetic4, rare_bp, merc",,,,Anti Shield,Fast,Good,,,%s of damage is dealt as soft flux.,50%,,,,32
 Cluster Mine Launcher,wpnxt_clusterminelauncher,2,0.5,600,1000,,600,,,30,3,10,,,HIGH_EXPLOSIVE,,,,5,,,,,,,,150,150,10,500,, ,"ANTI_FTR, PD","he4, utility4, rare_bp, merc",,,,Anti Fighter,Very Slow,None,,,,,,,TRUE,35
 ,wpnxt_clusterlauncher_spawn,,,,1200,,250,,,,,,,,HIGH_EXPLOSIVE,,,,,,,,,,,,180,180,5,250,,,SYSTEM,,,,,,,,,,,,,,,35.1
+[TBD],wpnxt_iontorpedo,2,0.5,600,1200,,750,1000,45,15,2,2,,,KINETIC,,,,15,,,,,,,,350,200,4,600,,,"STRIKE, USE_VS_FRIGATES","kinetic1, utility4, strike4, rare_bp, merc",,,,Torpedo,Medium,None,,,EMP damage has a %s chance to arc to any unshielded engine or weapon in the blast radius. Arcs that hit disabled modules deal %s energy damage.,50% | 750,,,TRUE,39
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
 # Unused
 # Chromatic Bolt Carrier,wpnxt_chromaticblaster,2,0.5,6000,800,,300,,,15,25,,,,ENERGY,3000,,0.5,5.5,,,,,,,,200,,,400,,,STRIKE,"energy18, rare_bp, hist1t, merc",,,,General,,,,,"Generates a cloud of unstable energy that deals no damage and passes through inert and small objects. When in close proximity to a ship or fighter, the cloud instantaneously condenses into a volley of %s projectiles that converge on the target and deal %s damage each.
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -8,11 +8,10 @@ import com.fs.starfarer.api.combat.MissileAIPlugin;
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
-import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.combat.ai.missile.MirvAI;
 import org.json.JSONObject;
 import weaponexpansion.combat.plugins.*;
-
+import weaponexpansion.shaders.ParticleShader;
 import java.util.*;
 
 @SuppressWarnings("unused")
@@ -29,6 +28,11 @@ public class ModPlugin extends BaseModPlugin {
             return new PluginPick<>(pluginGen.make(missile), CampaignPlugin.PickPriority.MOD_SPECIFIC);
         }
         return null;
+    }
+
+    @Override
+    public void onApplicationLoad() {
+        ParticleShader.init("shaders/particle.vert", "shaders/particle.frag");
     }
 
     @Override

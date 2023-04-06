@@ -1,0 +1,40 @@
+{
+  "id":"wpnxt_iontorpedo_shot",
+  "specClass":"missile",
+  "missileType":"ROCKET",
+  "sprite":"graphics/missiles/wpnxt_iontorpedo.png",
+  "size":[8,24],
+  "center":[4,12],
+  "collisionRadius":20,
+  "collisionClass":"MISSILE_FF",
+  "flameoutTime":3, # total time from flameout to full fadeout
+  "armingTime":0.5,
+  "noEngineGlowTime":0.5, # time spent without the engine glow being rendered
+  "fadeTime":0.5, # fadeout duration
+  "engineSpec":{"turnAcc":0,
+    "turnRate":0,
+    "acc":500,
+    "dec":0},
+  "engineSlots":[{"id":"ES1",
+    "loc":[-11, 0],
+    "style":"CUSTOM",
+    "styleSpec":{
+      "mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
+      "engineColor":[100,200,200,255],
+      "contrailDuration":1.5,
+      "contrailWidthMult":2,
+      "contrailWidthAddedFractionAtEnd":1,  # can be negative. makes trail spread out/narrow at the end
+      "contrailMinSeg":5, # min segment length, in pixels
+      "contrailMaxSpeedMult":0f,
+      "contrailAngularVelocityMult":0.5f,
+      "contrailSpawnDistMult":0f, # how far away from engine it starts
+      "contrailColor":[100,200,200,50],
+      "glowSizeMult":2,
+      "glowAlternateColor":[50,125,125,255],
+      "type":"GLOW" # GLOW or SMOKE; additive or regular blend mode
+    },
+    "width":8.0,
+    "length":80.0,
+    "angle":180.0}],
+  "onHitEffect":"weaponexpansion.combat.scripts.IonTorpedoEffect"
+}
