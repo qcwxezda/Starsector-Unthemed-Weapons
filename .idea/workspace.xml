@@ -9,38 +9,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Finish cluster mine launcher, add paralyzer (ionrocket)">
-      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clusterminebig_shot.proj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_spike_shot.proj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_clusterlauncher_spawn.wpn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_clusterlauncherbig.wpn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_spikebarrage.wpn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_clusterlauncherbig_hardpoint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_clusterlauncherbig_turret.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_spikebarrage_hardpoint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_spikebarrage_turret.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/orig/clusterminebig.psd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_clusterminebig_fire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/DumbfireTimedMirv.java" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Add heavy energy swamer + minefield launcher">
+      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_iontorpedo_shot.proj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_iontorpedo.wpn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/fx/orig/wpnxt_explosion_sheet.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/missiles/orig/iontorpedo.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_iontorpedo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/Shader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.frag" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.vert" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/ExplosionRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/particles/Particle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleAngle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticlePosition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleSize.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_spike_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_spike_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_clusterminelauncher.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_clusterminelauncher.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/missiles/wpnxt_clustermine_dark.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_clustermine_dark.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/missiles/wpnxt_needle.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_needle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_orbbarrage_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_orbbarrage_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_orbbarrage_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_orbbarrage_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/orbbarrage.psd" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/orig/orbbarrage.psd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/spikebarrage.psd" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/orig/spikebarrage.psd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/AngleApproachMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/AngleApproachMissileAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/BaseMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/BaseGuidedMissileAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/LOSMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/LOSMissileAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/LeadingMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/LeadingMissileAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ClusterMineEffect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +42,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="fs-template" />
         <option value="Class" />
       </list>
     </option>
@@ -313,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680496849837</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Add heavy energy swamer + minefield launcher">
+      <created>1680581728516</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1680581728516</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -340,7 +339,8 @@
     <MESSAGE value="WIP minispiker, add missile AI stuff" />
     <MESSAGE value="WIP cluster mine launcher, add OrbBarrage (Ion Storm GMLRS) and Impaler (Sprawl MRM)" />
     <MESSAGE value="Finish cluster mine launcher, add paralyzer (ionrocket)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finish cluster mine launcher, add paralyzer (ionrocket)" />
+    <MESSAGE value="Add heavy energy swamer + minefield launcher" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add heavy energy swamer + minefield launcher" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
@@ -355,12 +355,6 @@
         <watch expression="target.getHitpoints()" language="JAVA" />
         <watch expression="damageResult" language="JAVA" />
         <watch expression="damageResult.getDamageToHull()" language="JAVA" />
-      </configuration>
-      <configuration name="Application">
-        <watch expression="weapon.getShip()" language="JAVA" />
-        <watch expression="interceptAngle + Math.min(90f, Math.abs(velError)) * Math.signum(velError)" language="JAVA" />
-        <watch expression="w" language="JAVA" />
-        <watch expression="findTargetInterval.elapsed" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
