@@ -383,10 +383,10 @@ public class Utils {
     }
 
     public static Color interpolateColor(Color c1, Color c2, float t) {
-        int red = (int) ((1-t) * c1.getRed() + t * c2.getRed());
-        int green = (int) ((1-t) * c1.getGreen() + t * c2.getGreen());
-        int blue = (int) ((1-t) * c1.getBlue() + t * c2.getBlue());
-        int alpha = (int) ((1-t) * c1.getAlpha() + t * c2.getAlpha());
+        int red = (int) clamp((1-t) * c1.getRed() + t * c2.getRed(), 0f, 255f);
+        int green = (int) clamp((1-t) * c1.getGreen() + t * c2.getGreen(), 0f, 255f);
+        int blue = (int) clamp((1-t) * c1.getBlue() + t * c2.getBlue(), 0f, 255f);
+        int alpha = (int) clamp((1-t) * c1.getAlpha() + t * c2.getAlpha(), 0f, 255f);
 
         return new Color(red, green, blue, alpha);
     }

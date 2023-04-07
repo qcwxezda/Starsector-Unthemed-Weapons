@@ -1,5 +1,6 @@
 package weaponexpansion.combat.plugins;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
@@ -13,7 +14,7 @@ public class ActionPlugin extends BaseEveryFrameCombatPlugin {
 
     private float currentTime;
     private CombatEngineAPI engine;
-    public final static String customDataKey = "wpnxt_PluginKey";
+    public final static String customDataKey = "wpnxt_ActionPlugin";
     private final Queue<ActionItem> actionList = new PriorityQueue<>();
 
     @Override
@@ -37,8 +38,20 @@ public class ActionPlugin extends BaseEveryFrameCombatPlugin {
         currentTime += amount;
     }
 
-    public void queueAction(Action action, float delay) {
-        actionList.add(new ActionItem(action, currentTime + delay));
+    public static void queueAction(Action action, float delay) {
+        ActionPlugin instance = getInstance();
+        if (instance != null) {
+            instance.actionList.add(new ActionItem(action, instance.currentTime + delay));
+        }
+    }
+
+    public static ActionPlugin getInstance() {
+        CombatEngineAPI engine = Global.getCombatEngine();
+        if (engine == null) {
+            return null;
+        }
+
+        return (ActionPlugin) engine.getCustomData().get(customDataKey);
     }
 
     public static class ActionItem implements Comparable<ActionItem> {

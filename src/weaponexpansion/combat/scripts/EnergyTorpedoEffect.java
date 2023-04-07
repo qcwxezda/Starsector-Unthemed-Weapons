@@ -30,10 +30,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
         final DamagingExplosionSpec spec = ((MissileAPI) proj).getSpec().getExplosionSpec();
         List<CombatEntityAPI> thisAsList = Collections.singletonList((CombatEntityAPI) proj);
 
-        ActionPlugin plugin = (ActionPlugin) engine.getCustomData().get(ActionPlugin.customDataKey);
-
-        // Shouldn't be null, but just in case
-        if (plugin == null) return;
+        //ActionPlugin plugin = (ActionPlugin) engine.getCustomData().get(ActionPlugin.customDataKey);
 
         String dummyWeapon = ModPlugin.dummyMissileWeapon;
         // Set the dummy spec to the appropriate values
@@ -55,7 +52,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
         dummyProj.setMinePrimed(true);
         dummyProj.setUntilMineExplosion(0f);
         dummyProj.setMineExplosionRange(((MissileAPI) proj).getSpec().getExplosionSpec().getRadius() + maxSpawnDistance);
-        plugin.queueAction(new Action() {
+        ActionPlugin.queueAction(new Action() {
             @Override
             public void perform() {
                 engine.removeEntity(dummyProj);
@@ -72,14 +69,14 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
             Vector2f.add(spawnLoc, dirVec, spawnLoc);
             final float delay = minDelay + Misc.random.nextFloat() * (maxDelay - minDelay);
 
-            plugin.queueAction(new Action() {
+            ActionPlugin.queueAction(new Action() {
 
                 @Override
                 public void perform() {
                     engine.spawnEmpArcVisual(pt, null, spawnLoc, null, 5f, empFringe, empCore);
                 }
             }, delay / 2f);
-            plugin.queueAction(new Action() {
+            ActionPlugin.queueAction(new Action() {
                 @Override
                 public void perform() {
                     engine.spawnDamagingExplosion(spec, proj.getSource(), spawnLoc);

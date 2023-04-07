@@ -23,9 +23,9 @@ public class ParticleSystem extends BaseCombatLayeredRenderingPlugin {
             0f, 0f,
             0f, 1f,
             1f, 0f,
-            1f, 0f,
+            //1f, 0f,
             1f, 1f,
-            0f, 1f
+            //0f, 1f
     };
 
     static {
@@ -107,7 +107,7 @@ public class ParticleSystem extends BaseCombatLayeredRenderingPlugin {
                 GL20.glUniform4f(ParticleShader.tintColorLoc, color[0], color[1], color[2], color[3]);
                 GL20.glUniform1f(ParticleShader.angleLoc, particle.angle.theta * Misc.RAD_PER_DEG);
                 GL20.glUniformMatrix4(ParticleShader.projectionLoc, true, Utils.getProjectionMatrix(viewport));
-                GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 6);
+                GL11.glDrawArrays(GL11.GL_TRIANGLE_STRIP, 0, 4);
                 GL30.glBindVertexArray(0);
             }
         }
