@@ -12,6 +12,9 @@ import com.fs.starfarer.combat.ai.missile.MirvAI;
 import org.json.JSONObject;
 import weaponexpansion.combat.plugins.*;
 import weaponexpansion.shaders.ParticleShader;
+import weaponexpansion.shaders.ParticleShader2;
+import weaponexpansion.shaders.Shader;
+
 import java.util.*;
 
 @SuppressWarnings("unused")
@@ -33,6 +36,7 @@ public class ModPlugin extends BaseModPlugin {
     @Override
     public void onApplicationLoad() {
         ParticleShader.init("shaders/particle.vert", "shaders/particle.frag");
+        ParticleShader2.init("shaders/part.vert", "shaders/part.frag");
     }
 
     @Override
