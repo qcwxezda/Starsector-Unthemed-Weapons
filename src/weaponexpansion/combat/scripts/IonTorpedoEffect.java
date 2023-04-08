@@ -27,8 +27,8 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
 
     private static final float[] coreColorIn = new float[] {1f, 1f, 1f, 0.5f};
     private static final float[] coreColorOut = new float[] {-1f, -1f, -1f, -0.3f};
-    private static final float[] colorIn = new float[] {0.588f, 1f, 0.902f, 0.098f};
-    private static final float[] colorOut = new float[] {0f, -0.2f, -0.2f, 0f};
+    private static final float[] colorIn = new float[] {0.588f, 1f, 0.902f, 1f};
+    private static final float[] colorOut = new float[] {0.5f, 0.5f, 0.5f, 1f};
     private static final float[] ringColorIn = new float[] {0.784f, 1f, 0.902f, 1f};
     private static final float[] ringColorOut = new float[] {0.784f, 1f, 0.902f, 0f};
 
@@ -55,17 +55,17 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
 //        ParticleSize ringSize = new ParticleSize(200f, 550f, -370f, 250f, 50f, 50f);
 //        part.addParticles(7, Global.getSettings().getSprite("misc", "wpnxt_explosion_ring"), ringPos, ringAngle, ringSize, 1.5f, 0.5f, ringColorIn, ringColorOut);
 //        combatEngine.addLayeredRenderingPlugin(part).getLocation().set(pt);
-        ParticleEngine.Cluster coreParticles = ParticleEngine.makeParticleCluster(50, Global.getSettings().getSprite("systemMap", "radar_entity"), 1f, 2f);
-        coreParticles.setColorData(coreColorIn, coreColorOut, 0.01f);
+        ParticleEngine.Cluster coreParticles = ParticleEngine.initializeParticles(50, Global.getSettings().getSprite("systemMap", "radar_entity"));
+        coreParticles.setColorData(coreColorIn, coreColorOut);
         coreParticles.setPositionData(pt, new Vector2f(), new Vector2f());
         coreParticles.setSizeData(30f, 60f, 50f, 100f, -50f, -100f);
         coreParticles.setPositionSpreadData(30f, 20f, 20f);
         coreParticles.setRadialVelocity(-20f, -10f);
         coreParticles.setRadialAcceleration(10f, 20f);
         coreParticles.setAngleData(0f, 360f, -30f, 30f, -30f, 30f);
-        coreParticles.generate();
-        ParticleEngine.Cluster explosionParticles = ParticleEngine.makeParticleCluster(150, Global.getSettings().getSprite("systemMap", "radar_entity"), 2f, 3f);
-        explosionParticles.setColorData(colorIn, colorOut, 0.01f);
+        ParticleEngine.generateParticles(coreParticles);
+        ParticleEngine.Cluster explosionParticles = ParticleEngine.initializeParticles(150, Global.getSettings().getSprite("systemMap", "radar_entity"));
+        explosionParticles.setColorData(colorIn, colorOut);
         explosionParticles.setPositionData(pt, new Vector2f(), new Vector2f());
         explosionParticles.setSizeData(150f, 250f, 120f, 180f, -90f, -120f);
         explosionParticles.setPositionSpreadData(50f, 30f, 30f);
@@ -73,20 +73,24 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
         explosionParticles.setRadialAcceleration(-25f, -25f);
         explosionParticles.setAngleData(0f, 360f, -50f, 50f, -50f, 50f);
         //explosionParticles.generate();
-        ParticleEngine.Cluster ringParticles =  ParticleEngine.makeParticleCluster(10, Global.getSettings().getSprite("misc", "wpnxt_explosion_ring"), 1.5f, 2f);
-        ringParticles.setColorData(ringColorIn, ringColorOut, 0.15f);
+        ParticleEngine.Cluster ringParticles =  ParticleEngine.initializeParticles(10, Global.getSettings().getSprite("misc", "wpnxt_explosion_ring"));
+        ringParticles.setColorData(ringColorIn, ringColorOut);
         ringParticles.setPositionData(pt, new Vector2f(), new Vector2f());
         ringParticles.setSizeData(100f, 200f, 400f, 500f, -350f, -250f);
-        ringParticles.generate();
-        ParticleEngine.Cluster test = ParticleEngine.makeParticleCluster(1000, Global.getSettings().getSprite("misc", "__explosion1"), 2f, 2.5f);
+        ParticleEngine.generateParticles(ringParticles);
+        ParticleEngine.Cluster test = ParticleEngine.initializeParticles(100, Global.getSettings().getSprite("misc", "__explosion1"));
+        test.setLife(3f, 6f);
         test.setPositionData(pt, new Vector2f(), new Vector2f());
-        test.setPositionSpreadData(100f, 20f, 20f);
-        test.setSizeData(150f, 300f, 0, 0, 0, 0);
-        test.setSinusoidalMotionX(0f, 200f, 1f, 2f, 0f, 360f);
-        test.setSinusoidalMotionY(0f, 200f, 1f, 2f, 0f, 360f);
-        test.setRadialRevolution(0f, 360f, -10f, 10f, 0f, 0f);
-        test.setColorData(colorIn, colorOut, 0.1f);
-        test.generate();
+        test.setPositionSpreadData(100f, 300f, 20f);
+        test.setSizeData(100f, 200f, 30, 40, 40, 40);
+        test.setAngleData(0f, 360f, -100f, 100f, -200f, 200f);
+//        test.setSinusoidalMotionX(0f, 200f, 1f, 2f, 0f, 360f);
+//        test.setSinusoidalMotionY(0f, 200f, 1f, 2f, 0f, 360f);
+        test.setRadialRevolution(0f, 360f, -100f, 100f, 0f, 0f);
+        test.setColorData(colorIn, colorOut);
+        test.setColorSpreadData(new float[] {0f, 0f, 0f, 0f}, new float[] {0f, 0f, 0f, 0f});
+        test.setFade(1f, 1f, 1f, 1f);
+        ParticleEngine.generateParticles(test);
 
 
         for (int i = 0; i < 15; i++) {

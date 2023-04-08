@@ -9,21 +9,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Particle system, ion torpedo">
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ParticleEngine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/part.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/part.vert" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="New particle system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ActionPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ActionPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ParticleEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ParticleEngine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/Shader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/Shader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/part.frag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/part.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/Particle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleAngle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticlePosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleSize.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleSystem.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +117,7 @@
       <selectedOptions>
         <option name="environmentVariables" visible="false" />
       </selectedOptions>
-      <option name="VM_PARAMETERS" value="-Djava.library.path=native\windows -Xms1536m -Xmx1536m -Xss2048k -Dcom.fs.starfarer.settings.paths.logs=. -Dcom.fs.starfarer.settings.paths.saves=../saves -Dcom.fs.starfarer.settings.paths.screenshots=../screenshots -Dcom.fs.starfarer.settings.paths.mods=../mods -classpath janino.jar;commons-compiler.jar;commons-compiler-jdk.jar;starfarer.res.jar;starfarer.api.jar;starfarer_obf.jar;jogg-0.0.7.jar;jorbis-0.0.15.jar;json.jar;lwjgl.jar;lwjgl_util_applet.jar;jinput.jar;lwjgl_test.jar;log4j-1.2.9.jar;lwjgl_util.jar;fs.sound_obf.jar;fs.common_obf.jar;xstream-1.4.10.jar com.fs.starfarer.StarfarerLauncher" />
+      <option name="VM_PARAMETERS" value="-Djava.library.path=native\windows -Xms1536m -Xmx1536m -Xss2048k -XX:MaxDirectMemorySize=8192m -Dcom.fs.starfarer.settings.paths.logs=. -Dcom.fs.starfarer.settings.paths.saves=../saves -Dcom.fs.starfarer.settings.paths.screenshots=../screenshots -Dcom.fs.starfarer.settings.paths.mods=../mods -classpath janino.jar;commons-compiler.jar;commons-compiler-jdk.jar;starfarer.res.jar;starfarer.api.jar;starfarer_obf.jar;jogg-0.0.7.jar;jorbis-0.0.15.jar;json.jar;lwjgl.jar;lwjgl_util_applet.jar;jinput.jar;lwjgl_test.jar;log4j-1.2.9.jar;lwjgl_util.jar;fs.sound_obf.jar;fs.common_obf.jar;xstream-1.4.10.jar com.fs.starfarer.StarfarerLauncher" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../starsector-core" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
@@ -316,7 +317,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680754295681</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="New particle system">
+      <created>1680841231643</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1680841231643</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -345,9 +353,19 @@
     <MESSAGE value="Finish cluster mine launcher, add paralyzer (ionrocket)" />
     <MESSAGE value="Add heavy energy swamer + minefield launcher" />
     <MESSAGE value="Particle system, ion torpedo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Particle system, ion torpedo" />
+    <MESSAGE value="New particle system" />
+    <option name="LAST_COMMIT_MESSAGE" value="New particle system" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ParticleEngine.java</url>
+          <line>635</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="com.fs.starfarer.loading.WeaponSpreadsheetLoader$o" memberName="spec" />
@@ -362,5 +380,8 @@
         <watch expression="damageResult.getDamageToHull()" language="JAVA" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Weapon_Expansion$Run_Starsector.ic" NAME="Run Starsector Coverage Results" MODIFIED="1680902377672" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
