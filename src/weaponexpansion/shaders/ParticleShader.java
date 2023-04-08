@@ -3,16 +3,13 @@ package weaponexpansion.shaders;
 import org.lwjgl.opengl.GL20;
 
 public abstract class ParticleShader extends Shader {
-    public static int projectionLoc, offsetLoc, scaleLoc, tintColorLoc, angleLoc;
     public static int programId = -1;
-    public static final String projectionName = "projection", offsetName = "offset", scaleName = "scale", tintColorName = "tintColor", angleLocName = "angle";
+    public static int projectionLoc, timeLoc;
+    public static String projectionName = "projection", timeName = "time";
 
     public static void init(String vertShaderPath, String fragShaderPath) {
         programId = Shader.createProgram(vertShaderPath, fragShaderPath, programId);
         projectionLoc = GL20.glGetUniformLocation(programId, projectionName);
-        offsetLoc = GL20.glGetUniformLocation(programId, offsetName);
-        scaleLoc = GL20.glGetUniformLocation(programId, scaleName);
-        tintColorLoc = GL20.glGetUniformLocation(programId, tintColorName);
-        angleLoc = GL20.glGetUniformLocation(programId, angleLocName);
+        timeLoc = GL20.glGetUniformLocation(programId, timeName);
     }
 }
