@@ -17,6 +17,7 @@ public class ListenerPlugin extends BaseEveryFrameCombatPlugin {
 
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
+        if (engine == null) return;
         updateShipsInterval.advance(amount);
         if (updateShipsInterval.intervalElapsed()) {
             for (ShipAPI ship : engine.getShips()) {

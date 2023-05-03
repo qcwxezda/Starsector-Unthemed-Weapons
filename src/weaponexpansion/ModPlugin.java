@@ -10,7 +10,6 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
 import org.json.JSONObject;
 import weaponexpansion.combat.plugins.*;
-import weaponexpansion.shaders.ParticleShader;
 
 import java.util.*;
 
@@ -18,6 +17,7 @@ import java.util.*;
 public class ModPlugin extends BaseModPlugin {
     private final Map<String, MakeMissilePlugin> customMissiles = new HashMap<>();
     public static final String dummyMissileWeapon = "wpnxt_dummy_m", dummyProjWeapon = "wpnxt_dummy_p";
+    public static boolean particleEngineEnabled = false;
 
     @Override
     public PluginPick<MissileAIPlugin> pickMissileAI(MissileAPI missile, ShipAPI launchingShip) {
@@ -31,12 +31,10 @@ public class ModPlugin extends BaseModPlugin {
     }
 
     @Override
-    public void onApplicationLoad() {
-        ParticleShader.init("shaders/particle.vert", "shaders/particle.frag");
-    }
-
-    @Override
     public void onGameLoad(boolean newGame) {
+
+        particleEngineEnabled = Global.getSettings().getModManager().isModEnabled("particleengine");
+
         customMissiles.clear();
         customMissiles.put("wpnxt_energytorpedo_shot", new MakeMissilePlugin() {
             @Override

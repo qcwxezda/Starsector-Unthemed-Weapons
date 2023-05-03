@@ -1,0 +1,56 @@
+package weaponexpansion.particles;
+
+import org.lwjgl.util.vector.Vector2f;
+import particleengine.Emitter;
+import particleengine.Particles;
+
+public class IonTorpedoExplosion {
+    public static Emitter core(Vector2f loc) {
+        Emitter emitter = Particles.initialize(loc, "graphics/fx/explosion1.png");
+        emitter.circleOffset(30f, 50f);
+        emitter.life(0.75f, 1.25f);
+        emitter.fadeTime(0.1f, 0.1f, 0.3f, 0.5f);
+        emitter.facing(0f, 360f);
+        emitter.turnRate(-50f, 50f);
+        emitter.turnAcceleration(-50f, 50f);
+        emitter.circleVelocity(100f, 100f);
+        emitter.radialAcceleration(-50f, -100f);
+        emitter.revolutionRate(-20f, 20f);
+        emitter.color(0.588f, 1f, 0.902f, 0.25f);
+        emitter.randomHSVA(20f, 0.1f, 0f, 0f);
+        emitter.colorShiftHSVA(0f, -0.3f, -0.3f, -0.05f);
+        emitter.size(150f, 200f);
+        emitter.growthRate(100f, 150f);
+        emitter.growthAcceleration(-50f, -75f);
+        return emitter;
+    }
+
+    public static Emitter ring(Vector2f loc, float angle) {
+        Emitter emitter = Particles.initialize(loc, "graphics/fx/wpnxt_explosion_ring.png");
+        emitter.setAxis(angle);
+        emitter.life(0.75f, 1f);
+        emitter.fadeTime(0.1f, 0.1f, 0.5f, 0.7f);
+        emitter.size(300f, 400f, 40f, 60f);
+        emitter.growthRate(400f, 500f);
+        emitter.growthAcceleration(-50f, -60f);
+        emitter.color(0.5f, 1f, 0.902f, 0.75f);
+        emitter.hueShift(-50f, 50f);
+        emitter.saturationShift(-0.2f, -0.2f);
+        emitter.facing(-55f, -35f);
+        return emitter;
+    }
+
+    public static Emitter empArcs(Vector2f loc) {
+        Emitter emitter = Particles.initialize(loc, "graphics/fx/wpnxt_emp_arcs_modified.png");
+        emitter.life(0.25f, 0.3f);
+        emitter.fadeTime(0f, 0f, 0.15f, 0.25f);
+        emitter.size(350f, 350f, 300f, 300f);
+        emitter.growthRate(-40f, -80f);
+        emitter.turnRate(-10f, 10f);
+        emitter.facing(0f, 360f);
+        emitter.color(0.7f, 1f, 1f, 0.7f);
+        emitter.facing(0f, 360f);
+        emitter.alphaShift(-0.5f, -0.5f);
+        return emitter;
+    }
+}

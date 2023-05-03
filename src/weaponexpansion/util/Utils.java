@@ -382,49 +382,10 @@ public class Utils {
         return shield.isWithinArc(pt);
     }
 
-    public static Color interpolateColor(Color c1, Color c2, float t) {
-        int red = (int) clamp((1-t) * c1.getRed() + t * c2.getRed(), 0f, 255f);
-        int green = (int) clamp((1-t) * c1.getGreen() + t * c2.getGreen(), 0f, 255f);
-        int blue = (int) clamp((1-t) * c1.getBlue() + t * c2.getBlue(), 0f, 255f);
-        int alpha = (int) clamp((1-t) * c1.getAlpha() + t * c2.getAlpha(), 0f, 255f);
-
-        return new Color(red, green, blue, alpha);
-    }
-
     public static Vector2f randomPointInCircle(Vector2f center, float radius) {
         float theta = Misc.random.nextFloat() * 2f *  (float) Math.PI;
         float r = radius * (float) Math.sqrt(Misc.random.nextFloat());
         return new Vector2f(center.x + r*(float)Math.cos(theta), center.y + r*(float)Math.sin(theta));
-    }
-
-    public static String readFile(String path) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        BufferedReader br = new BufferedReader(new InputStreamReader(Objects.requireNonNull(ModPlugin.class.getResourceAsStream(path))));
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line).append("\n");
-        }
-        return sb.toString();
-    }
-
-    /** Returns a vector in the range [0, 1]x[0, 1] */
-    public static Vector2f toScreenSpace(Vector2f worldCoords, ViewportAPI viewport) {
-        float x = viewport.convertWorldXtoScreenX(worldCoords.x);
-        float y = viewport.convertWorldYtoScreenY(worldCoords.y);
-        float width = viewport.convertWorldWidthToScreenWidth(viewport.getVisibleWidth());
-        float height = viewport.convertWorldHeightToScreenHeight(viewport.getVisibleHeight());
-        return new Vector2f(x/width, y/height);
-    }
-
-    /** 4x4 matrix, translation elements in 3rd dimension, 4th dimension is identity */
-    public static FloatBuffer getProjectionMatrix(ViewportAPI viewport) {
-        float W = viewport.getVisibleWidth();
-        float H = viewport.getVisibleHeight();
-        float llx = viewport.getLLX();
-        float lly = viewport.getLLY();
-        FloatBuffer buf = BufferUtils.createFloatBuffer(16);
-        buf.put(new float[] {2f/W, 0f, -2f*llx/W-1f, 0f, 0f, 2f/H, -2f*lly/H-1f, 0f, 0f, 0f, 1f, 0f, 0f, 0f, 0f, 1f}).flip();
-        return buf;
     }
 
     public interface Function {
