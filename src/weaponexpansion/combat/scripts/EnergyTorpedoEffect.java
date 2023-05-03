@@ -10,16 +10,18 @@ import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.combat.plugins.Action;
 import weaponexpansion.combat.plugins.ActionPlugin;
+import weaponexpansion.particles.BloomTrail;
+import weaponexpansion.particles.Explosion;
 
 import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class EnergyTorpedoEffect implements OnHitEffectPlugin {
+public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin {
 
-    int numSpawns = 5;
-    float minSpawnDistance = 60f, maxSpawnDistance = 120f, minDelay = 0.67f, maxDelay = 1.33f, angleDeviation = 20f;
+    int numSpawns = 5, empResistance = 10, particlesPerSecond = 100;
+    float minSpawnDistance = 60f, maxSpawnDistance = 120f, minDelay = 0.67f, maxDelay = 1.33f, angleDeviation = 20f, particleScale = 7f;
     static final Color empCore = new Color(180, 200, 255);
     static final Color empFringe = new Color(100, 120, 255);
 
@@ -29,6 +31,12 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
 
         final DamagingExplosionSpec spec = ((MissileAPI) proj).getSpec().getExplosionSpec();
         List<CombatEntityAPI> thisAsList = Collections.singletonList((CombatEntityAPI) proj);
+
+        if (ModPlugin.particleEngineEnabled) {
+            spec.setParticleCount(0);
+            spec.setExplosionColor(new Color(0, 0, 0, 0));
+            addExplosionVisual(pt, spec.getRadius()*1.5f);
+        }
 
         //ActionPlugin plugin = (ActionPlugin) engine.getCustomData().get(ActionPlugin.customDataKey);
 
@@ -80,9 +88,22 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin {
                 @Override
                 public void perform() {
                     engine.spawnDamagingExplosion(spec, proj.getSource(), spawnLoc);
+                    if (ModPlugin.particleEngineEnabled) {
+                        addExplosionVisual(spawnLoc, spec.getRadius()*1.5f);
+                    }
                 }
             }, delay);
             offset = (offset + 360f / numSpawns) % 360f;
         }
+    }
+
+    private void addExplosionVisual(Vector2f loc, float radius) {
+        Explosion.makeExplosion(loc, radius, 50, 1, 100, new float[]{0.2f, 0.2f, 1f, 0.2f}, new float[]{0.4f, 0.4f, 1f, 0.7f}, new float[]{0.3f, 0.3f, 1f, 1f}, new float[]{0.2f, 0.2f, 1f, 1f});
+    }
+
+    @Override
+    public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
+        BloomTrail.makeTrail(proj, particleScale, particlesPerSecond);
+        ((MissileAPI) proj).setEmpResistance(empResistance);
     }
 }

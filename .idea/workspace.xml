@@ -9,22 +9,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="New particle system">
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Update particle system">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/ParticleEngine.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/sample_emitter.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/saved_emitters/explosionCore.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/saved_emitters/explosionRing.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/fx/wpnxt_emp_arcs_modified.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/IonTorpedoExplosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Weapon Expansion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Weapon Expansion.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/strings/descriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedo_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedolarge_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedolarge_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_iontorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_iontorpedo_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ParticleEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ParticleEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ListenerPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ListenerPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ParticleEngine.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/part.frag" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/part.vert" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.frag" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.vert" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/Particle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleAngle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticlePosition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleSize.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/particles/ParticleSystem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SetEmpResistance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/Shader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.frag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,20 +100,20 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alex/Documents/My Games/Starsector/starsector-core/json.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alex/Documents/My Games/Starsector/mods/Weapon Expansion/data/saved_emitters&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Csv.Editor.Settings&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;VisualVMLauncher&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\saved_emitters" />
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data" />
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\weapons\proj" />
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\weapons" />
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons\chromaticblaster" />
-      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons" />
-      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons\proj" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\graphics\fx" />
@@ -117,7 +135,7 @@
       <selectedOptions>
         <option name="environmentVariables" visible="false" />
       </selectedOptions>
-      <option name="VM_PARAMETERS" value="-Djava.library.path=native\windows -Xms1536m -Xmx1536m -Xss2048k -XX:MaxDirectMemorySize=8192m -Dcom.fs.starfarer.settings.paths.logs=. -Dcom.fs.starfarer.settings.paths.saves=../saves -Dcom.fs.starfarer.settings.paths.screenshots=../screenshots -Dcom.fs.starfarer.settings.paths.mods=../mods -classpath janino.jar;commons-compiler.jar;commons-compiler-jdk.jar;starfarer.res.jar;starfarer.api.jar;starfarer_obf.jar;jogg-0.0.7.jar;jorbis-0.0.15.jar;json.jar;lwjgl.jar;lwjgl_util_applet.jar;jinput.jar;lwjgl_test.jar;log4j-1.2.9.jar;lwjgl_util.jar;fs.sound_obf.jar;fs.common_obf.jar;xstream-1.4.10.jar com.fs.starfarer.StarfarerLauncher" />
+      <option name="VM_PARAMETERS" value="-Djava.library.path=native\windows -Xms1536m -Xmx1536m -Xss2048k -Dcom.fs.starfarer.settings.paths.logs=. -Dcom.fs.starfarer.settings.paths.saves=../saves -Dcom.fs.starfarer.settings.paths.screenshots=../screenshots -Dcom.fs.starfarer.settings.paths.mods=../mods -classpath janino.jar;commons-compiler.jar;commons-compiler-jdk.jar;starfarer.res.jar;starfarer.api.jar;starfarer_obf.jar;jogg-0.0.7.jar;jorbis-0.0.15.jar;json.jar;lwjgl.jar;lwjgl_util_applet.jar;jinput.jar;lwjgl_test.jar;log4j-1.2.9.jar;lwjgl_util.jar;fs.sound_obf.jar;fs.common_obf.jar;xstream-1.4.10.jar com.fs.starfarer.StarfarerLauncher" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../starsector-core" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
@@ -324,12 +342,18 @@
       <option name="project" value="LOCAL" />
       <updated>1680841231643</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Update particle system">
+      <created>1680922065729</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1680922065729</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added 3 medium energy weapons: frag pd, shotgun, debuffing beam" />
     <MESSAGE value="Remove jars and .idea folder" />
     <MESSAGE value="Mass renaming" />
     <MESSAGE value="Add needle driver, redo medium energy sprites" />
@@ -354,20 +378,13 @@
     <MESSAGE value="Add heavy energy swamer + minefield launcher" />
     <MESSAGE value="Particle system, ion torpedo" />
     <MESSAGE value="New particle system" />
-    <option name="LAST_COMMIT_MESSAGE" value="New particle system" />
+    <MESSAGE value="Update particle system" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update particle system" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ParticleEngine.java</url>
-          <line>635</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
+        <PinnedItemInfo parentTag="com.fs.starfarer.settings.B" memberName="o00000" />
         <PinnedItemInfo parentTag="com.fs.starfarer.loading.WeaponSpreadsheetLoader$o" memberName="spec" />
         <PinnedItemInfo parentTag="com.fs.starfarer.combat.E.return" memberName="new" />
         <PinnedItemInfo parentTag="com.fs.starfarer.combat.E.return" memberName="Ô00000" />
