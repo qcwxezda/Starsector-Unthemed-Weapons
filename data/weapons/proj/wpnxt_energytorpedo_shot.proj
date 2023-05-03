@@ -50,5 +50,5 @@
     "width":20.0,
     "length":60.0,
     "angle":180.0}],
-  "onFireEffect":"weaponexpansion.combat.scripts.SetEmpResistance"
+  "onFireEffect":"weaponexpansion.combat.scripts.EnergyTorpedoEffect"
 }

@@ -4,6 +4,8 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import org.lwjgl.util.vector.Vector2f;
+import weaponexpansion.ModPlugin;
+import weaponexpansion.particles.Explosion;
 import weaponexpansion.util.ExplosionRingRenderer;
 
 import java.awt.*;
@@ -45,14 +47,26 @@ public class ExplosiveShellEffect implements OnHitEffectPlugin {
         spec.setDetailedExplosionFlashColorFringe(color2);
         spec.setDamageType(DamageType.HIGH_EXPLOSIVE);
 
+
+        if (ModPlugin.particleEngineEnabled) {
+            spec.setParticleCount(0);
+            spec.setUseDetailedExplosion(false);
+            spec.setExplosionColor(new Color(0, 0, 0, 0));
+        }
+
         engine.spawnDamagingExplosion(
                 spec,
                 proj.getSource(),
                 pt
         ).addDamagedAlready(target);
 
-        engine.addLayeredRenderingPlugin(new ExplosionRingRenderer(explosionRadius / 4f, explosionRadius * 1.5f, 0.75f, color2))
-                .getLocation()
-                .set(pt);
+        if (!ModPlugin.particleEngineEnabled) {
+            engine.addLayeredRenderingPlugin(new ExplosionRingRenderer(explosionRadius / 4f, explosionRadius * 1.5f, 0.75f, color2))
+                    .getLocation()
+                    .set(pt);
+        }
+        else {
+            Explosion.makeExplosion(pt, 125f, 50, 1, 50);
+        }
     }
 }

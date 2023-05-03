@@ -10,5 +10,8 @@ public class EnergyTorpedoLargeEffect extends EnergyTorpedoEffect {
         minDelay = 1f;
         maxDelay = 2.5f;
         angleDeviation = 20f;
+        empResistance = 100;
+        particleScale = 10f;
+        particlesPerSecond = 200;
     }
 }
