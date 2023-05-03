@@ -7,7 +7,11 @@ import com.fs.starfarer.api.util.Misc;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
+import weaponexpansion.ModPlugin;
+import weaponexpansion.particles.Explosion;
 import weaponexpansion.util.Utils;
+
+import java.awt.*;
 
 @SuppressWarnings("unused")
 public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPlugin {
@@ -77,6 +81,13 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
 
         CombatEngineAPI engine = Global.getCombatEngine();
         engine.removeEntity(missile);
+
+        if (ModPlugin.particleEngineEnabled) {
+            explosionSpec.setParticleCount(0);
+            explosionSpec.setExplosionColor(new Color(0, 0, 0, 0));
+            Explosion.makeExplosion(missile.getLocation(), explosionSpec.getRadius()*1.5f, 25, 1, 25);
+        }
+
         engine.spawnDamagingExplosion(explosionSpec, missile.getSource(), missile.getLocation());
     }
 }
