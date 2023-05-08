@@ -15,6 +15,9 @@
   "textureScrollSpeed":64.0,
   "pixelsPerTexel":5.0,
   "passThroughMissiles":true,
+  "passThroughFighters":true,
+  "passThroughFightersOnlyWhenDestroyed":true,
+  "applyOnHitEffectWhenPassThrough":false,
   "bulletSprite":"graphics/missiles/wpnxt_mortar_shot_big.png",
   "onHitEffect":"weaponexpansion.combat.scripts.ExplosiveShellEffect"
 }

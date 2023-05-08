@@ -37,9 +37,7 @@ public class VoidCannonShotEffect implements OnHitEffectPlugin {
         spec.setDamageType(DamageType.FRAGMENTATION);
 
         if (ModPlugin.particleEngineEnabled) {
-            spec.setExplosionColor(new Color(0f, 0f, 0f, 0f));
-            spec.setParticleCount(0);
-            Explosion.makeExplosion(pt, explosionRadius*1.5f, 25, 1, 25, new float[] {1f, 0.5f, 0.8f, 0.3f}, new float[] {1f, 0.8f, 0.8f, 0.7f}, new float[] {1f, 0.6f, 0.8f, 1f}, new float[] {1f, 0.5f, 0.8f, 1f});
+            Explosion.makeExplosion(pt, explosionRadius*1.2f, 30, 1, 25, new float[] {1f, 0.5f, 0.8f, 0.1f}, new float[] {1f, 0.8f, 0.8f, 0.7f}, new float[] {1f, 0.6f, 0.8f, 0.3f}, new float[] {1f, 0.5f, 0.8f, 1f});
         }
 
         DamagingProjectileAPI explosion = engine.spawnDamagingExplosion(
