@@ -9,39 +9,46 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Update particle system">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/ParticleEngine.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/sample_emitter.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/saved_emitters/explosionCore.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/saved_emitters/explosionRing.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/fx/wpnxt_emp_arcs_modified.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/IonTorpedoExplosion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Refactor particle engine to separate mod, add particle explosions and trail, add missile descriptions">
+      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_phasetorpedo_shot.proj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_phasetorpedo.wpn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_phasetorpedo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_phasetorpedo_nocolor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_phasetorpedo_hardpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_phasetorpedo_turret.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_phasetorpedo_explosion.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_phasetorpedo_fire.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/PhaseTorpedoAI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/PhaseTorpedoEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/FlickerJumpTrail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/FlickerTrail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Weapon Expansion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Weapon Expansion.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/strings/descriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedo_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedolarge_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedolarge_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_iontorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_iontorpedo_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_explosiveshell_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_explosiveshell_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_needledriver_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_needledriver_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_orb_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_orb_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_spike_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_spike_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_superrailgun_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_superrailgun_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_ultrablaster_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_ultrablaster_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_lv3shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_lv3shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/mod_info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ListenerPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ListenerPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ParticleEngine.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/AngleApproachMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/AngleApproachMissileAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/BaseGuidedMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/BaseGuidedMissileAI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SetEmpResistance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/ParticleShader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/Shader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.frag" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/shaders/particle.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/IonTorpedoExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/IonTorpedoExplosion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +107,7 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alex/Documents/My Games/Starsector/mods/Weapon Expansion/data/saved_emitters&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alex/Documents/My Games/Starsector/mods/Weapon Expansion/data/weapons/proj&quot;,
     &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -109,10 +116,10 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\saved_emitters" />
-      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data" />
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\weapons\proj" />
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\weapons" />
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\saved_emitters" />
+      <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data" />
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Untitled\data\weapons\chromaticblaster" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -349,12 +356,18 @@
       <option name="project" value="LOCAL" />
       <updated>1680922065729</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Refactor particle engine to separate mod, add particle explosions and trail, add missile descriptions">
+      <created>1683146628145</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1683146628145</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Remove jars and .idea folder" />
     <MESSAGE value="Mass renaming" />
     <MESSAGE value="Add needle driver, redo medium energy sprites" />
     <MESSAGE value="Add 3 small weapons, modify many images" />
@@ -379,7 +392,8 @@
     <MESSAGE value="Particle system, ion torpedo" />
     <MESSAGE value="New particle system" />
     <MESSAGE value="Update particle system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update particle system" />
+    <MESSAGE value="Refactor particle engine to separate mod, add particle explosions and trail, add missile descriptions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor particle engine to separate mod, add particle explosions and trail, add missile descriptions" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
@@ -387,6 +401,7 @@
         <PinnedItemInfo parentTag="com.fs.starfarer.settings.B" memberName="o00000" />
         <PinnedItemInfo parentTag="com.fs.starfarer.loading.WeaponSpreadsheetLoader$o" memberName="spec" />
         <PinnedItemInfo parentTag="com.fs.starfarer.combat.E.return" memberName="new" />
+        <PinnedItemInfo parentTag="java.util.HashMap$Entry" memberName="value" />
         <PinnedItemInfo parentTag="com.fs.starfarer.combat.E.return" memberName="Ô00000" />
       </pinned-members>
     </pin-to-top-manager>
@@ -395,6 +410,11 @@
         <watch expression="target.getHitpoints()" language="JAVA" />
         <watch expression="damageResult" language="JAVA" />
         <watch expression="damageResult.getDamageToHull()" language="JAVA" />
+      </configuration>
+      <configuration name="Application">
+        <watch expression="newGame" />
+        <watch expression="pSpec.getId()" language="JAVA" />
+        <watch expression="mSpec.getHullSpec().getHullId()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

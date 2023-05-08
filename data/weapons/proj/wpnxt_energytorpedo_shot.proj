@@ -7,12 +7,12 @@
   "size":[8,19],
   "center":[4,10],
   "collisionRadius":16,
-  "collisionClass":"MISSILE_FF",
+  "collisionClass":"MISSILE_NO_FF",
   "explosionColor":[100,120,255,255],  # purely visual, will get a white additively blended core on top of this color
-  "explosionRadius":75, # purely visual
+  "explosionRadius":120, # purely visual
   "explosionSpec":{"duration":0.1f, # not visual
-    "radius":75,
-    "coreRadius":37.5, # full damage within core radius
+    "radius":120,
+    "coreRadius":60, # full damage within core radius
     "collisionClass":PROJECTILE_FF,
     "collisionClassByFighter":PROJECTILE_FIGHTER,
     "particleSizeMin":5.0,
@@ -34,7 +34,7 @@
     "style":"CUSTOM",
     "styleSpec":{
       "mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
-      "engineColor":[100,120,255,255],
+      "engineColor":[100,120,255,64],
       "contrailDuration":1.5,
       "contrailWidthMult":1,
       "contrailWidthAddedFractionAtEnd":3,  # can be negative. makes trail spread out/narrow at the end
@@ -47,8 +47,8 @@
       "glowAlternateColor":[0,40,200,255],
       "type":"GLOW" # GLOW or SMOKE; additive or regular blend mode
     },
-    "width":20.0,
-    "length":60.0,
+    "width":10.0,
+    "length":30.0,
     "angle":180.0}],
   "onFireEffect":"weaponexpansion.combat.scripts.EnergyTorpedoEffect"
 }

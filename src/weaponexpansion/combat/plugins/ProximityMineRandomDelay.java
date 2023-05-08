@@ -43,7 +43,7 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
         }
 
         if (!missile.didDamage() && (missile.isFading()
-                || Utils.isEntityNearby(missile.getLocation(), null, range, vsMissileRange, true, proxChecker))) {
+                || Utils.isEntityNearby(missile.getLocation(), null, range, vsMissileRange, false, proxChecker))) {
             explode();
         }
 
@@ -85,7 +85,7 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
         if (ModPlugin.particleEngineEnabled) {
             explosionSpec.setParticleCount(0);
             explosionSpec.setExplosionColor(new Color(0, 0, 0, 0));
-            Explosion.makeExplosion(missile.getLocation(), explosionSpec.getRadius()*1.5f, 25, 1, 25);
+            Explosion.makeExplosion(missile.getLocation(), explosionSpec.getRadius()*1.2f, 30, 1, 25);
         }
 
         engine.spawnDamagingExplosion(explosionSpec, missile.getSource(), missile.getLocation());
