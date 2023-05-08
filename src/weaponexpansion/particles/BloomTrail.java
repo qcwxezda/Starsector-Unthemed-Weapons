@@ -8,7 +8,7 @@ import particleengine.Particles;
 
 public class BloomTrail {
     public static Emitter trail(Vector2f loc, float scale) {
-        Emitter emitter = Particles.initialize(loc, "graphics/fx/particlealpha32sq.png");
+        Emitter emitter = Particles.initialize(loc, "graphics/fx/starburst_glow1.png");
         emitter.setSyncSize(true);
         emitter.color(0.3f, 0.3f, 1f, 1f);
         emitter.offset(-30f, 0f, 0f, 0f);
@@ -19,6 +19,7 @@ public class BloomTrail {
         emitter.growthRate(-2f*scale, -scale);
         emitter.fadeTime(0f, 0f, 0.5f, 0.5f);
         emitter.life(0.75f, 1.25f);
+        emitter.facing(0f, 360f);
         emitter.sinusoidalMotionY(20f, 40f, 0.25f, 0.5f, 0f, 360f);
         return emitter;
     }

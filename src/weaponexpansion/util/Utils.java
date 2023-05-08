@@ -2,11 +2,16 @@ package weaponexpansion.util;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.util.vector.Vector2f;
+import particleengine.Emitter;
+import particleengine.Particles;
 import weaponexpansion.ModPlugin;
+import weaponexpansion.combat.plugins.Action;
+import weaponexpansion.combat.plugins.ActionPlugin;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -42,11 +47,19 @@ public class Utils {
         }
     }
 
+    public static ClosestCollisionData collisionCheck(Vector2f a, Vector2f b, Collection<? extends CombatEntityAPI> ignoreList, CombatEngineAPI engine) {
+        return collisionCheck(a, b, ignoreList, -1, engine);
+    }
+
+    public static ClosestCollisionData collisionCheck(Vector2f a, Vector2f b, int ignoreOwner, CombatEngineAPI engine) {
+        return collisionCheck(a, b, null, ignoreOwner, engine);
+    }
+
     /**
      * Checks if the segment from a to b collides with an entity and returns the collision point closest to a.
      * Returns null if there was no collision.
      */
-    public static ClosestCollisionData collisionCheck(Vector2f a, Vector2f b, Collection<? extends CombatEntityAPI> ignoreList, CombatEngineAPI engine) {
+    public static ClosestCollisionData collisionCheck(Vector2f a, Vector2f b, Collection<? extends CombatEntityAPI> ignoreList, int ignoreOwner, CombatEngineAPI engine) {
         // TIme since last hit should advance in world time, not ship time
         float length = Misc.getDistance(a, b);
 
@@ -64,6 +77,9 @@ public class Utils {
 
             CombatEntityAPI o = (CombatEntityAPI) obj;
 
+            if (o.getOwner() == ignoreOwner) continue;
+            if (CollisionClass.NONE.equals(o.getCollisionClass())) continue;
+
             // Pre-check collision radius, exit early if outside to prevent unnecessary computation
             Vector2f collisionRadiusPoint = Misc.intersectSegmentAndCircle(a, b, o.getLocation(), o.getCollisionRadius());
             if (collisionRadiusPoint == null) {
@@ -73,7 +89,7 @@ public class Utils {
             // If it's a ship, check collision with shields
             if (o instanceof ShipAPI) {
                 ShipAPI ship = (ShipAPI) o;
-                if (ship.isPhased() || CollisionClass.NONE.equals(ship.getCollisionClass())) continue;
+                if (ship.isPhased()) continue;
 
                 if (ship.getShield() != null) {
                     // Actual point itself is inside shield
@@ -149,6 +165,297 @@ public class Utils {
         }
 
         return closest;
+    }
+
+    /** For big explosions. Applies damage to all entities around a ring. */
+    public static void applyDamageOnRing(
+            Vector2f origin,
+            float radius,
+            int owner,
+            boolean friendlyFire,
+            Collection<? extends CombatEntityAPI> ignoreList,
+            float totalDamage,
+            DamageType damageType,
+            float totalEmp,
+            boolean bypassShields,
+            boolean dealsSoftFlux,
+            Object source,
+            boolean playSound) {
+        CombatEngineAPI engine = Global.getCombatEngine();
+        Iterator<Object> objItr = engine.getAllObjectGrid().getCheckIterator(origin, 2f*radius, 2f*radius);
+        while (objItr.hasNext()) {
+            Object o = objItr.next();
+            if (!(o instanceof CombatEntityAPI)) continue;
+            if ((o instanceof DamagingProjectileAPI) && !(o instanceof MissileAPI)) continue;
+
+            CombatEntityAPI entity = (CombatEntityAPI) o;
+            if (ignoreList != null && ignoreList.contains(o)) continue;
+            if (!friendlyFire && owner == entity.getOwner()) continue;
+            if (entity instanceof ShipAPI && ((ShipAPI) entity).isPhased()) continue;
+            if (CollisionClass.NONE.equals(entity.getCollisionClass())) continue;
+
+            BoundsAPI bounds = entity.getExactBounds();
+            if (bounds == null) {
+                Pair<Vector2f, Vector2f> collisionPoints = intersectCircles(origin, radius, entity.getLocation(), entity.getCollisionRadius());
+                if (collisionPoints != null) {
+                    Vector2f p1 = Misc.getDiff(collisionPoints.one, origin);
+                    Vector2f p2 = Misc.getDiff(collisionPoints.two, origin);
+                    float theta1 = (float) Math.atan2(p1.y, p1.x) * Misc.DEG_PER_RAD;
+                    float theta2 = (float) Math.atan2(p2.y, p2.x) * Misc.DEG_PER_RAD;
+                    float subtendedAngle = Math.abs(angleDiff(theta1, theta2));
+
+                    if (subtendedAngle > 0f) {
+                        float damage = totalDamage * subtendedAngle / 360f;
+                        float empDamage = totalEmp * subtendedAngle / 360f;
+                        engine.applyDamage(entity, collisionPoints.one, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                        engine.applyDamage(entity, collisionPoints.two, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                    }
+                }
+            }
+            else {
+                if (entity instanceof ShipAPI) {
+                    ShipAPI ship = (ShipAPI) entity;
+                    if (ship.getShield() != null) {
+                        List<Float> collisionAngles = new ArrayList<>();
+                        List<Vector2f> collisionPoints = new ArrayList<>();
+                        Vector2f shieldCenter = ship.getShieldCenterEvenIfNoShield();
+                        float shieldRadius = ship.getShieldRadiusEvenIfNoShield();
+                        Pair<Vector2f, Vector2f> shieldPts = intersectCircles(shieldCenter, shieldRadius, origin, radius);
+                        if (shieldPts != null) {
+                            if (ship.getShield().isWithinArc(shieldPts.one)) {
+                                collisionPoints.add(shieldPts.one);
+                            }
+                            if (ship.getShield().isWithinArc(shieldPts.two)) {
+                                collisionPoints.add(shieldPts.two);
+                            }
+                        }
+                        float t1 = ship.getShield().getFacing() - ship.getShield().getActiveArc() / 2f;
+                        float t2 = ship.getShield().getFacing() + ship.getShield().getActiveArc() / 2f;
+                        Vector2f shieldEnd1 = new Vector2f(shieldCenter.x + shieldRadius*(float)Math.cos(t1), shieldCenter.y + shieldRadius*(float)Math.sin(t1));
+                        Vector2f shieldEnd2 = new Vector2f(shieldCenter.x + shieldRadius*(float)Math.cos(t2), shieldCenter.y + shieldRadius*(float)Math.sin(t2));
+                        collisionPoints.addAll(intersectSegmentCircle(shieldCenter, shieldEnd1, origin, radius));
+                        collisionPoints.addAll(intersectSegmentCircle(shieldCenter, shieldEnd2, origin, radius));
+
+                        for (Vector2f pt : collisionPoints) {
+                            Vector2f p = Misc.getDiff(pt, origin);
+                            collisionAngles.add((float) Math.atan2(p.y, p.x) * Misc.DEG_PER_RAD);
+                        }
+
+                        if (collisionAngles.size() >= 2) {
+                            Collections.sort(collisionAngles);
+
+                            // (0, 1) is an arc inside the ship bounds, as is (2, 3), etc.
+                            // unless angle 0 is inside the ship bounds, then it's (1, 2), (3, 4), etc.
+                            int startIndex = 0;
+
+                            // Check if point at angle 0 is inside bounds
+                            Vector2f checkPt = new Vector2f(radius + origin.x, origin.y);
+                            if (ship.getShield().isWithinArc(checkPt) && Misc.getDistance(checkPt, shieldCenter) <= shieldRadius) {
+                                startIndex = 1;
+                            }
+
+                            for (int i = 0; i < collisionAngles.size(); i += 2) {
+                                int a = (startIndex + i) % collisionAngles.size();
+                                int b = (startIndex + i + 1) % collisionAngles.size();
+                                float subtendedAngle = Math.abs(angleDiff(collisionAngles.get(a), collisionAngles.get(b)));
+
+                                if (subtendedAngle > 0f) {
+                                    float damage = totalDamage * subtendedAngle / 360f;
+                                    float empDamage = totalEmp * subtendedAngle / 360f;
+                                    Vector2f p1 = new Vector2f(
+                                            origin.x + radius * (float) Math.cos(collisionAngles.get(a) * Misc.RAD_PER_DEG),
+                                            origin.y + radius * (float) Math.sin(collisionAngles.get(a) * Misc.RAD_PER_DEG));
+                                    Vector2f p2 = new Vector2f(
+                                            origin.x + radius * (float) Math.cos(collisionAngles.get(b) * Misc.RAD_PER_DEG),
+                                            origin.y + radius * (float) Math.sin(collisionAngles.get(b) * Misc.RAD_PER_DEG));
+                                    if (entity.getShield().isWithinArc(p1)) {
+                                        engine.applyDamage(entity, p1, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                                    }
+                                    if (entity.getShield().isWithinArc(p2)) {
+                                        engine.applyDamage(entity, p2, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                bounds.update(entity.getLocation(), entity.getFacing());
+                List<Float> collisionAngles = new ArrayList<>();
+                List<BoundsAPI.SegmentAPI> segments = bounds.getSegments();
+
+                for (BoundsAPI.SegmentAPI segment : segments) {
+                    List<Vector2f> pts = intersectSegmentCircle(segment.getP1(), segment.getP2(), origin, radius);
+                    for (Vector2f pt : pts) {
+                        Vector2f p = Misc.getDiff(pt, origin);
+                        collisionAngles.add((float) Math.atan2(p.y, p.x) * Misc.DEG_PER_RAD);
+                    }
+                }
+
+                if (collisionAngles.size() >= 2) {
+                    Collections.sort(collisionAngles);
+                    // (0, 1) is an arc inside the ship bounds, as is (2, 3), etc.
+                    // unless angle 0 is inside the ship bounds, then it's (1, 2), (3, 4), etc.
+                    int startIndex = 0;
+
+                    // Check if point at angle 0 is inside bounds
+                    List<Vector2f> boundVerts = new ArrayList<>();
+                    boundVerts.add(segments.get(0).getP1());
+                    for (BoundsAPI.SegmentAPI segment : segments) {
+                        boundVerts.add(segment.getP2());
+                    }
+                    Vector2f checkPt = new Vector2f(radius + origin.x, origin.y);
+                    if (Misc.isPointInBounds(checkPt, boundVerts)) {
+                        startIndex = 1;
+                    }
+
+                    for (int i = 0; i < collisionAngles.size(); i += 2) {
+                        int a = (startIndex + i) % collisionAngles.size();
+                        int b = (startIndex + i + 1) % collisionAngles.size();
+                        float subtendedAngle = Math.abs(angleDiff(collisionAngles.get(a), collisionAngles.get(b)));
+
+                        if (subtendedAngle > 0f) {
+                            float damage = totalDamage * subtendedAngle / 360f;
+                            float empDamage = totalEmp * subtendedAngle / 360f;
+                            Vector2f p1 = new Vector2f(
+                                    origin.x + radius * (float) Math.cos(collisionAngles.get(a) * Misc.RAD_PER_DEG),
+                                    origin.y + radius * (float) Math.sin(collisionAngles.get(a) * Misc.RAD_PER_DEG));
+                            Vector2f p2 = new Vector2f(
+                                    origin.x + radius * (float) Math.cos(collisionAngles.get(b) * Misc.RAD_PER_DEG),
+                                    origin.y + radius * (float) Math.sin(collisionAngles.get(b) * Misc.RAD_PER_DEG));
+                            if (entity.getShield() == null || !entity.getShield().isWithinArc(p1)) {
+                                engine.applyDamage(entity, p1, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                            }
+                            if (entity.getShield() == null || !entity.getShield().isWithinArc(p2)) {
+                                engine.applyDamage(entity, p2, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+//        Map<CombatEntityAPI, List<Vector2f>> entitiesWithBounds = new HashMap<>();
+//        while (objItr.hasNext()) {
+//            Object o = objItr.next();
+//            if (!(o instanceof CombatEntityAPI)) continue;
+//            if ((o instanceof DamagingProjectileAPI) && !(o instanceof MissileAPI)) continue;
+//
+//            CombatEntityAPI entity = (CombatEntityAPI) o;
+//            if (ignoreList != null && ignoreList.contains(o)) continue;
+//            if (!friendlyFire && owner == entity.getOwner()) continue;
+//            if (entity instanceof ShipAPI && ((ShipAPI) entity).isPhased()) continue;
+//            if (CollisionClass.NONE.equals(entity.getCollisionClass())) continue;
+//
+//            BoundsAPI bounds = entity.getExactBounds();
+//            if (bounds == null) {
+//                entitiesWithBounds.put(entity, null);
+//            }
+//            else {
+//                bounds.update(entity.getLocation(), entity.getFacing());
+//                List<BoundsAPI.SegmentAPI> segments = bounds.getSegments();
+//
+//                // Check if point itself is inside bounds
+//                List<Vector2f> boundVerts = new ArrayList<>();
+//                boundVerts.add(segments.get(0).getP1());
+//                for (BoundsAPI.SegmentAPI segment : segments) {
+//                    boundVerts.add(segment.getP2());
+//                }
+//                entitiesWithBounds.put(entity, boundVerts);
+//            }
+//        }
+//
+//        float numPoints = (float) Math.floor(2f*Math.PI * radius / distBetweenSamples);
+//        float inc = (float) (2f*Math.PI) / numPoints;
+//
+//        for (float a = 0f; a < 2f*Math.PI; a += inc) {
+//            Vector2f pt = new Vector2f(origin.x + radius*(float) Math.cos(a), origin.y + radius*(float) Math.sin(a));
+//
+//            for (Map.Entry<CombatEntityAPI, List<Vector2f>> entityEntry : entitiesWithBounds.entrySet()) {
+//                CombatEntityAPI entity = entityEntry.getKey();
+//                List<Vector2f> boundVerts = entityEntry.getValue();
+//                if (Misc.getDistance(pt, entity.getLocation()) <= entity.getCollisionRadius()) {
+//                    boolean collision = false;
+//                    if (entity instanceof ShipAPI) {
+//                        ShipAPI ship = (ShipAPI) entity;
+//                        if (ship.getShield() != null
+//                                && ship.getShield().isWithinArc(pt)
+//                                && Misc.getDistance(pt, ship.getShieldCenterEvenIfNoShield()) <= ship.getShieldRadiusEvenIfNoShield()) {
+//                            collision = true;
+//                        }
+//                    }
+//
+//                    if (!collision) {
+//                        if (boundVerts == null) {
+//                            collision = true;
+//                        } else {
+//                            if (Misc.isPointInBounds(pt, boundVerts)) {
+//                                collision = true;
+//                            }
+//                        }
+//                    }
+//
+//                    if (collision) {
+//                        engine.applyDamage(
+//                                entity,
+//                                pt,
+//                                totalDamage / numPoints,
+//                                damageType,
+//                                empAmount,
+//                                bypassShields,
+//                                dealsSoftFlux,
+//                                source,
+//                                playSound
+//                        );
+//                    }
+//                }
+//            }
+//        }
+    }
+
+
+    /** Gives both intersection points if there's more than one */
+    public static List<Vector2f> intersectSegmentCircle(Vector2f a, Vector2f b, Vector2f o, float r) {
+        List<Vector2f> pts = new ArrayList<>();
+
+        float x1 = a.x - o.x, y1 = a.y - o.y;
+        float x2 = b.x - o.x, y2 = b.y - o.y;
+        float dx = x2 - x1, dy = y2 - y1, dr = (float) Math.sqrt(dx*dx + dy*dy), D = x1*y2 - x2*y1;
+
+        float disc = r*r*dr*dr - D*D;
+        if (disc < 0) {
+            return pts;
+        }
+
+        float vx = sgnPos(dy)*dx*(float) Math.sqrt(disc);
+        float vy = Math.abs(dy)*(float) Math.sqrt(disc);
+        float rx1 = (D*dy + vx) / (dr*dr) + o.x, rx2 = (D*dy - vx) / (dr*dr) + o.x;
+        float ry1 = (-D*dx + vy) / (dr*dr) + o.y, ry2 = (-D*dx - vy) / (dr*dr) + o.y;
+
+        float mx = Math.min(a.x, b.x), Mx = Math.max(a.x, b.x);
+        float my = Math.min(a.y, b.y), My = Math.max(a.y, b.y);
+        if (rx1 <= Mx && rx1 >= mx && ry1 <= My && ry1 >= my) {
+            pts.add(new Vector2f(rx1, ry1));
+        }
+        if (rx2 <= Mx && rx2 >= mx && ry2 <= My && ry2 >= my) {
+            pts.add(new Vector2f(rx2, ry2));
+        }
+        return pts;
+    }
+
+    public static float sgnPos(float x) {
+        return x < 0 ? -1f : 1f;
+    }
+
+    public static Pair<Vector2f, Vector2f> intersectCircles(Vector2f o1, float r1, Vector2f o2, float r2) {
+        float dist = Misc.getDistance(o1, o2);
+        float a = (r1*r1 - r2*r2 + dist*dist)/(2f*dist);
+        float b = r1*r1 - a*a;
+        if (b < 0) return null;
+        float c = (float) Math.sqrt(b);
+        Vector2f p1 = new Vector2f(a/dist * (o2.x - o1.x) + c/dist * (o2.y - o1.y) + o1.x, a/dist * (o2.y - o1.y) - c/dist * (o2.x - o1.x) + o1.y);
+        Vector2f p2 = new Vector2f(a/dist * (o2.x - o1.x) - c/dist * (o2.y - o1.y) + o1.x, a/dist * (o2.y - o1.y) + c/dist * (o2.x - o1.x) + o1.y);
+        return new Pair<>(p1, p2);
     }
 
     public static float angleDiff(float a, float b) {
@@ -414,5 +721,28 @@ public class Utils {
         public boolean check(CombatEntityAPI entity) {
             return entity != null && Global.getCombatEngine().isEntityInPlay(entity) && entity.getHitpoints() > 0 && entity.getOwner() != side && entity.getOwner() != 100;
         }
+    }
+
+    public static void spawnFakeMine(Vector2f loc, float fakeRadius, float fakeDamageAmount, DamageType fakeDamageType, float dur) {
+        String dummyWeapon = ModPlugin.dummyMissileWeapon;
+        // Set the dummy spec to the appropriate values
+        MissileSpecAPI dummyProjSpec = (MissileSpecAPI) Global.getSettings().getWeaponSpec(dummyWeapon).getProjectileSpec();
+        dummyProjSpec.getDamage().setDamage(fakeDamageAmount);
+        dummyProjSpec.setLaunchSpeed(0f);
+        dummyProjSpec.getDamage().setType(fakeDamageType);
+
+
+        final MissileAPI dummyProj = (MissileAPI) Global.getCombatEngine().spawnProjectile(null, null, dummyWeapon, loc, 0f, new Vector2f());
+        dummyProj.setMine(true);
+        dummyProj.setNoMineFFConcerns(true);
+        dummyProj.setMinePrimed(true);
+        dummyProj.setUntilMineExplosion(0f);
+        dummyProj.setMineExplosionRange(fakeRadius);
+        ActionPlugin.queueAction(new Action() {
+            @Override
+            public void perform() {
+                Global.getCombatEngine().removeEntity(dummyProj);
+            }
+        }, dur);
     }
 }

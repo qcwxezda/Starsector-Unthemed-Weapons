@@ -11,7 +11,6 @@
   "explosionRadius":50, # purely visual
   "reduceDamageWhileFading":true,
   "useHitGlowWhenDestroyed":true,
-  "fizzleOnReachingWeaponRange":true,
   "dudProbabilityOnFlameout":0,
   "armingTime":0,
   "flameoutTime":0.5,

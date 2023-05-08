@@ -36,4 +36,4 @@ wpnxt_energytorpedomed,WEAPON,"A launcher for the Bloom-class torpedo. Integrati
 wpnxt_spikebarrage,WEAPON,"Fires a sustained barrage of high-velocity, low-yield energy missiles.",,,,
 wpnxt_clusterlauncherbig,WEAPON,"Launches a vessel holding five smaller containers, each of which holds three proximity mines. Containers eject their contents after a short delay, resulting in a total of fifteen mines spread over a wide arc. ",,,,
 wpnxt_orbbarrage,WEAPON,"Fires a large burst of ion missiles that surround the target ship. Although direct damage is poor and dispersed over a large area, the hefty EMP payload can be devastating to ships without full shield coverage.",,,,
-wpnxt_energytorpedolarge,WEAPON,"An upscaled Bloom launcher, the torpedoes fired by this weapon have similarly been scaled up. Impact causes several secondary explosions over a large area that occur after a moderate delay.",,,,
+wpnxt_energytorpedolarge,WEAPON,"Enlarged and enhanced version of the Bloom-class torpedo launcher. Impact causes several secondary explosions over a large area that occur after a moderate delay.",,,,

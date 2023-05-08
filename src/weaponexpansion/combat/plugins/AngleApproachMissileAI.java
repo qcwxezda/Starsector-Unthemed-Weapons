@@ -35,7 +35,7 @@ public class AngleApproachMissileAI extends BaseGuidedMissileAI {
             return;
         }
 
-        Vector2f interceptionPoint = getInterceptionPoint();
+        Vector2f interceptionPoint = getInterceptionPoint(1f);
         Vector2f los = new Vector2f();
         Vector2f.sub(interceptionPoint, missile.getLocation(), los);
         Utils.safeNormalize(los);

@@ -7,19 +7,19 @@ import particleengine.Particles;
 public class IonTorpedoExplosion {
     public static Emitter core(Vector2f loc) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/explosion1.png");
-        emitter.circleOffset(30f, 50f);
-        emitter.life(0.75f, 1.25f);
-        emitter.fadeTime(0.1f, 0.1f, 0.3f, 0.5f);
+        emitter.circleOffset(0f, 50f);
+        emitter.life(1.25f, 1.75f);
+        emitter.fadeTime(0.1f, 0.1f, 1f, 1.5f);
         emitter.facing(0f, 360f);
         emitter.turnRate(-50f, 50f);
         emitter.turnAcceleration(-50f, 50f);
-        emitter.circleVelocity(100f, 100f);
-        emitter.radialAcceleration(-50f, -100f);
+        emitter.radialVelocity(70f, 100f);
+        emitter.radialAcceleration(-100f, -70f);
         emitter.revolutionRate(-20f, 20f);
-        emitter.color(0.588f, 1f, 0.902f, 0.25f);
+        emitter.color(0.588f, 1f, 0.902f, 0.05f);
         emitter.randomHSVA(20f, 0.1f, 0f, 0f);
-        emitter.colorShiftHSVA(0f, -0.3f, -0.3f, -0.05f);
-        emitter.size(150f, 200f);
+        emitter.colorShiftHSVA(0f, -0.3f, 0f, 0f);
+        emitter.size(200f, 300f);
         emitter.growthRate(100f, 150f);
         emitter.growthAcceleration(-50f, -75f);
         return emitter;
@@ -44,7 +44,7 @@ public class IonTorpedoExplosion {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/wpnxt_emp_arcs_modified.png");
         emitter.life(0.25f, 0.3f);
         emitter.fadeTime(0f, 0f, 0.15f, 0.25f);
-        emitter.size(350f, 350f, 300f, 300f);
+        emitter.size(550f, 550f, 500f, 500f);
         emitter.growthRate(-40f, -80f);
         emitter.turnRate(-10f, 10f);
         emitter.facing(0f, 360f);
