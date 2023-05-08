@@ -36,14 +36,14 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
         );
 
         if (ModPlugin.particleEngineEnabled) {
-            Particles.burst(IonTorpedoExplosion.core(pt), 50);
+            Particles.burst(IonTorpedoExplosion.core(pt), 100);
 
             Emitter ringEmitter = IonTorpedoExplosion.ring(pt, proj.getFacing());
             Particles.burst(ringEmitter, 5);
             ringEmitter.facing(35f, 55f);
             Particles.burst(ringEmitter, 5);
 
-            Particles.stream(IonTorpedoExplosion.empArcs(pt), 1, 10, 0.75f);
+            Particles.stream(IonTorpedoExplosion.empArcs(pt), 1, 15, 1f);
         }
 
         for (CombatEntityAPI tgt : targets) {

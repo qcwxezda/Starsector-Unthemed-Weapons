@@ -85,13 +85,13 @@ public abstract class BaseGuidedMissileAI implements MissileAIPlugin, GuidedMiss
     }
 
     public Vector2f getInterceptionLoS() {
-        Vector2f interceptor = getInterceptionPoint();
+        Vector2f interceptor = getInterceptionPoint(1f);
         Vector2f.sub(interceptor, missile.getLocation(), interceptor);
         return interceptor;
     }
 
-    public Vector2f getInterceptionPoint() {
-        return Global.getCombatEngine().getAimPointWithLeadForAutofire(missile, 1f, target, missile.getMaxSpeed());
+    public Vector2f getInterceptionPoint(float accuracy) {
+        return Global.getCombatEngine().getAimPointWithLeadForAutofire(missile, accuracy, target, missile.getMaxSpeed());
     }
 
     @Override

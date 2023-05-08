@@ -2,9 +2,9 @@
 	"id":"weaponexpansion",
 	"name":"Weapon Expansion",
 	"author":"this_is_a_username",
-	"version":"0.1", 
+	"version":"0.2",
 	"description":"Adds more weapons.",
-    "gameVersion": "0.95.1a-RC6",
+    "gameVersion": "0.96a-RC6",
 	"jars": ["jars/WeaponExpansion.jar"],
 	"modPlugin":"weaponexpansion.ModPlugin"
 }

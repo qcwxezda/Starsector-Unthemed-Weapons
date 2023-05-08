@@ -14,6 +14,5 @@
   "glowRadius":125,
   "textureScrollSpeed":64.0,
   "pixelsPerTexel":5.0,
-  "passThroughMissiles":true,
   "bulletSprite":"graphics/missiles/wpnxt_mortar_shot_thin.png"
 }

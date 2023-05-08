@@ -14,6 +14,7 @@
   "hitGlowRadius":90,
   "textureScrollSpeed":64.0,
   "pixelsPerTexel":5.0,
+  "passThroughMissiles":true,
   "bulletSprite":"graphics/missiles/wpnxt_needle.png",
   "onHitEffect":"weaponexpansion.combat.scripts.NeedleDriverEffect"
 }
