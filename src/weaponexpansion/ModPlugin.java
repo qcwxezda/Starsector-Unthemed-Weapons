@@ -56,31 +56,31 @@ public class ModPlugin extends BaseModPlugin {
         customMissiles.put("wpnxt_energytorpedo_shot", new MakeMissilePlugin() {
             @Override
             public MissileAIPlugin make(MissileAPI missile) {
-                return new LeadingMissileAI(missile, 1.5f);
+                return new LeadingMissileAI(missile, 1.2f);
             }
         });
         customMissiles.put("wpnxt_energytorpedolarge_shot", new MakeMissilePlugin() {
             @Override
             public MissileAIPlugin make(MissileAPI missile) {
-                return new LeadingMissileAI(missile, 1.5f);
+                return new LeadingMissileAI(missile, 1.2f);
             }
         });
         customMissiles.put("wpnxt_minispiker_shot", new MakeMissilePlugin() {
             @Override
             public MissileAIPlugin make(MissileAPI missile) {
-                return new LOSMissileAI(missile, 1.5f);
+                return new LOSMissileAI(missile, 1.2f);
             }
         });
         customMissiles.put("wpnxt_impaler_shot", new MakeMissilePlugin() {
             @Override
             public MissileAIPlugin make(MissileAPI missile) {
-                return new AngleApproachMissileAI(missile, 1.5f, 5f);
+                return new AngleApproachMissileAI(missile, 1.2f, 5f);
             }
         });
         customMissiles.put("wpnxt_orb_shot", new MakeMissilePlugin() {
             @Override
             public MissileAIPlugin make(MissileAPI missile) {
-                return new AngleApproachMissileAI(missile, 1.5f, 2f);
+                return new AngleApproachMissileAI(missile, 1.2f, 2f);
             }
         });
         customMissiles.put("wpnxt_clustermine_spawn", new MakeMissilePlugin() {
@@ -92,7 +92,7 @@ public class ModPlugin extends BaseModPlugin {
         customMissiles.put("wpnxt_phasetorpedo_shot", new MakeMissilePlugin() {
             @Override
             public MissileAIPlugin make(MissileAPI missile) {
-                return new PhaseTorpedoAI(missile, 1.5f);
+                return new PhaseTorpedoAI(missile, 1.2f);
             }
         });
 

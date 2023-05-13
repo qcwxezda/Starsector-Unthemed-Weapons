@@ -1,9 +1,9 @@
 {
   "id":"wpnxt_explosiveshell_shot",
   "specClass":"projectile",
-  "spawnType":"BALLISTIC",
-  "collisionClass":"PROJECTILE_FF",
-  "collisionClassByFighter":"PROJECTILE_FIGHTER",
+  "spawnType":"BALLISTIC_AS_BEAM",
+  "collisionClass":"RAY",
+  "collisionClassByFighter":"RAY_FIGHTER",
   "length":150.0,
   "hitGlowRadius":100,
   "width":10.0,

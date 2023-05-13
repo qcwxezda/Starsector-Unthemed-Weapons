@@ -76,7 +76,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
     }
 
     private void addExplosionVisual(Vector2f loc, float radius) {
-        Explosion.makeExplosion(loc, radius, 35, 1, 100, new float[]{0.2f, 0.2f, 1f, 0.1f}, new float[]{0.4f, 0.4f, 1f, 0.7f}, new float[]{0.3f, 0.3f, 1f, 0.3f}, new float[]{0.2f, 0.2f, 1f, 1f});
+        Explosion.makeExplosion(loc, radius, 35, 1, 100, new float[]{0.33f, 0.33f, 1f, 0.1f}, new float[]{0.4f, 0.4f, 1f, 0.7f}, new float[]{0.3f, 0.3f, 1f, 0.3f}, new float[]{0.2f, 0.2f, 1f, 1f});
     }
 
     @Override
