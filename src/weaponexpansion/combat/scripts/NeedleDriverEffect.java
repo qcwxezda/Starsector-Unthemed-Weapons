@@ -5,6 +5,7 @@ import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
+import weaponexpansion.util.Utils;
 
 import java.util.LinkedList;
 
@@ -40,8 +41,12 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
         spec.setGlowRadius(0f);
         spec.setLength(attachedLength);
         Vector2f scaledVelocity = new Vector2f(proj.getVelocity());
-        float adjustAmount = 0.7f * engine.getElapsedInLastFrame() * proj.getVelocity().length();
-        scaledVelocity.scale(0.7f * engine.getElapsedInLastFrame());
+        Utils.safeNormalize(scaledVelocity);
+        scaledVelocity.scale(0.3f * attachedLength);
+        float adjustAmount = attachedLength * 0.3f;
+//        Vector2f scaledVelocity = new Vector2f(proj.getVelocity());
+//        float adjustAmount = 0.7f * engine.getElapsedInLastFrame() * proj.getVelocity().length();
+//        scaledVelocity.scale(0.7f * engine.getElapsedInLastFrame());
         Vector2f spawnLocation = Misc.getDiff(pt, scaledVelocity);
         DamagingProjectileAPI spawn = (DamagingProjectileAPI) engine.spawnProjectile(proj.getSource(), proj.getWeapon(), proj.getWeapon().getId(), spawnLocation, proj.getFacing(), new Vector2f());
         spec.setMaxRange(maxRange);

@@ -5,23 +5,12 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
-import org.lwjgl.BufferUtils;
+import com.fs.starfarer.combat.P;
 import org.lwjgl.util.vector.Vector2f;
-import particleengine.Emitter;
-import particleengine.Particles;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.combat.plugins.Action;
 import weaponexpansion.combat.plugins.ActionPlugin;
 
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.FloatBuffer;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.List;
 
@@ -40,29 +29,112 @@ public class Utils {
         }
 
         private void updateClosest(Vector2f newPt, CombatEntityAPI newEntity, float newDist) {
-            distance = newDist;
-            entity = newEntity;
-            point = newPt;
-            isEmpty = false;
+            if (newDist < distance) {
+                distance = newDist;
+                entity = newEntity;
+                point = newPt;
+                isEmpty = false;
+            }
         }
     }
 
-    public static ClosestCollisionData collisionCheck(Vector2f a, Vector2f b, Collection<? extends CombatEntityAPI> ignoreList, CombatEngineAPI engine) {
-        return collisionCheck(a, b, ignoreList, -1, engine);
+    /** Checks if the circle at origin pt with the given radius collides with an entity */
+    public static ClosestCollisionData circleCollisionCheck(Vector2f pt, float radius, Collection<? extends CombatEntityAPI> ignoreList, CombatEngineAPI engine) {
+        Iterator<Object> objItr = engine.getAllObjectGrid().getCheckIterator(pt, 2f*radius, 2f*radius);
+
+        ClosestCollisionData data = new ClosestCollisionData();
+
+        while (objItr.hasNext()) {
+            Object obj = objItr.next();
+            if (!(obj instanceof CombatEntityAPI)) continue;
+            if ((obj instanceof DamagingProjectileAPI) && !(obj instanceof MissileAPI)) continue;
+            if (ignoreList != null && ignoreList.contains(obj)) continue;
+
+            CombatEntityAPI o = (CombatEntityAPI) obj;
+            if (CollisionClass.NONE.equals(o.getCollisionClass())) continue;
+            if (o instanceof ShipAPI && ((ShipAPI) o).isPhased()) continue;
+
+            float centerDistance = Misc.getDistance(pt, o.getLocation());
+            // Collision radius of target fully contained in collision radius of projectile
+            if (centerDistance + o.getCollisionRadius() <= radius) {
+                data.updateClosest(o.getLocation(), o, centerDistance);
+            }
+
+            if (o instanceof ShipAPI) {
+                ShipAPI ship = (ShipAPI) o;
+
+                if (ship.getShield() != null) {
+                    Pair<Vector2f, Vector2f> pts = intersectCircles(pt, radius, ship.getShieldCenterEvenIfNoShield(), ship.getShieldRadiusEvenIfNoShield());
+                    if (pts != null) {
+                        if (ship.getShield().isWithinArc(pts.one)) {
+                            data.updateClosest(pts.one, ship, Misc.getDistance(pt, pts.one));
+                        }
+                        if (ship.getShield().isWithinArc(pts.two)) {
+                            data.updateClosest(pts.two, ship, Misc.getDistance(pt, pts.two));
+                        }
+                    }
+                }
+            }
+
+            // No exact bounds -- check collision radius
+            if (o.getExactBounds() == null) {
+
+                // Collision radius of projectile fully contained in collision radius of target
+                if (centerDistance + radius <= o.getCollisionRadius()) {
+                    data.point = pt;
+                    data.entity = o;
+                    return data;
+                }
+
+                Pair<Vector2f, Vector2f> pts = intersectCircles(pt, radius, o.getLocation(), o.getCollisionRadius());
+                if (pts != null) {
+                    data.updateClosest(pts.one, o, Misc.getDistance(pt, pts.one));
+                    data.updateClosest(pts.two, o, Misc.getDistance(pt, pts.two));
+                }
+                continue;
+            }
+
+            // Check exact bounds
+            BoundsAPI bounds = o.getExactBounds();
+            bounds.update(o.getLocation(), o.getFacing());
+            List<BoundsAPI.SegmentAPI> segments = bounds.getSegments();
+
+            // Check if point itself is inside bounds
+            List<Vector2f> boundVerts = new ArrayList<>();
+            boundVerts.add(segments.get(0).getP1());
+            for (BoundsAPI.SegmentAPI segment : segments) {
+                boundVerts.add(segment.getP2());
+            }
+            if (Misc.isPointInBounds(pt, boundVerts)) {
+                data.updateClosest(pt, o, 0f);
+                break;
+            }
+
+            for (BoundsAPI.SegmentAPI segment : segments) {
+                List<Vector2f> pts = intersectSegmentCircle(segment.getP1(), segment.getP2(), pt, radius);
+                for (Vector2f p : pts) {
+                    data.updateClosest(p, o, Misc.getDistance(pt, p));
+                }
+            }
+        }
+
+        return data.isEmpty ? null : data;
     }
 
-    public static ClosestCollisionData collisionCheck(Vector2f a, Vector2f b, int ignoreOwner, CombatEngineAPI engine) {
-        return collisionCheck(a, b, null, ignoreOwner, engine);
+    public static ClosestCollisionData rayCollisionCheck(Vector2f a, Vector2f b, Collection<? extends CombatEntityAPI> ignoreList, CombatEngineAPI engine) {
+        return rayCollisionCheck(a, b, ignoreList, -1, engine);
+    }
+
+    public static ClosestCollisionData rayCollisionCheck(Vector2f a, Vector2f b, int ignoreOwner, CombatEngineAPI engine) {
+        return rayCollisionCheck(a, b, null, ignoreOwner, engine);
     }
 
     /**
      * Checks if the segment from a to b collides with an entity and returns the collision point closest to a.
      * Returns null if there was no collision.
      */
-    public static ClosestCollisionData collisionCheck(Vector2f a, Vector2f b, Collection<? extends CombatEntityAPI> ignoreList, int ignoreOwner, CombatEngineAPI engine) {
-        // TIme since last hit should advance in world time, not ship time
+    public static ClosestCollisionData rayCollisionCheck(Vector2f a, Vector2f b, Collection<? extends CombatEntityAPI> ignoreList, int ignoreOwner, CombatEngineAPI engine) {
         float length = Misc.getDistance(a, b);
-
         Iterator<Object> objItr = engine.getAllObjectGrid().getCheckIterator(a, length, length);
 
         // Keep track of the closest collision point as that is the one that we will end up using
@@ -205,8 +277,8 @@ public class Utils {
                     float subtendedAngle = Math.abs(angleDiff(theta1, theta2));
 
                     if (subtendedAngle > 0f) {
-                        float damage = totalDamage * subtendedAngle / 360f;
-                        float empDamage = totalEmp * subtendedAngle / 360f;
+                        float damage = totalDamage * (float) Math.sqrt(subtendedAngle / 360f);
+                        float empDamage = totalEmp * (float) Math.sqrt(subtendedAngle / 360f);
                         engine.applyDamage(entity, collisionPoints.one, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
                         engine.applyDamage(entity, collisionPoints.two, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
                     }
@@ -260,8 +332,8 @@ public class Utils {
                                 float subtendedAngle = Math.abs(angleDiff(collisionAngles.get(a), collisionAngles.get(b)));
 
                                 if (subtendedAngle > 0f) {
-                                    float damage = totalDamage * subtendedAngle / 360f;
-                                    float empDamage = totalEmp * subtendedAngle / 360f;
+                                    float damage = totalDamage * (float) Math.sqrt(subtendedAngle / 360f);
+                                    float empDamage = totalEmp * (float) Math.sqrt(subtendedAngle / 360f);
                                     Vector2f p1 = new Vector2f(
                                             origin.x + radius * (float) Math.cos(collisionAngles.get(a) * Misc.RAD_PER_DEG),
                                             origin.y + radius * (float) Math.sin(collisionAngles.get(a) * Misc.RAD_PER_DEG));
@@ -315,8 +387,8 @@ public class Utils {
                         float subtendedAngle = Math.abs(angleDiff(collisionAngles.get(a), collisionAngles.get(b)));
 
                         if (subtendedAngle > 0f) {
-                            float damage = totalDamage * subtendedAngle / 360f;
-                            float empDamage = totalEmp * subtendedAngle / 360f;
+                            float damage = totalDamage * (float) Math.sqrt(subtendedAngle / 360f);
+                            float empDamage = totalEmp * (float) Math.sqrt(subtendedAngle / 360f);
                             Vector2f p1 = new Vector2f(
                                     origin.x + radius * (float) Math.cos(collisionAngles.get(a) * Misc.RAD_PER_DEG),
                                     origin.y + radius * (float) Math.sin(collisionAngles.get(a) * Misc.RAD_PER_DEG));

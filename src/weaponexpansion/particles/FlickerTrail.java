@@ -10,31 +10,27 @@ public class FlickerTrail {
 
     public static Emitter trail(Vector2f loc, float amp) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/smoke32.png");
-        emitter.color(0.6f, 0.4f, 1f, 0.15f);
+        emitter.color(0.98f, 0.53f, 0.69f, 0.175f);
         emitter.randomHSVA(30f, 0f, 0f, 0f);
-        emitter.offset(-30f, 0f, 0f, 0f);
         emitter.saturationShift(-0.24f, -0.3f);
         emitter.velocity(-90f, -80f, 0f, 0f);
-        emitter.size(50f, 60f, 20f, 20f);
-        emitter.growthRate(-5f, -5f, 0f, 0f);
-        emitter.fadeTime(0f, 0f, 1.5f, 2f);
+        emitter.size(20f, 30f, 10f, 15f);
+        emitter.growthRate(8f, 12f, 8f, 12f);
+        emitter.fadeTime(0f, 0f, 2f, 3f);
         emitter.life(3f, 3.5f);
-        emitter.facing(-10f, 10f);
+        emitter.facing(0, 360f);
         emitter.turnRate(-5f, 5f);
-        emitter.sinusoidalMotionY(amp, amp*1.5f, 0.1f, 0.1f, 0f, 0f);
+        emitter.sinusoidalMotionY(amp, amp*1.5f, 0.5f, 0.5f, 0f, 0f);
         return emitter;
     }
 
     public static void makeTrail(final CombatEntityAPI follow) {
-        final float angleAmp = 5f;
-        final float[] anglePhase = { 0f };
-        for (float f = -20f; f <= 20f; f += 20f) {
+        for (float f = -15f; f <= 15f; f += 30f) {
             Emitter trailEmitter = trail(follow.getLocation(), f);
-            Particles.stream(trailEmitter, 5, 100, 100f, new Particles.StreamAction() {
+            Particles.stream(trailEmitter, 1, 150, 100f, new Particles.StreamAction() {
                 @Override
                 public boolean apply(Emitter emitter) {
-                    anglePhase[0] += 0.04f;
-                    emitter.setAxis(follow.getFacing() + angleAmp * (float)Math.sin(anglePhase[0]));
+                    emitter.setAxis(follow.getFacing());
                     emitter.setLocation(follow.getLocation());
                     return Global.getCombatEngine().isEntityInPlay(follow);
                 }

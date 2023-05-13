@@ -38,6 +38,7 @@ public abstract class BaseGuidedMissileAI implements MissileAIPlugin, GuidedMiss
         maxSeekRange = maxSeekRangeFactor * missile.getMaxRange();
         canTargetFighters =
                 missile.getWeapon() != null && missile.getWeapon().hasAIHint(WeaponAPI.AIHints.ANTI_FTR);
+        findTargetInterval.forceIntervalElapsed();
     }
 
     /** If correctVelocity is true, will try to steer slightly off the targetAngle to correct the velocity
