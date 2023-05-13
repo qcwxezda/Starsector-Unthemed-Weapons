@@ -22,7 +22,7 @@ public class IonRocketEffect implements OnHitEffectPlugin {
                 maxArcs,
                 proj.getLocation(),
                 null,
-                true,
+                false,
                 arcRange,
                 true,
                 new Utils.TargetChecker() {

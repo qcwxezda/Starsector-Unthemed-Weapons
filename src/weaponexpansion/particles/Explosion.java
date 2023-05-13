@@ -11,20 +11,20 @@ public class Explosion {
     public static Emitter core(Vector2f loc, float scale, float[] color, String particlePath) {
         Emitter emitter = Particles.initialize(loc, particlePath);
         emitter.setSyncSize(true);
-        emitter.circleOffset(0f, scale*0.15f);
+        emitter.circleOffset(0f, scale*0.1f);
         emitter.circleVelocity(0f, scale*0.05f);
         emitter.color(color);
         emitter.facing(0f, 360f);
-        emitter.fadeTime(0.1f, 0.1f, 1.3f, 1.5f);
-        emitter.size(scale*0.6f, scale*0.8f);
-        emitter.growthAcceleration(-scale*0.7f, -scale*0.6f);
-        emitter.growthRate(scale*0.8f, scale);
-        emitter.life(1.75f, 2.25f);
-        emitter.radialVelocity(scale*0.03f, scale*0.4f);
+        emitter.fadeTime(0.1f, 0.1f, 1.9f, 1.9f);
+        emitter.size(scale*0.4f, scale*0.5f);
+        emitter.growthAcceleration(-scale*1.1f, -scale*0.9f);
+        emitter.growthRate(scale*1.3f, scale*1.5f);
+        emitter.life(2f, 2f);
+        emitter.radialVelocity(scale*0.03f, scale*0.15f);
         emitter.radialAcceleration(-scale*0.2f, -scale*0.15f);
         emitter.randomHSVA(35f, 1f, 0f, 0f);
         emitter.revolutionRate(-10f, 10f);
-        emitter.saturationShift(-0.3f, 0f);
+        emitter.saturationShift(-0.2f, -0.1f);
         emitter.turnRate(-20f, 20f);
         emitter.turnAcceleration(-20f, 20f);
         return emitter;
@@ -33,10 +33,10 @@ public class Explosion {
     public static Emitter ring(Vector2f loc, float scale, float[] color) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/wpnxt_explosion_ring.png");
         emitter.setSyncSize(true);
-        emitter.life(0.75f, 1f);
-        emitter.fadeTime(0.1f, 0.1f, 0.5f, 0.7f);
-        emitter.size(scale*0.8f, scale*1.2f);
-        emitter.growthRate(scale*2f, scale*2.5f);
+        emitter.life(1f, 1.25f);
+        emitter.fadeTime(0f, 0f, 0.4f, 0.6f);
+        emitter.size(scale*0.4f, scale*0.5f);
+        emitter.growthRate(scale*2f, scale*2.1f);
         emitter.growthAcceleration(-scale*1.5f, -scale);
         emitter.color(color);
         emitter.hueShift(-50f, 50f);
@@ -48,8 +48,9 @@ public class Explosion {
         emitter.setSyncSize(true);
         emitter.life(0.75f, 1.75f);
         emitter.fadeTime(0f, 0f, 0.5f, 0.7f);
-        emitter.size(scale*0.025f, scale*0.05f);
-        emitter.circleOffset(0f, scale*0.4f);
+        float debrisScale = (float) Math.sqrt(scale) * 0.6f;
+        emitter.size(debrisScale*0.8f, debrisScale*1.2f);
+        emitter.circleOffset(0f, scale*0.25f);
         emitter.radialVelocity(scale*0.5f, scale*0.75f);
         emitter.growthRate(-scale*0.025f, -scale*0.0125f);
         emitter.color(color);
@@ -63,7 +64,7 @@ public class Explosion {
         emitter.setSyncSize(true);
         emitter.life(0.5f, 0.75f);
         emitter.fadeTime(0f, 0f, 0.5f, 0.75f);
-        emitter.size(scale*1.5f, scale*1.5f);
+        emitter.size(scale*1.5f, scale*2.25f);
         emitter.growthRate(-scale*0.4f, -scale*0.2f);
         emitter.color(color);
         return emitter;
@@ -81,7 +82,7 @@ public class Explosion {
         Particles.burst(core(loc, scale, coreColor, particlePath), coreCount);
         Particles.burst(ring(loc, scale, ringColor), ringCount);
         Particles.burst(debris(loc, scale, debrisColor), debrisCount);
-        Particles.burst(glow(loc, scale, glowColor), 2);
+        Particles.burst(glow(loc, scale, glowColor), 1);
     }
 
 }

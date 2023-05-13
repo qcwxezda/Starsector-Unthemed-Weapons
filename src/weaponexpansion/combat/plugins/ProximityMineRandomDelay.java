@@ -76,8 +76,8 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
     }
 
 
-    public void explode() {
-        if (explosionSpec == null) return;
+    public DamagingProjectileAPI explode() {
+        if (explosionSpec == null) return null;
 
         CombatEngineAPI engine = Global.getCombatEngine();
         engine.removeEntity(missile);
@@ -88,6 +88,6 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
             Explosion.makeExplosion(missile.getLocation(), explosionSpec.getRadius()*1.2f, 30, 1, 25);
         }
 
-        engine.spawnDamagingExplosion(explosionSpec, missile.getSource(), missile.getLocation());
+        return engine.spawnDamagingExplosion(explosionSpec, missile.getSource(), missile.getLocation());
     }
 }

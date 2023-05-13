@@ -4,7 +4,6 @@ package weaponexpansion.combat.scripts;
 public class EnergyTorpedoLargeEffect extends EnergyTorpedoEffect {
 
     public EnergyTorpedoLargeEffect() {
-        numSpawns = 5;
         minSpawnDistance = 80f;
         maxSpawnDistance = 150f;
         minDelay = 1f;

@@ -20,13 +20,13 @@ public class ImpalerEffect implements EveryFrameWeaponEffectPlugin, OnFireEffect
         }
 
         AngleApproachMissileAI ai = (AngleApproachMissileAI)  missile.getUnwrappedMissileAI();
-        ai.setApproachOffset( offset + Utils.randBetween(-10f, 10f));
-        offset -= 30f;
+        ai.setApproachOffset( offset + Utils.randBetween(-20f, 20f));
+        offset -= 45f;
     }
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
         // Reset offset after each set of shots
-        offset = 60f;
+        offset = 90f;
     }
 }

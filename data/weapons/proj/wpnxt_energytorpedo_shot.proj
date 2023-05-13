@@ -21,7 +21,8 @@
     "particleCount":75,
     "particleColor":[125,125,200,255],
   },
-  "flameoutTime":3, # total time from flameout to full fadeout
+  "flameoutTime":1.5, # total time from flameout to full fadeout,
+  "dudProbabilityOnFlameout":0,
   "armingTime":0.25,
   "noEngineGlowTime":0.5, # time spent without the engine glow being rendered
   "fadeTime":0.5, # fadeout duration
