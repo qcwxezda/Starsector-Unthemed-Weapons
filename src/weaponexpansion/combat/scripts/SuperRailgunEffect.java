@@ -2,8 +2,6 @@ package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.combat.BoundsAPI.SegmentAPI;
-import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.util.GlowRenderer;
 import weaponexpansion.util.Utils;
@@ -133,7 +131,7 @@ public class SuperRailgunEffect extends GlowOnFirePlugin {
             List<CombatEntityAPI> ignoreList = new ArrayList<>();
             ignoreList.add(proj.getSource());
             ignoreList.add(proj);
-            Utils.ClosestCollisionData closest = Utils.collisionCheck(prevLocation, location, ignoreList, engine);
+            Utils.ClosestCollisionData closest = Utils.rayCollisionCheck(prevLocation, location, ignoreList, engine);
 
             if (closest == null) {
                 continue;
@@ -171,6 +169,7 @@ public class SuperRailgunEffect extends GlowOnFirePlugin {
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
         super.onFire(proj, weapon, engine);
+        proj.setCollisionClass(CollisionClass.NONE);
         projectiles.add(new ProjectileData(proj));
     }
 }

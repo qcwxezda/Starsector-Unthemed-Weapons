@@ -4,8 +4,9 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL14;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
@@ -14,14 +15,13 @@ import weaponexpansion.combat.plugins.Action;
 import weaponexpansion.combat.plugins.ActionPlugin;
 import weaponexpansion.particles.Explosion;
 import weaponexpansion.particles.FlickerTrail;
+import weaponexpansion.particles.PhaseTorpedoSecondaryExplosion;
 import weaponexpansion.util.Utils;
-
-import java.awt.*;
 
 @SuppressWarnings("unused")
 public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin {
 
-    public static final float explosionSpeed = 400f, timeBetweenHits = 0.04f, ringDamage = 2500f;
+    public static final float explosionSpeed = 200f, timeBetweenHits = 0.1f, ringDamage = 1250f;
 
     @Override
     public void onHit(final DamagingProjectileAPI proj, CombatEntityAPI target, final Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, final CombatEngineAPI engine){
@@ -66,11 +66,9 @@ public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin
     }
 
     private void addExplosionVisual(Vector2f loc, float radius) {
-        String corePath = "graphics/fx/explosion0.png";
-        float[] coreColor = new float[]{0.6f, 0.4f, 1f, 0.06f};
-        Explosion.makeExplosion(loc, radius, 50, 1, 0, coreColor, new float[]{0.7f, 0.5f, 1f, 0.7f}, new float[]{0.7f, 0.3f, 1f, 0.5f}, new float[]{0.5f, 0.3f, 1f, 1f}, corePath);
-        Emitter core = Explosion.core(loc, radius, coreColor, corePath);
-        Particles.stream(core, 1, 75, 1.5f);
+        PhaseTorpedoSecondaryExplosion.makeStaticRing(loc);
+        PhaseTorpedoSecondaryExplosion.makeRing(loc, 300);
+        Explosion.makeExplosion(loc, radius, 30, 1, 250);
     }
 
     @Override

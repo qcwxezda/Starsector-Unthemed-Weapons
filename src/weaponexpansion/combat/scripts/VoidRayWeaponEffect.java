@@ -19,14 +19,14 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
     static float fullChargeGrowRate = 1.5f;
 
     /** Amount of damage to transfer to full strength first beam per second. Approximate */
-    static float transferPerSecond = 0.2f;
+    static float transferPerSecond = 0.5f;
 
     /** Need both spreads and angleOffsets since angleOffsets is shared between every voidray weapon */
     float spread = 20f;
     boolean randomizedSpreads = false;
     float convergeLevel = 0f;
-    /** Per second */
-    float convergeLevelRate = 0.125f;
+    /** Per second, as fraction of remaining convergence arc */
+    float convergeLevelRate = 0.75f;
 
     List<Float> spreads = new ArrayList<>();
     List<Float> angleOffsets = new ArrayList<>();
@@ -52,7 +52,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
         }
 
         if (weapon.getChargeLevel() >= 1f) {
-            convergeLevel = Math.min(1f, convergeLevel + convergeLevelRate * amount);
+            convergeLevel = Math.min(1f, convergeLevel + convergeLevelRate * (1.05f - convergeLevel) * amount);
         }
 
         // Weapon is at max charge, slowly transfer damage to the first beam (makes it slowly stronger against armor)

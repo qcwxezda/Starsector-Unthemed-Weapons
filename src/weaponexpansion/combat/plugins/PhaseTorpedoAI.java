@@ -5,8 +5,6 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.ModPlugin;
-import weaponexpansion.particles.FlickerJumpTrail;
 
 import java.awt.*;
 import java.util.*;
@@ -48,7 +46,7 @@ public class PhaseTorpedoAI extends BaseGuidedMissileAI {
         float tExit = jumpInterval.getIntervalDuration() - jumpInterval.getElapsed();
         float tMin = Math.min(tEnter, tExit);
         if (tMin <= 0.5f) {
-            missile.setJitter(missile, Color.WHITE, 1f, (int) (8f * (0.5f - tMin)), 0f, 200f * (0.5f - tMin));
+            missile.setJitter(missile, Color.WHITE, 1.6f * (0.5f - tMin), (int) (8f * (0.5f - tMin)), 0f, 100f * (0.5f - tMin));
         }
 
         if (jumpInterval.intervalElapsed()) {

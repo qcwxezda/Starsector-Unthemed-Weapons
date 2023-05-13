@@ -20,7 +20,7 @@
     "blowbackDuration":2.0,
     "blowbackLength":22.0,
     "blowbackSpread":15.0,
-    "particleColor":[150,100,150,105]},
+    "particleColor":[250,136,176,105]},
   "projectileSpecId":"wpnxt_phasetorpedo_shot",
   "fireSoundTwo":"wpnxt_phasetorpedo_fire"
 }

@@ -9,46 +9,117 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Refactor particle engine to separate mod, add particle explosions and trail, add missile descriptions">
-      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_phasetorpedo_shot.proj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_phasetorpedo.wpn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_phasetorpedo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_phasetorpedo_nocolor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_phasetorpedo_hardpoint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_phasetorpedo_turret.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_phasetorpedo_explosion.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_phasetorpedo_fire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/PhaseTorpedoAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/PhaseTorpedoEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/FlickerJumpTrail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/FlickerTrail.java" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Add phase torpedo, lots of balancing">
+      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energyball_shot.proj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energyballlauncher.wpn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/fx/wpnxt_starburst_glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_energyball.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_hardpoint.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_hardpoint_glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_turret.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_turret_glow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ClusterMineOnHitEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyBallLauncherEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallCharge.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallTrail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoSecondaryExplosion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/util/EnergyBallRenderer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/strings/descriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clusterminebig_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clusterminebig_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedo_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedolarge_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedolarge_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_explosiveshell_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_explosiveshell_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_needledriver_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_needledriver_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_orb_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_orb_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_spike_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_spike_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_phasetorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_phasetorpedo_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_superrailgun_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_superrailgun_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_ultrablaster_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_ultrablaster_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_lv3shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_lv3shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/mod_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_phasetorpedo.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_phasetorpedo.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/fx/greeblesheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/fx/orig/wpnxt_explosion_sheet.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/fx/wpnxt_explosion_ring.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/fx/wpnxt_explosion_ring.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/fx/wpnxt_explosion_sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/fx/wpnxt_fog_circle_sprite_sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/fx/wpnxt_trail.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/missiles/orig/energytorpedo.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/missiles/orig/iontorpedo.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/missiles/orig/minivulcan.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/missiles/orig/mortarshot_big.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/missiles/orig/orb.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/missiles/orig/voidcannonshot.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/missiles/wpnxt_phasetorpedo.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/missiles/wpnxt_phasetorpedo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/missiles/wpnxt_phasetorpedo_nocolor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/boltgun.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/boltrepeater.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/boltstorm.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/boltstorm2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/boltstreamer.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/clusterminebig.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/clusterminelauncher.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/clusterminelauncher2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/energyscatterer.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedo.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedo2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedolarge.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedolarge2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedolarge3.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedolarge4.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedomed.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/energytorpedomed2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/enhtaclaser.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/explosiveshelllauncher.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/fragcannon.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/fragpdbeam.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/heavypounder.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/heavypounder2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/heavypounder3.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/heavyrailgun.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/impactbeam.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/impactlance.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/impaler.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/ionrocket.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/lightpounder.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/lightpounder2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/lightrailburst.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/lightrailburst2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/miniblaster.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/minigun.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/minigun2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/minigun3.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/minigun_resized.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/minimortarbattery.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/mininglasermk2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/minispiker.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/needledriver.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/orbbarrage.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/shotgun.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/spikebarrage.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/superrailgun.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/superrailgun2.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/superrailgun3.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/ultrablaster.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/unstablecannon.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/voidcannon.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/voidray.psd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/orig/voidray2.psd" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/AngleApproachMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/AngleApproachMissileAI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/BaseGuidedMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/BaseGuidedMissileAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/LeadingMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/LeadingMissileAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/PhaseTorpedoAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/PhaseTorpedoAI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ImpalerEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ImpalerEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonRocketEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonRocketEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/NeedleDriverEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/NeedleDriverEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/PhaseTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/PhaseTorpedoEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SuperRailgunEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SuperRailgunEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidRayWeaponEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidRayWeaponEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/IonTorpedoExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/IonTorpedoExplosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/FlickerTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/FlickerTrail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/ExplosionRenderer.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -363,12 +434,18 @@
       <option name="project" value="LOCAL" />
       <updated>1683146628145</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Add phase torpedo, lots of balancing">
+      <created>1683511393370</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1683511393370</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Mass renaming" />
     <MESSAGE value="Add needle driver, redo medium energy sprites" />
     <MESSAGE value="Add 3 small weapons, modify many images" />
     <MESSAGE value="Add boltstorm, voidcannon, miniblaster, impact beam + balancing" />
@@ -393,7 +470,8 @@
     <MESSAGE value="New particle system" />
     <MESSAGE value="Update particle system" />
     <MESSAGE value="Refactor particle engine to separate mod, add particle explosions and trail, add missile descriptions" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor particle engine to separate mod, add particle explosions and trail, add missile descriptions" />
+    <MESSAGE value="Add phase torpedo, lots of balancing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add phase torpedo, lots of balancing" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
@@ -412,9 +490,10 @@
         <watch expression="damageResult.getDamageToHull()" language="JAVA" />
       </configuration>
       <configuration name="Application">
-        <watch expression="newGame" />
-        <watch expression="pSpec.getId()" language="JAVA" />
-        <watch expression="mSpec.getHullSpec().getHullId()" language="JAVA" />
+        <watch expression="weapon.getCooldownRemaining()" language="JAVA" />
+        <watch expression="weapon.getChargeLevel()" language="JAVA" />
+        <watch expression="weapon.getBurstFireTimeRemaining()" language="JAVA" />
+        <watch expression="weapon.isFiring()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

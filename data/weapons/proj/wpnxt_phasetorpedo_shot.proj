@@ -3,22 +3,22 @@
   "specClass":"missile",
   "missileType":"MISSILE",
   "sprite":"graphics/missiles/wpnxt_phasetorpedo.png",
-  "size":[14,27],
-  "center":[7,14],
+  "size":[28,54],
+  "center":[14,28],
   "collisionRadius":25,
   "collisionClass":"MISSILE_NO_FF",
-  "explosionColor":[170,200,255,255],  # purely visual, will get a white additively blended core on top of this color
+  "explosionColor":[230,170,255,255],  # purely visual, will get a white additively blended core on top of this color
   "explosionRadius":500, # purely visual
   "explosionSpec":{"duration":0.1f, # not visual
-    "radius":500,
-    "coreRadius":100, # full damage within core radius
+    "radius":600,
+    "coreRadius":300, # full damage within core radius
     "collisionClass":PROJECTILE_FF,
     "collisionClassByFighter":PROJECTILE_FIGHTER,
     "particleSizeMin":5.0,
     "particleSizeRange":3.0,
     "particleDuration":1,
     "particleCount":100,
-    "particleColor":[150,200,200,255]
+    "particleColor":[200,150,200,255]
   },
   "flameoutTime":3, # total time from flameout to full fadeout,
   "dudProbabilityOnFlameout":0,

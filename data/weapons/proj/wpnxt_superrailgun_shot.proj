@@ -2,8 +2,8 @@
   "id":"wpnxt_superrailgun_shot",
   "specClass":"projectile",
   "spawnType":"BALLISTIC",
-  "collisionClass":"NONE",
-  "collisionClassByFighter":"NONE",
+  "collisionClass":"PROJECTILE_FF", # Set to NONE after firing, this is just so ships don't shoot each other in the back
+  "collisionClassByFighter":"PROJECTILE_FIGHTER",
   "length":300.0,
   "hitGlowRadius":150,
   "width":6.0,

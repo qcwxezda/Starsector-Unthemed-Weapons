@@ -2,11 +2,17 @@ package weaponexpansion.combat.plugins;
 
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
+import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.util.Utils;
 
 public class LeadingMissileAI extends BaseGuidedMissileAI {
+
+    private final IntervalUtil seekInterval = new IntervalUtil(0.1f, 0.1f);
+    private float targetAngle = 0f;
+    private static final float maxRandomOffset = 500f;
+    private final float randomOffset;
 
     private static class SmoothTurnData {
         ShipCommand command;
@@ -20,6 +26,8 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
 
     public LeadingMissileAI(MissileAPI missile, float maxSeekRangeFactor) {
         super(missile, maxSeekRangeFactor);
+        randomOffset = Utils.randBetween(-maxRandomOffset, maxRandomOffset);
+        seekInterval.forceIntervalElapsed();
     }
 
     private SmoothTurnData smoothTurnExt(float targetAngle, boolean calculateResultingOffset) {
@@ -218,33 +226,46 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
     public void advance(float amount) {
 
         missile.giveCommand(ShipCommand.ACCELERATE);
+        seekInterval.advance(amount);
 
         if (!preAdvance(amount)) {
             return;
         }
 
-        Vector2f interceptor = getInterceptionLoS();
-        float interceptAngle = Misc.getAngleInDegrees(interceptor);
+        if (seekInterval.intervalElapsed()) {
+            Vector2f interceptPoint = getInterceptionPoint(1f);
+            Vector2f interceptLoS = Misc.getDiff(interceptPoint, missile.getLocation());
+            Utils.safeNormalize(interceptLoS);
+            Vector2f perp = Misc.getPerp(interceptLoS);
+            float dist = Misc.getDistance(interceptPoint, missile.getLocation());
+            float distRatio = Math.min(1f, dist / missile.getMaxRange());
+            perp.scale(distRatio * randomOffset);
+
+            Vector2f modifiedInterceptPoint = new Vector2f();
+            Vector2f.add(interceptPoint, perp, modifiedInterceptPoint);
+            Vector2f modifiedInterceptLoS = Misc.getDiff(modifiedInterceptPoint, missile.getLocation());
+            targetAngle = Misc.getAngleInDegrees(modifiedInterceptLoS);
+        }
+
         float moveSpeed = missile.getVelocity().length() + 0.01f;
         float velAngle = moveSpeed > 0f ? Misc.getAngleInDegrees(missile.getVelocity()) : missile.getFacing();
-
-        float velError = Utils.angleDiff(interceptAngle, velAngle);
+        float velError = Utils.angleDiff(targetAngle, velAngle);
 
         if (Math.abs(velError) < 90f && Math.abs(velError) > 8f) {
             // To cancel out the perpendicular velocity.
             // Introduces some wobble -- to smooth out the motion would need to numerically integrate
             // the change in perpendicular error over time, etc.
-            SmoothTurnData turnData = smoothTurnExt(interceptAngle, true);
+            SmoothTurnData turnData = smoothTurnExt(targetAngle, true);
             float curError = (float) Math.sin(velError * Misc.RAD_PER_DEG);
             if (Math.signum(turnData.perpVelOffset + curError) != Math.signum(curError)) {
                 missile.giveCommand(turnData.command);
             }
             else {
-                missile.giveCommand(smoothTurnExt(interceptAngle + velError * Math.min(1f, interceptor.length() / moveSpeed), false).command);
+                missile.giveCommand(smoothTurnExt(targetAngle + velError * Math.min(1f, Misc.getDistance(target.getLocation(), missile.getLocation()) / moveSpeed), false).command);
             }//turnTowardTarget(interceptAngle + velError);
         }
         else if (Math.abs(velError) > 3f) {
-            missile.giveCommand(smoothTurnExt(interceptAngle, false).command);
+            missile.giveCommand(smoothTurnExt(targetAngle, false).command);
             //turnTowardTarget(interceptAngle);
         }
     }
