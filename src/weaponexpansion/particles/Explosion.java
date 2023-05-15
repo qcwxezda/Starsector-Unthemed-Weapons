@@ -1,88 +1,111 @@
 package weaponexpansion.particles;
 
 import com.fs.starfarer.api.combat.CombatEngineLayers;
+import com.fs.starfarer.api.util.Pair;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
+import weaponexpansion.util.Utils;
 
 public class Explosion {
-    public static Emitter core(Vector2f loc, float scale, float[] color, String particlePath) {
+    public static Emitter core(Vector2f loc, float scale, float dur, float[] color, String particlePath) {
         Emitter emitter = Particles.initialize(loc, particlePath);
         emitter.setSyncSize(true);
         emitter.circleOffset(0f, scale*0.1f);
-        emitter.circleVelocity(0f, scale*0.05f);
         emitter.color(color);
         emitter.facing(0f, 360f);
-        emitter.fadeTime(0.1f, 0.1f, 1.9f, 1.9f);
-        emitter.size(scale*0.4f, scale*0.5f);
-        emitter.growthAcceleration(-scale*1.1f, -scale*0.9f);
-        emitter.growthRate(scale*1.3f, scale*1.5f);
-        emitter.life(2f, 2f);
-        emitter.radialVelocity(scale*0.03f, scale*0.15f);
-        emitter.radialAcceleration(-scale*0.2f, -scale*0.15f);
+        emitter.fadeTime(0f, 0f, dur*0.6f, dur*0.7f);
+
+        float initialSize = scale*0.4f;
+        Pair<Float, Float> growthRateAcceleration = Utils.getRateAndAcceleration(initialSize, scale*0.95f, scale, dur);
+        emitter.size(initialSize*0.9f, initialSize*1.1f);
+        emitter.growthAcceleration(growthRateAcceleration.two * 0.9f, growthRateAcceleration.two * 1.1f);
+        emitter.growthRate(growthRateAcceleration.one * 0.9f, growthRateAcceleration.one * 1.1f);
+        emitter.life(dur*0.9f, dur*1.1f);
+
         emitter.randomHSVA(35f, 1f, 0f, 0f);
-        emitter.revolutionRate(-10f, 10f);
+        emitter.revolutionRate(-5f, 5f);
         emitter.saturationShift(-0.2f, -0.1f);
         emitter.turnRate(-20f, 20f);
-        emitter.turnAcceleration(-20f, 20f);
         return emitter;
     }
 
-    public static Emitter ring(Vector2f loc, float scale, float[] color) {
+    public static Emitter ring(Vector2f loc, float scale, float dur,  float[] color) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/wpnxt_explosion_ring.png");
         emitter.setSyncSize(true);
-        emitter.life(1f, 1.25f);
-        emitter.fadeTime(0f, 0f, 0.4f, 0.6f);
-        emitter.size(scale*0.4f, scale*0.5f);
-        emitter.growthRate(scale*2f, scale*2.1f);
-        emitter.growthAcceleration(-scale*1.5f, -scale);
+        emitter.life(dur * 0.5f, dur * 0.6f);
+        emitter.fadeTime(0f, 0f, dur * 0.3f, dur * 0.4f);
+
+        float initialSize = scale * 0.2f;
+        Pair<Float, Float> growthRateAndAcceleration = Utils.getRateAndAcceleration(initialSize, scale*1.8f, scale*1.8f, dur);
+        emitter.size(initialSize * 0.9f, initialSize * 1.1f);
+        emitter.growthRate(growthRateAndAcceleration.one * 0.9f, growthRateAndAcceleration.one * 1.1f);
+        emitter.growthAcceleration(growthRateAndAcceleration.two * 0.9f, growthRateAndAcceleration.two * 1.1f);
+
         emitter.color(color);
-        emitter.hueShift(-50f, 50f);
+        emitter.randomHSVA(10f, 0.2f, 0f, 0f);
         return emitter;
     }
 
-    public static Emitter debris(Vector2f loc, float scale, float[] color) {
-        Emitter emitter = Particles.initialize(loc, "graphics/fx/particlealpha32sq.png");
+    public static Emitter debris(Vector2f loc, float scale, float dur, float[] color) {
+        Emitter emitter = Particles.initialize(loc, "graphics/fx/particlealpha64sq.png");
         emitter.setSyncSize(true);
-        emitter.life(0.75f, 1.75f);
-        emitter.fadeTime(0f, 0f, 0.5f, 0.7f);
-        float debrisScale = (float) Math.sqrt(scale) * 0.6f;
+        emitter.life(dur * 0.6f, dur * 1.2f);
+        emitter.fadeTime(0f, 0f, dur * 0.2f, dur * 0.3f);
+        float debrisScale = (float) Math.sqrt(scale) * 1.2f;
         emitter.size(debrisScale*0.8f, debrisScale*1.2f);
-        emitter.circleOffset(0f, scale*0.25f);
-        emitter.radialVelocity(scale*0.5f, scale*0.75f);
-        emitter.growthRate(-scale*0.025f, -scale*0.0125f);
+        emitter.circleOffset(0f, scale);
+        emitter.radialVelocity(scale*0.2f / dur, scale*1.3f / dur);
+        emitter.growthRate(-debrisScale / dur, -debrisScale / dur);
         emitter.color(color);
-        emitter.hueShift(-20f, 20f);
+        emitter.randomHSVA(15f, 0.4f, 0f, 0f);
         emitter.saturationShift(-0.2f, 0.2f);
         return emitter;
     }
 
-    public static Emitter glow(Vector2f loc, float scale, float[] color) {
+    public static Emitter glow(Vector2f loc, float scale, float dur, float[] color) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/particlealpha64sq.png");
         emitter.setSyncSize(true);
-        emitter.life(0.5f, 0.75f);
-        emitter.fadeTime(0f, 0f, 0.5f, 0.75f);
-        emitter.size(scale*1.5f, scale*2.25f);
-        emitter.growthRate(-scale*0.4f, -scale*0.2f);
+        emitter.life(dur * 0.8f, dur);
+        emitter.fadeTime(0f, 0f, dur * 0.7f, dur * 0.8f);
+
+        float initialSize = scale*1.05f;
+        Pair<Float, Float> growthRateAndAcceleration = Utils.getRateAndAcceleration(initialSize, initialSize, scale*1.6f, dur);
+        emitter.size(initialSize * 0.9f, initialSize * 1.1f);
+        emitter.growthRate(growthRateAndAcceleration.one * 0.9f, growthRateAndAcceleration.one * 1.1f);
+        emitter.growthAcceleration(growthRateAndAcceleration.two * 0.9f, growthRateAndAcceleration.two * 1.1f);
+
         emitter.color(color);
         return emitter;
     }
 
     public static void makeExplosion(Vector2f loc, float scale, int coreCount, int ringCount, int debrisCount) {
-        makeExplosion(loc, scale, coreCount, ringCount, debrisCount, new float[] {1f, 0.75f, 0.5f, 0.1f}, new float[] {1f, 0.75f, 0.75f, 1f}, new float[] {1f, 0.5f, 0.2f, 0.3f}, new float[] {1f, 0.75f, 0.5f, 1f});
+        makeExplosion(loc, scale, coreCount, ringCount, debrisCount, new float[] {1f, 0.75f, 0.5f, 0.3f}, new float[] {1f, 0.75f, 0.5f, 1f}, new float[] {1f, 0.5f, 0.2f, 0.3f}, new float[] {1f, 0.75f, 0.5f, 1f});
+    }
+
+    public static void makeExplosion(Vector2f loc, float scale, float dur, int coreCount, int ringCount, int debrisCount) {
+        makeExplosion(loc, scale, dur, coreCount, ringCount, debrisCount, new float[] {1f, 0.75f, 0.5f, 0.3f}, new float[] {1f, 0.75f, 0.5f, 1f}, new float[] {1f, 0.5f, 0.2f, 0.3f}, new float[] {1f, 0.75f, 0.5f, 1f});
     }
 
     public static void makeExplosion(Vector2f loc, float scale, int coreCount, int ringCount, int debrisCount, float[] coreColor, float[] ringColor, float[] debrisColor, float[] glowColor) {
-        makeExplosion(loc, scale, coreCount, ringCount, debrisCount, coreColor, ringColor, debrisColor, glowColor, "graphics/fx/explosion4.png");
+        makeExplosion(loc, scale, coreCount, ringCount, debrisCount, coreColor, ringColor, debrisColor, glowColor, "graphics/fx/explosion3.png");
+    }
+
+    public static void makeExplosion(Vector2f loc, float scale, float dur, int coreCount, int ringCount, int debrisCount, float[] coreColor, float[] ringColor, float[] debrisColor, float[] glowColor) {
+        makeExplosion(loc, scale, dur, coreCount, ringCount, debrisCount, coreColor, ringColor, debrisColor, glowColor, "graphics/fx/explosion3.png");
     }
 
     public static void makeExplosion(Vector2f loc, float scale, int coreCount, int ringCount, int debrisCount, float[] coreColor, float[] ringColor, float[] debrisColor, float[] glowColor, String particlePath) {
-        Particles.burst(core(loc, scale, coreColor, particlePath), coreCount);
-        Particles.burst(ring(loc, scale, ringColor), ringCount);
-        Particles.burst(debris(loc, scale, debrisColor), debrisCount);
-        Particles.burst(glow(loc, scale, glowColor), 1);
+        makeExplosion(loc, scale, 1.5f, coreCount, ringCount, debrisCount, coreColor, ringColor, debrisColor, glowColor, particlePath);
+    }
+
+    public static void makeExplosion(Vector2f loc, float scale, float dur, int coreCount, int ringCount, int debrisCount, float[] coreColor, float[] ringColor, float[] debrisColor, float[] glowColor, String particlePath) {
+        Particles.burst(core(loc, scale, dur, coreColor, particlePath), coreCount);
+        Particles.burst(ring(loc, scale, dur, ringColor), ringCount);
+        Particles.burst(debris(loc, scale, dur, debrisColor), debrisCount);
+        Particles.burst(glow(loc, scale, dur, glowColor), 1);
     }
 
 }

@@ -4,10 +4,7 @@ import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.PluginPick;
 import com.fs.starfarer.api.campaign.CampaignPlugin;
-import com.fs.starfarer.api.combat.DamagingProjectileAPI;
-import com.fs.starfarer.api.combat.MissileAIPlugin;
-import com.fs.starfarer.api.combat.MissileAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileSpecAPI;
@@ -42,6 +39,16 @@ public class ModPlugin extends BaseModPlugin {
         MakeMissilePlugin pluginGen = customMissiles.get(projId);
         if (pluginGen != null) {
             return new PluginPick<>(pluginGen.make(missile), CampaignPlugin.PickPriority.MOD_SPECIFIC);
+        }
+        return null;
+    }
+
+    @Override
+    public PluginPick<AutofireAIPlugin> pickWeaponAutofireAI(WeaponAPI weapon) {
+        String weaponId = weapon.getId();
+
+        if ("wpnxt_energyballlauncher".equals(weaponId)) {
+            return new PluginPick<AutofireAIPlugin>(new EnergyBallLauncherAI(weapon), CampaignPlugin.PickPriority.MOD_SPECIFIC);
         }
         return null;
     }

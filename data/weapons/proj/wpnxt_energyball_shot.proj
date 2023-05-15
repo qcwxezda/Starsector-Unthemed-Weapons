@@ -6,10 +6,10 @@
   "collisionClassByFighter":"PROJECTILE_FIGHTER",
   "length":0,
   "width":0,
-  "fadeTime":0.25,
+  "fadeTime":0.5,
   "fringeColor":[192,255,192,0],
   "coreColor":[192,255,192,255],
-  "hitGlowRadius":150,
+  "hitGlowRadius":100,
   "textureScrollSpeed":64.0,
   "pixelsPerTexel":5.0,
   "bulletSprite": "graphics/fx/fog_circle.png"

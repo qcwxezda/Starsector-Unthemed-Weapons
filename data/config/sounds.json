@@ -74,11 +74,6 @@
     {"file": "sounds/weapons/wpnxt_superrailgun_fire.wav", "pitch": 0.98, "volume": 1},
     {"file": "sounds/weapons/wpnxt_superrailgun_fire.wav", "pitch": 0.96, "volume": 1}
   ],
-  "wpnxt_superrailgun_loop": [
-    {"file": "sounds/weapons/wpnxt_superrailgun_loop.wav", "pitch": 1, "volume": 0.5},
-    {"file": "sounds/weapons/wpnxt_superrailgun_loop.wav", "pitch": 0.98, "volume": 0.5},
-    {"file": "sounds/weapons/wpnxt_superrailgun_loop.wav", "pitch": 0.96, "volume": 0.5}
-  ],
   "wpnxt_shotgun_fire": [
     {"file": "sounds/weapons/wpnxt_shotgun_fire.wav", "pitch": 1, "volume": 0.8},
     {"file": "sounds/weapons/wpnxt_shotgun_fire.wav", "pitch": 0.98, "volume": 0.8},
@@ -178,5 +173,14 @@
     {"file": "sounds/weapons/wpnxt_phasetorpedo_explosion.wav", "pitch": 1, "volume": 1},
     {"file": "sounds/weapons/wpnxt_phasetorpedo_explosion.wav", "pitch": 0.98, "volume": 1},
     {"file": "sounds/weapons/wpnxt_phasetorpedo_explosion.wav", "pitch": 0.96, "volume": 1}
+  ],
+  "wpnxt_energyballlauncher_loop": [
+    {"file": "sounds/weapons/wpnxt_energyballlauncher_loop.wav", "pitch": 1, "volume": 1}
+  ],
+  "wpnxt_energyballlauncher_fire": [
+    {"file": "sounds/weapons/wpnxt_energyballlauncher_fire.wav", "pitch": 1, "volume": 1}
+  ],
+  "wpnxt_energyball_hit": [
+    {"file": "sounds/weapons/wpnxt_energyball_hit.wav", "pitch": 1, "volume": 1}
   ]
 }

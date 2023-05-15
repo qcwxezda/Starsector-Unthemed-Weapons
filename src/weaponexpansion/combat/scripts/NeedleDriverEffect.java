@@ -7,7 +7,9 @@ import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.util.Utils;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 public class NeedleDriverEffect implements OnHitEffectPlugin  {
 
@@ -44,9 +46,6 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
         Utils.safeNormalize(scaledVelocity);
         scaledVelocity.scale(0.3f * attachedLength);
         float adjustAmount = attachedLength * 0.3f;
-//        Vector2f scaledVelocity = new Vector2f(proj.getVelocity());
-//        float adjustAmount = 0.7f * engine.getElapsedInLastFrame() * proj.getVelocity().length();
-//        scaledVelocity.scale(0.7f * engine.getElapsedInLastFrame());
         Vector2f spawnLocation = Misc.getDiff(pt, scaledVelocity);
         DamagingProjectileAPI spawn = (DamagingProjectileAPI) engine.spawnProjectile(proj.getSource(), proj.getWeapon(), proj.getWeapon().getId(), spawnLocation, proj.getFacing(), new Vector2f());
         spec.setMaxRange(maxRange);
@@ -57,13 +56,17 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
         spawn.setFromMissile(true);
         Vector2f offset = Misc.getDiff(spawnLocation, ship.getLocation());
 
-        if (!ship.getCustomData().containsKey(attachDataKey)) {
-            ship.setCustomData(attachDataKey, new LinkedList<AttachData>());
+        if (!engine.getCustomData().containsKey(attachDataKey)) {
+            engine.getCustomData().put(attachDataKey, new HashMap<>());
         }
 
         //noinspection unchecked
-        ((LinkedList<AttachData>) (ship.getCustomData().get(attachDataKey)))
-                .add(new AttachData(spawn, offset, adjustAmount, proj.getFacing(), ship.getFacing()));
+        HashMap<ShipAPI, LinkedList<AttachData>> attachDataMap = (HashMap<ShipAPI, LinkedList<AttachData>>) engine.getCustomData().get(attachDataKey);
+        if (!attachDataMap.containsKey(ship)) {
+            attachDataMap.put(ship, new LinkedList<AttachData>());
+        }
+
+        attachDataMap.get(ship).add(new AttachData(spawn, offset, adjustAmount, proj.getFacing(), ship.getFacing()));
     }
 
     public static class AttachData {
