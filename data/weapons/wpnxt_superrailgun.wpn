@@ -28,6 +28,5 @@
     "particleCount":50,
     "particleColor":[255,255,128,255]},
   "projectileSpecId":"wpnxt_superrailgun_shot",  # projectile that will be fired
-  "fireSoundTwo":"wpnxt_superrailgun_fire",
-  "fireSoundOne":"wpnxt_superrailgun_loop"
+  "fireSoundTwo":"wpnxt_superrailgun_fire"
 }

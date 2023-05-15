@@ -9,7 +9,7 @@ import weaponexpansion.combat.scripts.NeedleDriverEffect;
 import weaponexpansion.combat.scripts.NeedleDriverEffect.AttachData;
 
 import java.awt.*;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -26,9 +26,15 @@ public class NeedleDriverPlugin extends BaseEveryFrameCombatPlugin {
         CombatEngineAPI engine = Global.getCombatEngine();
         if (engine == null || engine.isPaused()) return;
 
-        for (ShipAPI ship : engine.getShips()) {
-            //noinspection unchecked
-            LinkedList<AttachData> attachments = (LinkedList<AttachData>) ship.getCustomData().get(NeedleDriverEffect.attachDataKey);
+        //noinspection unchecked
+        HashMap<ShipAPI, LinkedList<AttachData>> attachDataMap = (HashMap<ShipAPI, LinkedList<AttachData>>) engine.getCustomData().get(NeedleDriverEffect.attachDataKey);
+        if (attachDataMap == null) return;
+
+        Iterator<Map.Entry<ShipAPI, LinkedList<AttachData>>> itr = attachDataMap.entrySet().iterator();
+        while (itr.hasNext()) {
+            Map.Entry<ShipAPI, LinkedList<AttachData>> entry = itr.next();
+            ShipAPI ship = entry.getKey();
+            LinkedList<AttachData> attachments = entry.getValue();
 
             if (attachments == null) {
                 continue;
@@ -54,36 +60,11 @@ public class NeedleDriverPlugin extends BaseEveryFrameCombatPlugin {
 
                     float explosionDamage = Math.min(maxExplosionDamage, numAttached * explosionDamagePer);
                     float explosionRadius = Math.min(maxExplosionRadius, numAttached * explosionRadiusPer);
-//                    DamagingExplosionSpec spec = new DamagingExplosionSpec(
-//                            0.5f,
-//                            explosionRadius,
-//                            explosionRadius / 2,
-//                            explosionDamage,
-//                            explosionDamage / 2,
-//                            CollisionClass.PROJECTILE_FF,
-//                            CollisionClass.PROJECTILE_FIGHTER,
-//                            1f,
-//                            4f,
-//                            1f,
-//                            50,
-//                            new Color(255, 200, 255, 192),
-//                            new Color(255, 75, 255, 64)
-//                    );
-//
-//                    spec.setDamageType(DamageType.ENERGY);
-//                    spec.setDetailedExplosionRadius(explosionRadius * 1.5f);
-//                    spec.setDetailedExplosionFlashRadius(explosionRadius * 1.5f);
-//
+
                     Vector2f lengthVec = Misc.getUnitVectorAtDegreeAngle(data.proj.getFacing());
                     lengthVec.scale(data.adjustAmount);
                     Vector2f explosionLoc = new Vector2f();
                     Vector2f.add(lengthVec, data.proj.getLocation(), explosionLoc);
-
-//                    engine.spawnDamagingExplosion(
-//                            spec,
-//                            data.proj.getSource(),
-//                            explosionLoc
-//                    );
 
                     engine.spawnExplosion(explosionLoc, ship.getVelocity(), new Color(255, 200, 255, 192), explosionRadius, 1f);
                     if (!ship.isPhased()) {
@@ -101,6 +82,7 @@ public class NeedleDriverPlugin extends BaseEveryFrameCombatPlugin {
                 }
 
                 attachments.clear();
+                itr.remove();
             }
         }
     }

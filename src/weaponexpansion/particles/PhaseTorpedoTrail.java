@@ -6,11 +6,11 @@ import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
 
-public class FlickerTrail {
+public class PhaseTorpedoTrail {
 
     public static Emitter trail(Vector2f loc, float amp) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/smoke32.png");
-        emitter.color(0.98f, 0.53f, 0.69f, 0.175f);
+        emitter.color(0.98f, 0.53f, 0.69f, 0.12f);
         emitter.randomHSVA(30f, 0f, 0f, 0f);
         emitter.saturationShift(-0.24f, -0.3f);
         emitter.velocity(-90f, -80f, 0f, 0f);
@@ -27,7 +27,7 @@ public class FlickerTrail {
     public static void makeTrail(final CombatEntityAPI follow) {
         for (float f = -15f; f <= 15f; f += 30f) {
             Emitter trailEmitter = trail(follow.getLocation(), f);
-            Particles.stream(trailEmitter, 1, 150, 100f, new Particles.StreamAction() {
+            Particles.stream(trailEmitter, 1, 250, 100f, new Particles.StreamAction() {
                 @Override
                 public boolean apply(Emitter emitter) {
                     emitter.setAxis(follow.getFacing());

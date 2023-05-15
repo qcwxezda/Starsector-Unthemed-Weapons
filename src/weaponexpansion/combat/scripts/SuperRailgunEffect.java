@@ -153,7 +153,7 @@ public class SuperRailgunEffect extends GlowOnFirePlugin {
                     true);
             engine.addHitParticle(
                     closest.point,
-                    target.getVelocity(),
+                    target.getVelocity().length() <= 50f ? target.getVelocity() : new Vector2f(),
                     proj.getProjectileSpec().getHitGlowRadius(),
                     1f,
                     hitGlowColor);

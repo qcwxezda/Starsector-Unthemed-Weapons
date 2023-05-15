@@ -9,8 +9,8 @@ Void Ray,wpnxt_voidray,3,0.125,15000,1000,1875,,,,20,32,,,,FRAGMENTATION,,500,0.
 Ultra Blaster,wpnxt_ultrablaster,2,0.5,5000,700,,900,,,9,20,,,,HIGH_EXPLOSIVE,1500,,0.5,4.5,,,,,,,,1250,,,300,,,"STRIKE, USE_VS_FRIGATES","energy15, strike15, rare_bp, hist1t, merc",,,,Anti Armor,,,,,Hits on hull or armor cause %s to %s secondary explosions around the impact point that each deal %s high-explosive damage.,5 | 10 | 150,,,,5
 Chaos Pulser,wpnxt_unstablecannon,3,0.25,10000,800,,200,,,12,32,,,,ENERGY,180,,0.25,,,,,,,,,1000,,,100,,,,"energy20, rare_bp, hist1t, merc",,,,General,,,,Varies,"Each projectile deals between %s and %s damage, with weaker projectiles being more likely to be generated. Projectiles' trajectories become increasingly erratic the stronger they are.",100 | 500,,,,6
 Boltstorm,wpnxt_boltstorm,1,0.75,4000,750,,50,20,,10,18,,,,ENERGY,35,,,0.09090909,,,10,10,0,0,,800,,,30,,,,"energy10, rare_bp, hist1t, merc",,,,Suppression,,,,,,,,,,1
-"TEXP-00 ""Singularity""",wpnxt_energyballlauncher,5,0.05,300000,1000,,5000,,,15,40,,,,ENERGY,5000,,10,0.5,,,,,,,,250,,,5000,,,STRIKE,"energy20, strike15, restricted",,,,General,,,,,,,,,,41
-
+"TEXP-00 ""Singularity""",wpnxt_energyballlauncher,5,0.05,300000,1000,,600,,,15,40,,,,ENERGY,600,,0,1,,,,,,,,250,,,5000,,,"STRIKE, USE_VS_FRIGATES","energy20, strike15, restricted",,,,General,,,,,Can be charged for up to %s seconds at %s flux per second. Deals %s energy damage at maximum charge.,24 | 500 | 9000,,,,41
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,wpnxt_unstablecannon_lv2spawner,,,,800,,,,,,,,,,ENERGY,,,,,,,,,,,,1000,,,250,,,SYSTEM,,,,,,,,,,,,,,,6.2
 ,wpnxt_unstablecannon_lv3spawner,,,,800,,,,,,,,,,ENERGY,,,,,,,,,,,,1000,,,400,,,SYSTEM,,,,,,,,,,,,,,,6.3
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -19,8 +19,8 @@ Dispersion PD Laser,wpnxt_fragpdbeam,1,0.75,2000,450,500,,,,50,12,,,,FRAGMENTATI
 Bolt Scrambler,wpnxt_energyscatterer,2,0.5,1500,750,,50,20,,25,13,,,,ENERGY,40,,,3,20,,20,20,0,0,,800,,,30,,,,"energy10, rare_bp, merc",,,,General,,,,,,,,,,8
 Enhanced Tactical Laser,wpnxt_enhtaclaser,2,0.5,1500,1000,150,,,,18,9,,,,ENERGY,,135,0.1,0.1,,,,,,,2400,,,,,,,,"beam12, LR, rare_bp, merc",,,,Suppression,,,,,"Suppresses the target's flux grid, increasing energy and ballistic weapons' flux generation by %s per beam, up to a maximum of %s.",3% | 15%,,,,9
 Bolt Streamer,wpnxt_boltstreamer,1,0.75,2500,750,,50,20,,18,12,,,,ENERGY,50,,,1.5,12,.066667,,,,,,800,,,30,,,,"energy11, rare_bp, merc",,,,General,,,,,,,,,,10
-Needle Driver,wpnxt_needledriver,3,0.25,4500,800,,220,150,20,15,14,,,,KINETIC,400,,0.2,2,,,,,,,,1250,,,200,,,,"energy12, rare_bp, hist1t, merc",,,,Pressure,,,,,"Projectiles attach to non-fighter craft on hull or armor hits. After %s seconds, attached projectiles explode, triggering a chain reaction that causes all other attached projectiles to explode. Each explosion deals energy damage equal to %s times the number of attached projectiles, up to a maximum of %s. ",12 | 50 | 500,,,,11
-,,,,,,,,,,,,,,,,,,,,,,,,
+Needle Driver,wpnxt_needledriver,3,0.25,4500,800,,220,150,20,15,14,,,,KINETIC,400,,0.2,2,,,,,,,,1250,,,200,,,,"energy12, rare_bp, hist1t, merc",,,,Pressure,,,,,"Projectiles attach to non-fighter craft on hull or armor hits and explode after %s seconds, causing every other attached projectile to simultaneously explode. Each explosion deals energy damage equal to %s times the number of attached projectiles, up to a maximum of %s. ",12 | 50 | 500,,,,11
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # SMALL ENERGY,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Mining Laser Mk.II,wpnxt_mininglasermk2,1,0.75,250,1000,150,,,,25,3,1200,,,HIGH_EXPLOSIVE,,200,0.15,0.15,,,,,,,2400,,,,,,,CONSERVE_FOR_ANTI_ARMOR,"beam3, energy3, he3, rare_bp, merc",,,,Suppression,,,,,,,,,,12
 Bolt Repeater,wpnxt_boltrepeater,2,0.5,750,750,,50,20,,30,7,28,1.75,7,ENERGY,50,,,0.142857,,,8,8,0,0,,800,,,30,,,,"energy9, rare_bp, merc",,,,General,,,,,,,,,,13
@@ -62,7 +62,7 @@ Paralyzer Rocket Launcher,wpnxt_ionrocket,2,0.5,2000,1500,,160,500,30,20,12,80,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Small Missile
 Bloom-class Torpedo,wpnxt_energytorpedo,3,0.25,1000,1500,,650,,30,15,2,1,,,ENERGY,,,,15,,,,,,,,250,200,8.5,800,,,"DO_NOT_AIM, STRIKE, USE_VS_FRIGATES","strike10, missile2, rare_bp, merc",,,,Guided Torpedo,Slow,Excellent,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 650,,,TRUE,29
-Spiker SRM,wpnxt_minispiker,1,0.75,400,1200,,120,,10,45,4,12,1,4,KINETIC,,,,0.8,4,0.4,,,,,,450,50,3,50,,,"DO_NOT_AIM, DO_NOT_CONSERVE, ANTI_FTR","missile1, kinetic4, rare_bp, merc",,,,Anti Shield,Fast,Good,,,%s of damage is dealt as soft flux.,50%,,,,32
+Spiker SRM,wpnxt_minispiker,1,0.75,400,1200,,70,,10,45,4,12,1,4,KINETIC,,,,0.8,4,0.4,,,,,,450,50,3,50,,,"DO_NOT_AIM, DO_NOT_CONSERVE, ANTI_FTR","missile1, kinetic4, rare_bp, merc",,,,Anti Shield,Fast,Good,,,Deals an additional %s soft flux damage on shield hits.,100%,,,,32
 Cluster Mine Launcher,wpnxt_clusterminelauncher,1,0.75,600,1000,,600,,50,30,3,10,,,HIGH_EXPLOSIVE,,,,5,,,,,,,,150,150,10,500,, ,"ANTI_FTR, PD","he4, utility4, rare_bp, merc",,,,Anti Fighter,Very Slow,None,,,,,,,TRUE,35
 ,wpnxt_clusterlauncher_spawn,,,,1200,,250,,,,,,,,HIGH_EXPLOSIVE,,,,,,,,,,,,180,180,5,250,,,SYSTEM,,,,,,,,,,,,,,,35.1
 Electron-class Torpedo Rack,wpnxt_iontorpedo,2,0.5,600,1200,,750,1000,45,15,4,2,,,KINETIC,,,,15,,,,,,,,350,200,4,400,,,STRIKE,"kinetic1, he0, utility4, strike4, rare_bp, merc",,,,Torpedo,Medium,None,,,EMP damage has a %s chance to arc to any unshielded engine or weapon in the blast radius. Arcs that hit disabled modules deal %s energy damage.,50% | 750,,,TRUE,39

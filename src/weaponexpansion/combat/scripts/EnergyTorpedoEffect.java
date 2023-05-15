@@ -34,7 +34,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
         List<CombatEntityAPI> thisAsList = Collections.singletonList((CombatEntityAPI) proj);
 
         if (ModPlugin.particleEngineEnabled) {
-            addExplosionVisual(pt, spec.getRadius()*1.2f);
+            addExplosionVisual(pt, spec.getRadius());
         }
 
         // Spawn mine to telegraph the delayed explosions
@@ -67,7 +67,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
                 public void perform() {
                     engine.spawnDamagingExplosion(spec, proj.getSource(), spawnLoc);
                     if (ModPlugin.particleEngineEnabled) {
-                        addExplosionVisual(spawnLoc, spec.getRadius()*1.2f);
+                        addExplosionVisual(spawnLoc, spec.getRadius());
                     }
                 }
             }, delay);
@@ -76,7 +76,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
     }
 
     private void addExplosionVisual(Vector2f loc, float radius) {
-        Explosion.makeExplosion(loc, radius, 35, 1, 100, new float[]{0.33f, 0.33f, 1f, 0.1f}, new float[]{0.4f, 0.4f, 1f, 0.7f}, new float[]{0.3f, 0.3f, 1f, 0.3f}, new float[]{0.2f, 0.2f, 1f, 1f});
+        Explosion.makeExplosion(loc, 2f*radius, radius / 100f,8, 1, 100, new float[]{0.33f, 0.33f, 1f, 0.35f}, new float[]{0.4f, 0.4f, 1f, 0.7f}, new float[]{0.3f, 0.3f, 1f, 0.3f}, new float[]{0.2f, 0.2f, 1f, 1f});
     }
 
     @Override

@@ -66,7 +66,7 @@ public class ExplosiveShellEffect implements OnHitEffectPlugin {
                     .set(pt);
         }
         else {
-            Explosion.makeExplosion(pt, explosionRadius * 1.2f, 30, 1, 50);
+            Explosion.makeExplosion(pt, explosionRadius * 2f, 10, 1, 75);
         }
     }
 }
