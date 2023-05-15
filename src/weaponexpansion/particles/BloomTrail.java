@@ -8,7 +8,7 @@ import particleengine.Particles;
 
 public class BloomTrail {
     public static Emitter trail(Vector2f loc, float scale) {
-        Emitter emitter = Particles.initialize(loc, "graphics/fx/starburst_glow1.png");
+        Emitter emitter = Particles.initialize(loc, "graphics/fx/particlealpha64sq.png");
         emitter.setSyncSize(true);
         emitter.color(0.3f, 0.3f, 1f, 1f);
         emitter.offset(-30f, 0f, 0f, 0f);
@@ -26,7 +26,7 @@ public class BloomTrail {
 
     public static void makeTrail(final CombatEntityAPI follow, float scale, int particlesPerSecond) {
         Emitter trailEmitter = trail(follow.getLocation(), scale);
-        Particles.stream(trailEmitter, 10, particlesPerSecond, 100f, new Particles.StreamAction() {
+        Particles.stream(trailEmitter, 1, particlesPerSecond, 100f, new Particles.StreamAction() {
             @Override
             public boolean apply(Emitter emitter) {
                 emitter.setAxis(follow.getFacing());

@@ -11,31 +11,39 @@ public class EnergyBallRenderer extends BaseCombatLayeredRenderingPlugin {
     private final WeaponAPI weaponSource;
     private final DamagingProjectileAPI projSource;
     private final float maxProjDamage;
-    private final SpriteAPI sprite;
+    private final SpriteAPI sprite, glowSprite;
     private final EnergyBallLauncherEffect plugin;
     public float facing = Utils.randBetween(0f, 360f);
+    public float modifiedTime = 0f;
+    private final float[] glowSizeMults = new float[] {1f, 1f, 1f};
+    private final float[] glowAlphaMults = new float[] {1f, 1f, 1f};
 
     // Attached to weapon
     public EnergyBallRenderer(WeaponAPI source, EnergyBallLauncherEffect plugin) {
         weaponSource = source;
         sprite = Global.getSettings().getSprite("misc", "wpnxt_energyball");
+        glowSprite = Global.getSettings().getSprite("misc", "wpnxt_glow");
         ProjectileSpecAPI projSpec = (ProjectileSpecAPI) source.getSpec().getProjectileSpec();
         sprite.setColor(projSpec.getCoreColor());
+        glowSprite.setColor(projSpec.getCoreColor());
         this.plugin = plugin;
         maxProjDamage = 0f;
         projSource = null;
     }
 
     // Attached to projectile
-    public EnergyBallRenderer(DamagingProjectileAPI source, EnergyBallLauncherEffect plugin, float maxDamage, float initialFacing) {
+    public EnergyBallRenderer(DamagingProjectileAPI source, EnergyBallLauncherEffect plugin, float maxDamage, float initialFacing, float originalTime) {
         projSource = source;
         sprite = Global.getSettings().getSprite("misc", "wpnxt_energyball");
+        glowSprite = Global.getSettings().getSprite("misc", "wpnxt_glow");
         ProjectileSpecAPI projSpec = source.getProjectileSpec();
         sprite.setColor(projSpec.getCoreColor());
+        glowSprite.setColor(projSpec.getCoreColor());
         this.plugin = plugin;
         maxProjDamage = maxDamage;
         weaponSource = null;
         facing = initialFacing;
+        modifiedTime = originalTime;
     }
 
     @Override
@@ -48,44 +56,55 @@ public class EnergyBallRenderer extends BaseCombatLayeredRenderingPlugin {
         if (weaponSource != null) {
             return weaponSource.getShip() == null || !weaponSource.getShip().isAlive();
         }
-        return projSource.isExpired();
+        return projSource.isExpired() || !Global.getCombatEngine().isEntityInPlay(projSource);
     }
 
     @Override
     public void advance(float amount) {
         if (weaponSource != null) {
+            modifiedTime += amount * (plugin.getProjectileSize() / EnergyBallLauncherEffect.maxProjectileSize);
             entity.getLocation().set(weaponSource.getFirePoint(0));
         }
         else {
+            modifiedTime += amount * 0.5f;
             entity.getLocation().set(projSource.getLocation());
         }
         facing += 240f * amount;
+
+        for (int i = 0; i < glowSizeMults.length; i++) {
+            float modTime = Utils.modPositive(-1.5f* modifiedTime + 0.33f * i, 1f);
+            glowSizeMults[i] = 0.5f + modTime;
+            glowAlphaMults[i] = (1f - 2f * Math.abs(modTime - 0.5f));
+        }
     }
 
     @Override
     public void render(CombatEngineLayers layer, ViewportAPI viewport) {
         if (weaponSource != null) {
-            float size = plugin.getProjectileSize();
-            if (size <= 0f) return;
-            sprite.setWidth(size);
-            sprite.setHeight(size);
-            sprite.setAlphaMult(0.25f);
-            render();
+            render(plugin.getProjectileSize(), 1f);
         }
         else {
-            sprite.setAlphaMult(projSource.getBrightness() * 0.25f);
-            float size = (float) Math.sqrt(projSource.getDamageAmount() / maxProjDamage) * EnergyBallLauncherEffect.maxProjectileSize;
-            sprite.setWidth(size);
-            sprite.setHeight(size);
-            render();
+            render(
+                    (float) Math.sqrt(projSource.getDamageAmount() / maxProjDamage) * EnergyBallLauncherEffect.maxProjectileSize,
+                    projSource.getBrightness());
         }
     }
 
-    private void render() {
+    private void render(float size, float alphaMult) {
+        if (size <= 0f) return;
+        sprite.setSize(size, size);
+        sprite.setAlphaMult(alphaMult * 0.16f) ;
         sprite.setAdditiveBlend();
         for (int i = 0; i < 6; i++) {
             sprite.setAngle(facing + i * 60f);
             sprite.renderAtCenter(entity.getLocation().x, entity.getLocation().y);
+        }
+
+        glowSprite.setAdditiveBlend();
+        for (int i = 0; i < glowSizeMults.length; i++) {
+            glowSprite.setAlphaMult(alphaMult * glowAlphaMults[i]);
+            glowSprite.setSize(size * 2f * glowSizeMults[i], size * 2f * glowSizeMults[i]);
+            glowSprite.renderAtCenter(entity.getLocation().x, entity.getLocation().y);
         }
     }
 }

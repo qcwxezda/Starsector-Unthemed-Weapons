@@ -5,30 +5,26 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.util.Misc;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL14;
 import org.lwjgl.util.vector.Vector2f;
-import particleengine.Emitter;
-import particleengine.Particles;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.combat.plugins.Action;
 import weaponexpansion.combat.plugins.ActionPlugin;
 import weaponexpansion.particles.Explosion;
-import weaponexpansion.particles.FlickerTrail;
+import weaponexpansion.particles.PhaseTorpedoTrail;
 import weaponexpansion.particles.PhaseTorpedoSecondaryExplosion;
 import weaponexpansion.util.Utils;
 
 @SuppressWarnings("unused")
 public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin {
 
-    public static final float explosionSpeed = 200f, timeBetweenHits = 0.1f, ringDamage = 1250f;
+    public static final float explosionSpeed = 200f, timeBetweenHits = 0.1f, ringDamage = 1500f;
 
     @Override
     public void onHit(final DamagingProjectileAPI proj, CombatEntityAPI target, final Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, final CombatEngineAPI engine){
         final DamagingExplosionSpec spec = ((MissileAPI) proj).getSpec().getExplosionSpec();
 
         if (ModPlugin.particleEngineEnabled) {
-            addExplosionVisual(pt, spec.getRadius()*1.2f);
+            addExplosionVisual(pt, spec.getRadius());
         }
 
         Global.getSoundPlayer().playSound("wpnxt_phasetorpedo_explosion", 0.9f + Misc.random.nextFloat() * 0.1f, 1f, pt, new Vector2f());
@@ -68,13 +64,13 @@ public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin
     private void addExplosionVisual(Vector2f loc, float radius) {
         PhaseTorpedoSecondaryExplosion.makeStaticRing(loc);
         PhaseTorpedoSecondaryExplosion.makeRing(loc, 300);
-        Explosion.makeExplosion(loc, radius, 30, 1, 250);
+        Explosion.makeExplosion(loc, 2f*radius, 2.4f,20, 5, 500);
     }
 
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
         if (ModPlugin.particleEngineEnabled) {
-            FlickerTrail.makeTrail(proj);
+            PhaseTorpedoTrail.makeTrail(proj);
             ((MissileAPI) proj).setEmpResistance(10000);
             ((MissileAPI) proj).setEccmChanceOverride(1f);
         }
