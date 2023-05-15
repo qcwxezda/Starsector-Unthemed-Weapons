@@ -26,7 +26,7 @@ public class BloomTrail {
 
     public static void makeTrail(final CombatEntityAPI follow, float scale, int particlesPerSecond) {
         Emitter trailEmitter = trail(follow.getLocation(), scale);
-        Particles.stream(trailEmitter, 1, particlesPerSecond, 100f, new Particles.StreamAction() {
+        Particles.stream(trailEmitter, 1, particlesPerSecond, 100f, new Particles.StreamAction<Emitter>() {
             @Override
             public boolean apply(Emitter emitter) {
                 emitter.setAxis(follow.getFacing());

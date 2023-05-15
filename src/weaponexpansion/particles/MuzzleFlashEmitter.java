@@ -5,6 +5,7 @@ import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.IEmitter;
+import particleengine.ParticleData;
 
 public class MuzzleFlashEmitter extends IEmitter {
 
@@ -47,6 +48,11 @@ public class MuzzleFlashEmitter extends IEmitter {
     @Override
     public CombatEngineLayers getLayer() {
         return null;
+    }
+
+    @Override
+    public float getRenderRadius() {
+        return 0;
     }
 
     @Override

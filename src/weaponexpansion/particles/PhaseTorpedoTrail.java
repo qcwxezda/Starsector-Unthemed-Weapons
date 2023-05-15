@@ -27,7 +27,7 @@ public class PhaseTorpedoTrail {
     public static void makeTrail(final CombatEntityAPI follow) {
         for (float f = -15f; f <= 15f; f += 30f) {
             Emitter trailEmitter = trail(follow.getLocation(), f);
-            Particles.stream(trailEmitter, 1, 250, 100f, new Particles.StreamAction() {
+            Particles.stream(trailEmitter, 1, 250, 100f, new Particles.StreamAction<Emitter>() {
                 @Override
                 public boolean apply(Emitter emitter) {
                     emitter.setAxis(follow.getFacing());

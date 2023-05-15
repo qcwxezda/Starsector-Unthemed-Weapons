@@ -48,7 +48,7 @@ Light Vulcan,wpnxt_minivulcan,0,,100,350,,25,,1,75,1,,,,FRAGMENTATION,1,,,0.125,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Large Missile
-Megabloom Projector,wpnxt_energytorpedolarge,3,0.25,15000,1500,,1200,,30,10,30,8,,,ENERGY,,,,15,,,,,,,,200,200,10.5,2000,,,DO_NOT_AIM,"strike19, missile19, rare_bp, hist1t, merc",,,,Guided Torpedo,Very Slow,Excellent,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 1200,,,TRUE,31
+Megabloom Projector,wpnxt_energytorpedolarge,3,0.25,15000,1500,,1200,,30,10,30,10,,,ENERGY,,,,15,,,,,,,,200,200,10.5,2000,,,DO_NOT_AIM,"strike19, missile19, rare_bp, hist1t, merc",,,,Guided Torpedo,Very Slow,Excellent,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 1200,,,TRUE,31
 Ion Storm GMLRS,wpnxt_orbbarrage,3,0.25,8000,2000,,50,250,50,20,24,,,,ENERGY,100,,1,21.6,25,0.1,6,6,0,0,,500,0,6,300,,,"DO_NOT_AIM,STRIKE,USE_VS_FRIGATES","missile18, strike12, rare_bp, hist1t, merc",,,,Suppression,Fast,Special,,,Hits on hull or armor have a %s chance to spawn a %s EMP damage arc.,50% | 500,,,,34
 Heavy Cluster Launcher,wpnxt_clusterlauncherbig,1,0.75,5000,1400,,2000,,50,15,20,25,,,HIGH_EXPLOSIVE,,,,8,,,,,,,,100,100,10,1000,,,"ANTI_FTR, PD","he12, utility13, rare_bp, hist1t, merc",,,,Anti Fighter (Area),Very Slow,None,,,,,,,TRUE,37
 Swarm Array,wpnxt_spikebarrage,2,0.5,6000,1600,,200,,30,8,25,200,,,ENERGY,,,,4.25,8,0.25,,,,,,550,300,5,200,,,DO_NOT_AIM,"missile16, rare_bp, hist1t, merc",,,,General,Very Fast,Good,,,,,,,,38

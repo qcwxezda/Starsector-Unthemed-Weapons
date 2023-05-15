@@ -26,9 +26,9 @@ public class EnergyBallExplosion {
     }
 
     public static void makeExplosion(Vector2f loc, float radius) {
-        int coreCount = 15;
-        float coreAlpha = 0.3f;
-        float dur = radius / 100f;
+        int coreCount = 20;
+        float coreAlpha = 0.2f;
+        float dur = 0.8f + radius / 300f;
         Explosion.makeExplosion(
                 loc,
                 radius*2f,
