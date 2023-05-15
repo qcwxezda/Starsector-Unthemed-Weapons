@@ -9,7 +9,8 @@
   "collisionClass":"MISSILE_NO_FF",
   "explosionColor":[180,180,150,255],  # purely visual, will get a white additively blended core on top of this color
   "explosionRadius":50, # purely visual
-  "fadeTime":1, # fadeout duration
+  "fadeTime":1, # fadeout duration,
+  "flameoutTime":2.5,
   "engineSpec":{"turnAcc":300,
     "turnRate":120,
     "acc":750,
@@ -35,5 +36,6 @@
     "width":4.0,
     "length":20.0,
     "angle":180.0}],
+  "onFireEffect":"weaponexpansion.combat.scripts.SpikerEffect",
   "onHitEffect":"weaponexpansion.combat.scripts.SpikerEffect"
 }

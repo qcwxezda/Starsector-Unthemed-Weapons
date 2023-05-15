@@ -2,13 +2,13 @@
   "graphics": {
     "misc": {
       "wpnxt_explosion_ring": "graphics/fx/wpnxt_explosion_ring.png",
-      "wpnxt_energyball": "graphics/missiles/wpnxt_energyball.png"
+      "wpnxt_energyball": "graphics/missiles/wpnxt_energyball.png",
+      "wpnxt_glow": "graphics/fx/particlealpha64sq.png"
     }
   },
 
   "plugins": {
     "wpnxt_needledriver_plugin": "weaponexpansion.combat.plugins.NeedleDriverPlugin",
-    "wpnxt_combat_plugin": "weaponexpansion.combat.plugins.ActionPlugin",
-    "wpnxt_listener_plugin": "weaponexpansion.combat.plugins.ListenerPlugin",
+    "wpnxt_combat_plugin": "weaponexpansion.combat.plugins.ActionPlugin"
   }
 }
