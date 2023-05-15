@@ -56,7 +56,7 @@ public class Explosion {
         emitter.fadeTime(0f, 0f, dur * 0.2f, dur * 0.3f);
         float debrisScale = (float) Math.sqrt(scale) * 1.2f;
         emitter.size(debrisScale*0.8f, debrisScale*1.2f);
-        emitter.circleOffset(0f, scale);
+        emitter.circleOffset(0f, scale*0.15f);
         emitter.radialVelocity(scale*0.2f / dur, scale*1.3f / dur);
         emitter.growthRate(-debrisScale / dur, -debrisScale / dur);
         emitter.color(color);

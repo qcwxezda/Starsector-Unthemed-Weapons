@@ -10,41 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Some changes, more energy ball launcher stuff">
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_energyball_hit.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_energyballlauncher_fire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_energyballlauncher_loop.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/EnergyBallLauncherAI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallExplosion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallMuzzleFlash.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/MuzzleFlashEmitter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/strings/descriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energyball_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energyball_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_minispiker_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_minispiker_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Weapon Expansion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Weapon Expansion.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_superrailgun.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_superrailgun.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_superrailgun_loop.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_superrailgun_loop.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ListenerPlugin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/NeedleDriverPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/NeedleDriverPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ProximityMineRandomDelay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyBallLauncherEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyBallLauncherEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/NeedleDriverEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/NeedleDriverEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/PhaseTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/PhaseTorpedoEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SpikerEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SpikerEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SuperRailgunEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SuperRailgunEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_phasetorpedo_explosion.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_phasetorpedo_explosion.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallCharge.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallExplosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallMuzzleFlash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallMuzzleFlash.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallTrail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/FlickerJumpTrail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/FlickerTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoTrail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/EnergyBallRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/EnergyBallRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/MuzzleFlashEmitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/MuzzleFlashEmitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoSecondaryExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoSecondaryExplosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoTrail.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,9 +79,10 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Alex/Documents/My Games/Starsector/mods/UAF/jars/UAF.jar",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
+    "jdk.selected.JAVA_MODULE": "1.7",
+    "last_opened_file_path": "C:/Users/Alex/Documents/My Games/Starsector/mods/Particle Engine/jars/ParticleEngine.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15429688",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "VisualVMLauncher"
   }
@@ -372,7 +350,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683954449543</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Some changes, more energy ball launcher stuff">
+      <created>1684128979832</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1684128979832</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
