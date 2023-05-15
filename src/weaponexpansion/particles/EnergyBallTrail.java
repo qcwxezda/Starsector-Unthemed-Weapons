@@ -21,7 +21,7 @@ public class EnergyBallTrail {
         emitter.turnRate(-120f, 120f);
         emitter.facing(0f, 360f);
         emitter.color(0.7f, 1f, 0.7f, 0.09f);
-        Particles.stream(emitter, 1, 35, 100f, new Particles.StreamAction() {
+        Particles.stream(emitter, 1, 35, 100f, new Particles.StreamAction<Emitter>() {
             float time = Global.getCombatEngine().getTotalElapsedTime(false);
             @Override
             public boolean apply(Emitter emitter) {
