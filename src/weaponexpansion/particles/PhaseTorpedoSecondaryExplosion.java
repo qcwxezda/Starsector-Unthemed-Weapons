@@ -9,7 +9,7 @@ import particleengine.Emitter;
 import particleengine.Particles;
 import weaponexpansion.util.Utils;
 
-public class PhaseTorpedoSecondaryExplosion {
+public abstract class PhaseTorpedoSecondaryExplosion {
 
     public static void makeStaticRing(Vector2f loc) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/explosion_ring0.png");

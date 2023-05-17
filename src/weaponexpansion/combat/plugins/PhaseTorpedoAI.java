@@ -17,11 +17,13 @@ public class PhaseTorpedoAI extends BaseGuidedMissileAI {
     private float hpCheckpoint, pendingDamage = 0f;
     private static final float minJumpRange = 150f, maxJumpRange = 300f;
     private static final float maxDamageTakenPerSecond = 1200f;
+    private float fixedFacing = 0f;
 
     public PhaseTorpedoAI(MissileAPI missile, float maxSeekRangeFactor) {
         super(missile, maxSeekRangeFactor);
         hpCheckpoint = missile.getHitpoints();
         jumpInterval.setElapsed(1.5f);
+        fixedFacing = missile.getFacing();
     }
 
     @Override
@@ -49,6 +51,7 @@ public class PhaseTorpedoAI extends BaseGuidedMissileAI {
             missile.setJitter(missile, Color.WHITE, 1.6f * (0.5f - tMin), (int) (8f * (0.5f - tMin)), 0f, 100f * (0.5f - tMin));
         }
 
+        missile.setFacing(fixedFacing);
         if (jumpInterval.intervalElapsed()) {
             List<Vector2f> jumpDestinations = new ArrayList<>();
             for (float t = 0f; t <= 1f; t += 0.1f) {
@@ -102,6 +105,7 @@ public class PhaseTorpedoAI extends BaseGuidedMissileAI {
                 if (seek) {
                     missile.getVelocity().set(new Vector2f());
                     missile.setFacing(Misc.getAngleInDegrees(dest, getInterceptionPoint(1f)));
+                    fixedFacing = missile.getFacing();
                 }
                 break;
             }
