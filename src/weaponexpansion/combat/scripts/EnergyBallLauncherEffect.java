@@ -9,9 +9,7 @@ import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.particles.EnergyBallExplosion;
 import weaponexpansion.particles.EnergyBallMuzzleFlash;
-import weaponexpansion.particles.Explosion;
 import weaponexpansion.util.EnergyBallRenderer;
-import weaponexpansion.util.ExplosionRingRenderer;
 import weaponexpansion.util.Utils;
 
 import java.awt.*;
@@ -42,7 +40,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
         }
 
         public float getSize() {
-            return maxProjectileSize * (float) Math.sqrt(proj.getDamageAmount() / maxDamage);
+            return maxProjectileSize * (float) Math.sqrt(proj.getBaseDamageAmount() / maxDamage);
         }
     }
 
@@ -85,7 +83,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
 
             Utils.ClosestCollisionData collisionData = Utils.circleCollisionCheck(
                     proj.getLocation(),
-                    (float) Math.sqrt(proj.getDamageAmount() / data.maxDamage) * maxProjectileSize * 0.5f,
+                    data.getSize() * 0.5f,
                     ignoreList,
                     engine);
 
@@ -208,7 +206,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
         }
 
         float explosionRadiusRatio = explosionRadius / minExplosionRadius;
-        Global.getSoundPlayer().playSound("wpnxt_energyball_hit", 2f - (explosionRadiusRatio - 1f) / 2.2f + Utils.randBetween(-0.03f, 0.03f), explosionRadiusRatio / 3f + Utils.randBetween(-0.03f, 0.03f), collisionData.point, new Vector2f());
+        Global.getSoundPlayer().playSound("wpnxt_energyball_hit", 1.5f - (explosionRadiusRatio - 1f) / 6f + Utils.randBetween(-0.03f, 0.03f), 0.6f + (explosionRadiusRatio - 1f) / 5f + Utils.randBetween(-0.03f, 0.03f), collisionData.point, new Vector2f());
     }
 
     @Override
@@ -244,10 +242,6 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
         proj.setCollisionRadius(projectileSize);
 
         Vector2f firePoint = weapon.getFirePoint(0);
-//        Vector2f adjust = Misc.getUnitVectorAtDegreeAngle(proj.getFacing());
-//        proj.getTailEnd().set(new Vector2f(firePoint.x + adjust.x * -projectileSize / 2f, firePoint.y + adjust.y * -projectileSize / 2f));
-//        proj.getLocation().set(firePoint);
-//        proj.getVelocity().scale(2.5f - 1.5f * chargeLevel);
         float maxDamage = proj.getBaseDamageAmount() * fullChargeDamageMultiplier;
         float actualDamage = proj.getBaseDamageAmount() * damageMult;
         proj.setDamageAmount(actualDamage);
@@ -266,10 +260,6 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
         if (weapon.getChargeLevel() <= 0f && chargeLevelOnAdvance > 0f && !weapon.isDisabled()) {
             onFire(null, weapon, engine);
         }
-    }
-
-    public Vector2f getFirePoint() {
-        return weapon == null ? new Vector2f() : weapon.getFirePoint(0);
     }
 
     @Override

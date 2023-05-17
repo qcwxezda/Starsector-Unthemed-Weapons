@@ -6,7 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
 
-public class BloomTrail {
+public abstract class BloomTrail {
     public static Emitter trail(Vector2f loc, float scale) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/particlealpha64sq.png");
         emitter.setSyncSize(true);
