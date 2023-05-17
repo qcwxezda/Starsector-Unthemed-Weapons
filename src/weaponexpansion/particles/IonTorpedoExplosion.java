@@ -4,7 +4,7 @@ import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
 
-public class IonTorpedoExplosion {
+public abstract class IonTorpedoExplosion {
     public static Emitter core(Vector2f loc) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/explosion1.png");
         emitter.circleOffset(0f, 50f);

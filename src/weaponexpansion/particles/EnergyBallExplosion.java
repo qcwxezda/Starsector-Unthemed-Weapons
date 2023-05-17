@@ -6,7 +6,7 @@ import particleengine.Emitter;
 import particleengine.Particles;
 import weaponexpansion.util.Utils;
 
-public class EnergyBallExplosion {
+public abstract class EnergyBallExplosion {
 
     public static Emitter coreGlow(Vector2f loc, float scale, float dur) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/starburst_glow1.png");
@@ -21,7 +21,6 @@ public class EnergyBallExplosion {
         emitter.growthRate(rateAcceleration.one * 0.9f, rateAcceleration.one * 1.1f);
         emitter.growthAcceleration(rateAcceleration.two * 0.9f, rateAcceleration.two * 1.1f);
         emitter.facing(0f, 360f);
-        emitter.turnRate(-30f, 30f);
         return emitter;
     }
 
@@ -42,7 +41,7 @@ public class EnergyBallExplosion {
                 new float[] {0.8f, 1f, 0.8f, 1f},
                 "graphics/fx/explosion0.png");
 
-        Emitter coreGlow = coreGlow(loc, radius, dur);
+        Emitter coreGlow = coreGlow(loc, radius*1.6f, dur);
         Particles.burst(coreGlow, 3);
     }
 }

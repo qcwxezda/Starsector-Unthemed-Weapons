@@ -170,9 +170,9 @@
     {"file": "sounds/weapons/wpnxt_phasetorpedo_fire.wav", "pitch": 0.96, "volume": 1}
   ],
   "wpnxt_phasetorpedo_explosion": [
-    {"file": "sounds/weapons/wpnxt_phasetorpedo_explosion.wav", "pitch": 1, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_phasetorpedo_explosion.wav", "pitch": 0.98, "volume": 1},
-    {"file": "sounds/weapons/wpnxt_phasetorpedo_explosion.wav", "pitch": 0.96, "volume": 1}
+    {"file": "sounds/weapons/wpnxt_phasetorpedo_explosion.wav", "pitch": 1, "volume": 1.4},
+    {"file": "sounds/weapons/wpnxt_phasetorpedo_explosion.wav", "pitch": 0.98, "volume": 1.4},
+    {"file": "sounds/weapons/wpnxt_phasetorpedo_explosion.wav", "pitch": 0.96, "volume": 1.4}
   ],
   "wpnxt_energyballlauncher_loop": [
     {"file": "sounds/weapons/wpnxt_energyballlauncher_loop.wav", "pitch": 1, "volume": 1}
@@ -182,5 +182,15 @@
   ],
   "wpnxt_energyball_hit": [
     {"file": "sounds/weapons/wpnxt_energyball_hit.wav", "pitch": 1, "volume": 1}
+  ],
+  "wpnxt_morphcannon_fire": [
+    {"file": "sounds/weapons/wpnxt_morphcannon_fire.wav", "pitch": 1, "volume": 1.25},
+    {"file": "sounds/weapons/wpnxt_morphcannon_fire.wav", "pitch": 0.98, "volume": 1.25},
+    {"file": "sounds/weapons/wpnxt_morphcannon_fire.wav", "pitch": 0.96, "volume": 1.25}
+  ],
+  "wpnxt_morphcannon_hit": [
+    {"file": "sounds/weapons/wpnxt_morphcannon_hit.wav", "pitch": 1, "volume": 1.25},
+    {"file": "sounds/weapons/wpnxt_morphcannon_hit.wav", "pitch": 0.98, "volume": 1.25},
+    {"file": "sounds/weapons/wpnxt_morphcannon_hit.wav", "pitch": 0.96, "volume": 1.25}
   ]
 }
