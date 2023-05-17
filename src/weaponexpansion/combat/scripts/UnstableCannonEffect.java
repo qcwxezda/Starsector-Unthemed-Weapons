@@ -80,10 +80,9 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
     private void randomizeDamage() {
         float r1 = scaledValue(minDamage, maxDamage, Misc.random.nextFloat());
         float r2 = scaledValue(minDamage, maxDamage, Misc.random.nextFloat());
-        float r3 = scaledValue(minDamage, maxDamage, Misc.random.nextFloat());
 
-        // Minimum of 3 damage rolls
-        damage = Math.min(r1, Math.min(r2, r3));
+        // Minimum of 2 damage rolls
+        damage = Math.min(r1, r2);
     }
 
     private float scaledValue(float min, float max, float frac) {

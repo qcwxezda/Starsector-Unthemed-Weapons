@@ -1,15 +1,12 @@
 package weaponexpansion.particles;
 
-import com.fs.starfarer.api.combat.CombatEngineLayers;
 import com.fs.starfarer.api.util.Pair;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL14;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
 import weaponexpansion.util.Utils;
 
-public class Explosion {
+public abstract class Explosion {
     public static Emitter core(Vector2f loc, float scale, float dur, float[] color, String particlePath) {
         Emitter emitter = Particles.initialize(loc, particlePath);
         emitter.setSyncSize(true);
@@ -68,11 +65,11 @@ public class Explosion {
     public static Emitter glow(Vector2f loc, float scale, float dur, float[] color) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/particlealpha64sq.png");
         emitter.setSyncSize(true);
-        emitter.life(dur * 0.8f, dur);
+        emitter.life(dur, dur*1.2f);
         emitter.fadeTime(0f, 0f, dur * 0.7f, dur * 0.8f);
 
-        float initialSize = scale*1.05f;
-        Pair<Float, Float> growthRateAndAcceleration = Utils.getRateAndAcceleration(initialSize, initialSize, scale*1.6f, dur);
+        float initialSize = scale*1.5f;
+        Pair<Float, Float> growthRateAndAcceleration = Utils.getRateAndAcceleration(initialSize, initialSize, scale*1.8f, dur);
         emitter.size(initialSize * 0.9f, initialSize * 1.1f);
         emitter.growthRate(growthRateAndAcceleration.one * 0.9f, growthRateAndAcceleration.one * 1.1f);
         emitter.growthAcceleration(growthRateAndAcceleration.two * 0.9f, growthRateAndAcceleration.two * 1.1f);

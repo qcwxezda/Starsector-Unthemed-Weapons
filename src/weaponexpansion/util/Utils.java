@@ -2,6 +2,7 @@ package weaponexpansion.util;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
@@ -10,7 +11,9 @@ import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.combat.plugins.Action;
 import weaponexpansion.combat.plugins.ActionPlugin;
+import weaponexpansion.particles.Explosion;
 
+import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -783,6 +786,12 @@ public class Utils {
     public static Vector2f randomPointInCircle(Vector2f center, float radius) {
         float theta = Misc.random.nextFloat() * 2f *  (float) Math.PI;
         float r = radius * (float) Math.sqrt(Misc.random.nextFloat());
+        return new Vector2f(center.x + r*(float)Math.cos(theta), center.y + r*(float)Math.sin(theta));
+    }
+
+    public static Vector2f randomPointInRing(Vector2f center, float inRadius, float outRadius) {
+        float theta = Misc.random.nextFloat() * 2f * (float) Math.PI;
+        float r = (float) Math.sqrt(Misc.random.nextFloat() * (outRadius*outRadius - inRadius*inRadius) + inRadius*inRadius);
         return new Vector2f(center.x + r*(float)Math.cos(theta), center.y + r*(float)Math.sin(theta));
     }
 

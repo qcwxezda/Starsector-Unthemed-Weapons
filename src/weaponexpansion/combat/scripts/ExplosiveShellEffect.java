@@ -6,7 +6,6 @@ import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.particles.Explosion;
-import weaponexpansion.util.ExplosionRingRenderer;
 
 import java.awt.*;
 
@@ -24,6 +23,8 @@ public class ExplosiveShellEffect implements OnHitEffectPlugin {
             return;
         }
 
+        // Should use getDamageAmount instead of getBaseDamageAmount
+        // as the explosionSpec damage does NOT get modified.
         DamagingExplosionSpec spec = new DamagingExplosionSpec(
                 0.1f,
                 explosionRadius,
@@ -60,12 +61,7 @@ public class ExplosiveShellEffect implements OnHitEffectPlugin {
                 pt
         ).addDamagedAlready(target);
 
-        if (!ModPlugin.particleEngineEnabled) {
-            engine.addLayeredRenderingPlugin(new ExplosionRingRenderer(explosionRadius / 4f, explosionRadius * 1.5f, 0.75f, color2))
-                    .getLocation()
-                    .set(pt);
-        }
-        else {
+        if (ModPlugin.particleEngineEnabled) {
             Explosion.makeExplosion(pt, explosionRadius * 2f, 10, 1, 75);
         }
     }

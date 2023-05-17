@@ -3,6 +3,7 @@ package weaponexpansion.combat.scripts;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.util.Misc;
+import weaponexpansion.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, WeaponEffectPluginWithInit, BeamEffectPlugin, EveryFrameWeaponEffectPluginWithAdvanceAfter {
 
-    static float maxSpread = 6f;
+    static float maxSpread = 9f;
 
     /** Per second */
     static float beamAngleSpeed = 20f;
@@ -22,29 +23,27 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
     static float transferPerSecond = 0.5f;
 
     /** Need both spreads and angleOffsets since angleOffsets is shared between every voidray weapon */
-    float spread = 20f;
+    float spread = 0f;
     boolean randomizedSpreads = false;
     float convergeLevel = 0f;
     /** Per second, as fraction of remaining convergence arc */
-    float convergeLevelRate = 0.75f;
+    float convergeLevelRate = 0.5f;
 
-    List<Float> spreads = new ArrayList<>();
     List<Float> angleOffsets = new ArrayList<>();
     List<Float> randomFloats = new ArrayList<>();
-    List<Boolean> dirs = new ArrayList<>();
+    float time = 0f;
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
+        time += amount;
 
         // Weapon has stopped firing and beams disappeared, so reset the angle offsets
         if (weapon.getChargeLevel() <= 0f) {
             spread = maxSpread;
             convergeLevel = 0f;
             if (!randomizedSpreads) {
-                for (int i = 0; i < spreads.size(); i++) {
-                    spreads.set(i, -maxSpread / 2 + i * maxSpread / (angleOffsets.size() - 1));
-                    randomFloats.set(i, Misc.random.nextFloat() * 0.5f + 0.5f);
-                    dirs.set(i, Misc.random.nextBoolean());
+                for (int i = 0; i < angleOffsets.size(); i++) {
+                    randomFloats.set(i, Utils.randBetween(0f, 6.28f));
                 }
                 randomizedSpreads = true;
             }
@@ -78,14 +77,9 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
         }
 
         // In between min and max strength, lower the beam dispersion
-        spread = maxSpread * (1f - convergeLevel); //Math.min(spread, maxSpread * (1f - weapon.getChargeLevel()));
-        for (int i = 0; i < spreads.size(); i++) {
-            float newSpread = spreads.get(i) + beamAngleSpeed * spread / maxSpread * randomFloats.get(i) * amount * (dirs.get(i) ? 1f : -1f);
-            if (Math.abs(newSpread) >= spread) {
-                newSpread = Math.min(spread, Math.max(-spread, newSpread));
-                dirs.set(i, !dirs.get(i));
-            }
-            spreads.set(i, newSpread);
+        spread = maxSpread * (1f - convergeLevel);
+        for (int i = 0; i < angleOffsets.size(); i++) {
+            float newSpread = spread / 2f * (float) Math.sin(beamAngleSpeed / (2f * Math.PI) * time + randomFloats.get(i));
             angleOffsets.set(i, newSpread);
         }
         randomizedSpreads = false;
@@ -124,9 +118,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
                      : weapon.getSpec().getHiddenAngleOffsets();
 
         for (int i = 0; i < angleOffsets.size(); i++) {
-            spreads.add(-maxSpread / 2 + i * maxSpread / (angleOffsets.size() - 1));
-            randomFloats.add(Misc.random.nextFloat() * 0.5f + 0.5f);
-            dirs.add(Misc.random.nextBoolean());
+            randomFloats.add(Utils.randBetween(0f, 6.28f));
         }
     }
 }

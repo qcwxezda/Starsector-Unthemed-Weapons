@@ -6,7 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
 
-public class PhaseTorpedoTrail {
+public abstract class PhaseTorpedoTrail {
 
     public static Emitter trail(Vector2f loc, float amp) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/smoke32.png");

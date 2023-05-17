@@ -6,7 +6,7 @@ import com.fs.starfarer.api.combat.listeners.DamageDealtModifier;
 import org.lwjgl.util.vector.Vector2f;
 
 @SuppressWarnings("unused")
-public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, DamageDealtModifier {
+public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, WeaponEffectPluginWithInit, DamageDealtModifier {
     private String weaponId = null;
     private static final String modifyKey = "wpnxt_spiker";
 
@@ -36,7 +36,6 @@ public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, Dama
         ShipAPI ship = weapon.getShip();
         if (!ship.hasListenerOfClass(SpikerEffect.class)) {
             ship.addListener(this);
-            weaponId = weapon.getId();
         }
     }
 
@@ -51,5 +50,10 @@ public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, Dama
             }
         }
         return null;
+    }
+
+    @Override
+    public void init(WeaponAPI weapon) {
+        weaponId = weapon.getId();
     }
 }
