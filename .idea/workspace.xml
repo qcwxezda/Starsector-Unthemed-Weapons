@@ -9,58 +9,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Particle changes">
-      <change afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_morphcannon_shot.proj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/weapons/wpnxt_morphcannon.wpn" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/fx/wpnxt_cleaner_clouds_single.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_morphcannon_hardpoint.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_morphcannon_hardpoint_glow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_morphcannon_hardpoint_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_morphcannon_turret.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_morphcannon_turret_glow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_morphcannon_turret_recoil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_morphcannon_fire.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_morphcannon_hit.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/MorphCannonEffect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/KineticBurstEmitter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/MorphCannonDebrisEmitter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/MorphCannonExplosion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/MorphCannonKineticExplosion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/MorphCannonTrail.java" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Added morph cannon, miscellaneous changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_chromaticblaster_shot.proj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_chromaticblaster_spawn_proj.proj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_phasetorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_phasetorpedo_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_lv2shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_lv2shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_lv3shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_lv3shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_unstablecannon_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sample_emitter.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_chromaticblaster.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_chromaticblaster_spawn.wpn" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpmxt_impactbeam_turret_glow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_energyball_hit.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_energyball_hit.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds/weapons/wpnxt_phasetorpedo_explosion.wav" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/weapons/wpnxt_phasetorpedo_explosion.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/PhaseTorpedoAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/PhaseTorpedoAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ChromaticBlasterEffect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyBallLauncherEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyBallLauncherEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SmallPlasmaOnHitEffect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SpikerEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SpikerEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidRayWeaponEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidRayWeaponEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/BloomTrail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallExplosion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallMuzzleFlash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallMuzzleFlash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/EnergyBallTrail.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/Explosion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/IonTorpedoExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/IonTorpedoExplosion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/MuzzleFlashEmitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/MuzzleFlashEmitter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoSecondaryExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoSecondaryExplosion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/particles/PhaseTorpedoTrail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/ExplosionRingRenderer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_unstablecannon.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_unstablecannon.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/fx/wpnxt_cleaner_clouds_single.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/fx/wpnxt_starburst_glow.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_turret_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_impactlance_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_impactlance_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_impactlance_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_impactlance_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_impactlance_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_impactlance_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_ultrablaster_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_ultrablaster_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_ultrablaster_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_ultrablaster_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_ultrablaster_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_ultrablaster_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_ultrablaster_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_ultrablaster_turret_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_unstablecannon_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_unstablecannon_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_unstablecannon_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_unstablecannon_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_unstablecannon_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_unstablecannon_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_unstablecannon_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_unstablecannon_turret_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_voidray_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_voidray_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_voidray_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_voidray_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_voidray_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_voidray_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_voidray_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_voidray_turret_glow.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -403,12 +377,18 @@
       <option name="project" value="LOCAL" />
       <updated>1684175808429</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Added morph cannon, miscellaneous changes">
+      <created>1684285625166</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1684285625166</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fix voidbeam bug + slight buff" />
     <MESSAGE value="Update graphics, add unique sounds, add EMP damage to bolts" />
     <MESSAGE value="Add descriptions, upload some failed files before deleting them" />
     <MESSAGE value="Change voidbeam emitter to fire multiple converging beams" />
@@ -433,7 +413,8 @@
     <MESSAGE value="Remove psd files, add energy ball launcher (WIP)" />
     <MESSAGE value="Some changes, more energy ball launcher stuff" />
     <MESSAGE value="Particle changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Particle changes" />
+    <MESSAGE value="Added morph cannon, miscellaneous changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added morph cannon, miscellaneous changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
