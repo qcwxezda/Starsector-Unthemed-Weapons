@@ -1,25 +1,22 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.particles;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.DamagingProjectileAPI;
-import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
-import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
-import weaponexpansion.combat.scripts.MorphCannonEffect;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
-public class MorphCannonTrail {
-    public static void makeTrail(final DamagingProjectileAPI source) {
+public abstract class MorphCannonTrail {
+    public static void makeTrail(final DamagingProjectileAPI source, final float maxLife) {
         Emitter emitter = Particles.initialize(source.getLocation(), "graphics/fx/particlealpha_textured.png");
         float life = 1.5f;
         emitter.life(life, life);
         emitter.fadeTime(0.1f, 0.1f, life-0.3f, life-0.3f);
 
         float initialSize = 9f;
-        Pair<Float, Float> growthRateAcc = Utils.getRateAndAcceleration(initialSize, initialSize, initialSize*1.5f, life);
-        emitter.size(initialSize * 5f, initialSize * 6f, initialSize * 0.9f, initialSize * 1.1f);
+        Pair<Float, Float> growthRateAcc = MathUtils.getRateAndAcceleration(initialSize, initialSize, initialSize*1.5f, life);
+        emitter.size(initialSize * 3f, initialSize * 4f, initialSize * 0.9f, initialSize * 1.1f);
         emitter.growthRate(0f, 0f, growthRateAcc.one * 0.9f, growthRateAcc.one * 1.1f);
         emitter.growthAcceleration(0f, 0f, growthRateAcc.two * 0.9f, growthRateAcc.two * 1.1f);
 
@@ -35,21 +32,22 @@ public class MorphCannonTrail {
             @Override
             public boolean apply(Emitter emitter) {
                 emitter.setLocation(source.getLocation());
-                emitter.setAxis(source.getFacing());
+
+                // Velocity is 0 on first frame for whatever reason
+                if (source.getVelocity().lengthSquared() <= 0f) {
+                    emitter.setAxis(source.getFacing());
+                }
+                else {
+                    emitter.setAxis(source.getVelocity());
+                }
 
                 emitter.facing(-10f, 10f);
 
 //                // Want the angle to match the projectile's facing rather than velocity
 //                float angleDiff = Utils.angleDiff(source.getFacing(), Misc.getAngleInDegrees(source.getVelocity()));
 //                emitter.facing(angleDiff - 10f, angleDiff + 10f);
-
-                Float maxLife = (Float) source.getCustomData().get(MorphCannonEffect.maxLifeKey);
-                if (maxLife == null) {
-                    return false;
-                }
-
                 float ratio = Math.min(1f, source.getElapsed() /  maxLife);
-                emitter.color(1f - ratio * 0.1f, 0.25f + ratio * 0.6f, 0.25f + ratio * 0.5f, 0.9f);
+                emitter.color(1f - ratio * 0.1f, 0.25f + ratio * 0.6f, 0.25f + ratio * 0.5f, 0.75f * source.getBrightness());
 
                 float elapsed = Global.getCombatEngine().getElapsedInLastFrame();
                 float dist = source.getVelocity().length() * elapsed;

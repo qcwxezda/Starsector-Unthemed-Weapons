@@ -1,10 +1,10 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.emitters;
 
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.BaseIEmitter;
 import particleengine.ParticleData;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 public class MorphCannonDebrisEmitter extends BaseIEmitter {
     private final Vector2f location;
@@ -40,12 +40,12 @@ public class MorphCannonDebrisEmitter extends BaseIEmitter {
     protected ParticleData initParticle(int i) {
         ParticleData data = new ParticleData();
 
-        float life = Utils.randBetween(minLife, maxLife);
+        float life = MathUtils.randBetween(minLife, maxLife);
         data.life(life).fadeTime(life, 0f);
 
-        Vector2f offset = Utils.randomPointInRing(new Vector2f(), radius * 0.8f, radius * 1.2f);
+        Vector2f offset = MathUtils.randomPointInRing(new Vector2f(), radius * 0.8f, radius * 1.2f);
         Vector2f velocity = new Vector2f(-offset.x, -offset.y);
-        Utils.safeNormalize(velocity);
+        MathUtils.safeNormalize(velocity);
         velocity.scale((offset.length() - 1f) / life);
         data.offset(offset).velocity(velocity);
 
@@ -55,8 +55,8 @@ public class MorphCannonDebrisEmitter extends BaseIEmitter {
                 0.5f,
                 1f};
         data.color(color);
-        data.revolutionRate(Utils.randBetween(minRevoRate, maxRevoRate));
-        float size = Utils.randBetween(minSize, maxSize);
+        data.revolutionRate(MathUtils.randBetween(minRevoRate, maxRevoRate));
+        float size = MathUtils.randBetween(minSize, maxSize);
         data.size(size, size);
         data.growthRate(-size / life, -size / life);
         return data;

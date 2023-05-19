@@ -1,4 +1,4 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.particles;
 
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;

@@ -3,11 +3,10 @@ package weaponexpansion.combat.scripts;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.util.GlowRenderer;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.CollisionUtils;
+import weaponexpansion.fx.render.GlowRenderer;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +18,7 @@ public class SuperRailgunEffect extends GlowOnFirePlugin {
     static final float minTimeBetweenHits = 0.06f;
     /** Fraction of current damage lost per pierce (not base damage) */
     static final float damageDecayPerHit = 0.3f;
-    static final float speedLossDuringHit = 0.6f;
+    static final float speedLossDuringHit = 0.5f;
     static final Color hitGlowColor = new Color(255, 225, 128);
     static final Color chargeGlowColor = new Color(65, 130, 195);
 
@@ -128,10 +127,7 @@ public class SuperRailgunEffect extends GlowOnFirePlugin {
             Vector2f scaledVelocity = new Vector2f(proj.getVelocity().x * amount, proj.getVelocity().y * amount);
             Vector2f.sub(location, scaledVelocity, prevLocation);
 
-            List<CombatEntityAPI> ignoreList = new ArrayList<>();
-            ignoreList.add(proj.getSource());
-            ignoreList.add(proj);
-            Utils.ClosestCollisionData closest = Utils.rayCollisionCheck(prevLocation, location, ignoreList, engine);
+            CollisionUtils.ClosestCollisionData closest = CollisionUtils.rayCollisionCheck(prevLocation, location, proj.getSource(), true, engine);
 
             if (closest == null) {
                 continue;
@@ -142,6 +138,7 @@ public class SuperRailgunEffect extends GlowOnFirePlugin {
             proj.getVelocity().set(new Vector2f(data.initialVelocity.x * (1f - speedLossDuringHit), data.initialVelocity.y * (1f - speedLossDuringHit)));
 
             engine.applyDamage(
+                    target,
                     target,
                     closest.point,
                     proj.getDamageAmount(),

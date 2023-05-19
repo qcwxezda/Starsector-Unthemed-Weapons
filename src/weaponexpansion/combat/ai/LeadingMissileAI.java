@@ -1,11 +1,11 @@
-package weaponexpansion.combat.plugins;
+package weaponexpansion.combat.ai;
 
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 public class LeadingMissileAI extends BaseGuidedMissileAI {
 
@@ -26,7 +26,7 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
 
     public LeadingMissileAI(MissileAPI missile, float maxSeekRangeFactor) {
         super(missile, maxSeekRangeFactor);
-        randomOffset = Utils.randBetween(-maxRandomOffset, maxRandomOffset);
+        randomOffset = MathUtils.randBetween(-maxRandomOffset, maxRandomOffset);
         seekInterval.forceIntervalElapsed();
     }
 
@@ -47,7 +47,7 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
         // is theta applies a deviation of a*sin(theta) dt. Since theta is quadratic in t, we may estimate sin theta
         // as theta to be able to integrate this analytically.
 
-        float theta0 = Utils.angleDiff(missile.getFacing(), targetAngle);
+        float theta0 = MathUtils.angleDiff(missile.getFacing(), targetAngle);
         float w = missile.getAngularVelocity();
         if (w == 0f) {
             w = 0.0001f;
@@ -70,7 +70,7 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
 
         // During this time, facing angle increases by -w^2 / (2 alpha).
         theta -= w*w/(2f*alpha);
-        theta = Utils.angleDiff(theta, 0f);
+        theta = MathUtils.angleDiff(theta, 0f);
         // We may need to change acceleration direction here
         alpha = -missile.getTurnAcceleration() * Math.signum(theta);
         W = -missile.getMaxTurnRate() * Math.signum(theta);
@@ -88,13 +88,13 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
             // integrate sin(theta/2 + alpha sqrt(-theta/alpha) (t-T2) - 1/2 alpha (t-T2)^2) from T2 to T3
             if (calculateResultingOffset) {
                 final float fTheta = theta*Misc.RAD_PER_DEG, fAlpha = alpha*Misc.RAD_PER_DEG, fT1 = T1;
-                IA += Utils.applyAtLimits(new Utils.Function() {
+                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return fTheta * x + 1f / 6f * fAlpha * (x - fT1) * (x - fT1) * (x - fT1);
                     }
                 }, T1, T2);
-                IA += Utils.applyAtLimits(new Utils.Function() {
+                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return 0.5f * fTheta * x + 0.5f * fAlpha * (float) Math.sqrt(-fTheta / fAlpha) * (x - T2) * (x - T2) - 1f / 6f * fAlpha * (x - T2) * (x - T2) * (x - T2);
@@ -114,19 +114,19 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
             // sin(theta + 1/2 alpha TW^2 + 2*W*TH + W*(t-T3) - 1/2*alpha*(t-T3)^2) from T3 to T4
             if (calculateResultingOffset) {
                 final float fTheta = theta*Misc.RAD_PER_DEG, fAlpha = alpha*Misc.RAD_PER_DEG, fw = w*Misc.RAD_PER_DEG, fT1 = T1;
-                IA += Utils.applyAtLimits(new Utils.Function() {
+                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return fTheta * x + 1f / 6f * fAlpha * (x - fT1) * (x - fT1) * (x - fT1);
                     }
                 }, T1, T2);
-                IA += Utils.applyAtLimits(new Utils.Function() {
+                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return fTheta * x + 0.5f * fAlpha * TW * TW * x + 0.5f * fw * (x - T2) * (x - T2);
                     }
                 }, T2, T3);
-                IA += Utils.applyAtLimits(new Utils.Function() {
+                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return fTheta * x + 0.5f * fAlpha * TW * TW * x + 2f * fw * TH * x + 0.5f * fw * (x - T3) * (x - T3) + 1f / 6f * fAlpha * (x - T3) * (x - T3) * (x - T3);
@@ -159,13 +159,13 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
             // sin(theta + w*T + 1/2*alpha*T^2 + wT*(t-T) - 1/2*alpha*(t-T)^2) from T to T2
             if (calculateResultingOffset && tW < tA) {
                 final float fTheta = theta*Misc.RAD_PER_DEG, fAlpha = alpha*Misc.RAD_PER_DEG, fw = w;
-                IW += Utils.applyAtLimits(new Utils.Function() {
+                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return fTheta * x + 0.5f * fw * x * x + 1f / 6f * fAlpha * x * x * x;
                     }
                 }, 0f, T);
-                IW += Utils.applyAtLimits(new Utils.Function() {
+                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return fTheta * x + fw * T * x + 0.5f * fAlpha * T * T * x + 0.5f * wT * (x - T) * (x - T) - 1f / 6f * fAlpha * (x - T) * (x - T) * (x - T);
@@ -183,7 +183,7 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
             // Here we need to find T such that theta + w*fT1 + 1/2*alpha*fT1^2 + W*T + W^2/(2*alpha) = 360k
             // again with the smallest k so that T is positive.
             //k = (int) Math.ceil((theta + w*fT1 + 0.5f*alpha*fT1*fT1 + W*W/(2f*alpha))/360f);
-            float T2part = Utils.modPositive((/*360f*k*/ - W*W/(2f*alpha) - 0.5f*alpha*fT1*fT1 - w*fT1 - theta)/W, Math.abs(360f / W));
+            float T2part = MathUtils.modPositive((/*360f*k*/ - W*W/(2f*alpha) - 0.5f*alpha*fT1*fT1 - w*fT1 - theta)/W, Math.abs(360f / W));
             final float T2 = fT1 + T2part;
             final float T3 = T2 + W/alpha;
             tW = T3;
@@ -193,19 +193,19 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
             // sin(theta + w fT1 + 1/2 alpha (fT1)^2 + W (t-fT1) - 1/2 alpha (t-T2)^2) from T2 to T3
             if (calculateResultingOffset && tW < tA) {
                 final float fTheta = theta*Misc.RAD_PER_DEG, fAlpha = alpha*Misc.RAD_PER_DEG, fw = w*Misc.RAD_PER_DEG, fW = W*Misc.RAD_PER_DEG;
-                IW += Utils.applyAtLimits(new Utils.Function() {
+                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return fTheta * x + 0.5f * fw * x * x + 1f / 6f * fAlpha * x * x * x;
                     }
                 }, 0f, fT1);
-                IW += Utils.applyAtLimits(new Utils.Function() {
+                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return fTheta * x + fw * fT1 * x + 0.5f * fAlpha * fT1 * fT1 * x + 0.5f * fW * (x - fT1) * (x - fT1);
                     }
                 }, fT1, T2);
-                IW += Utils.applyAtLimits(new Utils.Function() {
+                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
                     @Override
                     public float apply(float x) {
                         return fTheta * x + fw * fT1 * x + 0.5f * fAlpha * fT1 * fT1 * x + 0.5f * fW * (x - fT1) * (x - fT1) - 1f / 6f * fAlpha * (x - T2) * (x - T2) * (x - T2);
@@ -235,7 +235,7 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
         if (seekInterval.intervalElapsed()) {
             Vector2f interceptPoint = getInterceptionPoint(1f);
             Vector2f interceptLoS = Misc.getDiff(interceptPoint, missile.getLocation());
-            Utils.safeNormalize(interceptLoS);
+            MathUtils.safeNormalize(interceptLoS);
             Vector2f perp = Misc.getPerp(interceptLoS);
             float dist = Misc.getDistance(interceptPoint, missile.getLocation());
             float distRatio = Math.min(1f, dist / missile.getMaxRange());
@@ -249,7 +249,7 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
 
         float moveSpeed = missile.getVelocity().length() + 0.01f;
         float velAngle = moveSpeed > 0f ? Misc.getAngleInDegrees(missile.getVelocity()) : missile.getFacing();
-        float velError = Utils.angleDiff(targetAngle, velAngle);
+        float velError = MathUtils.angleDiff(targetAngle, velAngle);
 
         if (Math.abs(velError) < 90f && Math.abs(velError) > 8f) {
             // To cancel out the perpendicular velocity.

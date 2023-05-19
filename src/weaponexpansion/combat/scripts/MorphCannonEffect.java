@@ -5,13 +5,12 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.combat.listeners.DamageDealtModifier;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
-import weaponexpansion.particles.MorphCannonExplosion;
-import weaponexpansion.particles.MorphCannonKineticExplosion;
-import weaponexpansion.particles.MorphCannonTrail;
-import weaponexpansion.util.Utils;
+import weaponexpansion.fx.particles.MorphCannonExplosion;
+import weaponexpansion.fx.particles.MorphCannonKineticExplosion;
+import weaponexpansion.fx.particles.MorphCannonTrail;
+import weaponexpansion.util.MathUtils;
 
 import java.awt.*;
 import java.util.*;
@@ -20,8 +19,24 @@ import java.util.*;
 public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtModifier, OnHitEffectPlugin {
     private final Set<DamagingProjectileAPI> projectiles = new HashSet<>();
     public static final String modifyKey = "wpnxt_morphCannon";
-    public static final String maxLifeKey = "wpnxt_maxLife";
+    public static final String morphDataKey = "wpnxt_morphData";
     public static final float maxExplosionRadius = 200f;
+
+    private static class MorphProjDamageData {
+        float kineticFraction;
+        float heFraction;
+        float totalDamage;
+        final float maxLife;
+        DamagingProjectileAPI kineticComponent;
+
+        private MorphProjDamageData(float baseDamage, DamagingProjectileAPI kineticComponent, float maxLife) {
+            totalDamage = baseDamage;
+            kineticFraction = 0f;
+            heFraction = 1f;
+            this.kineticComponent = kineticComponent;
+            this.maxLife = maxLife;
+        }
+    }
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
@@ -30,7 +45,26 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
         while (itr.hasNext()) {
             DamagingProjectileAPI proj = itr.next();
 
+            MorphProjDamageData data = (MorphProjDamageData) proj.getCustomData().get(morphDataKey);
+            if (data == null) {
+                itr.remove();
+                continue;
+            }
+
+            // Copy projectile should always follow base projectile exactly
+            data.kineticComponent.getLocation().set(proj.getLocation());
+            data.kineticComponent.setFacing(proj.getFacing());
+            data.kineticComponent.getVelocity().set(proj.getVelocity());
+
+            // Set the damage values based on elapsed amount of time
+            float ratio = Math.min(1f, proj.getElapsed() / data.maxLife);
+            data.heFraction = 1f - ratio;
+            data.kineticFraction = ratio;
+            proj.setDamageAmount(data.heFraction * data.totalDamage);
+            data.kineticComponent.setDamageAmount(data.kineticFraction * data.totalDamage);
+
             if (proj.isExpired() || !engine.isEntityInPlay(proj)) {
+                engine.removeEntity(data.kineticComponent);
                 itr.remove();
             }
         }
@@ -39,20 +73,37 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine){
         super.onFire(proj, weapon, engine);
-        // Only do this so that the AI sees a 1200 damage energy projectile
-        // Will be a mix between high-explosive and kinetic when it actually hits.
-        proj.getDamage().setType(DamageType.ENERGY);
+
         ShipAPI ship = weapon.getShip();
         if (!ship.hasListenerOfClass(MorphCannonEffect.class)) {
             ship.addListener(this);
         }
 
         float maxLife = proj.getWeapon().getRange() / proj.getMoveSpeed();
-        proj.setCustomData(maxLifeKey, maxLife);
+
+        // The base projectile will represent the high-explosive component
+        proj.getDamage().setType(DamageType.HIGH_EXPLOSIVE);
+
+        // Spawn a second projectile to represent the kinetic component of the damage
+        // This projectile is invisible and solely serves to allow the AI to make an informed decision
+        // about what to do when faced with it
+        DamagingProjectileAPI kineticComponent =
+                (DamagingProjectileAPI) engine.spawnProjectile(
+                        null,
+                        null,
+                        ModPlugin.dummyProjWeapon,
+                        proj.getLocation(),
+                        0f,
+                        new Vector2f());
+        kineticComponent.setCollisionClass(CollisionClass.NONE);
+        kineticComponent.getDamage().setType(DamageType.KINETIC);
+
+        MorphProjDamageData data = new MorphProjDamageData(proj.getBaseDamageAmount(), kineticComponent, maxLife);
         projectiles.add(proj);
+        proj.setCustomData(morphDataKey, data);
 
         if (ModPlugin.particleEngineEnabled) {
-            MorphCannonTrail.makeTrail(proj);
+            MorphCannonTrail.makeTrail(proj, maxLife);
         }
     }
 
@@ -60,11 +111,9 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
     public String modifyDamageDealt(Object param, CombatEntityAPI target, DamageAPI damage, Vector2f pt, boolean shieldHit) {
         if (param instanceof DamagingProjectileAPI && projectiles.contains(param)) {
             DamagingProjectileAPI proj = (DamagingProjectileAPI) param;
-            // Deal partial kinetic damage; the remaining high-explosive damage will be dealt on the on-hit effect.
-            float maxLife = (float) proj.getCustomData().get(maxLifeKey);
-            float ratio = Math.min(1f, proj.getElapsed() / maxLife);
-            proj.getDamage().setType(DamageType.KINETIC);
-            proj.getDamage().getModifier().modifyMult(modifyKey, ratio);
+            // Set the damage to a small number; it will be correctly applied in the onHit function
+            // Don't set it to 0 because shieldHit doesn't register for hits that deal less than 1 damage!
+            proj.setDamageAmount(10f);
             return modifyKey;
         }
         return null;
@@ -72,33 +121,71 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
 
     @Override
     public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI result, CombatEngineAPI engine) {
-        Float maxLife = (Float) proj.getCustomData().get(maxLifeKey);
-        if (maxLife == null) {
+        if (proj.getCustomData() == null) {
+            return;
+        }
+        MorphProjDamageData data = (MorphProjDamageData) proj.getCustomData().get(morphDataKey);
+        if (data == null) {
             return;
         }
 
-        float ratio = 1f - proj.getElapsed() / maxLife;
-        float damage = proj.getDamageAmount() * ratio;
+        proj.setDamageAmount(data.totalDamage);
+        float kDamage = proj.getDamageAmount() * data.kineticFraction;
+        float hDamage = proj.getDamageAmount() * data.heFraction;
+        // If shield hit, apply kinetic damage equal to K + 0.25*HE
+        if (shieldHit) {
+            engine.applyDamage(
+                    target,
+                    target,
+                    pt,
+                    kDamage + 0.25f*hDamage,
+                    DamageType.KINETIC,
+                    0f,
+                    false,
+                    proj.isFading(),
+                    proj.getSource(),
+                    true);
+        }
+        // Otherwise, apply high-explosive damage equal to HE + 0.25*K,
+        // then apply an additional 0.75*K kinetic damage so that the total
+        // hull damage is HE + KE
+        else {
+            engine.applyDamage(
+                    target,
+                    target,
+                    pt,
+                    hDamage + 0.25f*kDamage,
+                    DamageType.HIGH_EXPLOSIVE,
+                    0f,
+                    false,
+                    proj.isFading(),
+                    proj.getSource(),
+                    true);
+            engine.applyDamage(
+                    target,
+                    target,
+                    pt,
+                    0.75f*kDamage,
+                    DamageType.KINETIC,
+                    0f,
+                    false,
+                    proj.isFading(),
+                    proj.getSource(),
+                    false);
+        }
 
-        engine.applyDamage(target,
-                pt,
-                damage,
-                DamageType.HIGH_EXPLOSIVE,
-                0f,
-                false,
-                proj.isFading(),
-                proj.getSource(),
-                true);
 
         if (ModPlugin.particleEngineEnabled) {
-            float kineticRatioSqrt = (float)Math.sqrt((1f - ratio));
-            MorphCannonKineticExplosion.makeExplosion(pt, 150f*kineticRatioSqrt, 60f*kineticRatioSqrt, 0.6f, (int) (100f * kineticRatioSqrt));
+            float kineticRatioSqrt = (float)Math.sqrt(data.kineticFraction);
+            if (kineticRatioSqrt > 0.3f) {
+                MorphCannonKineticExplosion.makeExplosion(pt, 150f * kineticRatioSqrt, 60f * kineticRatioSqrt, 0.6f, (int) (100f * kineticRatioSqrt));
+            }
         }
 
-        if (ratio <= 0.4f) {
+        if (data.heFraction <= 0.4f) {
             return;
         }
-        float explosionRadius = maxExplosionRadius * (float) Math.sqrt(ratio - 0.4f) / (float) Math.sqrt(0.6f);
+        float explosionRadius = maxExplosionRadius * (float) Math.sqrt(data.heFraction - 0.4f) / (float) Math.sqrt(0.6f);
         if (explosionRadius < 50f) {
             return;
         }
@@ -112,8 +199,8 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
                 0.1f,
                 explosionRadius,
                 explosionRadius / 2,
-                damage,
-                damage / 2,
+                hDamage,
+                hDamage,
                 CollisionClass.PROJECTILE_FF,
                 CollisionClass.PROJECTILE_FIGHTER,
                 4f,
@@ -148,8 +235,8 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
             MorphCannonExplosion.makeExplosion(pt, explosionRadius * 2f);
         }
         Global.getSoundPlayer().playSound("wpnxt_morphcannon_hit",
-                Utils.randBetween(0.95f, 1.05f),
-                ratio,
+                MathUtils.randBetween(0.95f, 1.05f),
+                data.heFraction,
                 pt,
                 new Vector2f());
     }

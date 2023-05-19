@@ -6,7 +6,7 @@ import com.fs.starfarer.api.combat.listeners.DamageDealtModifier;
 import org.lwjgl.util.vector.Vector2f;
 
 @SuppressWarnings("unused")
-public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, WeaponEffectPluginWithInit, DamageDealtModifier {
+public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, DamageDealtModifier {
     private String weaponId = null;
     private static final String modifyKey = "wpnxt_spiker";
 
@@ -18,13 +18,15 @@ public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, Weap
             // proj damage is the base damage and not twice the base damage
             engine.applyDamage(
                     target,
+                    target,
                     pt,
                     proj.getDamageAmount(),
                     DamageType.KINETIC,
                     0f,
                     false,
                     true,
-                    proj.getSource()
+                    proj.getSource(),
+                    false
             );
         }
     }
@@ -34,6 +36,7 @@ public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, Weap
         // Double the damage so ships see the full damage and don't overload on the soft flux damage
         proj.setDamageAmount(proj.getBaseDamageAmount() * 2f);
         ShipAPI ship = weapon.getShip();
+        weaponId = weapon.getId();
         if (!ship.hasListenerOfClass(SpikerEffect.class)) {
             ship.addListener(this);
         }
@@ -50,10 +53,5 @@ public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, Weap
             }
         }
         return null;
-    }
-
-    @Override
-    public void init(WeaponAPI weapon) {
-        weaponId = weapon.getId();
     }
 }

@@ -1,10 +1,11 @@
-package weaponexpansion.util;
+package weaponexpansion.fx.render;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import weaponexpansion.combat.scripts.EnergyBallLauncherEffect;
+import weaponexpansion.util.MathUtils;
 
 public class EnergyBallRenderer extends BaseCombatLayeredRenderingPlugin {
 
@@ -13,7 +14,7 @@ public class EnergyBallRenderer extends BaseCombatLayeredRenderingPlugin {
     private final float maxProjDamage;
     private final SpriteAPI sprite, glowSprite;
     private final EnergyBallLauncherEffect plugin;
-    public float facing = Utils.randBetween(0f, 360f);
+    public float facing = MathUtils.randBetween(0f, 360f);
     public float modifiedTime = 0f;
     private final float[] glowSizeMults = new float[] {1f, 1f, 1f};
     private final float[] glowAlphaMults = new float[] {1f, 1f, 1f};
@@ -69,10 +70,10 @@ public class EnergyBallRenderer extends BaseCombatLayeredRenderingPlugin {
             modifiedTime += amount * 0.5f;
             entity.getLocation().set(projSource.getLocation());
         }
-        facing += 240f * amount;
+        facing += 180f * amount;
 
         for (int i = 0; i < glowSizeMults.length; i++) {
-            float modTime = Utils.modPositive(-1.5f* modifiedTime + 0.33f * i, 1f);
+            float modTime = MathUtils.modPositive(-1.5f* modifiedTime + 0.33f * i, 1f);
             glowSizeMults[i] = 0.5f + modTime;
             glowAlphaMults[i] = (1f - 2f * Math.abs(modTime - 0.5f));
         }
@@ -93,12 +94,10 @@ public class EnergyBallRenderer extends BaseCombatLayeredRenderingPlugin {
     private void render(float size, float alphaMult) {
         if (size <= 0f) return;
         sprite.setSize(size, size);
-        sprite.setAlphaMult(alphaMult * 0.16f) ;
+        sprite.setAlphaMult(alphaMult) ;
         sprite.setAdditiveBlend();
-        for (int i = 0; i < 6; i++) {
-            sprite.setAngle(facing + i * 60f);
-            sprite.renderAtCenter(entity.getLocation().x, entity.getLocation().y);
-        }
+        sprite.setAngle(facing);
+        sprite.renderAtCenter(entity.getLocation().x, entity.getLocation().y);
 
         glowSprite.setAdditiveBlend();
         for (int i = 0; i < glowSizeMults.length; i++) {

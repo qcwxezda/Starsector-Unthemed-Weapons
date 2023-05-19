@@ -1,4 +1,4 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.particles;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.CombatEntityAPI;

@@ -1,10 +1,10 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.particles;
 
 import com.fs.starfarer.api.util.Pair;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 public abstract class Explosion {
     public static Emitter core(Vector2f loc, float scale, float dur, float[] color, String particlePath) {
@@ -16,7 +16,7 @@ public abstract class Explosion {
         emitter.fadeTime(0f, 0f, dur*0.6f, dur*0.7f);
 
         float initialSize = scale*0.4f;
-        Pair<Float, Float> growthRateAcceleration = Utils.getRateAndAcceleration(initialSize, scale*0.95f, scale, dur);
+        Pair<Float, Float> growthRateAcceleration = MathUtils.getRateAndAcceleration(initialSize, scale*0.95f, scale, dur);
         emitter.size(initialSize*0.9f, initialSize*1.1f);
         emitter.growthAcceleration(growthRateAcceleration.two * 0.9f, growthRateAcceleration.two * 1.1f);
         emitter.growthRate(growthRateAcceleration.one * 0.9f, growthRateAcceleration.one * 1.1f);
@@ -36,7 +36,7 @@ public abstract class Explosion {
         emitter.fadeTime(0f, 0f, dur * 0.3f, dur * 0.4f);
 
         float initialSize = scale * 0.2f;
-        Pair<Float, Float> growthRateAndAcceleration = Utils.getRateAndAcceleration(initialSize, scale*1.8f, scale*1.8f, dur);
+        Pair<Float, Float> growthRateAndAcceleration = MathUtils.getRateAndAcceleration(initialSize, scale*1.8f, scale*1.8f, dur);
         emitter.size(initialSize * 0.9f, initialSize * 1.1f);
         emitter.growthRate(growthRateAndAcceleration.one * 0.9f, growthRateAndAcceleration.one * 1.1f);
         emitter.growthAcceleration(growthRateAndAcceleration.two * 0.9f, growthRateAndAcceleration.two * 1.1f);
@@ -69,7 +69,7 @@ public abstract class Explosion {
         emitter.fadeTime(0f, 0f, dur * 0.7f, dur * 0.8f);
 
         float initialSize = scale*1.5f;
-        Pair<Float, Float> growthRateAndAcceleration = Utils.getRateAndAcceleration(initialSize, initialSize, scale*1.8f, dur);
+        Pair<Float, Float> growthRateAndAcceleration = MathUtils.getRateAndAcceleration(initialSize, initialSize, scale*1.8f, dur);
         emitter.size(initialSize * 0.9f, initialSize * 1.1f);
         emitter.growthRate(growthRateAndAcceleration.one * 0.9f, growthRateAndAcceleration.one * 1.1f);
         emitter.growthAcceleration(growthRateAndAcceleration.two * 0.9f, growthRateAndAcceleration.two * 1.1f);

@@ -9,10 +9,10 @@ import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.combat.plugins.Action;
 import weaponexpansion.combat.plugins.ActionPlugin;
-import weaponexpansion.particles.Explosion;
-import weaponexpansion.particles.PhaseTorpedoTrail;
-import weaponexpansion.particles.PhaseTorpedoSecondaryExplosion;
-import weaponexpansion.util.Utils;
+import weaponexpansion.fx.particles.Explosion;
+import weaponexpansion.fx.particles.PhaseTorpedoTrail;
+import weaponexpansion.fx.particles.PhaseTorpedoSecondaryExplosion;
+import weaponexpansion.util.EngineUtils;
 
 @SuppressWarnings("unused")
 public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin {
@@ -35,18 +35,18 @@ public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin
         scaledVelocity.scale(-0.1f); // So that it doesn't spawn inside the target's collision radius
         Vector2f.add(dummyPos, scaledVelocity, dummyPos);
 
-        Utils.spawnFakeMine(dummyPos, spec.getRadius(), ringDamage, spec.getDamageType(), spec.getRadius() / explosionSpeed);
+        EngineUtils.spawnFakeMine(dummyPos, spec.getRadius(), ringDamage, spec.getDamageType(), spec.getRadius() / explosionSpeed);
 
         for (float radius = explosionSpeed * timeBetweenHits, time = timeBetweenHits; radius <= spec.getRadius(); radius += explosionSpeed * timeBetweenHits, time += timeBetweenHits) {
             final float finalRadius = radius;
             ActionPlugin.queueAction(new Action() {
                 @Override
                 public void perform() {
-                    Utils.applyDamageOnRing(
+                    EngineUtils.applyDamageOnRing(
                             pt,
                             finalRadius,
-                            proj.getOwner(),
-                            false,
+                            true,
+                            true,
                             null,
                             ringDamage,
                             DamageType.HIGH_EXPLOSIVE,

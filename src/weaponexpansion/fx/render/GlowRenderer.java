@@ -1,4 +1,4 @@
-package weaponexpansion.util;
+package weaponexpansion.fx.render;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.graphics.SpriteAPI;

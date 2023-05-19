@@ -4,7 +4,8 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.EngineUtils;
+import weaponexpansion.util.TargetChecker;
 
 import java.awt.*;
 import java.util.Collection;
@@ -18,14 +19,14 @@ public class IonRocketEffect implements OnHitEffectPlugin {
 
     @Override
     public void onHit(final DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine)  {
-        Collection<CombatEntityAPI> nearest = Utils.getKNearestEntities(
+        Collection<CombatEntityAPI> nearest = EngineUtils.getKNearestEntities(
                 maxArcs,
                 proj.getLocation(),
                 null,
                 false,
                 arcRange,
                 true,
-                new Utils.TargetChecker() {
+                new TargetChecker() {
                     @Override
                     public boolean check(CombatEntityAPI entity) {
                         // The EMP won't arc through shields so don't waste an arc trying

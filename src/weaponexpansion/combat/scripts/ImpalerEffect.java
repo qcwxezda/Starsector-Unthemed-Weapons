@@ -1,8 +1,8 @@
 package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
-import weaponexpansion.combat.plugins.AngleApproachMissileAI;
-import weaponexpansion.util.Utils;
+import weaponexpansion.combat.ai.AngleApproachMissileAI;
+import weaponexpansion.util.MathUtils;
 
 @SuppressWarnings("unused")
 public class ImpalerEffect implements EveryFrameWeaponEffectPlugin, OnFireEffectPlugin {
@@ -20,7 +20,7 @@ public class ImpalerEffect implements EveryFrameWeaponEffectPlugin, OnFireEffect
         }
 
         AngleApproachMissileAI ai = (AngleApproachMissileAI)  missile.getUnwrappedMissileAI();
-        ai.setApproachOffset( offset + Utils.randBetween(-20f, 20f));
+        ai.setApproachOffset( offset + MathUtils.randBetween(-20f, 20f));
         offset -= 45f;
     }
 
