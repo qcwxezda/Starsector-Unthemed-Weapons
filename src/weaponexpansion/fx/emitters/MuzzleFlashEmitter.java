@@ -1,4 +1,4 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.emitters;
 
 import com.fs.starfarer.api.combat.CombatEntityAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
@@ -6,7 +6,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.BaseIEmitter;
 import particleengine.ParticleData;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 public class MuzzleFlashEmitter extends BaseIEmitter {
 
@@ -89,10 +89,10 @@ public class MuzzleFlashEmitter extends BaseIEmitter {
         ParticleData data = new ParticleData();
 
         // Life uniformly random between minLife and maxLife
-        float life = Utils.randBetween(minLife, maxLife);
+        float life = MathUtils.randBetween(minLife, maxLife);
         data.life(life).fadeTime(0f, life);
 
-        float theta = angle + Utils.randBetween(-arc / 2f, arc / 2f);
+        float theta = angle + MathUtils.randBetween(-arc / 2f, arc / 2f);
         float r = range * (float) Math.sqrt(Misc.random.nextFloat());
         Vector2f pt = new Vector2f(r*(float)Math.cos(theta*Misc.RAD_PER_DEG), r*(float)Math.sin(theta*Misc.RAD_PER_DEG));
         // Velocity is proportional to distance from center
@@ -106,7 +106,7 @@ public class MuzzleFlashEmitter extends BaseIEmitter {
         data.offset(pt).velocity(vel);
 
         // Size uniformly random between minSize and maxSize
-        float size = Utils.randBetween(minSize, maxSize);
+        float size = MathUtils.randBetween(minSize, maxSize);
         data.size(size, size);
 
         // Color

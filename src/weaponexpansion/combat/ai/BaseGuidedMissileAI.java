@@ -1,20 +1,21 @@
-package weaponexpansion.combat.plugins;
+package weaponexpansion.combat.ai;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.EngineUtils;
+import weaponexpansion.util.TargetChecker;
 
 public abstract class BaseGuidedMissileAI implements MissileAIPlugin, GuidedMissileAI {
 
     protected CombatEntityAPI target;
     protected MissileAPI missile;
     protected final float maxSeekRange;
-    protected final boolean canTargetFighters;
+    protected final ShipAPI.HullSize smallestAutoTarget;
     protected final IntervalUtil findTargetInterval = new IntervalUtil(0.2f, 0.3f);
-    protected final Utils.TargetChecker validTargetChecker = new Utils.TargetChecker() {
+    protected final TargetChecker validTargetChecker = new TargetChecker() {
         @Override
         public boolean check(CombatEntityAPI entity) {
             if (entity == null) return false;
@@ -36,13 +37,19 @@ public abstract class BaseGuidedMissileAI implements MissileAIPlugin, GuidedMiss
     public BaseGuidedMissileAI(MissileAPI missile, float maxSeekRangeFactor) {
         this.missile = missile;
         maxSeekRange = maxSeekRangeFactor * missile.getMaxRange();
-        canTargetFighters =
-                missile.getWeapon() != null && missile.getWeapon().hasAIHint(WeaponAPI.AIHints.ANTI_FTR);
+        WeaponAPI weapon = missile.getWeapon();
+        if (weapon.hasAIHint(WeaponAPI.AIHints.STRIKE)) {
+            smallestAutoTarget =
+                    weapon.hasAIHint(WeaponAPI.AIHints.USE_VS_FRIGATES)
+                            ? ShipAPI.HullSize.FRIGATE
+                            : ShipAPI.HullSize.DESTROYER;
+        }
+        else {
+            smallestAutoTarget = ShipAPI.HullSize.FIGHTER;
+        }
         findTargetInterval.forceIntervalElapsed();
     }
 
-    /** If correctVelocity is true, will try to steer slightly off the targetAngle to correct the velocity
-     *  perpendicular to targetAngle. */
     protected void smoothTurn(float targetAngle, boolean clockwise) {
         float facingAngle = missile.getFacing();
         float turnSpeed = missile.getAngularVelocity();
@@ -70,15 +77,18 @@ public abstract class BaseGuidedMissileAI implements MissileAIPlugin, GuidedMiss
     }
 
     private ShipAPI findNewTarget() {
+        // Does the ship have a valid target?
         if (missile.getSource() != null) {
             ShipAPI sourceTarget = missile.getSource().getShipTarget();
             if (validTargetChecker.check(sourceTarget) && Misc.getDistance(missile.getLocation(), sourceTarget.getLocation()) <= maxSeekRange + sourceTarget.getCollisionRadius()) {
                 return sourceTarget;
             }
         }
-        return Utils.getClosestEntity(
+
+        // Just find the closest target
+        return EngineUtils.getClosestEntity(
                 missile.getLocation(),
-                canTargetFighters ? ShipAPI.HullSize.FIGHTER : ShipAPI.HullSize.FRIGATE,
+                smallestAutoTarget,
                 maxSeekRange,
                 true,
                 validTargetChecker

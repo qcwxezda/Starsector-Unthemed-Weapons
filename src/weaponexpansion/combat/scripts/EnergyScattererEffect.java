@@ -1,9 +1,7 @@
 package weaponexpansion.combat.scripts;
 
-import weaponexpansion.util.ScatterPlugin;
-
 @SuppressWarnings("unused")
-public class EnergyScattererEffect extends ScatterPlugin {
+public class EnergyScattererEffect extends ScatterEffect {
     @Override
     public float getSpeedVariance() {
         return 0.15f;

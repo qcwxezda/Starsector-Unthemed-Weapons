@@ -1,7 +1,7 @@
 package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
-import weaponexpansion.combat.plugins.AngleApproachMissileAI;
+import weaponexpansion.combat.ai.AngleApproachMissileAI;
 
 // TODO: Why does the AI autofire reset this weapon's cooldown if it vents in the middle of firing, but not the player?
 @SuppressWarnings("unused")

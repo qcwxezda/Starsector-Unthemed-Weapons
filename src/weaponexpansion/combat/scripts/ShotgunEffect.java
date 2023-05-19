@@ -4,10 +4,9 @@ import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.DamagingProjectileAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.combat.WeaponEffectPluginWithInit;
-import weaponexpansion.util.ScatterPlugin;
 
 @SuppressWarnings("unused")
-public class ShotgunEffect extends ScatterPlugin implements WeaponEffectPluginWithInit {
+public class ShotgunEffect extends ScatterEffect implements WeaponEffectPluginWithInit {
 
     private float spread = 0f, maxSpread = 0f, minSpread = 0f;
     private static final float spreadIncreasePerSecond = 4f;

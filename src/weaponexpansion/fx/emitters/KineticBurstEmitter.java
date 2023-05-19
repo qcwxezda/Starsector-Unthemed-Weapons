@@ -1,11 +1,11 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.emitters;
 
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.BaseIEmitter;
 import particleengine.ParticleData;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 public class KineticBurstEmitter extends BaseIEmitter {
 
@@ -36,15 +36,15 @@ public class KineticBurstEmitter extends BaseIEmitter {
     protected ParticleData initParticle(int i) {
         ParticleData data = new ParticleData();
 
-        float life = Utils.randBetween(minLife, maxLife);
+        float life = MathUtils.randBetween(minLife, maxLife);
         data.life(life).fadeTime(0f, life);
 
-        float angle = Utils.randBetween(0f, 360f);
+        float angle = MathUtils.randBetween(0f, 360f);
         Vector2f vel = Misc.getUnitVectorAtDegreeAngle(angle);
-        vel.scale(Utils.randBetween(minRange, maxRange) / life);
+        vel.scale(MathUtils.randBetween(minRange, maxRange) / life);
         data.velocity(vel).facing(angle);
 
-        float size = Utils.randBetween(minSize, maxSize);
+        float size = MathUtils.randBetween(minSize, maxSize);
         data.size(size, size / 6f);
         data.growthRate(-size/life, -size/(6f*life));
 

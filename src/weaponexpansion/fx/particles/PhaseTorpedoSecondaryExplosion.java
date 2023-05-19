@@ -1,4 +1,4 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.particles;
 
 import com.fs.starfarer.api.combat.CombatEngineLayers;
 import com.fs.starfarer.api.util.Pair;
@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL14;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 public abstract class PhaseTorpedoSecondaryExplosion {
 
@@ -16,7 +16,7 @@ public abstract class PhaseTorpedoSecondaryExplosion {
         emitter.setBlendMode(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL14.GL_FUNC_ADD);
         emitter.setSyncSize(true);
 
-        Pair<Float, Float> radVelAcc = Utils.getRateAndAcceleration(0f, 1500f, 1500f, 5.5f);
+        Pair<Float, Float> radVelAcc = MathUtils.getRateAndAcceleration(0f, 1500f, 1500f, 5.5f);
         emitter.size(30f, 50f);
         emitter.growthRate(radVelAcc.one * 0.9f, radVelAcc.one * 1.1f);
         emitter.growthAcceleration(radVelAcc.two * 0.9f, radVelAcc.two * 1.1f);
@@ -42,7 +42,7 @@ public abstract class PhaseTorpedoSecondaryExplosion {
         emitter.fadeTime(0f, 0f, 4f, 5f);
         emitter.circleOffset(5f, 45f);
 
-        Pair<Float, Float> radVelAcc = Utils.getRateAndAcceleration(0f, 500f, 500f, 5.5f);
+        Pair<Float, Float> radVelAcc = MathUtils.getRateAndAcceleration(0f, 500f, 500f, 5.5f);
         emitter.radialVelocity(radVelAcc.one * 0.9f, radVelAcc.one * 1.1f);
         emitter.radialAcceleration(radVelAcc.two * 0.9f, radVelAcc.two * 1.1f);
 

@@ -3,7 +3,7 @@ package weaponexpansion.combat.scripts;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.util.Misc;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
             convergeLevel = 0f;
             if (!randomizedSpreads) {
                 for (int i = 0; i < angleOffsets.size(); i++) {
-                    randomFloats.set(i, Utils.randBetween(0f, 6.28f));
+                    randomFloats.set(i, MathUtils.randBetween(0f, 6.28f));
                 }
                 randomizedSpreads = true;
             }
@@ -118,7 +118,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
                      : weapon.getSpec().getHiddenAngleOffsets();
 
         for (int i = 0; i < angleOffsets.size(); i++) {
-            randomFloats.add(Utils.randBetween(0f, 6.28f));
+            randomFloats.add(MathUtils.randBetween(0f, 6.28f));
         }
     }
 }

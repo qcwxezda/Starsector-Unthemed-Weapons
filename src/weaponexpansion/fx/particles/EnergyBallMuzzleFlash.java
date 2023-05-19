@@ -1,7 +1,8 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.particles;
 
 import com.fs.starfarer.api.combat.WeaponAPI;
 import particleengine.Particles;
+import weaponexpansion.fx.emitters.MuzzleFlashEmitter;
 
 public abstract class EnergyBallMuzzleFlash {
 

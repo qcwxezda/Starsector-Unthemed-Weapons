@@ -1,11 +1,11 @@
-package weaponexpansion.combat.plugins;
+package weaponexpansion.combat.ai;
 
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.combat.CombatEntityAPI;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 public class AngleApproachMissileAI extends BaseGuidedMissileAI {
 
@@ -38,13 +38,13 @@ public class AngleApproachMissileAI extends BaseGuidedMissileAI {
         Vector2f interceptionPoint = getInterceptionPoint(1f);
         Vector2f los = new Vector2f();
         Vector2f.sub(interceptionPoint, missile.getLocation(), los);
-        Utils.safeNormalize(los);
+        MathUtils.safeNormalize(los);
 
         Vector2f tangentPoint = Misc.getPerp(los);
         Vector2f approachVector = Misc.getUnitVectorAtDegreeAngle(approachDir + approachOffset);
         float tangentStrength = 0.5f * (circleDist + target.getCollisionRadius()) * (1f - Vector2f.dot(los, approachVector)) * (1f + missile.getElapsed() / missile.getMaxFlightTime());
         //tangentStrength = Math.min(tangentStrength, Misc.getDistance(missile.getLocation(), interceptionPoint) + target.getCollisionRadius());
-        tangentPoint.scale(tangentStrength * (Utils.isClockwise(los, approachVector) ? -1f : 1f));
+        tangentPoint.scale(tangentStrength * (MathUtils.isClockwise(los, approachVector) ? -1f : 1f));
 
         Vector2f targetPoint = new Vector2f();
         Vector2f.add(interceptionPoint, tangentPoint ,targetPoint);
@@ -53,14 +53,14 @@ public class AngleApproachMissileAI extends BaseGuidedMissileAI {
 
         float desiredAngle = Misc.getAngleInDegrees(newLos);
         float velAngle = Misc.getAngleInDegrees(missile.getVelocity());
-        float velError = Utils.angleDiff(desiredAngle, velAngle);
+        float velError = MathUtils.angleDiff(desiredAngle, velAngle);
 
         if (Math.abs(velError) < 90f && Math.abs(velError) > 8f) {
             desiredAngle += velError;
         }
 
         missile.giveCommand(ShipCommand.ACCELERATE);
-        smoothTurn(desiredAngle, Utils.angleDiff(missile.getFacing(), desiredAngle) >= 0f);
+        smoothTurn(desiredAngle, MathUtils.angleDiff(missile.getFacing(), desiredAngle) >= 0f);
     }
 
     public void setApproachOffset(float offset) {

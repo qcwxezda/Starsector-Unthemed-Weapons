@@ -1,4 +1,4 @@
-package weaponexpansion.combat.plugins;
+package weaponexpansion.combat.ai;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;

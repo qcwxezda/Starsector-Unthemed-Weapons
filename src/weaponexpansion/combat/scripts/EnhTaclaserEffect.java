@@ -8,12 +8,12 @@ public class EnhTaclaserEffect implements BeamEffectPluginWithReset {
     ShipAPI affectedShip;
 
     static final String customDataKey = "wpnxt_enhtaclasercount";
-    static final String modificationSource = "wpnxt_enhtaclasereffect";
+    static final String modificationSource = "wpnxt_enhtaclaser";
     static final float debuffPerBeam = 0.03f, maxDebuff = 0.15f;
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, BeamAPI beam) {
-        // Ignore frames where the beam did no damage
+        // Ignore frames where the beam does no damage
         if (beam.getDamage().getDpsDuration() <= 0) {
             return;
         }
@@ -48,6 +48,7 @@ public class EnhTaclaserEffect implements BeamEffectPluginWithReset {
     public void reset() {
         if (affectedShip != null) {
             modifyBeamCount(affectedShip, -1);
+            affectedShip = null;
         }
     }
 

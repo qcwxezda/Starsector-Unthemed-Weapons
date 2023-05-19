@@ -2,7 +2,7 @@ package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import weaponexpansion.util.GlowRenderer;
+import weaponexpansion.fx.render.GlowRenderer;
 
 public class GlowOnFirePlugin implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin, WeaponEffectPluginWithInit {
 

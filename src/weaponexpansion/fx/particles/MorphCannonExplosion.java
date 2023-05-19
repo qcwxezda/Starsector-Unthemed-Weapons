@@ -1,11 +1,12 @@
-package weaponexpansion.particles;
+package weaponexpansion.fx.particles;
 
 import com.fs.starfarer.api.util.Pair;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.IEmitter;
 import particleengine.Particles;
-import weaponexpansion.util.Utils;
+import weaponexpansion.fx.emitters.MorphCannonDebrisEmitter;
+import weaponexpansion.util.MathUtils;
 
 public abstract class MorphCannonExplosion {
     public static Emitter core(Vector2f loc, float scale) {
@@ -16,7 +17,7 @@ public abstract class MorphCannonExplosion {
         emitter.fadeTime(life*0.1f, life*0.1f, life*0.9f, life*0.9f);
 
         float initialSize = scale * 0.6f;
-        Pair<Float, Float> growthRateAcc = Utils.getRateAndAcceleration(initialSize, initialSize/2f, scale*0.8f, life);
+        Pair<Float, Float> growthRateAcc = MathUtils.getRateAndAcceleration(initialSize, initialSize/2f, scale*0.8f, life);
         emitter.size(initialSize*0.9f, initialSize*1.1f);
         emitter.growthRate(growthRateAcc.one*0.9f, growthRateAcc.one*1.1f);
         emitter.growthAcceleration(growthRateAcc.two*0.9f, growthRateAcc.two*1.1f);

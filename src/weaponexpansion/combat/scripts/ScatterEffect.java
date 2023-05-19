@@ -1,9 +1,9 @@
-package weaponexpansion.util;
+package weaponexpansion.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.Misc;
 
-public abstract class ScatterPlugin implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin {
+public abstract class ScatterEffect implements OnFireEffectPlugin, EveryFrameWeaponEffectPlugin {
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
         float spread = getSpread(weapon);

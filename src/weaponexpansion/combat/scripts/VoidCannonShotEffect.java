@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
-import weaponexpansion.particles.Explosion;
+import weaponexpansion.fx.particles.Explosion;
 
 import java.awt.*;
 
@@ -37,7 +37,7 @@ public class VoidCannonShotEffect implements OnHitEffectPlugin {
         spec.setDamageType(DamageType.FRAGMENTATION);
 
         if (ModPlugin.particleEngineEnabled) {
-            Explosion.makeExplosion(pt, explosionRadius*2f, 6, 1, 25, new float[] {1f, 0.5f, 0.8f, 0.35f}, new float[] {1f, 0.8f, 0.8f, 0.7f}, new float[] {1f, 0.6f, 0.8f, 0.3f}, new float[] {1f, 0.5f, 0.8f, 1f});
+            Explosion.makeExplosion(pt, explosionRadius*2f, 6, 1, 25, new float[] {1f, 0.5f, 0.8f, 0.15f}, new float[] {1f, 0.8f, 0.8f, 0.7f}, new float[] {1f, 0.6f, 0.8f, 0.3f}, new float[] {1f, 0.5f, 0.8f, 0.1f});
         }
 
         DamagingProjectileAPI explosion = engine.spawnDamagingExplosion(

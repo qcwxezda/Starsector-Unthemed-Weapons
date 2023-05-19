@@ -5,11 +5,10 @@ import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 
 public class NeedleDriverEffect implements OnHitEffectPlugin  {
 
@@ -43,7 +42,7 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
         spec.setGlowRadius(0f);
         spec.setLength(attachedLength);
         Vector2f scaledVelocity = new Vector2f(proj.getVelocity());
-        Utils.safeNormalize(scaledVelocity);
+        MathUtils.safeNormalize(scaledVelocity);
         scaledVelocity.scale(0.3f * attachedLength);
         float adjustAmount = attachedLength * 0.3f;
         Vector2f spawnLocation = Misc.getDiff(pt, scaledVelocity);

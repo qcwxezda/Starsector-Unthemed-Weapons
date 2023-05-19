@@ -8,8 +8,10 @@ import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.Particles;
 import weaponexpansion.ModPlugin;
-import weaponexpansion.particles.IonTorpedoExplosion;
-import weaponexpansion.util.Utils;
+import weaponexpansion.fx.particles.IonTorpedoExplosion;
+import weaponexpansion.util.CollisionUtils;
+import weaponexpansion.util.EngineUtils;
+import weaponexpansion.util.TargetChecker;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,14 +27,14 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
 
     @Override
     public void onHit(final DamagingProjectileAPI proj, CombatEntityAPI target, final Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, final CombatEngineAPI combatEngine)  {
-        Collection<CombatEntityAPI> targets = Utils.getKNearestEntities(
+        Collection<CombatEntityAPI> targets = EngineUtils.getKNearestEntities(
                 maxTargets,
                 pt,
                 null,
                 true,
                 effectRadius,
                 true,
-                new Utils.CommonChecker(proj)
+                new TargetChecker.CommonChecker(proj)
         );
 
         if (ModPlugin.particleEngineEnabled) {
@@ -81,7 +83,7 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
                 Vector2f loc = pair.one;
                 boolean wasDisabled = pair.two;
                 // pt is inside shield, proj.getLocation() is outside
-                if (Misc.getDistance(pt, loc) <= effectRadius && !Utils.doesSegmentHitShield(proj.getLocation(), loc, tgt.getShield())) {
+                if (Misc.getDistance(pt, loc) <= effectRadius && CollisionUtils.rayCollisionCheckShield(proj.getLocation(), loc, tgt.getShield()) == null) {
                     combatEngine.applyDamage(
                             tgt,
                             loc,

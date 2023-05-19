@@ -1,10 +1,10 @@
-package weaponexpansion.combat.plugins;
+package weaponexpansion.combat.ai;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import weaponexpansion.util.Utils;
+import weaponexpansion.util.MathUtils;
 
 public class LOSMissileAI extends BaseGuidedMissileAI {
     private Vector2f targetVelLastFrame = new Vector2f();
@@ -38,13 +38,13 @@ public class LOSMissileAI extends BaseGuidedMissileAI {
         float normalizer = (N * targetAcc.length()) / 2f;
 
         // a = v^2 / r = w^2 r ==> w = a / v
-        float acc = (a.length() + normalizer) * ((Utils.isClockwise(missile.getVelocity(), a) ? -1f : 1f));
+        float acc = (a.length() + normalizer) * ((MathUtils.isClockwise(missile.getVelocity(), a) ? -1f : 1f));
         float w = acc / missile.getVelocity().length();
 
         // Don't let the PN algorithm intercept at too steep of an angle. This
         // also handles shots that were fired backwards.
         float losAngle = Misc.getAngleInDegrees(new Vector2f(Rd.x, Rd.y));
-        float angleDiff = Utils.angleDiff(missile.getFacing(), losAngle);
+        float angleDiff = MathUtils.angleDiff(missile.getFacing(), losAngle);
         if (Math.abs(angleDiff) > 60f) {
             w = 1000000f * (angleDiff < 0f ? 1f : -1f);
         }

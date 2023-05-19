@@ -9,9 +9,8 @@ import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
-import com.fs.starfarer.combat.entities.Missile;
 import org.json.JSONObject;
-import weaponexpansion.combat.plugins.*;
+import weaponexpansion.combat.ai.*;
 
 import java.awt.*;
 import java.util.*;
@@ -61,6 +60,12 @@ public class ModPlugin extends BaseModPlugin {
         // Populate custom missile AI
         customMissiles.clear();
         customMissiles.put("wpnxt_energytorpedo_shot", new MakeMissilePlugin() {
+            @Override
+            public MissileAIPlugin make(MissileAPI missile) {
+                return new LeadingMissileAI(missile, 1.2f);
+            }
+        });
+        customMissiles.put("wpnxt_spike_shot", new MakeMissilePlugin() {
             @Override
             public MissileAIPlugin make(MissileAPI missile) {
                 return new LeadingMissileAI(missile, 1.2f);

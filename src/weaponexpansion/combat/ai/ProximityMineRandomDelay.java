@@ -1,4 +1,4 @@
-package weaponexpansion.combat.plugins;
+package weaponexpansion.combat.ai;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
@@ -8,8 +8,10 @@ import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import weaponexpansion.ModPlugin;
-import weaponexpansion.particles.Explosion;
-import weaponexpansion.util.Utils;
+import weaponexpansion.fx.particles.Explosion;
+import weaponexpansion.util.EngineUtils;
+import weaponexpansion.util.MathUtils;
+import weaponexpansion.util.TargetChecker;
 
 import java.awt.*;
 
@@ -26,12 +28,12 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
 
     // On creation missile damage is 0, so wait a frame for the damage numbers to register
     private boolean updatedDamage = false;
-    private final Utils.TargetChecker proxChecker;
+    private final TargetChecker proxChecker;
 
     public ProximityMineRandomDelay(MissileAPI missile, float flightTimeSpread) {
         this.missile = missile;
         this.flightTimeSpread = flightTimeSpread;
-        proxChecker = new Utils.CommonChecker(missile);
+        proxChecker = new TargetChecker.CommonChecker(missile);
     }
 
     @Override
@@ -43,7 +45,7 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
         }
 
         if (!missile.didDamage() && (missile.isFading()
-                || Utils.isEntityNearby(missile.getLocation(), null, range, vsMissileRange, false, proxChecker))) {
+                || EngineUtils.isEntityNearby(missile.getLocation(), null, range, vsMissileRange, false, proxChecker))) {
             explode();
         }
 
@@ -61,7 +63,7 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
         slowToMaxSpeed = spec.optBoolean("slowToMaxSpeed", false);
         range = (float)spec.optDouble("range", 0f);
         vsMissileRange = (float)spec.optDouble("vsMissileRange", range);
-        missile.setMaxFlightTime((float)spec.optDouble("delay", 0f) * Utils.randBetween(1f - flightTimeSpread, 1f + flightTimeSpread));
+        missile.setMaxFlightTime((float)spec.optDouble("delay", 0f) * MathUtils.randBetween(1f - flightTimeSpread, 1f + flightTimeSpread));
         if (spec.has("explosionSpec")) {
             try {
                 explosionSpec = DamagingExplosionSpec.loadFromJSON(spec.getJSONObject("explosionSpec"));

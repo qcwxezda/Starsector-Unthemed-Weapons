@@ -3,7 +3,7 @@ package weaponexpansion.combat.scripts;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import org.lwjgl.util.vector.Vector2f;
-import weaponexpansion.combat.plugins.ProximityMineRandomDelay;
+import weaponexpansion.combat.ai.ProximityMineRandomDelay;
 
 @SuppressWarnings("unused")
 public class ClusterMineOnHitEffect implements OnHitEffectPlugin {

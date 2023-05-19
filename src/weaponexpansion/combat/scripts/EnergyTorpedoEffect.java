@@ -1,18 +1,16 @@
 package weaponexpansion.combat.scripts;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.combat.plugins.Action;
 import weaponexpansion.combat.plugins.ActionPlugin;
-import weaponexpansion.particles.BloomTrail;
-import weaponexpansion.particles.Explosion;
-import weaponexpansion.util.Utils;
+import weaponexpansion.fx.particles.BloomTrail;
+import weaponexpansion.fx.particles.Explosion;
+import weaponexpansion.util.EngineUtils;
 
 import java.awt.*;
 import java.util.Collections;
@@ -43,7 +41,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
         scaledVelocity.scale(-0.1f); // So that it doesn't spawn inside the target's collision radius
         Vector2f.add(dummyPos, scaledVelocity, dummyPos);
 
-        Utils.spawnFakeMine(dummyPos, spec.getRadius() + maxSpawnDistance, proj.getBaseDamageAmount(), proj.getDamageType(), maxDelay);
+        EngineUtils.spawnFakeMine(dummyPos, spec.getRadius() + maxSpawnDistance, proj.getBaseDamageAmount(), proj.getDamageType(), maxDelay);
 
         for (int i = 0; i < numSpawns; i++) {
             final Vector2f spawnLoc = new Vector2f(pt);
@@ -76,7 +74,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
     }
 
     private void addExplosionVisual(Vector2f loc, float radius) {
-        Explosion.makeExplosion(loc, 2f*radius, radius / 100f,8, 1, 100, new float[]{0.6f, 0.6f, 1f, 0.35f}, new float[]{0.7f, 0.7f, 1f, 0.7f}, new float[]{0.4f, 0.4f, 1f, 0.3f}, new float[]{0.6f, 0.6f, 1f, 0.8f});
+        Explosion.makeExplosion(loc, 2f*radius, radius / 100f,8, 1, 100, new float[]{0.6f, 0.6f, 1f, 0.35f}, new float[]{0.7f, 0.7f, 1f, 0.7f}, new float[]{0.4f, 0.4f, 1f, 0.3f}, new float[]{0.6f, 0.6f, 1f, 0.5f});
     }
 
     @Override

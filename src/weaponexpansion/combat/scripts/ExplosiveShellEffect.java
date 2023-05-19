@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
-import weaponexpansion.particles.Explosion;
+import weaponexpansion.fx.particles.Explosion;
 
 import java.awt.*;
 
