@@ -1,0 +1,31 @@
+{
+  "id":"wpnxt_splinterbattery",
+  "specClass":"projectile",
+  "type":"BALLISTIC",
+  "size":"LARGE",
+  "turretSprite":"graphics/weapons/ballistic/wpnxt_splinterbattery_turret.png",
+  "hardpointSprite":"graphics/weapons/ballistic/wpnxt_splinterbattery_hardpoint.png",
+  "turretGunSprite":"graphics/weapons/ballistic/wpnxt_splinterbattery_turret_recoil.png",
+  "hardpointGunSprite":"graphics/weapons/ballistic/wpnxt_splinterbattery_hardpoint_recoil.png",
+  "turretGlowSprite":"graphics/weapons/ballistic/wpnxt_splinterbattery_turret_glow.png",
+  "hardpointGlowSprite":"graphics/weapons/ballistic/wpnxt_splinterbattery_hardpoint_glow.png",
+  "visualRecoil":6,
+  "renderHints":["RENDER_BARREL_BELOW"],
+  "turretOffsets":[26, -10, 26, 10],
+  "turretAngleOffsets":[0, 0],
+  "hardpointOffsets":[36, -8, 36, 8],
+  "hardpointAngleOffsets":[0, 0],
+  "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
+  "animationType":"GLOW_AND_FLASH",  # NONE, GLOW, MUZZLE_FLASH, SMOKE,
+  "glowColor": [255, 64, 32, 255],
+  "muzzleFlashSpec":{"length":25.0,   # only used if animationType = MUZZLE_FLASH
+    "spread":10.0,
+    "particleSizeMin":6.0,
+    "particleSizeRange":12.0,
+    "particleDuration":0.25,
+    "particleCount":30,
+    "particleColor":[255,240,165,200]},
+  "projectileSpecId":"wpxnt_splinterbattery_shot",  # projectile that will be fired
+  "fireSoundTwo":"wpnxt_splinterbattery_fire",
+  "everyFrameEffect":"weaponexpansion.combat.scripts.SplinterBatteryEffect"
+}

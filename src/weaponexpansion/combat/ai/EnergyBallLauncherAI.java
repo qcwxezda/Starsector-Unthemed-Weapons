@@ -22,6 +22,7 @@ public class EnergyBallLauncherAI implements AutofireAIPlugin {
     // Array of maximum charge levels the AI will attempt to hold before firing, in order of target ship size
     // from fighter to capital:
     // DEFAULT, FIGHTER, FRIGATE, DESTROYER, CRUISER, CAPITAL
+    // Currently: just fires uncharged shots
     private final float[] maxChargeLevels = new float[] {0f, 0f, 0f, 0f, 0f, 0f};
 
     public EnergyBallLauncherAI(WeaponAPI weapon) {
@@ -51,7 +52,8 @@ public class EnergyBallLauncherAI implements AutofireAIPlugin {
                 weapon.getFirePoint(0),
                 aimLocation,
                 firingShip,
-                50f
+                50f,
+                true
         );
     }
 
@@ -86,10 +88,6 @@ public class EnergyBallLauncherAI implements AutofireAIPlugin {
         return bestTarget;
     }
 
-    private void getMaxChargeLevel(ShipAPI target) {
-        //target.getArmorGrid().get
-    }
-
     private void tryToNotFire() {
         float chargeLevel = weapon.getChargeLevel();
 
@@ -108,7 +106,7 @@ public class EnergyBallLauncherAI implements AutofireAIPlugin {
                 weapon.getFirePoint(0),
                 projectileReachPoint,
                 firingShip,
-                50f)) {
+                50f, false)) {
             shouldFire = false;
             return;
         }
@@ -166,13 +164,20 @@ public class EnergyBallLauncherAI implements AutofireAIPlugin {
 
         // Fire shots of varied maximum power depending on the target ship's hull size
         int hullSizeOrd = targetShip.getHullSize().ordinal();
+        float maxAllowedCharge = maxChargeLevels[hullSizeOrd];
         if (weapon.getChargeLevel() > maxChargeLevels[hullSizeOrd] && angleError <= 3f) {
             shouldFire = false;
             return;
         }
 
         // Safe to begin charging
-        shouldFire = true;
+        // Angle error check should be dependent on maximum allowed charge level
+        // i.e. how long it takes to turn the turret to face the target
+        float timeToTurn = angleError / weapon.getTurnRate();
+        float timeToCharge = maxAllowedCharge * EnergyBallLauncherEffect.chargeTime;
+        if (timeToTurn <= timeToCharge + 3f / weapon.getTurnRate()) {
+            shouldFire = true;
+        }
     }
 
     @Override

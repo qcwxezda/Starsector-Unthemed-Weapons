@@ -8,9 +8,9 @@
   "hardpointSprite":"graphics/weapons/energy/wpnxt_energyballlauncher_hardpoint.png",
   "hardpointGlowSprite":"graphics/weapons/energy/wpnxt_energyballlauncher_hardpoint_glow.png",
   "glowColor":[128,255,192,255],
-  "turretOffsets":[35, 0],
+  "turretOffsets":[40, 0],
   "turretAngleOffsets":[0],
-  "hardpointOffsets":[50, 0],
+  "hardpointOffsets":[60, 0],
   "hardpointAngleOffsets":[0],
   "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
   "animationType":"GLOW",

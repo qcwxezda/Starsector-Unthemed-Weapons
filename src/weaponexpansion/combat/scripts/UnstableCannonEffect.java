@@ -17,7 +17,7 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
     float lv2threshold = 230f, lv3threshold = 360f;
 
     // Maximum angle deviation per second
-    float maxJitter = 250f;
+    float maxJitter = 125f;
 
     static final String lv2SpawnWeapon = "wpnxt_unstablecannon_lv2spawner";
     static final String lv3SpawnWeapon = "wpnxt_unstablecannon_lv3spawner";
@@ -92,5 +92,8 @@ public class UnstableCannonEffect implements OnFireEffectPlugin, EveryFrameWeapo
     @Override
     public void init(WeaponAPI weapon) {
         randomizeDamage();
+        if (weapon.getSlot().isHardpoint()) {
+            maxJitter /= 2f;
+        }
     }
 }

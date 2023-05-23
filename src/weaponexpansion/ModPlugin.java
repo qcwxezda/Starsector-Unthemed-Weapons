@@ -4,13 +4,19 @@ import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.PluginPick;
 import com.fs.starfarer.api.campaign.CampaignPlugin;
+import com.fs.starfarer.api.campaign.GenericPluginManagerAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
+import com.fs.starfarer.api.util.Misc;
 import org.json.JSONObject;
+import weaponexpansion.campaign.ShipRecoveryWeaponsRemover;
 import weaponexpansion.combat.ai.*;
+import weaponexpansion.procgen.CacheDefenderPlugin;
+import weaponexpansion.procgen.ProcGen;
+import weaponexpansion.util.CampaignUtils;
 
 import java.awt.*;
 import java.util.*;
@@ -21,6 +27,7 @@ public class ModPlugin extends BaseModPlugin {
     public static final String dummyMissileWeapon = "wpnxt_dummy_m", dummyProjWeapon = "wpnxt_dummy_p";
     public static boolean particleEngineEnabled = false;
     private static final Set<String> replaceExplosionWithParticles = new HashSet<>();
+    public static final String initializerKey = "wpnxt_wasInitialized";
 
     static {
         replaceExplosionWithParticles.add("wpnxt_energytorpedo_shot");
@@ -54,6 +61,18 @@ public class ModPlugin extends BaseModPlugin {
 
     @Override
     public void onGameLoad(boolean newGame) {
+        if (!Global.getSector().getPersistentData().containsKey(initializerKey)) {
+            // Ensure the initialization only happens once
+            Global.getSector().getPersistentData().put(initializerKey, true);
+
+            ProcGen.initialize(Global.getSector());
+        }
+
+        GenericPluginManagerAPI plugins = Global.getSector().getGenericPlugins();
+        if (!plugins.hasPlugin(CacheDefenderPlugin.class)) {
+            plugins.addPlugin(new CacheDefenderPlugin(), true);
+        }
+        Global.getSector().addTransientListener(new ShipRecoveryWeaponsRemover(false));
 
         particleEngineEnabled = Global.getSettings().getModManager().isModEnabled("particleengine");
 

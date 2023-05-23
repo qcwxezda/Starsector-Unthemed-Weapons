@@ -3,7 +3,7 @@ package weaponexpansion.fx.particles;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.IEmitter;
 import particleengine.Particles;
-import weaponexpansion.fx.emitters.KineticBurstEmitter;
+import weaponexpansion.fx.particles.emitters.KineticBurstEmitter;
 
 public abstract class MorphCannonKineticExplosion {
     public static void makeExplosion(Vector2f loc, float range, float size, float life, int numParticles) {

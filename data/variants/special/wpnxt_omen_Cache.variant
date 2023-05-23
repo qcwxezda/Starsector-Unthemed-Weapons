@@ -1,0 +1,40 @@
+{
+    "displayName": "Elite",
+    "fluxCapacitors": 9,
+    "fluxVents": 10,
+    "hullId": "omen",
+    "hullMods": [
+        "solar_shielding",
+        "nav_relay",
+        "unstable_injector",
+        "frontemitter",
+        "hardened_subsystems",
+        "hardenedshieldemitter"
+    ],
+    "permaMods": [
+        "solar_shielding",
+        "nav_relay",
+        "unstable_injector"
+    ],
+    "sMods": [
+        "solar_shielding",
+        "nav_relay",
+        "unstable_injector"
+    ],
+    "variantId": "wpnxt_omen_Cache",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"WS 003": "wpnxt_minispiker"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "wpnxt_boltgun",
+                "WS 002": "wpnxt_boltgun"
+            }
+        }
+    ]
+}

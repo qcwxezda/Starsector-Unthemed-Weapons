@@ -246,16 +246,62 @@ public abstract class CollisionUtils {
             return new Pair<>(null, false);
         }
 
-        Vector2f shieldHitLoc = rayCollisionCheckShield(a, b, entity.getShield());
+        ShieldAPI thisShield = entity.getShield();
+        Vector2f bestShieldHitPt = null;
+        float bestShieldHitDist = Float.MAX_VALUE;
+
+        // Find the closest collision point with this entity's shield, or any of its child modules' shields,
+        // or its parent module's shields, or any of its parent's children's shields.
+
+        List<ShieldAPI> allShields = new ArrayList<>();
+        if (thisShield != null) {
+            allShields.add(thisShield);
+        }
+        if (entity instanceof ShipAPI) {
+            ShipAPI ship = (ShipAPI) entity;
+            // [entity] is itself a parent module
+            for (ShipAPI child : ship.getChildModulesCopy()) {
+                if (child.getShield() != null) {
+                    allShields.add(child.getShield());
+                }
+            }
+            // [entity] is a child module
+            if (ship.getParentStation() != null) {
+                ShipAPI parent = ship.getParentStation();
+                // Check if parent has covering shields
+                if (parent.getShield() != null) {
+                    allShields.add(parent.getShield());
+                }
+                else {
+                    // Check if any of parent's children have covering shields
+                    for (ShipAPI child : parent.getChildModulesCopy()) {
+                        if (child.getShield() != null) {
+                            allShields.add(child.getShield());
+                        }
+                    }
+                }
+            }
+        }
+
+        for (ShieldAPI shield : allShields) {
+            Vector2f hitLoc = rayCollisionCheckShield(a, b, shield);
+            if (hitLoc != null) {
+                float dist = Misc.getDistance(a, hitLoc);
+                if (dist < bestShieldHitDist) {
+                    bestShieldHitDist = dist;
+                    bestShieldHitPt = hitLoc;
+                }
+            }
+        }
+
         Vector2f boundsHitLoc = rayCollisionCheckBounds(a, b, entity);
 
-        if (shieldHitLoc == null) return new Pair<>(boundsHitLoc, false);
-        if (boundsHitLoc == null) return new Pair<>(shieldHitLoc, true);
+        if (bestShieldHitPt == null) return new Pair<>(boundsHitLoc, false);
+        if (boundsHitLoc == null) return new Pair<>(bestShieldHitPt, true);
 
-        float shieldHitDist = Misc.getDistance(a, shieldHitLoc);
         float boundsHitDist = Misc.getDistance(a, boundsHitLoc);
 
-        return shieldHitDist < boundsHitDist ? new Pair<>(shieldHitLoc, true) : new Pair<>(boundsHitLoc, false);
+        return bestShieldHitDist < boundsHitDist ? new Pair<>(bestShieldHitPt, true) : new Pair<>(boundsHitLoc, false);
     }
 
     public static Pair<Vector2f, Boolean> circleCollisionCheckEntity(Vector2f o, float r, CombatEntityAPI entity) {
@@ -371,14 +417,16 @@ public abstract class CollisionUtils {
 
     /** Checks if a shot would hit an ally, crudely using only the collision radius */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public static boolean rayCollisionCheckAlly(Vector2f a, Vector2f b, ShipAPI source, float increaseRadius) {
+    public static boolean rayCollisionCheckAlly(Vector2f a, Vector2f b, ShipAPI source, float increaseRadius, boolean includeHulks) {
         List<ShipAPI> ships = Global.getCombatEngine().getShips();
         for (ShipAPI ship : ships) {
-            if (ship.getOwner() != source.getOwner()) continue;
-            if (ship.isPhased()) continue;
             // Can't hit friendly fighters
             if (ship.isFighter()) continue;
-            if (source.equals(ship)) continue;
+            if (!(includeHulks && ship.isHulk())) {
+                if (ship.getOwner() != source.getOwner()) continue;
+                if (ship.isPhased()) continue;
+                if (source.equals(ship)) continue;
+            }
 
             if (Misc.intersectSegmentAndCircle(a, b, ship.getLocation(), ship.getCollisionRadius() + increaseRadius) != null) {
                 return true;

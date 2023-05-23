@@ -1,0 +1,3 @@
+id,trigger,conditions,script,text,options,notes,,
+wpnxt_Test,TriggerAutomatedDefenses,$wpnxt_specialCacheFlag,wpnxt_CacheDefenderInteraction,,,,,
+,,

@@ -14,6 +14,7 @@ public abstract class PhaseTorpedoSecondaryExplosion {
     public static void makeStaticRing(Vector2f loc) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/explosion_ring0.png");
         emitter.setBlendMode(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL14.GL_FUNC_ADD);
+        emitter.setLayer(CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER);
         emitter.setSyncSize(true);
 
         Pair<Float, Float> radVelAcc = MathUtils.getRateAndAcceleration(0f, 1500f, 1500f, 5.5f);

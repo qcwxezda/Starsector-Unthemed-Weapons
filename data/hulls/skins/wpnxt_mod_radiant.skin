@@ -1,0 +1,36 @@
+{
+    "baseHullId":"radiant",
+    "skinHullId":"wpnxt_mod_radiant",
+    "hullDesignation":"Battleship",
+    "hullName":"Radiant(?)",
+    "tags":["restricted"],
+    "removeHints":["UNBOARDABLE"],
+    "tech":"Unknown",
+    "spriteName":"graphics/ships/wpnxt_mod_radiant.png",
+    "baseValueMult":2,
+    "removeBuiltInMods":["automated"],
+    "builtInMods":["wpnxt_cohererOverride"],
+    "systemId":"damper_omega",
+    "weaponSlotChanges": {
+        "WS 002": {
+            "type": "ENERGY"
+        },
+        "WS 004": {
+            "type": "ENERGY"
+        },
+        "WS 005": {
+            "type": "ENERGY"
+        },
+        "WS 006": {
+            "type": "ENERGY"
+        },
+        "WS 007": {
+            "type": "ENERGY"
+        },
+        "WS 008": {
+            "type": "ENERGY"
+        }
+    },
+    "maxSpeed":55,
+    "ordnancePoints":370
+}

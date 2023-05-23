@@ -1,0 +1,28 @@
+{
+  "wpnxt_ballistic_cache":{
+    "baseId": "supply_cache",
+    "defaultName": "Hidden Cache",
+    "defaultRadius": 50,
+    "nameInText": "hidden cache",
+    "shortName": "cache",
+    "tags": ["has_interaction_dialog", "salvageable", "neutrino_low", "not_random_mission_target"]
+  },
+
+  "wpnxt_energy_cache":{
+    "baseId": "supply_cache",
+    "defaultName": "Hidden Cache",
+    "defaultRadius": 50,
+    "nameInText": "hidden cache",
+    "shortName": "cache",
+    "tags": ["has_interaction_dialog", "salvageable", "neutrino_low", "not_random_mission_target"]
+  },
+
+  "wpnxt_missile_cache":{
+    "baseId": "supply_cache",
+    "defaultName": "Hidden Cache",
+    "defaultRadius": 50,
+    "nameInText": "hidden cache",
+    "shortName": "cache",
+    "tags": ["has_interaction_dialog", "salvageable", "neutrino_low", "not_random_mission_target"]
+  }
+}
