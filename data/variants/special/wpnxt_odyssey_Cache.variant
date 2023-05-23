@@ -1,0 +1,54 @@
+{
+    "displayName": "Experimental",
+    "fluxCapacitors": 19,
+    "fluxVents": 50,
+    "hullId": "odyssey",
+    "hullMods": [
+        "solar_shielding",
+        "targetingunit",
+        "hardenedshieldemitter",
+        "defensive_targeting_array",
+        "auxiliarythrusters",
+        "coherer"
+    ],
+    "permaMods": [
+        "coherer",
+        "solar_shielding",
+        "targetingunit",
+        "hardenedshieldemitter"
+    ],
+    "sMods": [
+        "solar_shielding",
+        "targetingunit",
+        "hardenedshieldemitter"
+    ],
+    "variantId": "wpnxt_odyssey_Cache",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"WS 001": "wpnxt_orbbarrage"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 004": "wpnxt_impaler",
+                "WS 005": "wpnxt_impaler",
+                "WS 006": "wpnxt_impaler"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "wpnxt_energyballlauncher",
+                "WS 003": "wpnxt_energyballlauncher"
+            }
+        }
+    ],
+    "wings": [
+        "xyphos_wing",
+        "xyphos_wing"
+    ]
+}

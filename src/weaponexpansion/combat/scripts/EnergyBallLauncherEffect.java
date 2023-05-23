@@ -4,9 +4,10 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.DamageTakenModifier;
 import com.fs.starfarer.api.impl.campaign.skills.DamageControl;
-import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
+import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.util.Pair;
 import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.fx.particles.EnergyBallExplosion;
@@ -15,40 +16,19 @@ import weaponexpansion.util.CollisionUtils;
 import weaponexpansion.fx.render.EnergyBallRenderer;
 import weaponexpansion.util.MathUtils;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-/** Table of DPS vs number of seconds held, for the data miners:
- * 0: 600,
- * 1: 347,
- * 2: 289,
- * 3: 272,
- * 4: 270,
- * 5: 275,
- * 6: 283,
- * 7: 292,
- * 8: 303,
- * 9: 314,
- * 10: 325,
- * 11: 336,
- * 12: 346,
- * 13: 357,
- * 14: 368,
- * 15: 378,
- * 16: 389,
- * 17: 399,
- * 18: 409,
- * 19: 419,
- * 20: 429
- */
+// Stuff to remember:
+// Charge rate doesn't increase damage linearly; rather, damage increases proportionally to (charge rate)^1.5.
+// Put this in description?
 public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWithAdvanceAfter, WeaponEffectPluginWithInit, OnFireEffectPlugin {
 
-    public static final float maxProjectileSize = 100f;
-    public static final float fullChargeDamageMultiplier = 15f;
-    public static final float fullChargeFluxCostMultiplier = 20f;
-    public static final float chargeTime = 20f;
-    public static final float minExplosionRadius = 100f;
+    public static final float maxProjectileSize = 120f;
+    public static final float fullChargeDamageMultiplier = 18f;
+    public static final float fullChargeFluxCostMultiplier = 25f;
+    public static final float chargeTime = 25f;
+    public static final float minExplosionRadius = 111f;
     public static final float ignoreDefenseMin = 0.1f, ignoreDefenseMax = 1f;
     public static final String modifyKey = "wpnxt_energyball";
 
@@ -120,7 +100,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
             CombatEntityAPI target = collisionData.entity;
             float targetPrevFlux = target instanceof ShipAPI ? ((ShipAPI) target).getFluxTracker().getCurrFlux() : 0f;
 
-            applyDamage(target, target, collisionData.point, data, engine);
+            applyDamage(target, target, collisionData.point, proj.getDamageAmount(), data, engine, true);
 
             // Pass through everything it destroys
             if (target.getHitpoints() <= 0f && !(target instanceof ShipAPI)) {
@@ -145,7 +125,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
                     float damageRatio = proj.getDamageAmount() / proj.getBaseDamageAmount();
                     float newDamageAmount = (proj.getDamageAmount() - shieldDamageDealt) / damageRatio;
                     if (newDamageAmount < proj.getProjectileSpec().getDamage().getBaseDamage()) {
-                        destroyProjectile(proj, collisionData, engine);
+                        destroyProjectile(data, collisionData, engine);
                         itr.remove();
                     }
                     else {
@@ -157,7 +137,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
             }
 
             // Otherwise, destroy this projectile
-            destroyProjectile(proj, collisionData, engine);
+            destroyProjectile(data, collisionData, engine);
             itr.remove();
         }
     }
@@ -166,113 +146,107 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
         return 1 + ignoreDefenseFrac * (1f / MathUtils.clamp(originalMult, 0.001f, 1f) - 1f);
     }
 
+    private void prepareShipForHit(ShipAPI ship, ProjectileData data, List<DamageTakenModifier> listenersToRemoveRef) {
+        float ignoreDefense = ignoreDefenseMin + (ignoreDefenseMax - ignoreDefenseMin) * (data.currDamage / data.maxDamage);
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        stats.getShieldDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getShieldDamageTakenMult().getModifiedValue()));
+        stats.getArmorDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getArmorDamageTakenMult().getModifiedValue()));
+        stats.getHullDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getHullDamageTakenMult().getModifiedValue()));
+        stats.getProjectileDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getProjectileDamageTakenMult().getModifiedValue()));
+        stats.getWeaponDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getWeaponDamageTakenMult().getModifiedValue()));
+        stats.getEnergyDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getEnergyDamageTakenMult().getModifiedValue()));
+        stats.getEnergyShieldDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getEnergyShieldDamageTakenMult().getModifiedValue()));
+        listenersToRemoveRef.addAll(ship.getListeners(DamageControl.DamageControlDamageTakenMod.class));
+        ship.removeListenerOfClass(DamageControl.DamageControlDamageTakenMod.class);
+        damageListener.setData(data);
+        ship.addListener(damageListener);
+    }
+
+    private void resetShipAfterHit(ShipAPI ship, List<DamageTakenModifier> listenersToAddBack) {
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        stats.getShieldDamageTakenMult().unmodify(modifyKey);
+        stats.getArmorDamageTakenMult().unmodify(modifyKey);
+        stats.getHullDamageTakenMult().unmodify(modifyKey);
+        stats.getProjectileDamageTakenMult().unmodify(modifyKey);
+        stats.getWeaponDamageTakenMult().unmodify(modifyKey);
+        stats.getEnergyDamageTakenMult().unmodify(modifyKey);
+        stats.getEnergyShieldDamageTakenMult().unmodify(modifyKey);
+        ship.removeListener(damageListener);
+        for (DamageTakenModifier listener : listenersToAddBack) {
+            ship.addListener(listener);
+        }
+    }
+
     private void applyDamage(
             Object damageModifierParam,
             CombatEntityAPI target,
             Vector2f pt,
+            float damage,
             ProjectileData data,
-            CombatEngineAPI engine) {
+            CombatEngineAPI engine,
+            boolean addHitParticle) {
 
-        float ignoreDefense = ignoreDefenseMin + (ignoreDefenseMax - ignoreDefenseMin) * (data.currDamage / data.maxDamage);
+        List<DamageTakenModifier> damageControlListeners = new ArrayList<>();
 
-        List<DamageControl.DamageControlDamageTakenMod> damageControlListeners = new ArrayList<>();
-        if (target instanceof ShipAPI) {
-            ShipAPI ship = (ShipAPI) target;
-            MutableShipStatsAPI stats = ship.getMutableStats();
-            stats.getShieldDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getShieldDamageTakenMult().getModifiedValue()));
-            stats.getArmorDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getArmorDamageTakenMult().getModifiedValue()));
-            stats.getHullDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getHullDamageTakenMult().getModifiedValue()));
-            stats.getProjectileDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getProjectileDamageTakenMult().getModifiedValue()));
-            stats.getWeaponDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getWeaponDamageTakenMult().getModifiedValue()));
-            stats.getEnergyDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getEnergyDamageTakenMult().getModifiedValue()));
-            stats.getEnergyShieldDamageTakenMult().modifyMult(modifyKey, getModifyMultAmount(ignoreDefense, stats.getEnergyShieldDamageTakenMult().getModifiedValue()));
-            damageControlListeners.addAll(ship.getListeners(DamageControl.DamageControlDamageTakenMod.class));
-            ship.removeListenerOfClass(DamageControl.DamageControlDamageTakenMod.class);
-            damageListener.setData(data);
-            ship.addListener(damageListener);
+        if (target instanceof ShipAPI && !((ShipAPI) target).isFighter()) {
+            prepareShipForHit((ShipAPI) target, data, damageControlListeners);
         }
-
         engine.applyDamage(
                 damageModifierParam,
                 target,
                 pt,
-                data.proj.getDamageAmount(),
+                damage,
                 data.proj.getDamageType(),
                 data.proj.getEmpAmount(),
                 false,
                 data.proj.isFading(),
                 data.proj.getSource(),
                 true);
-
-
-        if (target instanceof ShipAPI) {
-            ShipAPI ship = (ShipAPI) target;
-            MutableShipStatsAPI stats = ship.getMutableStats();
-            stats.getShieldDamageTakenMult().unmodify(modifyKey);
-            stats.getArmorDamageTakenMult().unmodify(modifyKey);
-            stats.getHullDamageTakenMult().unmodify(modifyKey);
-            stats.getProjectileDamageTakenMult().unmodify(modifyKey);
-            stats.getWeaponDamageTakenMult().unmodify(modifyKey);
-            stats.getEnergyDamageTakenMult().unmodify(modifyKey);
-            stats.getEnergyShieldDamageTakenMult().unmodify(modifyKey);
-            ship.removeListener(damageListener);
-            for (DamageControl.DamageControlDamageTakenMod listener : damageControlListeners) {
-                ship.addListener(listener);
-            }
+        if (target instanceof ShipAPI && !((ShipAPI) target).isFighter()) {
+            resetShipAfterHit((ShipAPI) target, damageControlListeners);
         }
 
-        engine.addHitParticle(
-                pt,
-                target.getVelocity().length() <= 50f ? target.getVelocity() : new Vector2f(),
-                data.proj.getProjectileSpec().getHitGlowRadius(),
-                1f,
-                data.proj.getProjectileSpec().getFringeColor());
+        if (addHitParticle) {
+            engine.addHitParticle(
+                    pt,
+                    target.getVelocity().length() <= 50f ? target.getVelocity() : new Vector2f(),
+                    data.proj.getProjectileSpec().getHitGlowRadius(),
+                    1f,
+                    data.proj.getProjectileSpec().getFringeColor());
+        }
     }
 
-    private void destroyProjectile(DamagingProjectileAPI proj, CollisionUtils.ClosestCollisionData collisionData, CombatEngineAPI engine) {
+    private void destroyProjectile(ProjectileData data, CollisionUtils.ClosestCollisionData collisionData, CombatEngineAPI engine) {
 
+        DamagingProjectileAPI proj = data.proj;
         Global.getCombatEngine().removeEntity(proj);
         if (proj.isFading()) return;
 
         float explosionRadius =
                 minExplosionRadius * Math.max(1f, (float) Math.sqrt(proj.getBaseDamageAmount() / proj.getProjectileSpec().getDamage().getBaseDamage()));
-        Color darkColor = new Color(122, 255, 122, 255), lightColor = new Color(200, 255, 200, 255);
 
-        DamagingExplosionSpec spec = new DamagingExplosionSpec(
-                0.1f,
-                explosionRadius,
-                explosionRadius / 2,
-                proj.getDamageAmount(),
-                proj.getDamageAmount() / 2,
-                CollisionClass.PROJECTILE_FF,
-                CollisionClass.PROJECTILE_FIGHTER,
-                4f,
-                3f,
-                0.8f,
-                100,
-                darkColor,
-                lightColor
-        );
+        Iterator<Object> itr = engine.getAllObjectGrid().getCheckIterator(proj.getLocation(), 2f*explosionRadius, 2f*explosionRadius);
+        Set<CombatEntityAPI> alreadyDamaged = new HashSet<>();
+        while (itr.hasNext()) {
+            Object o = itr.next();
+            if (!CollisionUtils.canCollide(o, null, proj.getSource(), true)) continue;
+            if (o.equals(collisionData.entity)) continue;
+            CombatEntityAPI entity = (CombatEntityAPI) o;
+            if (alreadyDamaged.contains(entity)) continue;
 
-        spec.setUseDetailedExplosion(true);
-        spec.setDetailedExplosionRadius(explosionRadius);
-        spec.setDetailedExplosionFlashRadius(explosionRadius * 1.5f);
-        spec.setDetailedExplosionFlashColorCore(darkColor);
-        spec.setDetailedExplosionFlashColorFringe(lightColor);
-        spec.setDamageType(DamageType.HIGH_EXPLOSIVE);
+            alreadyDamaged.add(entity);
+            Pair<Vector2f, Boolean> pair =
+                    CollisionUtils.rayCollisionCheckEntity(
+                            proj.getLocation(),
+                            entity instanceof ShipAPI && !((ShipAPI) entity).isFighter() ? MathUtils.getVertexCenter(entity): entity.getLocation(),
+                            entity);
+            if (pair.one == null) continue;
+            float dist = Misc.getDistance(pair.one, proj.getLocation());
+            if (dist > explosionRadius) continue;
+            float damage = proj.getDamageAmount() * 0.5f + proj.getDamageAmount() * 0.5f * (explosionRadius - dist) / explosionRadius;
 
-
-        if (ModPlugin.particleEngineEnabled) {
-            spec.setParticleCount(0);
-            spec.setUseDetailedExplosion(false);
-            spec.setExplosionColor(new Color(0, 0, 0, 0));
+            applyDamage(entity, entity, pair.one, damage, data, engine, false);
         }
-
-        engine.spawnDamagingExplosion(
-                spec,
-                proj.getSource(),
-                proj.getLocation()
-        ).addDamagedAlready(collisionData.entity);
 
         if (ModPlugin.particleEngineEnabled) {
             EnergyBallExplosion.makeExplosion(proj.getLocation(), explosionRadius);
@@ -357,7 +331,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
     }
 
     public static float getMoveSpeed(float damageMult) {
-        return 750f - ((damageMult - 1f) / (fullChargeDamageMultiplier - 1f)) * 500f;
+        return 900f - ((damageMult - 1f) / (fullChargeDamageMultiplier - 1f)) * 650f;
     }
 
     private void setProjectileSpeed(WeaponAPI weapon, float damageMult) {

@@ -1,0 +1,56 @@
+{
+    "displayName": "Elite",
+    "fluxCapacitors": 8,
+    "fluxVents": 10,
+    "hullId": "lasher",
+    "hullMods": [
+        "unstable_injector",
+        "missleracks",
+        "fluxdistributor",
+        "hardenedshieldemitter",
+    ],
+    "permaMods": [
+        "fluxdistributor",
+        "unstable_injector",
+        "missleracks"
+    ],
+    "sMods": [
+        "fluxdistributor",
+        "unstable_injector",
+        "missleracks"
+    ],
+    "variantId": "wpnxt_lasher_Cache",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 001": "wpnxt_iontorpedo",
+                "WS 004": "wpnxt_iontorpedo"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {"WS 007": "wpnxt_lightpounder"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "lightneedler",
+                "WS 003": "lightneedler"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"WS 006": "wpnxt_minivulcan"}
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"WS 005": "wpnxt_minivulcan"}
+        }
+    ]
+}

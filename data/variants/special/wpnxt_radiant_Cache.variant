@@ -1,0 +1,59 @@
+{
+    "displayName": "Experimental",
+    "fluxCapacitors": 9,
+    "fluxVents": 55,
+    "hullId": "wpnxt_mod_radiant",
+    "hullMods": [
+        "stabilizedshieldemitter",
+        "solar_shielding",
+        "armoredweapons",
+        "targetingunit",
+        "hardenedshieldemitter",
+        "heavyarmor",
+        "turretgyros"
+    ],
+    "permaMods": [
+        "solar_shielding",
+        "turretgyros",
+        "armoredweapons"
+    ],
+    "sMods": [
+        "solar_shielding",
+        "turretgyros",
+        "armoredweapons"
+    ],
+    "variantId": "wpnxt_radiant_Cache",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 000": "wpnxt_unstablecannon",
+                "WS 001": "wpnxt_unstablecannon"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "wpnxt_energyballlauncher",
+                "WS 004": "wpnxt_energyballlauncher"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"WS 003": "wpnxt_unstablecannon"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 005": "wpnxt_needledriver",
+                "WS 006": "wpnxt_needledriver",
+                "WS 007": "wpnxt_needledriver",
+                "WS 008": "wpnxt_needledriver"
+            }
+        }
+    ]
+}

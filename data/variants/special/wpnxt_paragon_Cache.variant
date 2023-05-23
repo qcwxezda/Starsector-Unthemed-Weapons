@@ -1,0 +1,64 @@
+{
+    "displayName": "Elite",
+    "fluxCapacitors": 17,
+    "fluxVents": 55,
+    "hullId": "paragon",
+    "hullMods": [
+        "frontemitter",
+        "fluxbreakers",
+        "hardenedshieldemitter",
+        "fluxdistributor",
+        "auxiliarythrusters",
+        "solar_shielding",
+        "stabilizedshieldemitter",
+        "advancedshieldemitter",
+        "turretgyros"
+    ],
+    "permaMods": [
+        "solar_shielding",
+        "stabilizedshieldemitter",
+        "turretgyros"
+    ],
+    "sMods": [
+        "solar_shielding",
+        "stabilizedshieldemitter",
+        "turretgyros"
+    ],
+    "variantId": "wpnxt_paragon_Cache",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "plasma",
+                "WS 002": "plasma"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "tachyonlance",
+                "WS 004": "tachyonlance"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 005": "wpnxt_needledriver",
+                "WS 006": "wpnxt_needledriver",
+                "WS 007": "heavyneedler",
+                "WS 008": "heavyneedler"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 009": "heavyburst",
+                "WS 010": "heavyburst"
+            }
+        }
+    ]
+}

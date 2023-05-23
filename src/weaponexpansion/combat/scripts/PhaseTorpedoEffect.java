@@ -17,7 +17,7 @@ import weaponexpansion.util.EngineUtils;
 @SuppressWarnings("unused")
 public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin {
 
-    public static final float explosionSpeed = 200f, timeBetweenHits = 0.1f, ringDamage = 1500f;
+    public static final float explosionSpeed = 200f, timeBetweenHits = 0.1f, ringDamage = 1800f;
 
     @Override
     public void onHit(final DamagingProjectileAPI proj, CombatEntityAPI target, final Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, final CombatEngineAPI engine){
@@ -64,7 +64,7 @@ public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin
     private void addExplosionVisual(Vector2f loc, float radius) {
         PhaseTorpedoSecondaryExplosion.makeStaticRing(loc);
         PhaseTorpedoSecondaryExplosion.makeRing(loc, 300);
-        Explosion.makeExplosion(loc, 2f*radius, 2.4f,20, 5, 500);
+        Explosion.makeExplosion(loc, 2f*radius, 2.4f,8, 5, 500);
     }
 
     @Override

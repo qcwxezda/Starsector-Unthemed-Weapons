@@ -1,4 +1,8 @@
 {
+  "ruleCommandPackages":[
+    "weaponexpansion.campaign.rulecmd"
+  ],
+
   "graphics": {
     "misc": {
       "wpnxt_explosion_ring": "graphics/fx/wpnxt_explosion_ring.png",

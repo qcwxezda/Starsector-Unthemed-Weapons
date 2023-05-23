@@ -1,0 +1,44 @@
+{
+    "displayName": "Elite",
+    "fluxCapacitors": 6,
+    "fluxVents": 20,
+    "hullId": "medusa",
+    "hullMods": [
+        "extendedshieldemitter",
+        "solar_shielding",
+        "hardenedshieldemitter",
+        "converted_hangar",
+        "frontemitter",
+        "hardened_subsystems"
+    ],
+    "permaMods": [
+        "extendedshieldemitter",
+        "solar_shielding",
+        "hardenedshieldemitter"
+    ],
+    "sMods": [
+        "extendedshieldemitter",
+        "solar_shielding",
+        "hardenedshieldemitter"
+    ],
+    "variantId": "wpnxt_medusa_Cache",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 006": "wpnxt_needledriver",
+                "WS 007": "wpnxt_needledriver"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 008": "lightneedler",
+                "WS 009": "lightneedler"
+            }
+        }
+    ],
+    "wings": ["wasp_wing"]
+}

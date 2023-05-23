@@ -5,7 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 import particleengine.Emitter;
 import particleengine.IEmitter;
 import particleengine.Particles;
-import weaponexpansion.fx.emitters.MorphCannonDebrisEmitter;
+import weaponexpansion.fx.particles.emitters.MorphCannonDebrisEmitter;
 import weaponexpansion.util.MathUtils;
 
 public abstract class MorphCannonExplosion {

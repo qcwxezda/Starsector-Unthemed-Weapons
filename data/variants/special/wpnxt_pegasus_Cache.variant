@@ -1,0 +1,66 @@
+{
+    "displayName": "Experimental",
+    "fluxCapacitors": 18,
+    "fluxVents": 50,
+    "hullId": "pegasus",
+    "hullMods": [
+        "missleracks",
+        "solar_shielding",
+        "unstable_injector",
+        "extendedshieldemitter",
+        "hardenedshieldemitter",
+        "targetingunit",
+        "eccm"
+    ],
+    "permaMods": [
+        "missleracks",
+        "solar_shielding",
+        "unstable_injector",
+        "extendedshieldemitter"
+    ],
+    "sMods": [
+        "solar_shielding",
+        "unstable_injector",
+        "extendedshieldemitter"
+    ],
+    "variantId": "wpnxt_pegasus_Cache",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 012": "wpnxt_phasetorpedo",
+                "WS 013": "wpnxt_phasetorpedo"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 000": "wpnxt_energytorpedolarge",
+                "WS 001": "wpnxt_energytorpedolarge"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 004": "hveldriver",
+                "WS 005": "hveldriver",
+                "WS 008": "hveldriver",
+                "WS 009": "hveldriver",
+                "WS 010": "hveldriver"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "irautolance",
+                "WS 003": "irautolance",
+                "WS 006": "irautolance",
+                "WS 007": "irautolance"
+            }
+        }
+    ]
+}

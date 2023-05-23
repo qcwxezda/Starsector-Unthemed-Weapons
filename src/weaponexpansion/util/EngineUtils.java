@@ -273,9 +273,23 @@ public abstract class EngineUtils {
         return Misc.getDistance(location, entity.getLocation()) - (considerRadius ? entity.getCollisionRadius() : 0f);
     }
 
+    public static Collection<ShipAPI> getAllShipsInRange(Vector2f location, float radius, boolean includeFighters, CombatEngineAPI engine) {
+        Set<ShipAPI> ships = new HashSet<>();
+
+        for (ShipAPI ship : engine.getShips()) {
+            if (Misc.getDistance(ship.getLocation(), location) <= radius + ship.getCollisionRadius()) {
+                if (!ship.isFighter() || includeFighters) {
+                    ships.add(ship);
+                }
+            }
+        }
+
+        return ships;
+    }
+
     public static Collection<CombatEntityAPI> getKNearestEntities(
             int k,
-            final Vector2f location,
+            Vector2f location,
             ShipAPI.HullSize smallestToNote,
             boolean includeMissiles,
             float maxRange,
@@ -398,5 +412,51 @@ public abstract class EngineUtils {
     public static boolean isInRange(WeaponAPI weapon, CombatEntityAPI target, Vector2f targetPoint) {
         if (Misc.getDistance(weapon.getLocation(), targetPoint) > weapon.getRange() + target.getCollisionRadius()) return false;
         return Misc.getAngleDiff(Misc.getAngleInDegrees(weapon.getLocation(), targetPoint), weapon.getCurrAngle()) <= weapon.getArc() / 2f;
+    }
+
+    public static ShipAPI getBaseShip(ShipAPI shipWingOrModule, Map<String, ShipAPI> baseShipTable) {
+        if (shipWingOrModule == null) {
+            return null;
+        }
+        ShipAPI memo = baseShipTable.get(shipWingOrModule.getId());
+        if (memo != null) {
+            return memo;
+        }
+        // Possible to have wings come from a module of a station
+        // and maybe even have modules of modules?
+        // so function needs to be recursive
+        if (shipWingOrModule.isFighter()) {
+            ShipAPI base = null;
+            if (shipWingOrModule.getWing() == null ||
+                    shipWingOrModule.getWing().getSourceShip() == null) {
+                // If the fighter has no source ship but has a fleet member,
+                // just return the fighter itself
+                if (shipWingOrModule.getFleetMember() != null) {
+                    base = shipWingOrModule;
+                }
+            }
+            else {
+                base = getBaseShip(shipWingOrModule.getWing().getSourceShip(), baseShipTable);
+            }
+            baseShipTable.put(shipWingOrModule.getId(), base);
+            return base;
+        }
+        if (shipWingOrModule.isStationModule()) {
+            ShipAPI base = null;
+            if (shipWingOrModule.getParentStation() == null) {
+                // If the module has no parent station but has a fleet member,
+                // just return the module itself
+                if (shipWingOrModule.getFleetMember() != null) {
+                    base = shipWingOrModule;
+                }
+            }
+            else {
+                base = getBaseShip(shipWingOrModule.getParentStation(),baseShipTable);
+            }
+            baseShipTable.put(shipWingOrModule.getId(), base);
+            return base;
+        }
+        baseShipTable.put(shipWingOrModule.getId(), shipWingOrModule);
+        return shipWingOrModule;
     }
 }

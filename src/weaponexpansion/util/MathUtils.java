@@ -1,8 +1,12 @@
 package weaponexpansion.util;
 
+import com.fs.starfarer.api.combat.BoundsAPI;
+import com.fs.starfarer.api.combat.CombatEntityAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import org.lwjgl.util.vector.Vector2f;
+
+import java.util.List;
 
 public abstract class MathUtils {
     public static float sgnPos(float x) {
@@ -62,6 +66,21 @@ public abstract class MathUtils {
         float a = 2f * (-2f*sqrtTerm + end - 2f*peak + start) / (maxTime*maxTime);
         float r = 2f * (sqrtTerm + peak - start) / maxTime;
         return new Pair<>(r, a);
+    }
+
+    public static Vector2f getVertexCenter(CombatEntityAPI entity) {
+        BoundsAPI bounds = entity.getExactBounds();
+        if (bounds == null) return entity.getLocation();
+
+        bounds.update(entity.getLocation(), entity.getFacing());
+        List<BoundsAPI.SegmentAPI> segments = bounds.getSegments();
+        Vector2f sum = new Vector2f();
+        for (BoundsAPI.SegmentAPI segment : segments) {
+            Vector2f.add(sum, segment.getP2(), sum);
+        }
+
+        sum.scale(1f / segments.size());
+        return sum;
     }
 
     public interface Function {

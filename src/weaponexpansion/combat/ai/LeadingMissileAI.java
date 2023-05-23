@@ -11,7 +11,7 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
 
     private final IntervalUtil seekInterval = new IntervalUtil(0.1f, 0.1f);
     private float targetAngle = 0f;
-    private static final float maxRandomOffset = 500f;
+    private static final float maxRandomOffset = 300f;
     private final float randomOffset;
 
     private static class SmoothTurnData {

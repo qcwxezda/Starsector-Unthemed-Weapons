@@ -64,10 +64,10 @@
     {"file": "sounds/weapons/wpnxt_explosiveshelllauncher_fire.wav", "pitch": 0.98, "volume": 1},
     {"file": "sounds/weapons/wpnxt_explosiveshelllauncher_fire.wav", "pitch": 0.96, "volume": 1}
   ],
-  "wpnxt_minigun_fire":[
-    {"file": "sounds/weapons/wpnxt_minigun_fire.wav", "pitch": 1, "volume": 0.25},
-    {"file": "sounds/weapons/wpnxt_minigun_fire.wav", "pitch": 0.98, "volume": 0.25},
-    {"file": "sounds/weapons/wpnxt_minigun_fire.wav", "pitch": 0.96, "volume": 0.25}
+  "wpnxt_splinterbattery_fire":[
+    {"file": "sounds/weapons/wpnxt_splinterbattery_fire.wav", "pitch": 1, "volume": 0.45},
+    {"file": "sounds/weapons/wpnxt_splinterbattery_fire.wav", "pitch": 0.98, "volume": 0.45},
+    {"file": "sounds/weapons/wpnxt_splinterbattery_fire.wav", "pitch": 0.96, "volume": 0.45}
   ],
   "wpnxt_superrailgun_fire": [
     {"file": "sounds/weapons/wpnxt_superrailgun_fire.wav", "pitch": 1, "volume": 1},
