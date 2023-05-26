@@ -86,25 +86,37 @@ public abstract class CampaignUtils {
         for (int i = 0; i < paragonCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_paragon_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, paragonSkills, paragonEliteSkills, random)).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
         }
+//
+//        int shrikeCount = 15;
+//        for (int i = 0; i < shrikeCount; i++) {
+//            CampaignUtils.addToFleet(fleet, "wpnxt_shrike_Cache", null, null);
+//        }
 
-        List<String> apogeeSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.COMBAT_ENDURANCE, Skills.MISSILE_SPECIALIZATION);
-        List<Integer> apogeeEliteSkills = Arrays.asList(0, 1, 2, 3, 6);
-        int apogeeCount = 3;
-        for (int i = 0; i < apogeeCount; i++) {
-            CampaignUtils.addToFleet(fleet, "wpnxt_apogee_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, apogeeSkills, apogeeEliteSkills, random));
-        }
+//        List<String> tempestSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.COMBAT_ENDURANCE, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.TARGET_ANALYSIS, Skills.MISSILE_SPECIALIZATION);
+//        List<Integer> tempestEliteSkills = Arrays.asList(0, 2, 3, 4, 5);
+//        int tempestCount = 9;
+//        for (int i = 0; i < tempestCount; i++) {
+//            CampaignUtils.addToFleet(fleet, "wpnxt_tempest_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, tempestSkills, tempestEliteSkills, random));
+//        }
 
+//        List<String> apogeeSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.COMBAT_ENDURANCE, Skills.MISSILE_SPECIALIZATION);
+//        List<Integer> apogeeEliteSkills = Arrays.asList(0, 1, 2, 3, 6);
+//        int apogeeCount = 10;
+//        for (int i = 0; i < apogeeCount; i++) {
+//            CampaignUtils.addToFleet(fleet, "wpnxt_apogee_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, apogeeSkills, apogeeEliteSkills, random));
+//        }
+////
         List<String> medusaSkills = Arrays.asList(Skills.COMBAT_ENDURANCE, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.SYSTEMS_EXPERTISE, Skills.ENERGY_WEAPON_MASTERY);
         List<Integer> medusaEliteSkills = Arrays.asList(1, 2, 3, 4 ,6);
-        int medusaCount = 4;
+        int medusaCount = 9;
         for (int i = 0; i < medusaCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_medusa_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, medusaSkills, medusaEliteSkills, random));
         }
-
+//
         List<String> omenSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.FIELD_MODULATION, Skills.GUNNERY_IMPLANTS, Skills.SYSTEMS_EXPERTISE, Skills.COMBAT_ENDURANCE, Skills.POINT_DEFENSE, Skills.MISSILE_SPECIALIZATION);
         List<Integer> omenEliteSkills = Arrays.asList( 0, 1, 2, 5, 6);
-        int officeredOmenCount = 2;
-        int unofficeredOmenCount = 8;
+        int officeredOmenCount = 0;
+        int unofficeredOmenCount = 9;
         for (int i = 0; i < officeredOmenCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_omen_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, omenSkills, omenEliteSkills, random));
         }

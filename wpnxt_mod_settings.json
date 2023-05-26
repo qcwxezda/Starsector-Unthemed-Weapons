@@ -1,0 +1,4 @@
+{
+  # (Roughly) number of fortified caches per star system
+  "fortifiedCachesPerSystem": 0.6,
+}

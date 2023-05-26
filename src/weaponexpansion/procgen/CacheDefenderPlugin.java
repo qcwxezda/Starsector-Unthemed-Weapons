@@ -1,10 +1,14 @@
 package weaponexpansion.procgen;
 
-import com.fs.starfarer.api.campaign.CampaignFleetAPI;
-import com.fs.starfarer.api.campaign.GenericPluginManagerAPI;
-import com.fs.starfarer.api.campaign.SectorEntityToken;
+import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.BaseGenericPlugin;
+import com.fs.starfarer.api.impl.campaign.fleets.DefaultFleetInflater;
+import com.fs.starfarer.api.impl.campaign.fleets.DefaultFleetInflaterParams;
+import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
+import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.impl.campaign.ids.Skills;
@@ -12,15 +16,14 @@ import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.SDMParams;
 import weaponexpansion.util.CampaignUtils;
+import weaponexpansion.util.MathUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGenFromSeed.SalvageDefenderModificationPlugin {
 
     public static String specialFleetKey = "$wpnxt_specialFleet";
+    public static String cacheDefenseFleetKey = "$wpnxt_cacheDefenseFleet";
 
     @Override
     public float getStrength(SDMParams p, float strength, Random random, boolean withOverride) {
@@ -52,39 +55,143 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
 
         if (p.entity == null) return;
 
-        Object cacheValue = p.entity.getMemoryWithoutUpdate().get(ProcGen.cacheKey);
-        if (cacheValue == null) return;
-
-        fleet.getFleetData().clear();
         fleet.setName("Cache Defenses");
+        fleet.setNoFactionInName(true);
         fleet.getFleetData().setShipNameRandom(random);
+        // Set a flag so that we can consume the BeginFleetEncounter trigger
+        fleet.getMemoryWithoutUpdate().set(cacheDefenseFleetKey, true);
 
-        switch ((String) cacheValue) {
-            case "BALLISTIC":
-                generateFleetForBallisticCache(fleet, random);
-                break;
-            case "ENERGY":
-                generateFleetForEnergyCache(fleet, random);
-                break;
-            case "MISSILE":
-                generateFleetForMissileCache(fleet, random);
-                break;
-            default: break;
+        Object cacheValue = p.entity.getMemoryWithoutUpdate().get(GenSpecialCaches.cacheKey);
+
+        if (cacheValue != null) {
+            fleet.getFleetData().clear();
+            switch ((String) cacheValue) {
+                case "BALLISTIC":
+                    generateFleetForBallisticCache(fleet, random);
+                    break;
+                case "ENERGY":
+                    generateFleetForEnergyCache(fleet, random);
+                    break;
+                case "MISSILE":
+                    generateFleetForMissileCache(fleet, random);
+                    break;
+                default:
+                    break;
+            }
+            fleet.getMemoryWithoutUpdate().set(specialFleetKey, true);
+
+            CampaignUtils.finalizeFleet(fleet, Arrays.asList(Tags.TAG_NO_AUTOFIT, Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE, Tags.TAG_RETAIN_SMODS_ON_RECOVERY));
+            // Make the flagship not retain S-mods on recovery (ships are unique and might not want the solar shielding, etc.)
+            fleet.getFlagship().getVariant().removeTag(Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE);
+            fleet.getFlagship().getVariant().removeTag(Tags.TAG_RETAIN_SMODS_ON_RECOVERY);
         }
+        else {
+            // Generic defense fleet
+            float size = p.entity.getRadius();
+            GenFortifiedCaches.CacheSize cacheSize = GenFortifiedCaches.CacheSize.getSize(size);
+            float sizeFrac = (size - GenFortifiedCaches.minCacheSize) / (GenFortifiedCaches.maxCacheSize - GenFortifiedCaches.minCacheSize);
 
-        fleet.getMemoryWithoutUpdate().set(specialFleetKey, true);
-        CampaignUtils.finalizeFleet(fleet, Collections.singletonList(Tags.TAG_NO_AUTOFIT));
+            // Remove capitals from < huge crates, cruisers from < large crates, and destroyers from < medium crates
+            List<FleetMemberAPI> toRemove = new ArrayList<>();
+            for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
+                switch (member.getVariant().getHullSize()) {
+                    case DEFAULT:
+                    case FIGHTER:
+                    case FRIGATE:
+                        break;
+                    case DESTROYER:
+                        if (GenFortifiedCaches.CacheSize.getSizeOrdinal(cacheSize) < 1) {
+                            toRemove.add(member);
+                        }
+                        break;
+                    case CRUISER:
+                        if (GenFortifiedCaches.CacheSize.getSizeOrdinal(cacheSize) < 2) {
+                            toRemove.add(member);
+                        }
+                        break;
+                    case CAPITAL_SHIP:
+                        if (GenFortifiedCaches.CacheSize.getSizeOrdinal(cacheSize) < 3) {
+                            toRemove.add(member);
+                        }
+                        break;
+                }
+            }
+
+            float lostFP = 0f;
+            for (FleetMemberAPI member : toRemove) {
+                // Don't remove the last fleet member
+                if (fleet.getNumShips() > 1) {
+                    lostFP += member.getFleetPointCost();
+                    fleet.getFleetData().removeFleetMember(member);
+                }
+            }
+
+
+            FleetParamsV3 fleetParams = new FleetParamsV3();
+
+            // Replace the lost FP with the correct size ships
+            if (lostFP >= 1f) {
+                switch (cacheSize) {
+                    case SMALL:
+                        fleetParams.maxShipSize = 1;
+                        break;
+                    case MEDIUM:
+                        fleetParams.maxShipSize = 2;
+                        break;
+                    case LARGE:
+                        fleetParams.maxShipSize = 3;
+                        break;
+                    case HUGE:
+                        break;
+                }
+
+                // Random market as source, since the quality is getting overwritten anyway
+                // Will NPE if source is null
+                // Should be fine, base game does this too
+                fleetParams.setSource(Global.getFactory().createMarket("fake", "fake", 5), false);
+
+                FactionDoctrineAPI doctrine = fleet.getFaction().getDoctrine();
+                float sum = doctrine.getWarships() + doctrine.getCarriers() + doctrine.getPhaseShips();
+                float warshipFP = doctrine.getWarships() / sum * lostFP;
+                float carrierFP = doctrine.getCarriers() / sum * lostFP;
+                float phaseFP = doctrine.getPhaseShips() / sum * lostFP;
+                FleetFactoryV3.addCombatFleetPoints(fleet, random, warshipFP, carrierFP, phaseFP, fleetParams);
+            }
+
+            float quality, averageSMods, numOfficers, maxOfficerLevel;
+
+            quality = 1.5f * sizeFrac * MathUtils.randBetween(0.7f, 1.25f, random);
+            averageSMods = 2f * sizeFrac * sizeFrac * MathUtils.randBetween(0.6f, 1f, random);
+            numOfficers = 10f * sizeFrac * MathUtils.randBetween(0.6f, 1.5f, random);
+            maxOfficerLevel = Math.min(7f, 8f * sizeFrac * MathUtils.randBetween(0.8f, 1.25f, random));
+
+            if (fleet.getInflater() instanceof DefaultFleetInflater) {
+                DefaultFleetInflater inflater = (DefaultFleetInflater) fleet.getInflater();
+                DefaultFleetInflaterParams params = (DefaultFleetInflaterParams) inflater.getParams();
+                params.averageSMods = (int) averageSMods;
+                params.quality = quality;
+            }
+
+            // Add officers to the fleet using a FleetParams, but don't actually generate the fleet, just the officers
+            fleetParams.maxOfficersToAdd = (int) numOfficers;
+            fleetParams.officerLevelLimit = (int) maxOfficerLevel;
+            FleetFactoryV3.addCommanderAndOfficersV2(fleet, fleetParams, random);
+            fleet.inflateIfNeeded();
+
+            CampaignUtils.finalizeFleet(fleet, Arrays.asList(Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE, Tags.TAG_RETAIN_SMODS_ON_RECOVERY));
+        }
     }
 
     private void generateFleetForEnergyCache(CampaignFleetAPI fleet, Random random) {
-        List<String> radiantSkills = Arrays.asList(Skills.DAMAGE_CONTROL, Skills.TARGET_ANALYSIS, Skills.IMPACT_MITIGATION, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.COMBAT_ENDURANCE, Skills.SYSTEMS_EXPERTISE);
+        List<String> radiantSkills = Arrays.asList(Skills.DAMAGE_CONTROL, Skills.TARGET_ANALYSIS, Skills.IMPACT_MITIGATION, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.HELMSMANSHIP, Skills.SYSTEMS_EXPERTISE);
         List<Integer> radiantEliteSkills = Arrays.asList( 0, 2, 3, 4, 5);
         PersonAPI commander = CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, radiantSkills, radiantEliteSkills, random);
         commander.getStats().setSkipRefresh(true);
         commander.getStats().setSkillLevel(Skills.BEST_OF_THE_BEST, 1);
-        commander.getStats().setSkillLevel(Skills.CARRIER_GROUP, 1);
+        commander.getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 1);
         commander.getStats().setSkillLevel(Skills.FLUX_REGULATION, 1);
         commander.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
+        commander.getStats().setSkillLevel(Skills.HULL_RESTORATION, 1);
         commander.getStats().setSkipRefresh(false);
         fleet.setCommander(commander);
         CampaignUtils.addToFleet(fleet, "wpnxt_radiant_Cache", null, commander).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
@@ -93,31 +200,18 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
         List<Integer> paragonEliteSkills = Arrays.asList(0, 2, 3, 5, 6);
         int paragonCount = 1;
         for (int i = 0; i < paragonCount; i++) {
-            CampaignUtils.addToFleet(fleet, "wpnxt_paragon_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, paragonSkills, paragonEliteSkills, random)).getVariant();
-        }
-
-        List<String> apogeeSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.COMBAT_ENDURANCE, Skills.MISSILE_SPECIALIZATION);
-        List<Integer> apogeeEliteSkills = Arrays.asList(0, 1, 2, 3, 6);
-        int apogeeCount = 3;
-        for (int i = 0; i < apogeeCount; i++) {
-            CampaignUtils.addToFleet(fleet, "wpnxt_apogee_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, apogeeSkills, apogeeEliteSkills, random));
+            CampaignUtils.addToFleet(fleet, "wpnxt_paragon_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, paragonSkills, paragonEliteSkills, random)).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
         }
 
         List<String> medusaSkills = Arrays.asList(Skills.COMBAT_ENDURANCE, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.SYSTEMS_EXPERTISE, Skills.ENERGY_WEAPON_MASTERY);
         List<Integer> medusaEliteSkills = Arrays.asList(1, 2, 3, 4 ,6);
-        int medusaCount = 4;
+        int medusaCount = 9;
         for (int i = 0; i < medusaCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_medusa_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, medusaSkills, medusaEliteSkills, random));
         }
 
-        List<String> omenSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.FIELD_MODULATION, Skills.GUNNERY_IMPLANTS, Skills.SYSTEMS_EXPERTISE, Skills.COMBAT_ENDURANCE, Skills.POINT_DEFENSE, Skills.MISSILE_SPECIALIZATION);
-        List<Integer> omenEliteSkills = Arrays.asList( 0, 1, 2, 5, 6);
-        int officeredOmenCount = 2;
-        int unofficeredOmenCount = 8;
-        for (int i = 0; i < officeredOmenCount; i++) {
-            CampaignUtils.addToFleet(fleet, "wpnxt_omen_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, omenSkills, omenEliteSkills, random));
-        }
-        for (int i = 0; i < unofficeredOmenCount; i++) {
+        int omenCount = 8;
+        for (int i = 0; i < omenCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_omen_Cache", null ,null);
         }
     }
@@ -131,33 +225,34 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
         commander.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
         commander.getStats().setSkillLevel(Skills.FIGHTER_UPLINK, 1);
         commander.getStats().setSkillLevel(Skills.CARRIER_GROUP, 1);
+        commander.getStats().setSkillLevel(Skills.DERELICT_CONTINGENT, 1);
         commander.getStats().setSkipRefresh(false);
         fleet.setCommander(commander);
         CampaignUtils.addToFleet(fleet, "wpnxt_pegasus_Cache", null, commander).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
 
         List<String> conquestSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.MISSILE_SPECIALIZATION, Skills.BALLISTIC_MASTERY, Skills.FIELD_MODULATION, Skills.IMPACT_MITIGATION, Skills.GUNNERY_IMPLANTS);
         List<Integer> conquestEliteSkills = Arrays.asList(0, 1, 2, 4, 5);
-        int conquestCount = 1;
+        int conquestCount = 2;
         for (int i = 0; i < conquestCount; i++) {
-            CampaignUtils.addToFleet(fleet, "wpnxt_conquest_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, conquestSkills, conquestEliteSkills, random)).getVariant();
+            FleetMemberAPI member = CampaignUtils.addToFleet(fleet, "wpnxt_conquest_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, conquestSkills, conquestEliteSkills, random));
         }
 
         List<String> gryphonSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.MISSILE_SPECIALIZATION, Skills.SYSTEMS_EXPERTISE, Skills.COMBAT_ENDURANCE, Skills.FIELD_MODULATION, Skills.IMPACT_MITIGATION);
         List<Integer> gryphonEliteSkills = Arrays.asList(0, 2, 4, 5, 6);
-        int gryphonCount = 3;
+        int gryphonCount = 4;
         for (int i = 0; i < gryphonCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_gryphon_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, gryphonSkills, gryphonEliteSkills, random));
         }
 
-        int heronCount = 4;
+        int heronCount = 6;
         for (int i = 0; i < heronCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_heron_Cache", null, null);
         }
 
         List<String> vigilanceSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.MISSILE_SPECIALIZATION, Skills.COMBAT_ENDURANCE, Skills.FIELD_MODULATION, Skills.GUNNERY_IMPLANTS, Skills.ORDNANCE_EXPERTISE);
         List<Integer> vigilianceEliteSkills = Arrays.asList(0, 2, 4, 5, 6);
-        int officeredVigilanceCount = 6;
-        int unofficeredVigilanceCount = 4;
+        int officeredVigilanceCount = 5;
+        int unofficeredVigilanceCount = 7;
 
         for (int i = 0; i < officeredVigilanceCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_vigilance_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, vigilanceSkills, vigilianceEliteSkills, random));
@@ -225,8 +320,16 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
         if (!(params instanceof SDMParams)) return -1;
         SDMParams p = (SDMParams) params;
 
-        if (p.entity != null && p.entity.getMemoryWithoutUpdate().contains(ProcGen.cacheKey)) {
+        if (p.entity == null) {
+            return -1;
+        }
+
+        if (p.entity.getMemoryWithoutUpdate().contains(GenSpecialCaches.cacheKey)) {
             return GenericPluginManagerAPI.MOD_SPECIFIC;
+        }
+
+        if (p.entity.getMemoryWithoutUpdate().contains(GenFortifiedCaches.fortifiedFlag)) {
+            return GenericPluginManagerAPI.MOD_GENERAL;
         }
 
         return -1;

@@ -7,6 +7,7 @@ import com.fs.starfarer.api.util.Pair;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.List;
+import java.util.Random;
 
 public abstract class MathUtils {
     public static float sgnPos(float x) {
@@ -19,7 +20,11 @@ public abstract class MathUtils {
     }
 
     public static float randBetween(float a, float b) {
-        return Misc.random.nextFloat() * (b - a) + a;
+        return randBetween(a, b, Misc.random);
+    }
+
+    public static float randBetween(float a, float b, Random random) {
+        return random.nextFloat() * (b - a) + a;
     }
 
     public static boolean isClockwise(Vector2f v1, Vector2f v2) {
@@ -34,6 +39,10 @@ public abstract class MathUtils {
         if (v.x*v.x + v.y*v.y > 0) {
             v.normalise();
         }
+    }
+
+    public static float interpolate(float a, float b, float t) {
+        return a + (b - a) * t;
     }
 
     public static float modPositive(float x, float mod) {
@@ -81,6 +90,14 @@ public abstract class MathUtils {
 
         sum.scale(1f / segments.size());
         return sum;
+    }
+
+    public static float[][] clone2DArray(float[][] arr) {
+        float[][] res = new float[arr.length][];
+        for (int i = 0; i < arr.length; i++) {
+            res[i] = arr[i].clone();
+        }
+        return res;
     }
 
     public interface Function {

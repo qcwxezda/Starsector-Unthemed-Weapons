@@ -1,0 +1,10 @@
+{
+  "knownWeapons":{
+    "weapons":[
+      "wpnxt_minivulcan",
+      "wpnxt_minimortarbattery",
+      "wpnxt_miniblaster",
+      "wpnxt_mininglasermk2"
+    ]
+  }
+}

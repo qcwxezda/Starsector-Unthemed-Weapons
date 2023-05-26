@@ -192,5 +192,16 @@
     {"file": "sounds/weapons/wpnxt_morphcannon_hit.wav", "pitch": 1, "volume": 1.25},
     {"file": "sounds/weapons/wpnxt_morphcannon_hit.wav", "pitch": 0.98, "volume": 1.25},
     {"file": "sounds/weapons/wpnxt_morphcannon_hit.wav", "pitch": 0.96, "volume": 1.25}
+  ],
+
+  "wpnxt_reshaper_activate": [
+    {"file": "sounds/sfx_systems/interdictor_array.ogg", "pitch": 1, "volume": 1},
+    {"file": "sounds/sfx_systems/interdictor_array.ogg", "pitch": 0.98, "volume": 1},
+    {"file": "sounds/sfx_systems/interdictor_array.ogg", "pitch": 0.96, "volume": 1}
+  ],
+  "wpnxt_reshaper_loop": [
+    {"file": "sounds/systems/wpnxt_reshaper_loop.wav", "pitch": 1, "volume": 1},
+    {"file": "sounds/systems/wpnxt_reshaper_loop.wav", "pitch": 0.98, "volume": 1},
+    {"file": "sounds/systems/wpnxt_reshaper_loop.wav", "pitch": 0.96, "volume": 1}
   ]
 }

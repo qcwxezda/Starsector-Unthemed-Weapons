@@ -1,0 +1,21 @@
+{
+  "knownWeapons":{
+    "tags":["derelict"],
+    "weapons":[
+      "wpnxt_splinterbattery",
+      "wpnxt_heavypounder",
+      "wpnxt_heavyrailgun",
+      "wpnxt_minimortarbattery",
+      "wpnxt_lightrailburst",
+      "wpnxt_lightpounder",
+      "wpnxt_fragcannon",
+      "wpnxt_clusterlauncherbig",
+      "wpnxt_impaler",
+      "wpnxt_minispiker",
+      "wpnxt_clusterminelauncher",
+      "wpnxt_ultrablaster",
+      "wpnxt_miniblaster",
+      "wpnxt_mininglasermk2"
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+	"knownWeapons":{
+		"weapons":[
+			"wpnxt_impactlance",
+			"wpnxt_ultrablaster",
+			"wpnxt_unstablecannon",
+			"wpnxt_boltstorm",
+			"wpnxt_fragpdbeam",
+			"wpnxt_energyscatterer",
+			"wpnxt_enhtaclaser",
+			"wpnxt_boltstreamer",
+			"wpnxt_boltrepeater",
+			"wpnxt_boltgun",
+			"wpnxt_miniblaster",
+			"wpnxt_impactbeam",
+
+			"wpnxt_heavyrailgun",
+			"wpnxt_lightrailburst",
+
+			"wpnxt_orbbarrage",
+			"wpnxt_spikebarrage",
+			"wpnxt_energytorpedomed",
+			"wpnxt_ionrocket",
+			"wpnxt_impaler",
+			"wpnxt_energytorpedo",
+			"wpnxt_minispiker",
+			"wpnxt_clusterminelauncher",
+			"wpnxt_iontorpedo"
+		]
+	},
+
+	"weaponSellFrequency":{
+		"wpnxt_impactlance": 10,
+		"wpnxt_ultrablaster": 10,
+		"wpnxt_unstablecannon": 3,
+		"wpnxt_boltstorm": 10,
+		"wpnxt_fragpdbeam":5,
+		"wpnxt_energyscatterer":5,
+		"wpnxt_enhtaclaser": 10,
+		"wpnxt_boltstreamer": 10,
+		"wpnxt_boltrepeater": 5,
+		"wpnxt_boltgun": 5,
+		"wpnxt_miniblaster": 5,
+		"wpnxt_impactbeam": 5,
+		"wpnxt_orbbarrage": 5,
+		"wpnxt_spikebarrage": 10,
+		"wpnxt_energytorpedomed": 5,
+		"wpnxt_ionrocket": 5,
+		"wpnxt_iontorpedo": 5
+	}
+}

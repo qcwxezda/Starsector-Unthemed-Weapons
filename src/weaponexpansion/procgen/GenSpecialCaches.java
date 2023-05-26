@@ -9,6 +9,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Items;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.campaign.procgen.DefenderDataOverride;
+import com.fs.starfarer.api.impl.campaign.procgen.DropGroupRow;
 import com.fs.starfarer.api.impl.campaign.procgen.SalvageEntityGenDataSpec;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
@@ -23,11 +24,10 @@ import weaponexpansion.util.MathUtils;
 
 import java.util.*;
 
-public abstract class ProcGen {
+public abstract class GenSpecialCaches {
 
-    public static String cacheKey = "$wpnxt_specialCache";
-    public static String cacheFlagKey = "$wpnxt_specialCacheFlag";
-    public static Set<String> tagsToSkip = new HashSet<>();
+    public static final String cacheKey = "$wpnxt_specialCache";
+    public static final Set<String> tagsToSkip = new HashSet<>();
 
     static {
         tagsToSkip.add(Tags.THEME_CORE);
@@ -102,24 +102,24 @@ public abstract class ProcGen {
             chosenBinary = getRandomSystem(binary);
         }
 
-        // Add the "interesting" theme to the chosen systems
+        // Add the "special" theme to the chosen systems
         // Underlying tags backed by hash set; don't need to check duplicates
-        chosenPulsar.addTag(Tags.THEME_INTERESTING);
-        chosenBlackHole.addTag(Tags.THEME_INTERESTING);
-        chosenBinary.addTag(Tags.THEME_INTERESTING);
+        chosenPulsar.addTag(Tags.THEME_SPECIAL);
+        chosenBlackHole.addTag(Tags.THEME_SPECIAL);
+        chosenBinary.addTag(Tags.THEME_SPECIAL);
 
-        Map<String, Float> ballisticRarities = new HashMap<>();
-        Map<String, Float> energyRarities = new HashMap<>();
-        Map<String, Float> missileRarities = new HashMap<>();
+//        Map<String, Float> ballisticRarities = new HashMap<>();
+//        Map<String, Float> energyRarities = new HashMap<>();
+//        Map<String, Float> missileRarities = new HashMap<>();
 
-        separateRareWeaponBPs(ballisticRarities, energyRarities, missileRarities, 0.5f, 0.25f);
+//        separateRareWeaponBPs(ballisticRarities, energyRarities, missileRarities, 0.5f, 0.25f);
 
-        addBallisticCache(chosenBinary, ballisticRarities);
-        addMissileCache(chosenBlackHole, missileRarities);
-        addEnergyCache(chosenPulsar, energyRarities);
+        addBallisticCache(chosenBinary);
+        addMissileCache(chosenBlackHole);
+        addEnergyCache(chosenPulsar);
     }
 
-    private static void addEnergyCache(StarSystemAPI system, Map<String, Float> energyRarities) {
+    private static void addEnergyCache(StarSystemAPI system) {
         List<PulsarBeamTerrainPlugin> pulsarPlugins = new ArrayList<>();
         for (CampaignTerrainAPI terrain : system.getTerrainCopy()) {
             if (terrain.getPlugin() instanceof PulsarBeamTerrainPlugin) {
@@ -128,7 +128,7 @@ public abstract class ProcGen {
             }
         }
         Vector2f center = system.getStar() == null ? new Vector2f() : system.getStar().getLocation();
-        Vector2f energyCacheLocation = MathUtils.randomPointInRing(center, 5000f, 6000f);
+        Vector2f energyCacheLocation = MathUtils.randomPointInRing(center, 7000f, 8000f);
 
         // Ensure the pulsar beam isn't blocked by another planet
         if (system.getStar() != null) {
@@ -143,7 +143,7 @@ public abstract class ProcGen {
                     }
                 }
                 if (isOccluded) {
-                    energyCacheLocation = MathUtils.randomPointInRing(center, 5000f, 6000f);
+                    energyCacheLocation = MathUtils.randomPointInRing(center, 7000f, 8000f);
                 }
                 else {
                     break;
@@ -157,9 +157,9 @@ public abstract class ProcGen {
             energyCache.addScript(new EnergyCacheScript(energyCache, pulsarPlugins));
         }
 
-        populateCache(energyCache, 2, 120, 20, "ENERGY", energyRarities);
+//        populateCache(energyCache, 2, 120, 20, "ENERGY", energyRarities);
         energyCache.getMemoryWithoutUpdate().set(cacheKey, "ENERGY");
-        energyCache.getMemoryWithoutUpdate().set(cacheFlagKey, true);
+        energyCache.getMemoryWithoutUpdate().set(GenFortifiedCaches.fortifiedFlag, true);
         Misc.setDefenderOverride(energyCache, new DefenderDataOverride(Factions.MERCENARY, 1f, 240f, 240f, 20));
 
         // Mark the correct neutron star system by adding a single pristine derelict near the star
@@ -189,22 +189,33 @@ public abstract class ProcGen {
     }
 
     private static final int numDerelictShips = 25;
-    private static void addMissileCache(StarSystemAPI system, Map<String, Float> missileRarities) {
+    private static void addMissileCache(StarSystemAPI system) {
         SectorEntityToken missileCache = BaseThemeGenerator.addSalvageEntity(system, "wpnxt_missile_cache", null, null);
-        populateCache(missileCache, 2, 120, 20, "MISSILE", missileRarities);
+//        populateCache(missileCache, 2, 120, 20, "MISSILE", missileRarities);
+
+        PlanetAPI blackHole = null;
+        if (system.getStar() != null && system.getStar().getSpec().isBlackHole()) {
+            blackHole = system.getStar();
+        }
+        else if (system.getSecondary() != null && system.getSecondary().getSpec().isBlackHole()) {
+            blackHole = system.getSecondary();
+        }
+        else if (system.getTertiary() != null && system.getTertiary().getSpec().isBlackHole()) {
+            blackHole = system.getTertiary();
+        }
 
         // Shouldn't happen, but fallback just in case
-        if (system.getStar() == null) {
+        if (blackHole == null) {
             Vector2f loc = MathUtils.randomPointInRing(new Vector2f(), 80f, 100f);
             missileCache.setFixedLocation(loc.x, loc.y);
         }
         else {
             missileCache.setFixedLocation(1000000f, 1000000f);
-            missileCache.addScript(new MissileCacheScript(missileCache, system.getStar()));
+            missileCache.addScript(new MissileCacheScript(missileCache, blackHole));
         }
 
         missileCache.getMemoryWithoutUpdate().set(cacheKey, "MISSILE");
-        missileCache.getMemoryWithoutUpdate().set(cacheFlagKey, true);
+        missileCache.getMemoryWithoutUpdate().set(GenFortifiedCaches.fortifiedFlag, true);
         Misc.setDefenderOverride(missileCache, new DefenderDataOverride(Factions.MERCENARY, 1f, 240f, 240f, 20));
 
         // Mark the correct black hole system with a bunch of derelicts strewn about
@@ -212,8 +223,8 @@ public abstract class ProcGen {
         factions.add(Factions.PERSEAN, 10f);
         factions.add(Factions.INDEPENDENT, 8f);
         factions.add(Factions.LUDDIC_PATH, 4f);
-        Vector2f starCenter = system.getStar() == null ? new Vector2f() : system.getStar().getLocation();
-        float starRadius = system.getStar() == null ? 100f : system.getStar().getRadius();
+        Vector2f starCenter = blackHole == null ? new Vector2f() : blackHole.getLocation();
+        float starRadius = blackHole == null ? 100f : blackHole.getRadius();
         for (int i = 0; i < numDerelictShips; i++) {
             Vector2f point = MathUtils.randomPointInRing(starCenter, 3f*starRadius, 6f*starRadius);
             DerelictShipEntityPlugin.DerelictShipData params =
@@ -225,18 +236,18 @@ public abstract class ProcGen {
             SectorEntityToken derelict = BaseThemeGenerator.addSalvageEntity(Misc.random, system, Entities.WRECK, null, params);
             derelict.setDiscoverable(true);
             SalvageSpecialAssigner.assignSpecials(derelict);
-            if (system.getStar() == null) {
+            if (blackHole == null) {
                 derelict.setFixedLocation(point.x, point.y);
             } else {
-                derelict.setCircularOrbit(system.getStar(), MathUtils.randBetween(0f, 360f), point.length(), MathUtils.randBetween(30f, 90f));
+                derelict.setCircularOrbit(blackHole, MathUtils.randBetween(0f, 360f), point.length(), MathUtils.randBetween(30f, 90f));
             }
         }
     }
 
-    private static final int pathSegments = 12;
-    private static final float minSegmentLength = 2000f, maxSegmentLength = 3000f;
+    private static final int pathSegments = 8;
+    private static final float minSegmentLength = 3500f, maxSegmentLength = 5000f;
 
-    private static void addBallisticCache(StarSystemAPI system, Map<String, Float> ballisticRarities) {
+    private static void addBallisticCache(StarSystemAPI system) {
         Vector2f startPoint = MathUtils.randomPointInRing(new Vector2f(), 2500f, 3000f);
 
         List<Vector2f> pathPoints = new ArrayList<>();
@@ -257,8 +268,8 @@ public abstract class ProcGen {
                 SectorEntityToken ballisticCache = BaseThemeGenerator.addSalvageEntity(system, "wpnxt_ballistic_cache", null, null);
                 ballisticCache.setFixedLocation(point.x, point.y);
                 ballisticCache.getMemoryWithoutUpdate().set(cacheKey, "BALLISTIC");
-                ballisticCache.getMemoryWithoutUpdate().set(cacheFlagKey, true);
-                populateCache(ballisticCache, 4, 120, 20, "BALLISTIC", ballisticRarities);
+                ballisticCache.getMemoryWithoutUpdate().set(GenFortifiedCaches.fortifiedFlag, true);
+//                populateCache(ballisticCache, 4, 120, 20, "BALLISTIC", ballisticRarities);
                 Misc.setDefenderOverride(ballisticCache, new DefenderDataOverride(Factions.MERCENARY, 1f, 240f, 240f, 20));
             }
             else {
@@ -287,44 +298,42 @@ public abstract class ProcGen {
     public static Set<String> weaponTagsToSkip = new HashSet<>();
 
     static {
-        weaponTagsToSkip.add(Tags.NO_BP_DROP);
         weaponTagsToSkip.add(Tags.NO_DROP);
-        weaponTagsToSkip.add(Tags.HULLMOD_NO_DROP_SALVAGE);
         weaponTagsToSkip.add(Tags.RESTRICTED);
     }
-    @SuppressWarnings("SameParameterValue")
-    private static void separateRareWeaponBPs(
-            Map<String, Float> ballisticRarities,
-            Map<String, Float> energyRarities,
-            Map<String, Float> missileRarities,
-            float mediumWeaponRarityMultiplier,
-            float largeWeaponRarityMultiplier) {
-        for (WeaponSpecAPI spec : Global.getSettings().getAllWeaponSpecs()) {
-            if (spec.getAIHints().contains(WeaponAPI.AIHints.SYSTEM)) continue;
-            Set<String> tags = new HashSet<>(spec.getTags());
-            if (!tags.contains(Items.TAG_RARE_BP)) continue;
-            tags.retainAll(weaponTagsToSkip);
-            if (!tags.isEmpty()) {
-                continue;
-            }
-            float rarityMultiplier = WeaponAPI.WeaponSize.MEDIUM.equals(spec.getSize())
-                    ? mediumWeaponRarityMultiplier
-                    : WeaponAPI.WeaponSize.LARGE.equals(spec.getSize())
-                    ? largeWeaponRarityMultiplier
-                    : 1f;
-            switch (spec.getType()) {
-                case BALLISTIC: ballisticRarities.put(spec.getWeaponId(), spec.getRarity() * rarityMultiplier); break;
-                case ENERGY: energyRarities.put(spec.getWeaponId(), spec.getRarity() * rarityMultiplier); break;
-                case MISSILE: missileRarities.put(spec.getWeaponId(), spec.getRarity() * rarityMultiplier); break;
-                default: break;
-            }
-        }
-    }
 
-    /** {@code weaponType} is one of BALLISTIC, ENERGY, or MISSILE. */
+//    @SuppressWarnings("SameParameterValue")
+//    private static void separateRareWeaponBPs(
+//            Map<String, Float> ballisticRarities,
+//            Map<String, Float> energyRarities,
+//            Map<String, Float> missileRarities,
+//            float mediumWeaponRarityMultiplier,
+//            float largeWeaponRarityMultiplier) {
+//        for (WeaponSpecAPI spec : Global.getSettings().getAllWeaponSpecs()) {
+//            if (spec.getAIHints().contains(WeaponAPI.AIHints.SYSTEM)) continue;
+//            Set<String> tags = new HashSet<>(spec.getTags());
+//            if (!tags.contains(Items.TAG_RARE_BP)) continue;
+//            tags.retainAll(weaponTagsToSkip);
+//            if (!tags.isEmpty()) {
+//                continue;
+//            }
+//            float rarityMultiplier = WeaponAPI.WeaponSize.MEDIUM.equals(spec.getSize())
+//                    ? mediumWeaponRarityMultiplier
+//                    : WeaponAPI.WeaponSize.LARGE.equals(spec.getSize())
+//                    ? largeWeaponRarityMultiplier
+//                    : 1f;
+//            switch (spec.getType()) {
+//                case BALLISTIC: ballisticRarities.put(spec.getWeaponId(), spec.getRarity() * rarityMultiplier); break;
+//                case ENERGY: energyRarities.put(spec.getWeaponId(), spec.getRarity() * rarityMultiplier); break;
+//                case MISSILE: missileRarities.put(spec.getWeaponId(), spec.getRarity() * rarityMultiplier); break;
+//                default: break;
+//            }
+//        }
+//    }
+
     @SuppressWarnings("SameParameterValue")
-    private static void populateCache(SectorEntityToken cache, int uniqueWeaponCount, int randomWeaponCount, int randomBPCount, String weaponType, Map<String, Float> bpRarities) {
-        String uniqueWeaponId = "BALLISTIC".equals(weaponType) ? "wpnxt_morphcannon" : "ENERGY".equals(weaponType) ? "wpnxt_energyballlauncher" : "wpnxt_phasetorpedo";
+    public static void populateCache(SectorEntityToken cache, int uniqueWeaponCount, int randomWeaponCount, int randomBPCount, WeaponAPI.WeaponType weaponType, Random random) {
+        String uniqueWeaponId =  WeaponAPI.WeaponType.BALLISTIC.equals(weaponType) ? "wpnxt_morphcannon" : WeaponAPI.WeaponType.ENERGY.equals(weaponType) ? "wpnxt_energyballlauncher" : "wpnxt_phasetorpedo";
         SalvageEntityGenDataSpec.DropData uniqueWeaponDrop = new SalvageEntityGenDataSpec.DropData();
         uniqueWeaponDrop.addWeapon(uniqueWeaponId, 1f);
         uniqueWeaponDrop.chances = uniqueWeaponCount;
@@ -337,9 +346,27 @@ public abstract class ProcGen {
         cache.addDropRandom(randomWeapons);
         SalvageEntityGenDataSpec.DropData randomBPs = new SalvageEntityGenDataSpec.DropData();
         randomBPs.chances = randomBPCount;
-        for (Map.Entry<String, Float> entry : bpRarities.entrySet()) {
-            randomBPs.addCustom("item_weapon_bp:" + entry.getKey(), entry.getValue());
+        WeightedRandomPicker<DropGroupRow> bpPicker = new WeightedRandomPicker<>(random);
+
+        for (WeaponSpecAPI spec : Global.getSettings().getAllWeaponSpecs()) {
+            if (!weaponType.equals(spec.getType())) continue;
+            if (spec.getAIHints().contains(WeaponAPI.AIHints.SYSTEM)) continue;
+            Set<String> tags = new HashSet<>(spec.getTags());
+            if (!tags.contains(Items.TAG_RARE_BP)) continue;
+            tags.retainAll(weaponTagsToSkip);
+            if (!tags.isEmpty()) {
+                continue;
+            }
+            float rarityMultiplier = WeaponAPI.WeaponSize.MEDIUM.equals(spec.getSize())
+                    ? 0.5f
+                    : WeaponAPI.WeaponSize.LARGE.equals(spec.getSize())
+                    ? 0.25f
+                    : 1f;
+            float freq = spec.getRarity() * rarityMultiplier;
+            bpPicker.add(new DropGroupRow("item_weapon_bp:" + spec.getWeaponId(), "", freq), freq);
         }
+        randomBPs.initCustom();
+        randomBPs.getCustom().addAll(bpPicker);
         cache.addDropRandom(randomBPs);
     }
 }

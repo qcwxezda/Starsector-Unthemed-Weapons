@@ -13,7 +13,12 @@
     "permaMods": [
         "unstable_injector",
         "solar_shielding",
-        "hardenedshieldemitter"
+        "hardenedshieldemitter",
+        "damaged_mounts",
+        "glitched_sensors",
+        "comp_hull",
+        "erratic_injector",
+        "faulty_auto"
     ],
     "sMods": [
         "unstable_injector",

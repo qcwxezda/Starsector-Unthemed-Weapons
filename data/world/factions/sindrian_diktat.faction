@@ -1,0 +1,51 @@
+{
+  "knownWeapons":{
+    "weapons":[
+      "wpnxt_minivulcan",
+      "wpnxt_fragcannon",
+      "wpnxt_lightpounder",
+      "wpnxt_lightrailburst",
+      "wpnxt_minimortarbattery",
+      "wpnxt_heavyrailgun",
+      "wpnxt_heavypounder",
+      "wpnxt_splinterbattery",
+
+      "wpnxt_clusterlauncherbig",
+      "wpnxt_spikebarrage",
+      "wpnxt_impaler",
+      "wpnxt_ionrocket",
+      "wpnxt_minispiker",
+      "wpnxt_clusterminelauncher",
+
+      "wpnxt_fragpdbeam",
+      "wpnxt_enhtaclaser",
+      "wpnxt_mininglasermk2",
+      "wpnxt_miniblaster",
+      "wpnxt_impactbeam",
+
+      "wpnxt_impactlance",
+      "wpnxt_ultrablaster"
+    ]
+  },
+
+  "weaponSellFrequency":{
+    "wpnxt_impactlance": 10,
+    "wpnxt_ultrablaster": 10,
+    "wpnxt_fragpdbeam":5,
+    "wpnxt_enhtaclaser": 5,
+    "wpnxt_mininglasermk2": 7,
+    "wpnxt_miniblaster": 7,
+    "wpnxt_impactbeam": 7,
+    "wpnxt_clusterlauncherbig": 7,
+    "wpnxt_spikebarrage": 5,
+    "wpnxt_ionrocket": 5,
+    "wpnxt_impaler": 5,
+    "wpnxt_minispiker": 5,
+    "wpnxt_clusterminelauncher": 7,
+    "wpnxt_heavypounder": 5,
+    "wpnxt_minimortarbattery": 5,
+    "wpnxt_lightpounder": 5,
+    "wpnxt_fragcannon": 5,
+    "wpnxt_minivulcan": 5
+  }
+}

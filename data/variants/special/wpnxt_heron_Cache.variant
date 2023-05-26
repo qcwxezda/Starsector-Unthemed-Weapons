@@ -11,7 +11,12 @@
     "permaMods": [
         "expanded_deck_crew",
         "solar_shielding",
-        "unstable_injector"
+        "unstable_injector",
+        "damaged_mounts",
+        "glitched_sensors",
+        "comp_hull",
+        "erratic_injector",
+        "faulty_auto"
     ],
     "sMods": [
         "expanded_deck_crew",

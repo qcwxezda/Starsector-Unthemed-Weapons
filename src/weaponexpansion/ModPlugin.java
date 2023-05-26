@@ -6,17 +6,13 @@ import com.fs.starfarer.api.PluginPick;
 import com.fs.starfarer.api.campaign.CampaignPlugin;
 import com.fs.starfarer.api.campaign.GenericPluginManagerAPI;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import com.fs.starfarer.api.loading.MissileSpecAPI;
-import com.fs.starfarer.api.loading.ProjectileSpecAPI;
-import com.fs.starfarer.api.loading.WeaponSpecAPI;
-import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.loading.*;
 import org.json.JSONObject;
 import weaponexpansion.campaign.ShipRecoveryWeaponsRemover;
 import weaponexpansion.combat.ai.*;
 import weaponexpansion.procgen.CacheDefenderPlugin;
-import weaponexpansion.procgen.ProcGen;
-import weaponexpansion.util.CampaignUtils;
+import weaponexpansion.procgen.GenFortifiedCaches;
+import weaponexpansion.procgen.GenSpecialCaches;
 
 import java.awt.*;
 import java.util.*;
@@ -59,13 +55,80 @@ public class ModPlugin extends BaseModPlugin {
         return null;
     }
 
+//    @Override
+//    public void onApplicationLoad() {
+//        // Add the relevant tags to weapon, fighter, and ship specs
+//        // If adding tags to every spec breaks something, there is an alternative option: write an extension of, e.g. WeaponBlueprintItemPlugin and make a duplicate special item in special_items.csv with that plugin
+//        // However, this has the issue that it doesn't work for fighter LPCs, where the resolution to specific LPC is hard-coded
+//        addTagsToSpecs();
+//    }
+//
+//    @Override
+//    public void onDevModeF8Reload() {
+//        addTagsToSpecs();
+//    }
+//
+//    private void addTagsToSpecs() {
+//        for (WeaponSpecAPI spec : Global.getSettings().getAllWeaponSpecs()) {
+//            switch (spec.getSize()) {
+//                case SMALL:
+//                    spec.addTag(Tags.TAG_WEAPON_SMALL);
+//                    break;
+//                case MEDIUM:
+//                    spec.addTag(Tags.TAG_WEAPON_MEDIUM);
+//                    break;
+//                case LARGE:
+//                    spec.addTag(Tags.TAG_WEAPON_LARGE);
+//                    break;
+//            }
+//        }
+//        for (FighterWingSpecAPI spec : Global.getSettings().getAllFighterWingSpecs()) {
+//            float op = spec.getOpCost(null);
+//            if (op <= 5f) {
+//                spec.addTag(Tags.TAG_FIGHTER_UNDER5OP);
+//            }
+//            else if (op <= 10f) {
+//                spec.addTag(Tags.TAG_FIGHTER_5TO10OP);
+//            }
+//            else if (op <= 20f) {
+//                spec.addTag(Tags.TAG_FIGHTER_10TO20OP);
+//            }
+//            else {
+//                spec.addTag(Tags.TAG_FIGHTER_OVER20OP);
+//            }
+//        }
+//        for (ShipHullSpecAPI spec : Global.getSettings().getAllShipHullSpecs()) {
+//            if (!spec.isBaseHull()) continue;
+//            switch (spec.getHullSize()) {
+//                case DEFAULT:
+//                case FIGHTER:
+//                    break;
+//                case FRIGATE:
+//                    spec.addTag(Tags.TAG_FRIGATE);
+//                    break;
+//                case DESTROYER:
+//                    spec.addTag(Tags.TAG_DESTROYER);
+//                    break;
+//                case CRUISER:
+//                    spec.addTag(Tags.TAG_CRUISER);
+//                    break;
+//                case CAPITAL_SHIP:
+//                    spec.addTag(Tags.TAG_CAPITAL);
+//                    break;
+//            }
+//        }
+//    }
+
     @Override
     public void onGameLoad(boolean newGame) {
+        //CampaignUtils.generateFleetForEnergyCache(Global.getSector().getPlayerFleet(), Misc.random);
+
         if (!Global.getSector().getPersistentData().containsKey(initializerKey)) {
             // Ensure the initialization only happens once
             Global.getSector().getPersistentData().put(initializerKey, true);
 
-            ProcGen.initialize(Global.getSector());
+            GenSpecialCaches.initialize(Global.getSector());
+            GenFortifiedCaches.initialize(Global.getSector());
         }
 
         GenericPluginManagerAPI plugins = Global.getSector().getGenericPlugins();

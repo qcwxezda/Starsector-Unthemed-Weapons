@@ -1,0 +1,41 @@
+{
+  "knownWeapons":{
+    "weapons":[
+      "wpnxt_explosiveshelllauncher",
+      "wpnxt_splinterbattery",
+      "wpnxt_shotgun",
+      "wpnxt_heavypounder",
+      "wpnxt_heavyrailgun",
+      "wpnxt_minimortarbattery",
+      "wpnxt_lightrailburst",
+      "wpnxt_lightpounder",
+      "wpnxt_fragcannon",
+
+      "wpnxt_clusterlauncherbig",
+      "wpnxt_impaler",
+      "wpnxt_minispiker",
+      "wpnxt_clusterminelauncher",
+
+      "wpnxt_enhtaclaser",
+      "wpnxt_impactbeam",
+      "wpnxt_mininglasermk2"
+    ]
+  },
+  "weaponSellFrequency":{
+    "wpnxt_explosiveshelllauncher":3,
+    "wpnxt_splinterbattery":8,
+    "wpnxt_shotgun":3,
+
+    "wpnxt_heavypounder":10,
+    "wpnxt_heavyrailgun":10,
+    "wpnxt_minimortarbattery":5,
+    "wpnxt_lightrailburst":10,
+    "wpnxt_lightpounder":10,
+    "wpnxt_fragcannon":5,
+
+    "wpnxt_clusterlauncherbig":5,
+    "wpnxt_impaler":5,
+    "wpnxt_minispiker":5,
+    "wpnxt_clusterminelauncher":5,
+  }
+}

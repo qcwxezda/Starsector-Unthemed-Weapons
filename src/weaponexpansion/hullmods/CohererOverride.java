@@ -3,6 +3,7 @@ package weaponexpansion.hullmods;
 import java.awt.Color;
 
 import com.fs.starfarer.api.combat.BaseHullMod;
+import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.WeaponAPI;
@@ -11,16 +12,33 @@ import com.fs.starfarer.api.combat.listeners.WeaponBaseRangeModifier;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import weaponexpansion.combat.shipsystems.ReshaperStats;
 
-/** Mostly copied from EnergyBoltCoherer.java, just removes crewed hull penalty */
+/** Mostly copied from EnergyBoltCoherer.java, just removes crewed hull penalty
+ *  ALSO MAKES SOME MODIFICATIONS TO THE MOD RADIANT STATS AND ADDS THE LISTENER FOR THE SHIP SYSTEM */
 @SuppressWarnings("unused")
-public class wpnxt_CohererOverride extends BaseHullMod {
+public class CohererOverride extends BaseHullMod {
 
     public static float RANGE_BONUS = 200;
 
     @Override
+    public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
+        if (stats.getEntity() instanceof ShipAPI
+                && ("wpnxt_mod_radiant".equals(((ShipAPI) stats.getEntity()).getHullSpec().getHullId()))) {
+            stats.getAcceleration().modifyMult(id, 2f);
+            stats.getDeceleration().modifyMult(id, 1.5f);
+            stats.getTurnAcceleration().modifyMult(id, 2f);
+            stats.getMaxTurnRate().modifyMult(id, 1.5f);
+        }
+    }
+
+    @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ship.addListener(new EnergyBoltCohererRangeModifier());
+        if ("wpnxt_reshaper".equals(ship.getSystem().getId())
+                && !ship.hasListenerOfClass(ReshaperStats.ReshaperTracker.class)) {
+            ship.addListener(new ReshaperStats.ReshaperTracker(ship));
+        }
     }
 
     public static class EnergyBoltCohererRangeModifier implements WeaponBaseRangeModifier {
