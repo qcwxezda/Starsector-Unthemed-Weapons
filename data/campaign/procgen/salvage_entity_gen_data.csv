@@ -1,4 +1,5 @@
 id,rating,detection_range,type,autoXP,xpDiscover,xpSalvage,tags,drop_value,drop_random,defFaction,defQuality,probDefenders,minStr,maxStr,minSize,maxSize,probStation,stationRole
-wpnxt_ballistic_cache,0,1200,DISCOVERABLE,200,5000,15000,no_debris,,,,,,,,,,,
-wpnxt_energy_cache,0,1200,DISCOVERABLE,200,5000,15000,no_debris,,,,,,,,,,,
-wpnxt_missile_cache,0,1200,DISCOVERABLE,200,5000,15000,no_debris,,,,,,,,,,,
+wpnxt_ballistic_cache,0,1200,DISCOVERABLE,200,5000,100000,no_debris,,,,,,,,,,,
+wpnxt_energy_cache,0,1200,DISCOVERABLE,200,5000,100000,no_debris,,,,,,,,,,,
+wpnxt_missile_cache,0,1200,DISCOVERABLE,200,5000,100000,no_debris,,,,,,,,,,,
+wpnxt_fortified_cache,0,1200,DISCOVERABLE,200,,2000,no_debris,,,,,,,,,,,

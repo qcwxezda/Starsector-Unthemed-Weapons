@@ -18,7 +18,7 @@ public class MissileCacheScript implements EveryFrameScript {
 
     public MissileCacheScript(SectorEntityToken cache, PlanetAPI star) {
         this.cache = cache;
-        this.star=  star;
+        this.star = star;
     }
     @Override
     public boolean isDone() {

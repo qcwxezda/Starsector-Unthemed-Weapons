@@ -1,2 +1,2 @@
 name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sModDesc,sprite
-Energy Bolt Coherer,wpnxt_cohererOverride,,,,,,,,TRUE,,0,0,0,0,weaponexpansion.hullmods.wpnxt_CohererOverride,<tooltip created in the script>,Increases base range of non-beam energy weapons.,,graphics/hullmods/coherer.png
+Energy Bolt Coherer,wpnxt_cohererOverride,,,,,,,,TRUE,,0,0,0,0,weaponexpansion.hullmods.CohererOverride,<tooltip created in the script>,Increases base range of non-beam energy weapons.,,graphics/hullmods/coherer.png

@@ -17,7 +17,7 @@ import weaponexpansion.util.EngineUtils;
 @SuppressWarnings("unused")
 public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin {
 
-    public static final float explosionSpeed = 200f, timeBetweenHits = 0.1f, ringDamage = 1800f;
+    public static final float explosionSpeed = 200f, timeBetweenHits = 0.1f, ringDamage = 1575f;
 
     @Override
     public void onHit(final DamagingProjectileAPI proj, CombatEntityAPI target, final Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, final CombatEngineAPI engine){

@@ -1,0 +1,38 @@
+{
+  "knownWeapons":{
+    "weapons":[
+      "wpnxt_impactlance",
+      "wpnxt_ultrablaster",
+      "wpnxt_unstablecannon",
+      "wpnxt_boltstorm",
+      "wpnxt_fragpdbeam",
+      "wpnxt_energyscatterer",
+      "wpnxt_enhtaclaser",
+      "wpnxt_boltstreamer",
+      "wpnxt_boltrepeater",
+      "wpnxt_boltgun",
+      "wpnxt_miniblaster",
+      "wpnxt_impactbeam",
+      "wpnxt_needledriver",
+      "wpnxt_voidray",
+      "wpnxt_voidcannon",
+
+      "wpnxt_heavyrailgun",
+      "wpnxt_lightrailburst",
+      "wpnxt_superrailgun",
+      "wpnxt_explosiveshelllauncher",
+      "wpnxt_shotgun",
+
+      "wpnxt_energytorpedolarge",
+      "wpnxt_orbbarrage",
+      "wpnxt_spikebarrage",
+      "wpnxt_energytorpedomed",
+      "wpnxt_ionrocket",
+      "wpnxt_impaler",
+      "wpnxt_energytorpedo",
+      "wpnxt_minispiker",
+      "wpnxt_clusterminelauncher",
+      "wpnxt_iontorpedo"
+    ]
+  }
+}

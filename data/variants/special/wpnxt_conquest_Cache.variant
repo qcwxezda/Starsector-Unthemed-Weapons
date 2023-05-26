@@ -16,7 +16,12 @@
     "permaMods": [
         "solar_shielding",
         "missleracks",
-        "extendedshieldemitter"
+        "extendedshieldemitter",
+        "damaged_mounts",
+        "glitched_sensors",
+        "comp_hull",
+        "erratic_injector",
+        "faulty_auto"
     ],
     "sMods": [
         "solar_shielding",

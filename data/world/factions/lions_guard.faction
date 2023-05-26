@@ -1,0 +1,30 @@
+{
+  "knownWeapons":{
+    "weapons":[
+      "wpnxt_minivulcan",
+      "wpnxt_fragcannon",
+      "wpnxt_lightpounder",
+      "wpnxt_lightrailburst",
+      "wpnxt_minimortarbattery",
+      "wpnxt_heavyrailgun",
+      "wpnxt_heavypounder",
+      "wpnxt_splinterbattery",
+
+      "wpnxt_clusterlauncherbig",
+      "wpnxt_spikebarrage",
+      "wpnxt_impaler",
+      "wpnxt_ionrocket",
+      "wpnxt_minispiker",
+      "wpnxt_clusterminelauncher",
+
+      "wpnxt_fragpdbeam",
+      "wpnxt_enhtaclaser",
+      "wpnxt_mininglasermk2",
+      "wpnxt_miniblaster",
+      "wpnxt_impactbeam",
+
+      "wpnxt_impactlance",
+      "wpnxt_ultrablaster"
+    ]
+  }
+}

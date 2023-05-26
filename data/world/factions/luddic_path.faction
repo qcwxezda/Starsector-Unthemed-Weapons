@@ -1,0 +1,8 @@
+{
+  "knownWeapons":{
+    "weapons":[
+      "wpnxt_minimortarbattery",
+      "wpnxt_splinterbattery"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "knownWeapons":{
+    "weapons":[
+      "wpnxt_energytorpedolarge",
+      "wpnxt_orbbarrage",
+      "wpnxt_clusterlauncherbig",
+      "wpnxt_spikebarrage",
+      "wpnxt_energytorpedomed",
+      "wpnxt_impaler",
+      "wpnxt_ionrocket",
+      "wpnxt_energytorpedo",
+      "wpnxt_minispiker",
+      "wpnxt_clusterminelauncher",
+      "wpnxt_iontorpedo",
+
+      "wpnxt_shotgun",
+
+      "wpnxt_impactbeam",
+      "wpnxt_boltgun",
+      "wpnxt_boltrepeater",
+      "wpnxt_boltstreamer",
+      "wpnxt_energyscatterer",
+      "wpnxt_enhtaclaser",
+
+      "wpnxt_impactlance",
+      "wpnxt_boltstorm"
+    ]
+  },
+
+  "weaponSellFrequency":{
+    "wpnxt_impactlance": 5,
+    "wpnxt_boltstorm": 5,
+    "wpnxt_enhtaclaser": 5,
+    "wpnxt_impactbeam": 5,
+    "wpnxt_shotgun": 5,
+    "wpnxt_energytorpedolarge": 4,
+    "wpnxt_clusterlauncherbig": 8,
+    "wpnxt_spikebarrage": 8,
+    "wpnxt_orbbarrage": 9,
+    "wpnxt_ionrocket": 8,
+    "wpnxt_impaler": 8,
+    "wpnxt_energytorpedomed": 8,
+    "wpnxt_energytorpedo": 8,
+    "wpnxt_minispiker": 8,
+    "wpnxt_clusterminelauncher": 8,
+    "wpnxt_iontorpedo": 6
+  }
+}

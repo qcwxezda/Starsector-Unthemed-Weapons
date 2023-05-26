@@ -1,6 +1,6 @@
 {
     "displayName": "Experimental",
-    "fluxCapacitors": 18,
+    "fluxCapacitors": 28,
     "fluxVents": 50,
     "hullId": "pegasus",
     "hullMods": [
@@ -16,7 +16,12 @@
         "missleracks",
         "solar_shielding",
         "unstable_injector",
-        "extendedshieldemitter"
+        "extendedshieldemitter",
+        "damaged_mounts",
+        "glitched_sensors",
+        "comp_hull",
+        "erratic_injector",
+        "faulty_auto"
     ],
     "sMods": [
         "solar_shielding",
@@ -37,8 +42,8 @@
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS 000": "wpnxt_energytorpedolarge",
-                "WS 001": "wpnxt_energytorpedolarge"
+                "WS 000": "hurricane",
+                "WS 001": "hurricane"
             }
         },
         {

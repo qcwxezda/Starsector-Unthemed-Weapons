@@ -10,7 +10,7 @@
     "baseValueMult":2,
     "removeBuiltInMods":["automated"],
     "builtInMods":["wpnxt_cohererOverride"],
-    "systemId":"damper_omega",
+    "systemId":"wpnxt_reshaper",
     "weaponSlotChanges": {
         "WS 002": {
             "type": "ENERGY"
@@ -32,5 +32,48 @@
         }
     },
     "maxSpeed":55,
-    "ordnancePoints":370
+    "ordnancePoints":400,
+    "engineSlotChanges": {
+        "0": {
+            "length": 50,
+            "width": 18
+        },
+        "1": {
+            "length": 50,
+            "width": 18
+        },
+        "2": {
+            "length": 54,
+            "width": 8
+        },
+        "3": {
+            "length": 54,
+            "width": 8
+        },
+        "4": {
+            "length": 115,
+            "width": 32
+        },
+        "5": {
+            "length":120,
+            "width":38
+        },
+        "6": {
+            "length":120,
+            "width":38
+        },
+        "7": {
+            "length": 115,
+            "width": 32
+        },
+        "8": {
+            "length": 54,
+            "width": 8
+        },
+        "9": {
+            "length": 54,
+            "width": 8
+        }
+    }
+
 }

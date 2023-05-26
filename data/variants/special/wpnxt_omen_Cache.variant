@@ -1,7 +1,7 @@
 {
     "displayName": "Elite",
-    "fluxCapacitors": 9,
-    "fluxVents": 10,
+    "fluxCapacitors": 15,
+    "fluxVents": 4,
     "hullId": "omen",
     "hullMods": [
         "solar_shielding",

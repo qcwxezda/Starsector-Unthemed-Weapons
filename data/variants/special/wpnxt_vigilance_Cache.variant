@@ -1,6 +1,6 @@
 {
     "displayName": "Elite",
-    "fluxCapacitors": 5,
+    "fluxCapacitors": 8,
     "fluxVents": 10,
     "hullId": "vigilance",
     "hullMods": [
@@ -13,7 +13,12 @@
     "permaMods": [
         "eccm",
         "unstable_injector",
-        "solar_shielding"
+        "solar_shielding",
+        "damaged_mounts",
+        "glitched_sensors",
+        "comp_hull",
+        "erratic_injector",
+        "faulty_auto"
     ],
     "sMods": [
         "eccm",
@@ -25,7 +30,7 @@
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS 002": "wpnxt_energytorpedomed"}
+            "weapons": {"WS 002": "wpnxt_impaler"}
         },
         {
             "autofire": false,
