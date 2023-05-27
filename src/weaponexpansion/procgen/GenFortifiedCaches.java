@@ -32,11 +32,11 @@ public abstract class GenFortifiedCaches {
         tagsToSkip.add(Tags.THEME_HIDDEN);
     }
 
-    public static float cacheFreq;
     public static float minCacheSize = 22f, maxCacheSize = 60f;
     public static float mediumSizeThreshold = 30f, largeSizeThreshold = 40f, hugeSizeThreshold = 50f;
     public static float maxCacheSizeXPMultiplier = 20f;
     public static float baseCacheValue = 5000f, maxCacheSizeValueMultiplier = 79f;
+    public static float systemWeightPenaltyPerCache = 0.3f;
     public static String getCacheStringBySize(CacheSize size) {
         switch (size) {
             case SMALL:
@@ -49,30 +49,18 @@ public abstract class GenFortifiedCaches {
         }
     }
 
-    public static void initialize(SectorAPI sector) {
-        // Load the required constants
-        try {
-            JSONObject json = Global.getSettings().loadJSON("wpnxt_mod_settings.json");
-            cacheFreq = (float) json.getDouble("fortifiedCachesPerSystem");
-
-        } catch (Exception e) {
-            throw new RuntimeException("Could not load wpnxt_mod_settings.json: " + e, e);
-        }
-
-        int numSystems = sector.getStarSystems().size();
-        int numCaches = (int) (numSystems * cacheFreq);
-
+    public static WeightedRandomPicker<StarSystemAPI> getSystemPicker(Random random) {
         // Make an initial pass over star systems to get the size of the hyperspace
         float maxSystemDistance = 0f;
-        for (StarSystemAPI system : sector.getStarSystems()) {
+        for (StarSystemAPI system : Global.getSector().getStarSystems()) {
             float length = system.getLocation().length();
             if (length > maxSystemDistance) {
                 maxSystemDistance = length;
             }
         }
 
-        WeightedRandomPicker<StarSystemAPI> systemPicker = new WeightedRandomPicker<>();
-        for (StarSystemAPI system : sector.getStarSystems()) {
+        WeightedRandomPicker<StarSystemAPI> systemPicker = new WeightedRandomPicker<>(random);
+        for (StarSystemAPI system : Global.getSector().getStarSystems()) {
             Set<String> blacklist = tagsToSkip;
             blacklist.retainAll(system.getTags());
             if (!blacklist.isEmpty()) {
@@ -105,7 +93,7 @@ public abstract class GenFortifiedCaches {
             PlanetAPI primaryStar = system.getStar();
             // Nebula
             if (primaryStar == null) {
-                weight *= 1.5f;
+                weight *= 0.5f;
             }
             // Black hole
             else if (primaryStar.getSpec().isBlackHole()) {
@@ -113,7 +101,7 @@ public abstract class GenFortifiedCaches {
             }
             // Pulsar
             else if (primaryStar.getSpec().isPulsar()) {
-                weight *= 3f;
+                weight *= 1.5f;
             }
 
             // Check for habitable worlds, 0.75x multiplicative penalty for each one
@@ -123,109 +111,153 @@ public abstract class GenFortifiedCaches {
                 }
             }
 
+            // Check for existing fortified caches; 30% penalty each
+            for (SectorEntityToken entity : system.getCustomEntities()) {
+                if ("wpnxt_fortified_cache".equals(entity.getCustomEntitySpec().getId())) {
+                    weight *= (1f - systemWeightPenaltyPerCache);
+                }
+            }
+
+            // Favor worlds with fewer existing custom entities in general
+            weight *= 1f / Math.max(1f, (float) Math.sqrt(system.getCustomEntities().size()));
+
             systemPicker.add(system, weight);
         }
+        return systemPicker;
+    }
 
-        WeightedRandomPicker<FactionAPI> factionPicker = new WeightedRandomPicker<>();
+    public static WeightedRandomPicker<FactionAPI> getFactionPicker(Random random) {
+        WeightedRandomPicker<FactionAPI> factionPicker = new WeightedRandomPicker<>(random);
         for (FactionAPI faction : Global.getSector().getAllFactions()) {
             if (faction.isPlayerFaction()) continue;
             if (!faction.isShowInIntelTab()) continue;
 
             factionPicker.add(faction);
         }
+        return factionPicker;
+    }
 
-        for (int i = 0; i < numCaches; i++) {
-            // 37.7% chance of small cache
-            // 34.6% chance of medium cache
-            // 20.8% chance of large cache
-            // 6.9% chance of huge cache
-            float size = Math.min(MathUtils.randBetween(minCacheSize, maxCacheSize), MathUtils.randBetween(minCacheSize, maxCacheSize));
-            CacheSize cacheSize = CacheSize.getSize(size);
-            StarSystemAPI system = systemPicker.pick();
-            CustomCampaignEntityAPI cache = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(system, "wpnxt_fortified_cache",null, null);
-            cache.getMemoryWithoutUpdate().set(fortifiedFlag, true);
-            cache.getMemoryWithoutUpdate().set(numCreditsKey, 0f);
-            cache.setRadius(size);
-            float sizeFrac = (size - minCacheSize) / (maxCacheSize - minCacheSize);
-            // Double the detection range at max size
-            cache.getDetectedRangeMod().modifyMult(modifyKey, 1f + sizeFrac);
-            // Bigger caches get more salvage XP
-            cache.setSalvageXP(cache.getSalvageXP() * (1f + maxCacheSizeXPMultiplier*sizeFrac*sizeFrac));
-            cache.setName(getCacheStringBySize(CacheSize.getSize(size)));
+    public static void addCache(StarSystemAPI system, WeightedRandomPicker<FactionAPI> factionPicker) {
+        // 37.7% chance of small cache
+        // 34.6% chance of medium cache
+        // 20.8% chance of large cache
+        // 6.9% chance of huge cache
+        float size = Math.min(MathUtils.randBetween(minCacheSize, maxCacheSize), MathUtils.randBetween(minCacheSize, maxCacheSize));
+        CacheSize cacheSize = CacheSize.getSize(size);
+        CustomCampaignEntityAPI cache = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(system, "wpnxt_fortified_cache",null, null);
+        cache.getMemoryWithoutUpdate().set(fortifiedFlag, true);
+        cache.getMemoryWithoutUpdate().set(numCreditsKey, 0f);
+        cache.setRadius(size);
+        float sizeFrac = (size - minCacheSize) / (maxCacheSize - minCacheSize);
+        // Double the detection range at max size
+        cache.getDetectedRangeMod().modifyMult(modifyKey, 1f + sizeFrac);
+        // Bigger caches get more salvage XP
+        cache.setSalvageXP(cache.getSalvageXP() * (1f + maxCacheSizeXPMultiplier*sizeFrac*sizeFrac));
+        cache.setName(getCacheStringBySize(CacheSize.getSize(size)));
 
-            WeightedRandomPicker<LocationType> locationPicker = new WeightedRandomPicker<>();
-            // If the system has stars and/or planets
-            if (system.getPlanets() != null && !system.getPlanets().isEmpty()) {
-                locationPicker.add(LocationType.ORBITING_STAR_OR_PLANET, 1f);
-            }
-            // If the system has any asteroids
-            if (system.getAsteroids() != null && !system.getAsteroids().isEmpty()) {
-                locationPicker.add(LocationType.INSIDE_ASTEROID_FIELD, 1f);
-            }
-            // If the system has any stable locations
-            List<SectorEntityToken> stableLocations = system.getEntitiesWithTag(Tags.STABLE_LOCATION);
-            if (stableLocations != null && !stableLocations.isEmpty()) {
-                locationPicker.add(LocationType.NEAR_STABLE_LOCATION, 1f);
-            }
-            // If the system has any jump points
-            if (system.getJumpPoints() != null && !system.getJumpPoints().isEmpty()) {
-                locationPicker.add(LocationType.ORBITING_JUMP_POINT, 1f);
-            }
-            // Random fixed location as a fallback guaranteed option
-            locationPicker.add(LocationType.RANDOM_FIXED_LOCATION, 1f);
+        WeightedRandomPicker<LocationType> locationPicker = new WeightedRandomPicker<>();
+        // If the system has stars and/or planets
+        if (system.getPlanets() != null && !system.getPlanets().isEmpty()) {
+            locationPicker.add(LocationType.ORBITING_STAR_OR_PLANET, 3f);
+        }
+        // If the system has any asteroids
+        if (system.getAsteroids() != null && !system.getAsteroids().isEmpty()) {
+            locationPicker.add(LocationType.INSIDE_ASTEROID_FIELD, 1f);
+        }
+        // If the system has any stable locations
+        List<SectorEntityToken> stableLocations = system.getEntitiesWithTag(Tags.STABLE_LOCATION);
+        if (stableLocations != null && !stableLocations.isEmpty()) {
+            locationPicker.add(LocationType.NEAR_STABLE_LOCATION, 2f);
+        }
+        // If the system has any jump points
+        if (system.getJumpPoints() != null && !system.getJumpPoints().isEmpty()) {
+            locationPicker.add(LocationType.ORBITING_JUMP_POINT, 2f);
+        }
+        // Random fixed location as a fallback guaranteed option
+        locationPicker.add(LocationType.RANDOM_FIXED_LOCATION, 1f);
 
-            LocationType locationType = locationPicker.pick();
+        LocationType locationType = locationPicker.pick();
 
-            Vector2f fixedLocation;
-            float orbitRadius;
-            // Place the cache at a desired location
-            switch (locationType) {
-                case ORBITING_STAR_OR_PLANET:
-                    PlanetAPI planet = system.getPlanets().get(Misc.random.nextInt(system.getPlanets().size()));
-                    orbitRadius = MathUtils.randBetween(planet.getRadius() * 1.5f, planet.getRadius() * 3f);
-                    cache.setCircularOrbit(planet, MathUtils.randBetween(0f, 360f), orbitRadius, MathUtils.randBetween(30f, 90f) / 100f * Math.min(100f, orbitRadius));
-                    break;
-                case INSIDE_ASTEROID_FIELD:
-                    SectorEntityToken asteroid = system.getAsteroids().get(Misc.random.nextInt(system.getAsteroids().size()));
-                    // Fixed location near the selected asteroid
-                    fixedLocation = MathUtils.randomPointInRing(asteroid.getLocation(), asteroid.getRadius(), 300f + asteroid.getRadius());
-                    cache.setFixedLocation(fixedLocation.x, fixedLocation.y);
-                    break;
-                case NEAR_STABLE_LOCATION:
-                    assert stableLocations != null;
-                    SectorEntityToken stableLocation = stableLocations.get(Misc.random.nextInt( stableLocations.size()));
-                    // Fixed location near the selected stable location
-                    fixedLocation = MathUtils.randomPointInRing(stableLocation.getLocation(), stableLocation.getRadius(), 300f + stableLocation.getRadius());
-                    orbitRadius = MathUtils.randBetween(stableLocation.getRadius() + 100f, stableLocation.getRadius() + 400f);
-                    cache.setCircularOrbit(stableLocation, MathUtils.randBetween(0f, 360f), orbitRadius, 50000f);
-                    break;
-                case ORBITING_JUMP_POINT:
-                    SectorEntityToken jumpPoint = system.getJumpPoints().get(Misc.random.nextInt(system.getJumpPoints().size()));
-                    orbitRadius = MathUtils.randBetween(jumpPoint.getRadius() + 100f, jumpPoint.getRadius() + 400f);
-                    cache.setCircularOrbit(jumpPoint, MathUtils.randBetween(0f, 360f), orbitRadius, MathUtils.randBetween(30f, 90f));
-                case RANDOM_FIXED_LOCATION:
-                    // Shouldn't be farther away from the center of the system than the farthest already-existing entity,
-                    // or a certain fixed value
-                    Vector2f center = system.getStar() == null ? new Vector2f() : system.getStar().getLocation();
-                    float farthestEntityDist = 6000f;
-                    if (system.getAllEntities() != null) {
-                        for (SectorEntityToken entity : system.getAllEntities()) {
-                            float dist = Misc.getDistance(center, entity.getLocation());
-                            if (dist > farthestEntityDist) {
-                                farthestEntityDist = dist;
-                            }
+        Vector2f fixedLocation;
+        float orbitRadius;
+        // Place the cache at a desired location
+        switch (locationType) {
+            case ORBITING_STAR_OR_PLANET:
+                PlanetAPI planet = system.getPlanets().get(Misc.random.nextInt(system.getPlanets().size()));
+                orbitRadius = MathUtils.randBetween(planet.getRadius() * 1.5f, planet.getRadius() * 3f);
+                cache.setCircularOrbit(planet, MathUtils.randBetween(0f, 360f), orbitRadius, MathUtils.randBetween(30f, 90f) / 100f * Math.min(100f, orbitRadius));
+                break;
+            case INSIDE_ASTEROID_FIELD:
+                SectorEntityToken asteroid = system.getAsteroids().get(Misc.random.nextInt(system.getAsteroids().size()));
+                // Fixed location near the selected asteroid
+                fixedLocation = MathUtils.randomPointInRing(asteroid.getLocation(), asteroid.getRadius(), 300f + asteroid.getRadius());
+                cache.setFixedLocation(fixedLocation.x, fixedLocation.y);
+                break;
+            case NEAR_STABLE_LOCATION:
+                assert stableLocations != null;
+                SectorEntityToken stableLocation = stableLocations.get(Misc.random.nextInt( stableLocations.size()));
+                // Fixed location near the selected stable location
+                fixedLocation = MathUtils.randomPointInRing(stableLocation.getLocation(), stableLocation.getRadius(), 300f + stableLocation.getRadius());
+                orbitRadius = MathUtils.randBetween(stableLocation.getRadius() + 100f, stableLocation.getRadius() + 400f);
+                cache.setCircularOrbit(stableLocation, MathUtils.randBetween(0f, 360f), orbitRadius, 50000f);
+                break;
+            case ORBITING_JUMP_POINT:
+                SectorEntityToken jumpPoint = system.getJumpPoints().get(Misc.random.nextInt(system.getJumpPoints().size()));
+                orbitRadius = MathUtils.randBetween(jumpPoint.getRadius() + 100f, jumpPoint.getRadius() + 400f);
+                cache.setCircularOrbit(jumpPoint, MathUtils.randBetween(0f, 360f), orbitRadius, MathUtils.randBetween(30f, 90f));
+            case RANDOM_FIXED_LOCATION:
+                // Shouldn't be farther away from the center of the system than the farthest already-existing entity,
+                // or a certain fixed value
+                Vector2f center = system.getStar() == null ? new Vector2f() : system.getStar().getLocation();
+                float farthestEntityDist = 1000f;
+                if (system.getAllEntities() != null) {
+                    for (SectorEntityToken entity : system.getAllEntities()) {
+                        float dist = Misc.getDistance(center, entity.getLocation());
+                        if (dist > farthestEntityDist) {
+                            farthestEntityDist = dist;
                         }
                     }
-                    fixedLocation = MathUtils.randomPointInRing(center, system.getStar() == null ? 0f : system.getStar().getRadius() * 1.5f, farthestEntityDist);
-                    cache.setFixedLocation(fixedLocation.x, fixedLocation.y);
-                    break;
-            }
+                }
+                // Don't be farther than 6k units away from center
+                farthestEntityDist = Math.min(farthestEntityDist, 6000f);
+                fixedLocation = MathUtils.randomPointInRing(center, system.getStar() == null ? 0f : system.getStar().getRadius() * 1.5f, farthestEntityDist);
+                cache.setFixedLocation(fixedLocation.x, fixedLocation.y);
+                break;
+        }
 
-            // Strength from 10 to 300 DP
-            float defenderStrength = 10f * (1f + sizeFrac*sizeFrac*29f);
-            Misc.setDefenderOverride(cache, new DefenderDataOverride(factionPicker.pick().getId(), 1f, defenderStrength * 0.8f, defenderStrength * 1.2f, 30));
-            // Doesn't seem to do anything
+        // Strength from 10 to 300 DP
+        float defenderStrength = 10f * (1f + sizeFrac*sizeFrac*29f);
+        DefenderDataOverride ddo = new DefenderDataOverride(factionPicker.pick().getId(), 1f, defenderStrength * 0.8f, defenderStrength * 1.2f, 30);
+        switch (cacheSize) {
+            case SMALL:
+            case MEDIUM:
+                ddo.maxDefenderSize = 2;
+                break;
+            case LARGE:
+                ddo.maxDefenderSize = 3;
+                break;
+            case HUGE:
+                ddo.maxDefenderSize = 1000;
+                break;
+        }
+        Misc.setDefenderOverride(cache, ddo);
+        // Doesn't seem to do anything
 //            SalvageSpecialAssigner.assignSpecials(cache);
+    }
+
+    public static void initialize(int numCaches) {
+        WeightedRandomPicker<StarSystemAPI> systemPicker = getSystemPicker(Misc.random);
+        WeightedRandomPicker<FactionAPI> factionPicker = getFactionPicker(Misc.random);
+
+        for (int i = 0; i < numCaches; i++) {
+            StarSystemAPI system = systemPicker.pick();
+            // After picking a system, add it back but reduce its weight by 30%
+            // Obviously this is faster than calling getSystemPicker() each iteration
+            float weight = systemPicker.getWeight(system);
+            systemPicker.remove(system);
+            systemPicker.add(system, weight * (1f - systemWeightPenaltyPerCache));
+
+            addCache(system, factionPicker);
         }
     }
 
@@ -284,31 +316,31 @@ public abstract class GenFortifiedCaches {
                     case BALLISTIC_WEAPONS:
                     case ENERGY_WEAPONS:
                     case MISSILE_WEAPONS:
-                        // Give anywhere from 5 to 100 weapons
-                        data.chances = (int) Math.ceil(5f * (1f + sizeFrac * sizeFrac * 19f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
+                        // Give anywhere from 15 to 105 weapons (divided by number of rolls)
+                        data.chances = (int) Math.ceil(15f * (1f + sizeFrac * sizeFrac * 6f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
                         break;
                     case FIGHTER_LPCS:
-                        // Give anywhere from 3 to 60 LPCs
-                        data.chances = (int) Math.ceil(3f * (1f + sizeFrac * sizeFrac * 19f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
+                        // Give anywhere from 8 to 80 LPCs (divided by number of rolls)
+                        data.chances = (int) Math.ceil(8f * (1f + sizeFrac * sizeFrac * 9f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
                         break;
                     case WEAPON_BLUEPRINTS:
-                        // Give anywhere from 2 to 30 BPs
-                        data.chances = (int) Math.ceil(2f * (1f + sizeFrac * sizeFrac * 14f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
+                        // Give anywhere from 4 to 32 BPs (divided by number of rolls)
+                        data.chances = (int) Math.ceil(4f * (1f + sizeFrac * sizeFrac * 7f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
                         break;
                     case FIGHTER_BLUEPRINTS:
-                        // Give anywhere from 2 to 24 BPS
-                        data.chances = (int) Math.ceil(2f * (1f + sizeFrac * sizeFrac * 11f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
+                        // Give anywhere from 3 to 27 BPS (divided by number of rolls)
+                        data.chances = (int) Math.ceil(3f * (1f + sizeFrac * sizeFrac * 8f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
                         break;
                     case SHIP_BLUEPRINTS:
-                        // Give anywhere from 1 to 12 BPs
-                        data.chances = (int) Math.ceil(1f * (1f + sizeFrac * sizeFrac * 11f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
+                        // Give anywhere from 3 to 15 BPs (divided by number of rolls)
+                        data.chances = (int) Math.ceil(3f * (1f + sizeFrac * sizeFrac * 4f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
                         break;
                     case AI_CORES:
-                        // Give anywhere from 2 to 20 cores
-                        data.chances = (int) Math.ceil(2f * (1f + sizeFrac * sizeFrac * 9f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
+                        // Give anywhere from 4 to 20 cores (divided by number of rolls)
+                        data.chances = (int) Math.ceil(4f * (1f + sizeFrac * sizeFrac * 4f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
                         break;
                     case RARE_TECH:
-                        // Give anywhere from 1 to 3 items
+                        // Give anywhere from 1 to 3 items (divided by number of rolls, so basically always 1)
                         data.chances = (int) Math.ceil(1f * (1f + sizeFrac * sizeFrac * 2f) * MathUtils.randBetween(0.8f, 1.2f, random)) / numRolls;
                         break;
                 }

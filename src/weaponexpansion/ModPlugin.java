@@ -5,9 +5,11 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.PluginPick;
 import com.fs.starfarer.api.campaign.CampaignPlugin;
 import com.fs.starfarer.api.campaign.GenericPluginManagerAPI;
+import com.fs.starfarer.api.campaign.listeners.ListenerManagerAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.loading.*;
 import org.json.JSONObject;
+import weaponexpansion.campaign.FortifiedCacheRegenerator;
 import weaponexpansion.campaign.ShipRecoveryWeaponsRemover;
 import weaponexpansion.combat.ai.*;
 import weaponexpansion.procgen.CacheDefenderPlugin;
@@ -122,13 +124,32 @@ public class ModPlugin extends BaseModPlugin {
     @Override
     public void onGameLoad(boolean newGame) {
         //CampaignUtils.generateFleetForEnergyCache(Global.getSector().getPlayerFleet(), Misc.random);
+        float cacheFreq;
+        boolean regenerateCaches;
+        try {
+            JSONObject json = Global.getSettings().loadJSON("wpnxt_mod_settings.json");
+            cacheFreq = (float) json.getDouble("fortifiedCachesPerSystem");
+            regenerateCaches = json.getBoolean("regenerateFortifiedCaches");
+        } catch (Exception e) {
+            throw new RuntimeException("Could not load wpnxt_mod_settings.json: " + e, e);
+        }
+        int numCaches = (int) (Global.getSector().getStarSystems().size() * cacheFreq);
 
         if (!Global.getSector().getPersistentData().containsKey(initializerKey)) {
             // Ensure the initialization only happens once
             Global.getSector().getPersistentData().put(initializerKey, true);
 
             GenSpecialCaches.initialize(Global.getSector());
-            GenFortifiedCaches.initialize(Global.getSector());
+            GenFortifiedCaches.initialize(numCaches);
+        }
+
+        ListenerManagerAPI listeners = Global.getSector().getListenerManager();
+        if (regenerateCaches) {
+            FortifiedCacheRegenerator regenerator = new FortifiedCacheRegenerator(numCaches, false);
+            if (!listeners.hasListenerOfClass(FortifiedCacheRegenerator.class)) {
+                listeners.addListener(regenerator, true);
+            }
+            Global.getSector().addTransientListener(regenerator);
         }
 
         GenericPluginManagerAPI plugins = Global.getSector().getGenericPlugins();

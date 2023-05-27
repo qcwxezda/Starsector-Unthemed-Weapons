@@ -24,6 +24,9 @@ import java.util.Map;
 
 /** Copied from SalvageDefenderInteraction. Need to set text to remove references to "automated" defenses, but unfortunately
  *  the text is hard-coded as a literal.
+ *  Also: don't impact allies' reputations.
+ *  Also: don't drop AI cores since no AI core officers.
+ *
  * <p>
  *  Note: calling new SalvageDefenderInteration().execute() and then setting the option text doesn't work due to
  *  re-engagement still referring to the defenses as automated. */
@@ -48,12 +51,12 @@ public class wpnxt_CacheDefenderInteraction extends BaseCommandPlugin {
         config.showTransponderStatus = false;
         config.showWarningDialogWhenNotHostile = false;
         config.alwaysAttackVsAttack = true;
-        config.impactsAllyReputation = true;
+        config.impactsAllyReputation = false;
         config.impactsEnemyReputation = false;
         config.pullInAllies = false;
         config.pullInEnemies = false;
         config.pullInStations = false;
-        config.lootCredits = false;
+        config.lootCredits = true;
 
         config.firstTimeEngageOptionText = "Engage the defenses";
         config.afterFirstTimeEngageOptionText = "Re-engage the defenses";
@@ -150,57 +153,6 @@ public class wpnxt_CacheDefenderInteraction extends BaseCommandPlugin {
 
                 float valueMultFleet = Global.getSector().getPlayerFleet().getStats().getDynamic().getValue(Stats.BATTLE_SALVAGE_MULT_FLEET);
                 float valueModShips = context.getSalvageValueModPlayerShips();
-
-                for (FleetEncounterContextPlugin.FleetMemberData data : winner.getEnemyCasualties()) {
-                    // add at least one of each weapon that was present on the OMEGA ships, since these
-                    // are hard to get; don't want them to be too RNG
-                    if (data.getMember() != null && context.getBattle() != null) {
-                        CampaignFleetAPI fleet = context.getBattle().getSourceFleet(data.getMember());
-
-                        if (fleet != null && fleet.getFaction().getId().equals(Factions.OMEGA)) {
-                            for (String slotId : data.getMember().getVariant().getNonBuiltInWeaponSlots()) {
-                                String weaponId = data.getMember().getVariant().getWeaponId(slotId);
-                                if (weaponId == null) continue;
-                                if (salvage.getNumWeapons(weaponId) <= 0) {
-                                    WeaponSpecAPI spec = Global.getSettings().getWeaponSpec(weaponId);
-                                    if (spec.hasTag(Tags.NO_DROP)) continue;
-
-                                    salvage.addWeapons(weaponId, 1);
-                                }
-                            }
-                        }
-
-                        if (fleet != null &&
-                                fleet.getFaction().getCustomBoolean(Factions.CUSTOM_NO_AI_CORES_FROM_AUTOMATED_DEFENSES)) {
-                            continue;
-                        }
-                    }
-                    if (config.salvageRandom.nextFloat() < playerContribMult) {
-                        SalvageEntityGenDataSpec.DropData drop = new SalvageEntityGenDataSpec.DropData();
-                        drop.chances = 1;
-                        drop.value = -1;
-                        switch (data.getMember().getHullSpec().getHullSize()) {
-                            case CAPITAL_SHIP:
-                                drop.group = Drops.AI_CORES3;
-                                drop.chances = 2;
-                                break;
-                            case CRUISER:
-                                drop.group = Drops.AI_CORES3;
-                                break;
-                            case DESTROYER:
-                                drop.group = Drops.AI_CORES2;
-                                break;
-                            case FIGHTER:
-                            case FRIGATE:
-                                drop.group = Drops.AI_CORES1;
-                                break;
-                        }
-                        if (drop.group != null) {
-                            dropRandom.add(drop);
-                        }
-                    }
-                }
-
                 float fuelMult = Global.getSector().getPlayerFleet().getStats().getDynamic().getValue(Stats.FUEL_SALVAGE_VALUE_MULT_FLEET);
                 //float fuel = salvage.getFuel();
                 //salvage.addFuel((int) Math.round(fuel * fuelMult));
@@ -212,7 +164,6 @@ public class wpnxt_CacheDefenderInteraction extends BaseCommandPlugin {
                     }
                     salvage.addFromStack(stack);
                 }
-
             }
 
         };

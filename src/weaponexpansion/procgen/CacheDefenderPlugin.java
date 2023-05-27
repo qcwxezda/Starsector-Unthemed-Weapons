@@ -91,84 +91,84 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
             GenFortifiedCaches.CacheSize cacheSize = GenFortifiedCaches.CacheSize.getSize(size);
             float sizeFrac = (size - GenFortifiedCaches.minCacheSize) / (GenFortifiedCaches.maxCacheSize - GenFortifiedCaches.minCacheSize);
 
-            // Remove capitals from < huge crates, cruisers from < large crates, and destroyers from < medium crates
-            List<FleetMemberAPI> toRemove = new ArrayList<>();
-            for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
-                switch (member.getVariant().getHullSize()) {
-                    case DEFAULT:
-                    case FIGHTER:
-                    case FRIGATE:
-                        break;
-                    case DESTROYER:
-                        if (GenFortifiedCaches.CacheSize.getSizeOrdinal(cacheSize) < 1) {
-                            toRemove.add(member);
-                        }
-                        break;
-                    case CRUISER:
-                        if (GenFortifiedCaches.CacheSize.getSizeOrdinal(cacheSize) < 2) {
-                            toRemove.add(member);
-                        }
-                        break;
-                    case CAPITAL_SHIP:
-                        if (GenFortifiedCaches.CacheSize.getSizeOrdinal(cacheSize) < 3) {
-                            toRemove.add(member);
-                        }
-                        break;
-                }
-            }
-
-            float lostFP = 0f;
-            for (FleetMemberAPI member : toRemove) {
-                // Don't remove the last fleet member
-                if (fleet.getNumShips() > 1) {
-                    lostFP += member.getFleetPointCost();
-                    fleet.getFleetData().removeFleetMember(member);
-                }
-            }
-
-
+//            // Remove capitals from < huge crates, cruisers from < large crates, and destroyers from < medium crates
+//            List<FleetMemberAPI> toRemove = new ArrayList<>();
+//            for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
+//                switch (member.getVariant().getHullSize()) {
+//                    case DEFAULT:
+//                    case FIGHTER:
+//                    case FRIGATE:
+//                        break;
+//                    case DESTROYER:
+//                        if (GenFortifiedCaches.CacheSize.getSizeOrdinal(cacheSize) < 1) {
+//                            toRemove.add(member);
+//                        }
+//                        break;
+//                    case CRUISER:
+//                        if (GenFortifiedCaches.CacheSize.getSizeOrdinal(cacheSize) < 2) {
+//                            toRemove.add(member);
+//                        }
+//                        break;
+//                    case CAPITAL_SHIP:
+//                        if (GenFortifiedCaches.CacheSize.getSizeOrdinal(cacheSize) < 3) {
+//                            toRemove.add(member);
+//                        }
+//                        break;
+//                }
+//            }
+//
+//            float lostFP = 0f;
+//            for (FleetMemberAPI member : toRemove) {
+//                // Don't remove the last fleet member
+//                if (fleet.getNumShips() > 1) {
+//                    lostFP += member.getFleetPointCost();
+//                    fleet.getFleetData().removeFleetMember(member);
+//                }
+//            }
+//
+//
             FleetParamsV3 fleetParams = new FleetParamsV3();
-
-            // Replace the lost FP with the correct size ships
-            if (lostFP >= 1f) {
-                switch (cacheSize) {
-                    case SMALL:
-                        fleetParams.maxShipSize = 1;
-                        break;
-                    case MEDIUM:
-                        fleetParams.maxShipSize = 2;
-                        break;
-                    case LARGE:
-                        fleetParams.maxShipSize = 3;
-                        break;
-                    case HUGE:
-                        break;
-                }
-
-                // Random market as source, since the quality is getting overwritten anyway
-                // Will NPE if source is null
-                // Should be fine, base game does this too
-                fleetParams.setSource(Global.getFactory().createMarket("fake", "fake", 5), false);
-
-                FactionDoctrineAPI doctrine = fleet.getFaction().getDoctrine();
-                float sum = doctrine.getWarships() + doctrine.getCarriers() + doctrine.getPhaseShips();
-                float warshipFP = doctrine.getWarships() / sum * lostFP;
-                float carrierFP = doctrine.getCarriers() / sum * lostFP;
-                float phaseFP = doctrine.getPhaseShips() / sum * lostFP;
-                FleetFactoryV3.addCombatFleetPoints(fleet, random, warshipFP, carrierFP, phaseFP, fleetParams);
-            }
+//
+//            // Replace the lost FP with the correct size ships
+//            if (lostFP >= 1f) {
+//                switch (cacheSize) {
+//                    case SMALL:
+//                        fleetParams.maxShipSize = 1;
+//                        break;
+//                    case MEDIUM:
+//                        fleetParams.maxShipSize = 2;
+//                        break;
+//                    case LARGE:
+//                        fleetParams.maxShipSize = 3;
+//                        break;
+//                    case HUGE:
+//                        break;
+//                }
+//
+//                // Random market as source, since the quality is getting overwritten anyway
+//                // Will NPE if source is null
+//                // Should be fine, base game does this too
+//                fleetParams.setSource(Global.getFactory().createMarket("fake", "fake", 5), false);
+//
+//                FactionDoctrineAPI doctrine = fleet.getFaction().getDoctrine();
+//                float sum = doctrine.getWarships() + doctrine.getCarriers() + doctrine.getPhaseShips();
+//                float warshipFP = doctrine.getWarships() / sum * lostFP;
+//                float carrierFP = doctrine.getCarriers() / sum * lostFP;
+//                float phaseFP = doctrine.getPhaseShips() / sum * lostFP;
+//                FleetFactoryV3.addCombatFleetPoints(fleet, random, warshipFP, carrierFP, phaseFP, fleetParams);
+//            }
 
             float quality, averageSMods, numOfficers, maxOfficerLevel;
 
-            quality = 1.5f * sizeFrac * MathUtils.randBetween(0.7f, 1.25f, random);
-            averageSMods = 2f * sizeFrac * sizeFrac * MathUtils.randBetween(0.6f, 1f, random);
+            quality = 1.8f * sizeFrac * MathUtils.randBetween(0.7f, 1.25f, random);
+            averageSMods = 4f * sizeFrac * sizeFrac * MathUtils.randBetween(0.8f, 1.2f, random) - 1f;
             numOfficers = 10f * sizeFrac * MathUtils.randBetween(0.6f, 1.5f, random);
             maxOfficerLevel = Math.min(7f, 8f * sizeFrac * MathUtils.randBetween(0.8f, 1.25f, random));
 
             if (fleet.getInflater() instanceof DefaultFleetInflater) {
                 DefaultFleetInflater inflater = (DefaultFleetInflater) fleet.getInflater();
                 DefaultFleetInflaterParams params = (DefaultFleetInflaterParams) inflater.getParams();
-                params.averageSMods = (int) averageSMods;
+                params.averageSMods = averageSMods < 0f ? null : (int) averageSMods;
                 params.quality = quality;
             }
 

@@ -85,6 +85,13 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
                 continue;
             }
 
+            // Projectile destroyed by outside factor
+            if (!proj.isFading() && !engine.isEntityInPlay(proj) && !proj.didDamage()) {
+                destroyProjectile(data, null, engine);
+                itr.remove();
+                continue;
+            }
+
             CollisionUtils.ClosestCollisionData collisionData = CollisionUtils.circleCollisionCheck(
                     proj.getLocation(),
                     data.getSize() * 0.5f,
@@ -230,7 +237,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
         while (itr.hasNext()) {
             Object o = itr.next();
             if (!CollisionUtils.canCollide(o, null, proj.getSource(), true)) continue;
-            if (o.equals(collisionData.entity)) continue;
+            if (collisionData != null && o.equals(collisionData.entity)) continue;
             CombatEntityAPI entity = (CombatEntityAPI) o;
             if (alreadyDamaged.contains(entity)) continue;
 
@@ -253,7 +260,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
         }
 
         float explosionRadiusRatio = explosionRadius / minExplosionRadius;
-        Global.getSoundPlayer().playSound("wpnxt_energyball_hit", 1.5f - (explosionRadiusRatio - 1f) / 6f + MathUtils.randBetween(-0.03f, 0.03f), 0.6f + (explosionRadiusRatio - 1f) / 5f + MathUtils.randBetween(-0.03f, 0.03f), collisionData.point, new Vector2f());
+        Global.getSoundPlayer().playSound("wpnxt_energyball_hit", 1.5f - (explosionRadiusRatio - 1f) / 6f + MathUtils.randBetween(-0.03f, 0.03f), 0.6f + (explosionRadiusRatio - 1f) / 5f + MathUtils.randBetween(-0.03f, 0.03f), proj.getLocation(), new Vector2f());
     }
 
     @Override

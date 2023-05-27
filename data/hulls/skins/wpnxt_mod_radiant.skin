@@ -5,6 +5,7 @@
     "hullName":"Radiant(?)",
     "tags":["restricted"],
     "removeHints":["UNBOARDABLE"],
+    "descriptionPrefix": "This ship is nearly entirely automated. There are no crew quarters, no walkways, and certainly nowhere for a commanding officer to be stationed. However, all of its subsystems have been modified to allow for remote control via transmission of encrypted command signals from an interface that can only be described as \"needlessly obtuse\". Clearly, another specimen from the depths of the Tri-Tachyon Corporation.",
     "tech":"Unknown",
     "spriteName":"graphics/ships/wpnxt_mod_radiant.png",
     "baseValueMult":2,
@@ -19,16 +20,16 @@
             "type": "ENERGY"
         },
         "WS 005": {
-            "type": "ENERGY"
+            "type": "HYBRID"
         },
         "WS 006": {
-            "type": "ENERGY"
+            "type": "HYBRID"
         },
         "WS 007": {
-            "type": "ENERGY"
+            "type": "HYBRID"
         },
         "WS 008": {
-            "type": "ENERGY"
+            "type": "HYBRID"
         }
     },
     "maxSpeed":55,
