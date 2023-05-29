@@ -1,7 +1,7 @@
 {
   # (Roughly) number of fortified caches per star system
-  "fortifiedCachesPerSystem": 0.6,
+  "fortifiedCachesPerSystem": 0.4,
 
   # Whether fortified caches should peroidically be regenerated
-  "regenerateFortifiedCaches": true,
+  "regenerateFortifiedCaches": false,
 }

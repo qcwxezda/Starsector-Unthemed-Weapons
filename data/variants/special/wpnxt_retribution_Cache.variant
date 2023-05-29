@@ -1,6 +1,6 @@
 {
     "displayName": "Experimental",
-    "fluxCapacitors": 33,
+    "fluxCapacitors": 29,
     "fluxVents": 50,
     "hullId": "retribution",
     "hullMods": [
@@ -35,7 +35,7 @@
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {"WS 002": "hellbore"}
+            "weapons": {"WS 002": "devastator"}
         },
         {
             "autofire": true,

@@ -13,9 +13,6 @@ public class ClusterMineOnHitEffect implements OnHitEffectPlugin {
         MissileAPI missile = (MissileAPI) proj;
         MissileAIPlugin ai = missile.getUnwrappedMissileAI();
         if (!(ai instanceof ProximityMineRandomDelay)) return;
-        DamagingProjectileAPI explosion = ((ProximityMineRandomDelay) ai).explode();
-        if (explosion != null) {
-            explosion.addDamagedAlready(entity);
-        }
+        ((ProximityMineRandomDelay) ai).explode(entity);
     }
 }

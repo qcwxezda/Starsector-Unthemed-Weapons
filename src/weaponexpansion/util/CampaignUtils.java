@@ -52,7 +52,7 @@ public abstract class CampaignUtils {
     }
 
     public static void finalizeFleet(CampaignFleetAPI fleet,  List<String> tagsToAdd) {
-        for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
+        for (FleetMemberAPI member : fleet.getFleetData().getMembersListWithFightersCopy()) {
             member.getRepairTracker().setCR(member.getRepairTracker().getMaxCR());
         }
 
