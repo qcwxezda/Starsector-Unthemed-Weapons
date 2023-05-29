@@ -81,9 +81,6 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
             fleet.getMemoryWithoutUpdate().set(specialFleetKey, true);
 
             CampaignUtils.finalizeFleet(fleet, Arrays.asList(Tags.TAG_NO_AUTOFIT, Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE, Tags.TAG_RETAIN_SMODS_ON_RECOVERY));
-            // Make the flagship not retain S-mods on recovery (ships are unique and might not want the solar shielding, etc.)
-            fleet.getFlagship().getVariant().removeTag(Tags.VARIANT_ALWAYS_RETAIN_SMODS_ON_SALVAGE);
-            fleet.getFlagship().getVariant().removeTag(Tags.TAG_RETAIN_SMODS_ON_RECOVERY);
         }
         else {
             // Generic defense fleet
@@ -161,9 +158,9 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
             float quality, averageSMods, numOfficers, maxOfficerLevel;
 
             quality = 1.8f * sizeFrac * MathUtils.randBetween(0.7f, 1.25f, random);
-            averageSMods = 4f * sizeFrac * sizeFrac * MathUtils.randBetween(0.8f, 1.2f, random) - 1f;
-            numOfficers = 10f * sizeFrac * MathUtils.randBetween(0.6f, 1.5f, random);
-            maxOfficerLevel = Math.min(7f, 8f * sizeFrac * MathUtils.randBetween(0.8f, 1.25f, random));
+            averageSMods = 4f * sizeFrac * sizeFrac * MathUtils.randBetween(0.9f, 1.25f, random) - 1f;
+            numOfficers = 10f * sizeFrac * MathUtils.randBetween(0.8f, 1.4f, random);
+            maxOfficerLevel = Math.min(7f, 9f * sizeFrac * MathUtils.randBetween(0.8f, 1.25f, random));
 
             if (fleet.getInflater() instanceof DefaultFleetInflater) {
                 DefaultFleetInflater inflater = (DefaultFleetInflater) fleet.getInflater();

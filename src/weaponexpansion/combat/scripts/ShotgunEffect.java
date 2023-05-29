@@ -10,7 +10,7 @@ public class ShotgunEffect extends ScatterEffect implements WeaponEffectPluginWi
 
     private float spread = 0f, maxSpread = 0f, minSpread = 0f;
     private static final float spreadIncreasePerSecond = 4f;
-    private static final float spreadDecreasePerShot = 3f;
+    private static final float spreadDecreasePerShot = 5f;
 
     @Override
     public float getSpeedVariance() {

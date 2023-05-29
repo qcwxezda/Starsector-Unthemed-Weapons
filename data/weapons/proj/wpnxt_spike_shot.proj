@@ -17,7 +17,7 @@
   "flameoutTime":0.01,
   "noEngineGlowTime":0,
   "fadeTime":0.4,
-  "engineSpec":{"turnAcc":1500,
+  "engineSpec":{"turnAcc":500,
     "turnRate":250,
     "acc":10000,
     "dec":2000},

@@ -386,6 +386,38 @@ public abstract class EngineUtils {
         return false;
     }
 
+    /** Deals damage instantaneously. Used in cluster mine so multiple mines don't explode on the same already-dead target */
+    public static void spawnInstantaneousExplosion(Vector2f loc, float radius, float damageAmount, float empAmount, DamageType damageType, ShipAPI source, Set<CombatEntityAPI> alreadyDamaged, CombatEngineAPI engine) {
+        Iterator<Object> itr = engine.getAllObjectGrid().getCheckIterator(loc, 2f*radius, 2f*radius);
+        if (alreadyDamaged == null) {
+            alreadyDamaged = new HashSet<>();
+        }
+        else {
+            // Abstract sets don't have the add operation
+            alreadyDamaged = new HashSet<>(alreadyDamaged);
+        }
+        while (itr.hasNext()) {
+            Object o = itr.next();
+            if (!CollisionUtils.canCollide(o, null, source, true)) continue;
+            CombatEntityAPI entity = (CombatEntityAPI) o;
+            if (alreadyDamaged.contains(entity)) continue;
+
+            alreadyDamaged.add(entity);
+            Pair<Vector2f, Boolean> pair =
+                    CollisionUtils.rayCollisionCheckEntity(
+                            loc,
+                            entity instanceof ShipAPI && !((ShipAPI) entity).isFighter() ? MathUtils.getVertexCenter(entity): entity.getLocation(),
+                            entity);
+            if (pair.one == null) continue;
+            float dist = Misc.getDistance(pair.one, loc);
+            if (dist > radius) continue;
+            float damage = damageAmount*0.5f + damageAmount*0.5f * (radius - dist) / radius;
+            float emp = empAmount*0.5f + empAmount*0.5f * (radius - dist) / radius;
+
+            engine.applyDamage(entity, entity, pair.one, damage, damageType, emp, false, false, source, true);
+        }
+    }
+
     public static void spawnFakeMine(Vector2f loc, float fakeRadius, float fakeDamageAmount, DamageType fakeDamageType, float dur) {
         String dummyWeapon = ModPlugin.dummyMissileWeapon;
         // Set the dummy spec to the appropriate values
@@ -412,51 +444,5 @@ public abstract class EngineUtils {
     public static boolean isInRange(WeaponAPI weapon, CombatEntityAPI target, Vector2f targetPoint) {
         if (Misc.getDistance(weapon.getLocation(), targetPoint) > weapon.getRange() + target.getCollisionRadius()) return false;
         return Misc.getAngleDiff(Misc.getAngleInDegrees(weapon.getLocation(), targetPoint), weapon.getCurrAngle()) <= weapon.getArc() / 2f;
-    }
-
-    public static ShipAPI getBaseShip(ShipAPI shipWingOrModule, Map<String, ShipAPI> baseShipTable) {
-        if (shipWingOrModule == null) {
-            return null;
-        }
-        ShipAPI memo = baseShipTable.get(shipWingOrModule.getId());
-        if (memo != null) {
-            return memo;
-        }
-        // Possible to have wings come from a module of a station
-        // and maybe even have modules of modules?
-        // so function needs to be recursive
-        if (shipWingOrModule.isFighter()) {
-            ShipAPI base = null;
-            if (shipWingOrModule.getWing() == null ||
-                    shipWingOrModule.getWing().getSourceShip() == null) {
-                // If the fighter has no source ship but has a fleet member,
-                // just return the fighter itself
-                if (shipWingOrModule.getFleetMember() != null) {
-                    base = shipWingOrModule;
-                }
-            }
-            else {
-                base = getBaseShip(shipWingOrModule.getWing().getSourceShip(), baseShipTable);
-            }
-            baseShipTable.put(shipWingOrModule.getId(), base);
-            return base;
-        }
-        if (shipWingOrModule.isStationModule()) {
-            ShipAPI base = null;
-            if (shipWingOrModule.getParentStation() == null) {
-                // If the module has no parent station but has a fleet member,
-                // just return the module itself
-                if (shipWingOrModule.getFleetMember() != null) {
-                    base = shipWingOrModule;
-                }
-            }
-            else {
-                base = getBaseShip(shipWingOrModule.getParentStation(),baseShipTable);
-            }
-            baseShipTable.put(shipWingOrModule.getId(), base);
-            return base;
-        }
-        baseShipTable.put(shipWingOrModule.getId(), shipWingOrModule);
-        return shipWingOrModule;
     }
 }

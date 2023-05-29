@@ -7,6 +7,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.lwjgl.util.vector.Vector2f;
 import weaponexpansion.ModPlugin;
 import weaponexpansion.fx.particles.Explosion;
 import weaponexpansion.util.EngineUtils;
@@ -14,6 +15,7 @@ import weaponexpansion.util.MathUtils;
 import weaponexpansion.util.TargetChecker;
 
 import java.awt.*;
+import java.util.Collections;
 
 @SuppressWarnings("unused")
 public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPlugin {
@@ -46,7 +48,7 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
 
         if (!missile.didDamage() && (missile.isFading()
                 || EngineUtils.isEntityNearby(missile.getLocation(), null, range, vsMissileRange, false, proxChecker))) {
-            explode();
+            explode(null);
         }
 
         if (missile.getVelocity().length() > missile.getMaxSpeed() && slowToMaxSpeed) {
@@ -78,8 +80,8 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
     }
 
 
-    public DamagingProjectileAPI explode() {
-        if (explosionSpec == null) return null;
+    public void explode(CombatEntityAPI hitTarget) {
+        if (explosionSpec == null) return;
 
         CombatEngineAPI engine = Global.getCombatEngine();
         engine.removeEntity(missile);
@@ -89,7 +91,19 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
             explosionSpec.setExplosionColor(new Color(0, 0, 0, 0));
             Explosion.makeExplosion(missile.getLocation(), explosionSpec.getRadius()*2f, 10, 1, 30);
         }
+        else {
+            engine.spawnExplosion(missile.getLocation(), missile.getVelocity(), explosionSpec.getExplosionColor(), explosionSpec.getRadius()*2f, 1.5f);
+        }
 
-        return engine.spawnDamagingExplosion(explosionSpec, missile.getSource(), missile.getLocation());
+        EngineUtils.spawnInstantaneousExplosion(
+                missile.getLocation(),
+                explosionSpec.getRadius(),
+                explosionSpec.getMaxDamage(),
+                0f,
+                explosionSpec.getDamageType(),
+                missile.getSource(),
+                hitTarget == null ? null : Collections.singleton(hitTarget),
+                engine);
+        Global.getSoundPlayer().playSound(explosionSpec.getSoundSetId(), 0.95f + MathUtils.randBetween(0f, 0.05f), 1f, missile.getLocation(), new Vector2f());
     }
 }

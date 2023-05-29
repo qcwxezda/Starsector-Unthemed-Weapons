@@ -9,23 +9,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Add fortified caches, add radiant skin ship system">
-      <change afterPath="$PROJECT_DIR$/src/weaponexpansion/campaign/FortifiedCacheRegenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
+    <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Add license">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/skins/wpnxt_mod_radiant.skin" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/skins/wpnxt_mod_radiant.skin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/strings/descriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/special/wpnxt_radiant_Cache.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/special/wpnxt_radiant_Cache.variant" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/variants/special/wpnxt_retribution_Cache.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/special/wpnxt_retribution_Cache.variant" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clusterminebig_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clusterminebig_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_spike_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_spike_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_splinterbattery_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_splinterbattery_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_splinterbattery_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_splinterbattery_turret_glow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_splinterbattery_turret_recoil.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_splinterbattery_turret_recoil.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/campaign/rulecmd/wpnxt_CacheDefenderInteraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/campaign/rulecmd/wpnxt_CacheDefenderInteraction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ActionPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ActionPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyBallLauncherEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyBallLauncherEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_energyballlauncher.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energyballlauncher.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_superrailgun_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_superrailgun_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_superrailgun_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/ballistic/wpnxt_superrailgun_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_boltstorm_turret_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_hardpoint_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_hardpoint_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_turret_glow.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_energyballlauncher_turret_glow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_fragpdbeam_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_fragpdbeam_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_fragpdbeam_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/energy/wpnxt_fragpdbeam_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_impaler_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_impaler_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_impaler_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_impaler_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_minispiker_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_minispiker_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_minispiker_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_minispiker_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_orbbarrage_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_orbbarrage_hardpoint.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_orbbarrage_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_orbbarrage_turret.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/LeadingMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/LeadingMissileAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/ProximityMineRandomDelay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/ProximityMineRandomDelay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ClusterMineOnHitEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ClusterMineOnHitEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/PhaseTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/PhaseTorpedoEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ShotgunEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ShotgunEffect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/weaponexpansion/procgen/CacheDefenderPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/procgen/CacheDefenderPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/procgen/GenFortifiedCaches.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/procgen/GenFortifiedCaches.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/CampaignUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/CampaignUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/EngineUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/util/EngineUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wpnxt_mod_settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/wpnxt_mod_settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -422,7 +443,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685071732055</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Bug fixes, change cache generation behavior">
+      <created>1685230771666</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1685230771666</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Add license">
+      <created>1685230965991</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1685230965991</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -438,8 +473,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add superrailgun" />
-    <MESSAGE value="Polish large ballistics" />
     <MESSAGE value="Add ballistic scattergun, modularize scatter effect, change some sprites" />
     <MESSAGE value="Helios Artillery flux efficiency 1.2 -&gt; 1.5" />
     <MESSAGE value="Add a bunch of ballistics" />
@@ -463,7 +496,9 @@
     <MESSAGE value="Add procgen for secret caches / weapons + cache defenders" />
     <MESSAGE value="Change license" />
     <MESSAGE value="Add fortified caches, add radiant skin ship system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add fortified caches, add radiant skin ship system" />
+    <MESSAGE value="Bug fixes, change cache generation behavior" />
+    <MESSAGE value="Add license" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add license" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
