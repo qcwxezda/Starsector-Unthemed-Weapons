@@ -1,1 +1,1 @@
-# Starsector-Weapon-Expansion
+# Starsector-Unthemed-Weapons
