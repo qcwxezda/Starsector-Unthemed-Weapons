@@ -11,8 +11,8 @@
   "explosionColor":[170,150,255,255],  # purely visual, will get a white additively blended core on top of this color
   "explosionRadius":180, # purely visual
   "explosionSpec":{"duration":0.1f, # not visual
-    "radius":180,
-    "coreRadius":90, # full damage within core radius
+    "radius":150,
+    "coreRadius":75, # full damage within core radius
     "collisionClass":PROJECTILE_FF,
     "collisionClassByFighter":PROJECTILE_FIGHTER,
     "particleSizeMin":5.0,
