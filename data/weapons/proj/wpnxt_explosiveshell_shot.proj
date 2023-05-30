@@ -19,5 +19,5 @@
   "passThroughFightersOnlyWhenDestroyed":true,
   "applyOnHitEffectWhenPassThrough":false,
   "bulletSprite":"graphics/missiles/wpnxt_mortar_shot_big.png",
-  "onHitEffect":"weaponexpansion.combat.scripts.ExplosiveShellEffect"
+  "onHitEffect":"unthemedweapons.combat.scripts.ExplosiveShellEffect"
 }

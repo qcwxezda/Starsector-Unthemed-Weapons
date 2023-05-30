@@ -1,10 +1,10 @@
 {
-	"id":"weaponexpansion",
-	"name":"Weapon Expansion",
+	"id":"unthemedweapons",
+	"name":"Unthemed Weapons Collection",
 	"author":"qcwxezda",
-	"version":"0.4",
-	"description":"Adds more weapons.",
+	"version":"0.5",
+	"description":"Adds various weapons to the game. Adds fortified caches. Adds secrets.\n\nNote: soft dependency on Particle Engine. Will run without, but some visual effects will be missing.",
     "gameVersion": "0.96a-RC10",
-	"jars": ["jars/WeaponExpansion.jar"],
-	"modPlugin":"weaponexpansion.ModPlugin"
+	"jars": ["jars/UnthemedWeaponsCollection.jar"],
+	"modPlugin":"unthemedweapons.ModPlugin"
 }

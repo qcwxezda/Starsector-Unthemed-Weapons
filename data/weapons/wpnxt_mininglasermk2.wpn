@@ -4,7 +4,7 @@
   "type":"ENERGY",
   "size":"SMALL",
   "collisionClass":"RAY",
-  "beamEffect":"weaponexpansion.combat.scripts.LimitedAmmoBeamEffect",
+  "beamEffect":"unthemedweapons.combat.scripts.LimitedAmmoBeamEffect",
   "collisionClassByFighter":"RAY_FIGHTER",
   "turretSprite":"graphics/weapons/energy/wpnxt_mininglasermk2_turret.png",
   "turretGlowSprite":"graphics/weapons/energy/wpnxt_mininglasermk2_turret_glow.png",

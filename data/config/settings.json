@@ -1,6 +1,6 @@
 {
   "ruleCommandPackages":[
-    "weaponexpansion.campaign.rulecmd"
+    "unthemedweapons.campaign.rulecmd"
   ],
 
   "graphics": {
@@ -12,7 +12,7 @@
   },
 
   "plugins": {
-    "wpnxt_needledriver_plugin": "weaponexpansion.combat.plugins.NeedleDriverPlugin",
-    "wpnxt_combat_plugin": "weaponexpansion.combat.plugins.ActionPlugin"
+    "wpnxt_needledriver_plugin": "unthemedweapons.combat.plugins.NeedleDriverPlugin",
+    "wpnxt_combat_plugin": "unthemedweapons.combat.plugins.ActionPlugin"
   }
 }

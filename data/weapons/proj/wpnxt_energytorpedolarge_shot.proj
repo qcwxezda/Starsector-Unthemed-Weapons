@@ -2,7 +2,7 @@
   "id":"wpnxt_energytorpedolarge_shot",
   "specClass":"missile",
   "missileType":"MISSILE",
-  "onHitEffect":"weaponexpansion.combat.scripts.EnergyTorpedoLargeEffect",
+  "onHitEffect":"unthemedweapons.combat.scripts.EnergyTorpedoLargeEffect",
   "sprite":"graphics/missiles/wpnxt_energytorpedo.png",
   "size":[14,27],
   "center":[7,14],
@@ -51,5 +51,5 @@
     "width":15.0,
     "length":45.0,
     "angle":180.0}],
-  "onFireEffect":"weaponexpansion.combat.scripts.EnergyTorpedoLargeEffect"
+  "onFireEffect":"unthemedweapons.combat.scripts.EnergyTorpedoLargeEffect"
 }

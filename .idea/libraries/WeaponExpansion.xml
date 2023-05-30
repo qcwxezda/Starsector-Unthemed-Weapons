@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="WeaponExpansion">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jars/WeaponExpansion.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

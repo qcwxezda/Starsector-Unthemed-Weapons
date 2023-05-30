@@ -27,5 +27,5 @@
     "particleColor":[255,128,128,255]},
   "projectileSpecId":"wpnxt_explosiveshell_shot",  # projectile that will be fired
   "fireSoundTwo":"wpnxt_explosiveshelllauncher_fire",
-  "everyFrameEffect":"weaponexpansion.combat.scripts.GlowOnFirePlugin"
+  "everyFrameEffect":"unthemedweapons.combat.scripts.GlowOnFirePlugin"
 }

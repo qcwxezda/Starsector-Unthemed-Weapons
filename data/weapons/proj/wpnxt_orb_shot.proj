@@ -43,5 +43,5 @@
     "width":3.0,
     "length":20.0,
     "angle":180.0}],
-  "onHitEffect":"weaponexpansion.combat.scripts.OrbOnHitEffect"
+  "onHitEffect":"unthemedweapons.combat.scripts.OrbOnHitEffect"
 }

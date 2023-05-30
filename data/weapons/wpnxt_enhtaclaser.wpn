@@ -3,7 +3,7 @@
   "id":"wpnxt_enhtaclaser",
   "type":"ENERGY",
   "size":"MEDIUM",
-  "beamEffect":"weaponexpansion.combat.scripts.EnhTaclaserEffect",
+  "beamEffect":"unthemedweapons.combat.scripts.EnhTaclaserEffect",
   "turretSprite":"graphics/weapons/energy/wpnxt_enhtaclaser_turret.png",
   "turretGlowSprite":"graphics/weapons/energy/wpnxt_enhtaclaser_turret_glow.png",
   "hardpointSprite":"graphics/weapons/energy/wpnxt_enhtaclaser_hardpoint.png",

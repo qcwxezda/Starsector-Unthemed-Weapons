@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="WeaponExpansion" />
+      <artifact name="UnthemedWeaponsCollection" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
@@ -10,17 +10,121 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3365416-27a8-4c20-9d40-eb6c01680ea1" name="Changes" comment="Update some sprites, bugfixes, balancing">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/UnthemedWeaponsCollection.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/WeaponExpansion.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/config/version/version_files.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unthemedweapons.version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/WeaponExpansion.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/strings/descriptions.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/strings/descriptions.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Weapon Expansion.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Unthemed Weapons Collection.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/hullmods/hull_mods.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/hullmods/hull_mods.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/shipsystems/wpnxt_reshaper.system" beforeDir="false" afterPath="$PROJECT_DIR$/data/shipsystems/wpnxt_reshaper.system" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_clustermine_spawn.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedo_shot.proj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedolarge_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_energytorpedolarge_shot.proj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/ships/wpnxt_mod_radiant.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/ships/wpnxt_mod_radiant.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_hardpoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_hardpoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_turret.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/missile/wpnxt_energytorpedomed_turret.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/BloomTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/BloomTrail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_explosiveshell_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_explosiveshell_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_ionrocket_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_ionrocket_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_iontorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_iontorpedo_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_minispiker_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_minispiker_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_morphcannon_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_morphcannon_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_needledriver_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_needledriver_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_orb_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_orb_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_phasetorpedo_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_phasetorpedo_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_ultrablaster_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_ultrablaster_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/proj/wpnxt_voidcannon_shot.proj" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/proj/wpnxt_voidcannon_shot.proj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_boltstorm.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_boltstorm.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_energyballlauncher.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energyballlauncher.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_energyscatterer.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_enhtaclaser.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_enhtaclaser.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_explosiveshelllauncher.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_explosiveshelllauncher.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_impactlance.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_impactlance.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_impaler.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_impaler.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_mininglasermk2.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_mininglasermk2.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_morphcannon.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_morphcannon.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_orbbarrage.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_orbbarrage.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_shotgun.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_shotgun.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_splinterbattery.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_splinterbattery.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_superrailgun.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_superrailgun.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_unstablecannon.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_unstablecannon.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/wpnxt_voidray.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/wpnxt_voidray.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/mod_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/ModPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/ModPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/campaign/FortifiedCacheRegenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/campaign/FortifiedCacheRegenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/campaign/ShipRecoveryWeaponsRemover.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/campaign/ShipRecoveryWeaponsRemover.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/campaign/rulecmd/wpnxt_CacheDefenderInteraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/campaign/rulecmd/wpnxt_CacheDefenderInteraction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/campaign/rulecmd/wpnxt_PrePerformSalvage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/campaign/rulecmd/wpnxt_PrePerformSalvage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/AngleApproachMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/ai/AngleApproachMissileAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/BaseGuidedMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/ai/BaseGuidedMissileAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/DumbfireTimedMirv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/ai/DumbfireTimedMirv.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/EnergyBallLauncherAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/ai/EnergyBallLauncherAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/LOSMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/ai/LOSMissileAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/LeadingMissileAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/ai/LeadingMissileAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/PhaseTorpedoAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/ai/PhaseTorpedoAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/ai/ProximityMineRandomDelay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/ai/ProximityMineRandomDelay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/Action.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/plugins/Action.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/ActionPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/plugins/ActionPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/plugins/NeedleDriverPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/plugins/NeedleDriverPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/BoltStormEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/BoltStormEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ClusterMineOnHitEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/ClusterMineOnHitEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyBallLauncherEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/EnergyBallLauncherEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyScattererEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/EnergyScattererEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/EnergyTorpedoEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnergyTorpedoLargeEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/EnergyTorpedoLargeEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/EnhTaclaserEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/EnhTaclaserEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ExplosiveShellEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/ExplosiveShellEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/GlowOnFirePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/GlowOnFirePlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ImpactLanceEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/ImpactLanceEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ImpalerEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/ImpalerEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonRocketEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/IonRocketEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/IonTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/IonTorpedoEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/LimitedAmmoBeamEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/LimitedAmmoBeamEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/MorphCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/MorphCannonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/NeedleDriverEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/NeedleDriverEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/OrbBarrageEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/OrbBarrageEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/OrbOnHitEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/OrbOnHitEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/PhaseTorpedoEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/PhaseTorpedoEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ScatterEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/ScatterEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/ShotgunEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/ShotgunEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SpikerEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/SpikerEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SplinterBatteryEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/SplinterBatteryEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/SuperRailgunEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/SuperRailgunEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UltraBlasterOnHitEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/UltraBlasterOnHitEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/UnstableCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/UnstableCannonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/VoidCannonEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidCannonShotEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/VoidCannonShotEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/scripts/VoidRayWeaponEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/scripts/VoidRayWeaponEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/shipsystems/ReshaperAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/shipsystems/ReshaperAI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/combat/shipsystems/ReshaperStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/combat/shipsystems/ReshaperStats.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/BloomTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/BloomTrail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/EnergyBallExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/EnergyBallExplosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/EnergyBallMuzzleFlash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/EnergyBallMuzzleFlash.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/Explosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/Explosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/IonTorpedoExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/IonTorpedoExplosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/MorphCannonExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/MorphCannonExplosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/MorphCannonKineticExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/MorphCannonKineticExplosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/MorphCannonTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/MorphCannonTrail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/PhaseTorpedoSecondaryExplosion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/PhaseTorpedoSecondaryExplosion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/PhaseTorpedoTrail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/PhaseTorpedoTrail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/emitters/KineticBurstEmitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/emitters/KineticBurstEmitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/emitters/MorphCannonDebrisEmitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/emitters/MorphCannonDebrisEmitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/particles/emitters/MuzzleFlashEmitter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/particles/emitters/MuzzleFlashEmitter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/render/EnergyBallRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/render/EnergyBallRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/fx/render/GlowRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/fx/render/GlowRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/hullmods/CohererOverride.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/hullmods/CohererOverride.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/procgen/CacheDefenderPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/procgen/CacheDefenderPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/procgen/EnergyCacheScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/procgen/EnergyCacheScript.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/procgen/GenFortifiedCaches.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/procgen/GenFortifiedCaches.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/procgen/GenSpecialCaches.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/procgen/GenSpecialCaches.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/procgen/MissileCacheScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/procgen/MissileCacheScript.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/procgen/Tags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/procgen/Tags.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/CampaignUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/util/CampaignUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/CollisionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/util/CollisionUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/EngineUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/util/EngineUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/MathUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/util/MathUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/weaponexpansion/util/TargetChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/util/TargetChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wpnxt_mod_settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/wpnxt_mod_settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,19 +178,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.7&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Alex/Documents/My Games/Starsector/mods/Weapon Expansion/data/variants/special&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15429688&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "1.7",
+    "last_opened_file_path": "C:/Users/Alex/Documents/My Games/Starsector/mods/Weapon Expansion/data/variants/special",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15429688",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Alex\Documents\My Games\Starsector\mods\Weapon Expansion\data\variants\special" />
@@ -122,7 +226,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="1.7" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.fs.starfarer.StarfarerLauncher" />
-      <module name="Weapon Expansion" />
+      <module name="Unthemed Weapons Collection" />
       <selectedOptions>
         <option name="environmentVariables" visible="false" />
       </selectedOptions>
@@ -130,7 +234,7 @@
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../starsector-core" />
       <method v="2">
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="WeaponExpansion" />
+          <artifact name="UnthemedWeaponsCollection" />
         </option>
       </method>
     </configuration>
@@ -490,7 +594,7 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/weaponexpansion/procgen/GenSpecialCaches.java</url>
+          <url>file://$PROJECT_DIR$/src/unthemedweapons/procgen/GenSpecialCaches.java</url>
           <line>118</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>

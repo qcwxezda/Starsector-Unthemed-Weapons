@@ -36,6 +36,6 @@
     "width":4.0,
     "length":20.0,
     "angle":180.0}],
-  "onFireEffect":"weaponexpansion.combat.scripts.SpikerEffect",
-  "onHitEffect":"weaponexpansion.combat.scripts.SpikerEffect"
+  "onFireEffect":"unthemedweapons.combat.scripts.SpikerEffect",
+  "onHitEffect":"unthemedweapons.combat.scripts.SpikerEffect"
 }

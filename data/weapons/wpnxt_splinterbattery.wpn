@@ -27,5 +27,5 @@
     "particleColor":[255,240,165,200]},
   "projectileSpecId":"wpxnt_splinterbattery_shot",  # projectile that will be fired
   "fireSoundTwo":"wpnxt_splinterbattery_fire",
-  "everyFrameEffect":"weaponexpansion.combat.scripts.SplinterBatteryEffect"
+  "everyFrameEffect":"unthemedweapons.combat.scripts.SplinterBatteryEffect"
 }

@@ -54,6 +54,6 @@
     "width":0.0,
     "length":0.0,
     "angle":180.0}],
-  "onHitEffect":"weaponexpansion.combat.scripts.PhaseTorpedoEffect",
-  "onFireEffect":"weaponexpansion.combat.scripts.PhaseTorpedoEffect"
+  "onHitEffect":"unthemedweapons.combat.scripts.PhaseTorpedoEffect",
+  "onFireEffect":"unthemedweapons.combat.scripts.PhaseTorpedoEffect"
 }

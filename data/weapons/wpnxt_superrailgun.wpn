@@ -9,7 +9,7 @@
   "hardpointSprite":"graphics/weapons/ballistic/wpnxt_superrailgun_hardpoint.png",
   "hardpointGunSprite":"graphics/weapons/ballistic/wpnxt_superrailgun_hardpoint_recoil.png",
   "hardpointGlowSprite":"graphics/weapons/ballistic/wpnxt_superrailgun_hardpoint_glow.png",
-  "everyFrameEffect":"weaponexpansion.combat.scripts.SuperRailgunEffect",
+  "everyFrameEffect":"unthemedweapons.combat.scripts.SuperRailgunEffect",
   "glowColor":[255, 64, 32, 255],
   "visualRecoil":10.0,  # the gun sprites are only used if this is non-0
   "renderHints":["RENDER_BARREL_BELOW"],

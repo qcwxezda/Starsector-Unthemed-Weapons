@@ -25,6 +25,6 @@
     "particleColor":[160,160,160,200]},
   "projectileSpecId":"wpnxt_impaler_shot",
   "fireSoundTwo":"wpnxt_impaler_fire",
-  "onFireEffect":"weaponexpansion.combat.scripts.ImpalerEffect",
-  "everyFrameEffect":"weaponexpansion.combat.scripts.ImpalerEffect"
+  "onFireEffect":"unthemedweapons.combat.scripts.ImpalerEffect",
+  "everyFrameEffect":"unthemedweapons.combat.scripts.ImpalerEffect"
 }

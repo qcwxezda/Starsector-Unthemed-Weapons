@@ -4,7 +4,7 @@
   "spawnType":"BALLISTIC_AS_BEAM",
   "collisionClass":"RAY",
   "collisionClassByFighter":"RAY_FIGHTER",
-  "onHitEffect":"weaponexpansion.combat.scripts.UltraBlasterOnHitEffect",
+  "onHitEffect":"unthemedweapons.combat.scripts.UltraBlasterOnHitEffect",
   "length":85.0,
   "width":15,
   "fadeTime":0.3,

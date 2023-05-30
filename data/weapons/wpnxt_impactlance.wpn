@@ -25,5 +25,5 @@
   "pixelsPerTexel":5.0,
   "fireSoundOne":"laser_intro",
   "fireSoundTwo":"wpnxt_impactlance_loop",
-  "everyFrameEffect":"weaponexpansion.combat.scripts.ImpactLanceEffect"
+  "everyFrameEffect":"unthemedweapons.combat.scripts.ImpactLanceEffect"
 }

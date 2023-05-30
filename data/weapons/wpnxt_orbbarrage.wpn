@@ -17,6 +17,6 @@
   "interruptibleBurst":false,
   "projectileSpecId":"wpnxt_orb_shot",
   "fireSoundTwo":"wpnxt_orb_fire",
-  "onFireEffect":"weaponexpansion.combat.scripts.OrbBarrageEffect",
-  "everyFrameEffect":"weaponexpansion.combat.scripts.OrbBarrageEffect",
+  "onFireEffect":"unthemedweapons.combat.scripts.OrbBarrageEffect",
+  "everyFrameEffect":"unthemedweapons.combat.scripts.OrbBarrageEffect",
 }

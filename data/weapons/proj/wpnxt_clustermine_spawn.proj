@@ -42,7 +42,7 @@
       "detailedExplosionFlashColorCore":[255, 200, 150, 255],
       "sound":"wpnxt_mine_strike"}
   },
-  "onHitEffect":"weaponexpansion.combat.scripts.ClusterMineOnHitEffect"
+  "onHitEffect":"unthemedweapons.combat.scripts.ClusterMineOnHitEffect"
 }
 
 

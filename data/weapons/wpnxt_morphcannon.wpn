@@ -26,5 +26,5 @@
     "particleColor":[255,192,128,255]},
   "projectileSpecId":"wpnxt_morphcannon_shot",  # projectile that will be fired
   "fireSoundTwo":"wpnxt_morphcannon_fire",
-  "everyFrameEffect":"weaponexpansion.combat.scripts.MorphCannonEffect"
+  "everyFrameEffect":"unthemedweapons.combat.scripts.MorphCannonEffect"
 }

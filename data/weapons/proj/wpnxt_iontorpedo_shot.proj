@@ -38,5 +38,5 @@
     "width":8.0,
     "length":80.0,
     "angle":180.0}],
-  "onHitEffect":"weaponexpansion.combat.scripts.IonTorpedoEffect"
+  "onHitEffect":"unthemedweapons.combat.scripts.IonTorpedoEffect"
 }

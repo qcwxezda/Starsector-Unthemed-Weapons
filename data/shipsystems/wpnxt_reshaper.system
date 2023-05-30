@@ -2,9 +2,9 @@
 	"id":"wpnxt_reshaper",
 	"type":"STAT_MOD",
 	"aiType":"CUSTOM",
-	"aiScript":"weaponexpansion.combat.shipsystems.ReshaperAI",
+	"aiScript":"unthemedweapons.combat.shipsystems.ReshaperAI",
 
-	"statsScript":"weaponexpansion.combat.shipsystems.ReshaperStats",
+	"statsScript":"unthemedweapons.combat.shipsystems.ReshaperStats",
 
 	"fadeActivationSoundOnChargedown":true,
 	"useSound":"wpnxt_reshaper_activate",

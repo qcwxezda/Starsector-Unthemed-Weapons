@@ -35,6 +35,6 @@
     "width":5.0,
     "length":40.0,
     "angle":180.0}],
-  "onHitEffect":"weaponexpansion.combat.scripts.IonRocketEffect"
+  "onHitEffect":"unthemedweapons.combat.scripts.IonRocketEffect"
 }
 

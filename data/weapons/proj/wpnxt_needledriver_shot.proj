@@ -16,5 +16,5 @@
   "pixelsPerTexel":5.0,
   "passThroughMissiles":true,
   "bulletSprite":"graphics/missiles/wpnxt_needle.png",
-  "onHitEffect":"weaponexpansion.combat.scripts.NeedleDriverEffect"
+  "onHitEffect":"unthemedweapons.combat.scripts.NeedleDriverEffect"
 }

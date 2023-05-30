@@ -15,5 +15,5 @@
   "barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
   "animationType":"GLOW",
   "projectileSpecId":"wpnxt_energyball_shot",  # projectile that will be fired
-  "everyFrameEffect":"weaponexpansion.combat.scripts.EnergyBallLauncherEffect"
+  "everyFrameEffect":"unthemedweapons.combat.scripts.EnergyBallLauncherEffect"
 }
