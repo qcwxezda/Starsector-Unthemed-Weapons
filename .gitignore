@@ -1,4 +1,6 @@
 out/
+.idea/
+javadoc/
 
 # Compiled class file
 *.class
