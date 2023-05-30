@@ -10,7 +10,7 @@ public abstract class BloomTrail {
     public static Emitter trail(Vector2f loc, float scale) {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/particlealpha64sq.png");
         emitter.setSyncSize(true);
-        emitter.color(0.3f, 0.3f, 1f, 1f);
+        emitter.color(0.3f, 0.3f, 1f, 0.6f);
         emitter.offset(-30f, 0f, 0f, 0f);
         emitter.hueShift(-30f, 30f);
         emitter.saturationShift(-0.4f, 0.4f);
@@ -20,7 +20,7 @@ public abstract class BloomTrail {
         emitter.fadeTime(0f, 0f, 0.5f, 0.5f);
         emitter.life(0.75f, 1.25f);
         emitter.facing(0f, 360f);
-        emitter.sinusoidalMotionY(20f, 40f, 0.25f, 0.5f, 0f, 360f);
+        emitter.sinusoidalMotionY(5f, 10f, 0.25f, 0.5f, 0f, 360f);
         return emitter;
     }
 

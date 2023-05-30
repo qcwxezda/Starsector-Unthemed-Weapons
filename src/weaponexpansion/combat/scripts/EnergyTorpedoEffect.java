@@ -20,7 +20,7 @@ import java.util.List;
 public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin {
 
     int numSpawns = 5, empResistance = 10, particlesPerSecond = 100;
-    float minSpawnDistance = 60f, maxSpawnDistance = 120f, minDelay = 0.67f, maxDelay = 1.33f, angleDeviation = 20f, particleScale = 15f;
+    float minSpawnDistance = 60f, maxSpawnDistance = 120f, minDelay = 0.67f, maxDelay = 1.33f, angleDeviation = 20f, particleScale = 10f;
     static final Color empCore = new Color(180, 200, 255);
     static final Color empFringe = new Color(100, 120, 255);
 
