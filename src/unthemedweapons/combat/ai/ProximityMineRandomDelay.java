@@ -92,7 +92,7 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
             Explosion.makeExplosion(missile.getLocation(), explosionSpec.getRadius()*2f, 10, 1, 30);
         }
         else {
-            engine.spawnExplosion(missile.getLocation(), missile.getVelocity(), explosionSpec.getExplosionColor(), explosionSpec.getRadius()*2f, 1.5f);
+            engine.spawnExplosion(missile.getLocation(), new Vector2f(), explosionSpec.getExplosionColor(), explosionSpec.getRadius()*2f, 1.5f);
         }
 
         EngineUtils.spawnInstantaneousExplosion(

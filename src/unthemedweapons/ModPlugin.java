@@ -8,6 +8,7 @@ import com.fs.starfarer.api.campaign.GenericPluginManagerAPI;
 import com.fs.starfarer.api.campaign.listeners.ListenerManagerAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.loading.*;
+import com.fs.starfarer.api.util.Misc;
 import org.json.JSONObject;
 import unthemedweapons.campaign.FortifiedCacheRegenerator;
 import unthemedweapons.campaign.ShipRecoveryWeaponsRemover;
@@ -15,6 +16,7 @@ import unthemedweapons.combat.ai.*;
 import unthemedweapons.procgen.CacheDefenderPlugin;
 import unthemedweapons.procgen.GenFortifiedCaches;
 import unthemedweapons.procgen.GenSpecialCaches;
+import unthemedweapons.util.CampaignUtils;
 
 import java.awt.*;
 import java.util.*;
@@ -122,44 +124,8 @@ public class ModPlugin extends BaseModPlugin {
 //    }
 
     @Override
-    public void onGameLoad(boolean newGame) {
-        //CampaignUtils.generateFleetForEnergyCache(Global.getSector().getPlayerFleet(), Misc.random);
-        float cacheFreq;
-        boolean regenerateCaches;
-        try {
-            JSONObject json = Global.getSettings().loadJSON("wpnxt_mod_settings.json");
-            cacheFreq = (float) json.getDouble("fortifiedCachesPerSystem");
-            regenerateCaches = json.getBoolean("regenerateFortifiedCaches");
-        } catch (Exception e) {
-            throw new RuntimeException("Could not load wpnxt_mod_settings.json: " + e, e);
-        }
-        int numCaches = (int) (Global.getSector().getStarSystems().size() * cacheFreq);
-
-        if (!Global.getSector().getPersistentData().containsKey(initializerKey)) {
-            // Ensure the initialization only happens once
-            Global.getSector().getPersistentData().put(initializerKey, true);
-
-            GenSpecialCaches.initialize(Global.getSector());
-            GenFortifiedCaches.initialize(numCaches);
-        }
-
-        ListenerManagerAPI listeners = Global.getSector().getListenerManager();
-        if (regenerateCaches) {
-            FortifiedCacheRegenerator regenerator = new FortifiedCacheRegenerator(numCaches, false);
-            if (!listeners.hasListenerOfClass(FortifiedCacheRegenerator.class)) {
-                listeners.addListener(regenerator, true);
-            }
-            Global.getSector().addTransientListener(regenerator);
-        }
-
-        GenericPluginManagerAPI plugins = Global.getSector().getGenericPlugins();
-        if (!plugins.hasPlugin(CacheDefenderPlugin.class)) {
-            plugins.addPlugin(new CacheDefenderPlugin(), true);
-        }
-        Global.getSector().addTransientListener(new ShipRecoveryWeaponsRemover(false));
-
+    public void onApplicationLoad() {
         particleEngineEnabled = Global.getSettings().getModManager().isModEnabled("particleengine");
-
         // Populate custom missile AI
         customMissiles.clear();
         customMissiles.put("wpnxt_energytorpedo_shot", new MakeMissilePlugin() {
@@ -238,6 +204,44 @@ public class ModPlugin extends BaseModPlugin {
                 }
             }
         }
+    }
+
+    @Override
+    public void onGameLoad(boolean newGame) {
+        //CampaignUtils.generateFleetForEnergyCache(Global.getSector().getPlayerFleet(), Misc.random);
+        float cacheFreq;
+        boolean regenerateCaches;
+        try {
+            JSONObject json = Global.getSettings().loadJSON("wpnxt_mod_settings.json");
+            cacheFreq = (float) json.getDouble("fortifiedCachesPerSystem");
+            regenerateCaches = json.getBoolean("regenerateFortifiedCaches");
+        } catch (Exception e) {
+            throw new RuntimeException("Could not load wpnxt_mod_settings.json: " + e, e);
+        }
+        int numCaches = (int) (Global.getSector().getStarSystems().size() * cacheFreq);
+
+        if (!Global.getSector().getPersistentData().containsKey(initializerKey)) {
+            // Ensure the initialization only happens once
+            Global.getSector().getPersistentData().put(initializerKey, true);
+
+            GenSpecialCaches.initialize(Global.getSector());
+            GenFortifiedCaches.initialize(numCaches);
+        }
+
+        ListenerManagerAPI listeners = Global.getSector().getListenerManager();
+        if (regenerateCaches) {
+            FortifiedCacheRegenerator regenerator = new FortifiedCacheRegenerator(numCaches, false);
+            if (!listeners.hasListenerOfClass(FortifiedCacheRegenerator.class)) {
+                listeners.addListener(regenerator, true);
+            }
+            Global.getSector().addTransientListener(regenerator);
+        }
+
+        GenericPluginManagerAPI plugins = Global.getSector().getGenericPlugins();
+        if (!plugins.hasPlugin(CacheDefenderPlugin.class)) {
+            plugins.addPlugin(new CacheDefenderPlugin(), true);
+        }
+        Global.getSector().addTransientListener(new ShipRecoveryWeaponsRemover(false));
     }
 
     public void addDumbfireMirv(String weaponSpec, String projSpec) {

@@ -1,0 +1,8 @@
+- Fix: an issue where custom missile AI didn't work unless a campaign game was loaded first.
+- Void Ray: fixed tooltip showing wrong info
+- Bloom-class torpedo: base price 1000 -> 500
+- Electron-class torpedo rack: base price 600 -> 1000
+- Sprawl MRM: range 2000 -> 1800
+- Cluster Mine Launcher / Heavy Cluster Launcher: explosions no longer inherit mine velocity when Particle Engine is disabled
+- Bolt gun: DPS 83 -> 70
+- Pummeler: now reaches max fire rate after 10s, down from 15s
