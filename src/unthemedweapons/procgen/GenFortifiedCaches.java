@@ -48,15 +48,6 @@ public abstract class GenFortifiedCaches {
     }
 
     public static WeightedRandomPicker<StarSystemAPI> getSystemPicker(Random random) {
-        // Make an initial pass over star systems to get the size of the hyperspace
-        float maxSystemDistance = 0f;
-        for (StarSystemAPI system : Global.getSector().getStarSystems()) {
-            float length = system.getLocation().length();
-            if (length > maxSystemDistance) {
-                maxSystemDistance = length;
-            }
-        }
-
         WeightedRandomPicker<StarSystemAPI> systemPicker = new WeightedRandomPicker<>(random);
         for (StarSystemAPI system : Global.getSector().getStarSystems()) {
             Set<String> blacklist = tagsToSkip;
@@ -65,15 +56,12 @@ public abstract class GenFortifiedCaches {
                 continue;
             }
             // Certain things should make fortified caches more or less likely to appear:
-            //   -- Farther from the core worlds: more likely
             //   -- THEME_INTERESTING or THEME_INTERESTING_MINOR: more likely
             //   -- THEME_REMNANT_MAIN or THEME_REMNANT_SECONDARY: less likely
             //   -- Dangerous primary star (neutron star, black hole): more likely
             //   -- Presence of habitable world(s): less likely
 
             float weight = 1f;
-            weight *= Math.sqrt(system.getLocation().length() / maxSystemDistance);
-
             if (system.hasTag(Tags.THEME_INTERESTING)) {
                 weight *= 2f;
             }
@@ -195,7 +183,6 @@ public abstract class GenFortifiedCaches {
                 assert stableLocations != null;
                 SectorEntityToken stableLocation = stableLocations.get(Misc.random.nextInt( stableLocations.size()));
                 // Fixed location near the selected stable location
-                fixedLocation = MathUtils.randomPointInRing(stableLocation.getLocation(), stableLocation.getRadius(), 300f + stableLocation.getRadius());
                 orbitRadius = MathUtils.randBetween(stableLocation.getRadius() + 100f, stableLocation.getRadius() + 400f);
                 cache.setCircularOrbit(stableLocation, MathUtils.randBetween(0f, 360f), orbitRadius, 50000f);
                 break;
@@ -224,7 +211,7 @@ public abstract class GenFortifiedCaches {
         }
 
         // Strength from 10 to 300 DP
-        float defenderStrength = 10f * (1f + sizeFrac*sizeFrac*29f);
+        float defenderStrength = 10f * (1f + (float)Math.pow(sizeFrac, 1.5f)*29f);
         DefenderDataOverride ddo = new DefenderDataOverride(factionPicker.pick().getId(), 1f, defenderStrength * 0.8f, defenderStrength * 1.2f, 30);
         switch (cacheSize) {
             case SMALL:
@@ -276,18 +263,18 @@ public abstract class GenFortifiedCaches {
         cacheThemePicker.add(CacheTheme.MISSILE_WEAPONS, 1f);
         cacheThemePicker.add(CacheTheme.FIGHTER_LPCS, 2f);
         // Only medium-size caches and up can have BPs and special items
-        if (CacheSize.getSizeOrdinal(cacheSize) >= 1) {
+        if (cacheSize.getSizeOrdinal() >= 1) {
             cacheThemePicker.add(CacheTheme.WEAPON_BLUEPRINTS, 1f);
             cacheThemePicker.add(CacheTheme.FIGHTER_BLUEPRINTS, 1f);
             cacheThemePicker.add(CacheTheme.SHIP_BLUEPRINTS, 1f);
             cacheThemePicker.add(CacheTheme.AI_CORES, 1.5f);
         }
         // Only large-size caches and up can have rare tech
-        if (CacheSize.getSizeOrdinal(cacheSize) >= 2) {
+        if (cacheSize.getSizeOrdinal() >= 2) {
             cacheThemePicker.add(CacheTheme.RARE_TECH, 1.5f);
         }
 
-        int numRolls = CacheSize.getSizeOrdinal(cacheSize) + 1;
+        int numRolls = cacheSize.getSizeOrdinal() + 1;
         // Huge caches get an additional "free" roll
         for (int j = 0; j < numRolls + (cacheSize == CacheSize.HUGE ? 1 : 0); j++) {
             CacheTheme cacheTheme = cacheThemePicker.pick();
@@ -404,13 +391,13 @@ public abstract class GenFortifiedCaches {
                 }
 
                 picker.add(new DropGroupRow("wpn_:{weaponSize:SMALL,weaponType:" + weaponType + ",tags:[!no_drop,!restricted,!no_drop_salvage]}", "", 1f), 1f);
-                if (CacheSize.getSizeOrdinal(size) >= 1) {
+                if (size.getSizeOrdinal() >= 1) {
                     picker.add(new DropGroupRow("wpn_:{weaponSize:MEDIUM,weaponType:" + weaponType + ",tags:[!no_drop,!restricted,!no_drop_salvage]}", "", 0.5f), 0.5f);
                 }
-                if (CacheSize.getSizeOrdinal(size) >= 2) {
+                if (size.getSizeOrdinal() >= 2) {
                     picker.add(new DropGroupRow("wpn_:{weaponSize:LARGE,weaponType:" + weaponType + ",tags:[!no_drop,!restricted,!no_drop_salvage]}", "", 0.25f), 0.25f);
                 }
-                if (CacheSize.getSizeOrdinal(size) >= 3) {
+                if (size.getSizeOrdinal() >= 3) {
                     picker.add(new DropGroupRow("wpn_:{weaponType:" + weaponType + ",tags:[!no_drop,!restricted,!no_drop_salvage,rare_bp]}", "", 0.2f), 0.2f);
                 }
                 break;
@@ -427,13 +414,13 @@ public abstract class GenFortifiedCaches {
                     if (op <= 5f) {
                         shouldAdd = true;
                     }
-                    else if (op <= 10f && CacheSize.getSizeOrdinal(size) >= 1) {
+                    else if (op <= 10f && size.getSizeOrdinal() >= 1) {
                         shouldAdd = true;
                     }
-                    else if (op <= 20f && CacheSize.getSizeOrdinal(size) >= 2) {
+                    else if (op <= 20f && size.getSizeOrdinal() >= 2) {
                         shouldAdd = true;
                     }
-                    else if (CacheSize.getSizeOrdinal(size) >= 3) {
+                    else if (size.getSizeOrdinal() >= 3) {
                         shouldAdd = true;
                     }
                     if (shouldAdd) {
@@ -453,9 +440,8 @@ public abstract class GenFortifiedCaches {
 //                }
                 break;
             case WEAPON_BLUEPRINTS:
-
                 // Small caches can't have blueprints
-                if (CacheSize.getSizeOrdinal(size) <= 0) {
+                if (size.getSizeOrdinal() <= 0) {
                     return null;
                 }
                 // Weapon blueprints:
@@ -471,11 +457,11 @@ public abstract class GenFortifiedCaches {
                             picker.add(new DropGroupRow("item_weapon_bp:" + spec.getWeaponId(), "", spec.getRarity()), spec.getRarity());
                             break;
                         case LARGE:
-                            if (CacheSize.getSizeOrdinal(size) >= 2) {
-                                picker.add(new DropGroupRow("item_weapon_bp:" + spec.getWeaponId(), "", 0.5f * spec.getRarity()), 0.5f * spec.getRarity());
-                            }
-                            else if (CacheSize.getSizeOrdinal(size) >= 3) {
+                            if (size.getSizeOrdinal() >= 3) {
                                 picker.add(new DropGroupRow("item_weapon_bp:" + spec.getWeaponId(), "", spec.getRarity()), spec.getRarity());
+                            }
+                            else if (size.getSizeOrdinal() == 2) {
+                                picker.add(new DropGroupRow("item_weapon_bp:" + spec.getWeaponId(), "", 0.5f * spec.getRarity()), 0.5f * spec.getRarity());
                             }
                             break;
                     }
@@ -493,7 +479,7 @@ public abstract class GenFortifiedCaches {
                 break;
             case FIGHTER_BLUEPRINTS:
                 // Small caches can't have blueprints
-                if (CacheSize.getSizeOrdinal(size) <= 0) {
+                if (size.getSizeOrdinal() <= 0) {
                     return null;
                 }
                 // Fighter blueprints:
@@ -506,10 +492,10 @@ public abstract class GenFortifiedCaches {
                     if (op <= 10f) {
                         picker.add(new DropGroupRow("item_fighter_bp:" + spec.getId(), "", spec.getRarity()), spec.getRarity());
                     }
-                    else if (op <= 20f && CacheSize.getSizeOrdinal(size) >= 2) {
+                    else if (op <= 20f && size.getSizeOrdinal() >= 2) {
                         picker.add(new DropGroupRow("item_fighter_bp:" + spec.getId(), "", spec.getRarity()), spec.getRarity());
                     }
-                    else if (CacheSize.getSizeOrdinal(size) >= 3) {
+                    else if (size.getSizeOrdinal() >= 3) {
                         picker.add(new DropGroupRow("item_fighter_bp:" + spec.getId(), "", spec.getRarity()), spec.getRarity());
                     }
                 }
@@ -527,7 +513,7 @@ public abstract class GenFortifiedCaches {
                 break;
             case SHIP_BLUEPRINTS:
                 // Small caches can't have blueprints
-                if (CacheSize.getSizeOrdinal(size) <= 0) {
+                if (size.getSizeOrdinal() <= 0) {
                     return null;
                 }
                 // Ship blueprints:
@@ -546,7 +532,7 @@ public abstract class GenFortifiedCaches {
                             picker.add(new DropGroupRow("item_ship_bp:" + spec.getBaseHullId(), "", spec.getRarity()), spec.getRarity());
                             break;
                         case CRUISER:
-                            if (CacheSize.getSizeOrdinal(size) >= 2) {
+                            if (size.getSizeOrdinal() >= 2) {
                                 picker.add(new DropGroupRow("item_ship_bp:" + spec.getBaseHullId(), "", spec.getRarity()), spec.getRarity());
                             }
                             else {
@@ -554,10 +540,10 @@ public abstract class GenFortifiedCaches {
                             }
                             break;
                         case CAPITAL_SHIP:
-                            if (CacheSize.getSizeOrdinal(size) >= 3) {
+                            if (size.getSizeOrdinal() >= 3) {
                                 picker.add(new DropGroupRow("item_ship_bp:" + spec.getBaseHullId(), "", spec.getRarity()), spec.getRarity());
                             }
-                            else if (CacheSize.getSizeOrdinal(size) >= 2) {
+                            else if (size.getSizeOrdinal() >= 2) {
                                 picker.add(new DropGroupRow("item_ship_bp:" + spec.getBaseHullId(), "", 0.25f * spec.getRarity()), 0.25f * spec.getRarity());
                             }
                             break;
@@ -577,16 +563,16 @@ public abstract class GenFortifiedCaches {
                 break;
             case AI_CORES:
                 // Small caches can't have special items
-                if (CacheSize.getSizeOrdinal(size) <= 0) {
+                if (size.getSizeOrdinal() <= 0) {
                     return null;
                 }
                 WeightedRandomPicker<DropGroupRow> aiCorePicker = getDropGroupClearNothing("ai_cores3");
                 for (DropGroupRow row : aiCorePicker.getItems()) {
                     if (Commodities.ALPHA_CORE.equals(row.getCommodity())) {
-                        row.setFreq(CacheSize.getSizeOrdinal(size) >= 3 ? 1.5f : CacheSize.getSizeOrdinal(size) >= 2 ? 0.5f : 0.05f);
+                        row.setFreq(size.getSizeOrdinal() >= 3 ? 1.5f : size.getSizeOrdinal() >= 2 ? 0.5f : 0.05f);
                     }
                     else if (Commodities.BETA_CORE.equals(row.getCommodity())) {
-                        row.setFreq(CacheSize.getSizeOrdinal(size) >= 2 ? 1f : 0.6f);
+                        row.setFreq(size.getSizeOrdinal() >= 2 ? 1f : 0.6f);
                     }
                     else if (Commodities.GAMMA_CORE.equals(row.getCommodity())) {
                         row.setFreq(1f);
@@ -596,7 +582,7 @@ public abstract class GenFortifiedCaches {
                 break;
             case RARE_TECH:
                 // Small and medium caches can't have rare tech
-                if (CacheSize.getSizeOrdinal(size) <= 1) {
+                if (size.getSizeOrdinal() <= 1) {
                     return null;
                 }
                 picker.addAll(getDropGroupClearNothing("rare_tech"));
@@ -637,18 +623,6 @@ public abstract class GenFortifiedCaches {
         LARGE,
         HUGE;
 
-        public static int getSizeOrdinal(CacheSize size) {
-            switch (size) {
-                case SMALL:
-                    return 0;
-                case LARGE:
-                    return 2;
-                case HUGE:
-                    return 3;
-                default: return 1;
-            }
-        }
-
         public static CacheSize getSize(float cacheRadius) {
             if (cacheRadius >= hugeSizeThreshold) {
                 return HUGE;
@@ -660,6 +634,18 @@ public abstract class GenFortifiedCaches {
                 return MEDIUM;
             }
             return SMALL;
+        }
+
+        public int getSizeOrdinal() {
+            switch (this) {
+                case SMALL:
+                    return 0;
+                case LARGE:
+                    return 2;
+                case HUGE:
+                    return 3;
+                default: return 1;
+            }
         }
     }
 }

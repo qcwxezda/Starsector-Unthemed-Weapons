@@ -84,7 +84,6 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
         else {
             // Generic defense fleet
             float size = p.entity.getRadius();
-            GenFortifiedCaches.CacheSize cacheSize = GenFortifiedCaches.CacheSize.getSize(size);
             float sizeFrac = (size - GenFortifiedCaches.minCacheSize) / (GenFortifiedCaches.maxCacheSize - GenFortifiedCaches.minCacheSize);
 
 //            // Remove capitals from < huge crates, cruisers from < large crates, and destroyers from < medium crates
@@ -187,6 +186,8 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
         commander.getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 1);
         commander.getStats().setSkillLevel(Skills.FLUX_REGULATION, 1);
         commander.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
+        commander.getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1);
+        commander.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
         commander.getStats().setSkillLevel(Skills.HULL_RESTORATION, 1);
         commander.getStats().setSkipRefresh(false);
         fleet.setCommander(commander);
@@ -219,6 +220,8 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
         commander.getStats().setSkipRefresh(true);
         commander.getStats().setSkillLevel(Skills.BEST_OF_THE_BEST, 1);
         commander.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
+        commander.getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 1);
+        commander.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
         commander.getStats().setSkillLevel(Skills.FIGHTER_UPLINK, 1);
         commander.getStats().setSkillLevel(Skills.CARRIER_GROUP, 1);
         commander.getStats().setSkillLevel(Skills.DERELICT_CONTINGENT, 1);
@@ -230,7 +233,7 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
         List<Integer> conquestEliteSkills = Arrays.asList(0, 1, 2, 4, 5);
         int conquestCount = 2;
         for (int i = 0; i < conquestCount; i++) {
-            FleetMemberAPI member = CampaignUtils.addToFleet(fleet, "wpnxt_conquest_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, conquestSkills, conquestEliteSkills, random));
+            CampaignUtils.addToFleet(fleet, "wpnxt_conquest_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, conquestSkills, conquestEliteSkills, random));
         }
 
         List<String> gryphonSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.MISSILE_SPECIALIZATION, Skills.SYSTEMS_EXPERTISE, Skills.COMBAT_ENDURANCE, Skills.FIELD_MODULATION, Skills.IMPACT_MITIGATION);
@@ -266,7 +269,10 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
         commander.getStats().setSkipRefresh(true);
         commander.getStats().setSkillLevel(Skills.BEST_OF_THE_BEST, 1);
         commander.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
+        commander.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
         commander.getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 1);
+        commander.getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1);
+        commander.getStats().setSkillLevel(Skills.TACTICAL_DRILLS, 1);
         commander.getStats().setSkillLevel(Skills.FLUX_REGULATION, 1);
         commander.getStats().setSkipRefresh(false);
         fleet.setCommander(commander);

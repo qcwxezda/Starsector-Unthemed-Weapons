@@ -2,6 +2,8 @@ package unthemedweapons.util;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
+import com.fs.starfarer.api.campaign.SectorEntityToken;
+import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
@@ -10,6 +12,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.impl.campaign.ids.Skills;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.loading.VariantSource;
+import unthemedweapons.procgen.GenSpecialCaches;
 
 import java.util.Arrays;
 import java.util.List;
@@ -214,5 +217,15 @@ public abstract class CampaignUtils {
             CampaignUtils.addToFleet(fleet, "wpnxt_lasher_Cache", null, null);
         }
 
+    }
+
+    public static void findSpecialCaches() {
+        for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+            for (SectorEntityToken entity : system.getCustomEntities()) {
+                if (entity.getMemoryWithoutUpdate().contains(GenSpecialCaches.cacheKey)) {
+                    System.out.println(system.getName());
+                }
+            }
+        }
     }
 }

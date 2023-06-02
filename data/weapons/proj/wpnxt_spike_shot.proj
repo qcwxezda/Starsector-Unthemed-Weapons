@@ -14,7 +14,7 @@
   "alwaysAccelerate":true,
   "dudProbabilityOnFlameout":0,
   "armingTime":0,
-  "flameoutTime":0.01,
+  "flameoutTime":0.5,
   "noEngineGlowTime":0,
   "fadeTime":0.4,
   "engineSpec":{"turnAcc":500,

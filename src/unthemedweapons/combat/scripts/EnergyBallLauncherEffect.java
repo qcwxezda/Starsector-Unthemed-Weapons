@@ -25,9 +25,9 @@ import java.util.List;
 public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWithAdvanceAfter, WeaponEffectPluginWithInit, OnFireEffectPlugin {
 
     public static final float maxProjectileSize = 120f;
-    public static final float fullChargeDamageMultiplier = 18f;
-    public static final float fullChargeFluxCostMultiplier = 25f;
-    public static final float chargeTime = 25f;
+    public static final float fullChargeDamageMultiplier = 16f;
+    public static final float fullChargeFluxCostMultiplier = 20f;
+    public static final float chargeTime = 20f;
     public static final float minExplosionRadius = 111f;
     public static final float ignoreDefenseMin = 0.1f, ignoreDefenseMax = 1f;
     public static final String modifyKey = "wpnxt_energyball";

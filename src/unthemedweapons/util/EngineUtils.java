@@ -31,10 +31,12 @@ public abstract class EngineUtils {
             float totalEmp,
             boolean bypassShields,
             boolean dealsSoftFlux,
-            ShipAPI source,
+            DamagingProjectileAPI projSource,
             boolean playSound) {
-
         CombatEngineAPI engine = Global.getCombatEngine();
+        ShipAPI source = projSource.getSource();
+        // damage multiplier, points to apply damage to
+        List<Pair<Float, List<Vector2f>>> damageList = new ArrayList<>();
         Iterator<Object> objItr = engine.getAllObjectGrid().getCheckIterator(origin, 2f*radius, 2f*radius);
         while (objItr.hasNext()) {
             Object o = objItr.next();
@@ -53,10 +55,7 @@ public abstract class EngineUtils {
                     float subtendedAngle = Math.abs(MathUtils.angleDiff(theta1, theta2));
 
                     if (subtendedAngle > 0f) {
-                        float damage = totalDamage * (float) Math.sqrt(subtendedAngle / 360f);
-                        float empDamage = totalEmp * (float) Math.sqrt(subtendedAngle / 360f);
-                        engine.applyDamage(entity, entity, collisionPoints.one, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
-                        engine.applyDamage(entity, entity, collisionPoints.two, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                        damageList.add(new Pair<>((float) Math.sqrt(subtendedAngle / 360f), Arrays.asList(collisionPoints.one, collisionPoints.two)));
                     }
                 }
             }
@@ -108,19 +107,21 @@ public abstract class EngineUtils {
                                 float subtendedAngle = Math.abs(MathUtils.angleDiff(collisionAngles.get(a), collisionAngles.get(b)));
 
                                 if (subtendedAngle > 0f) {
-                                    float damage = totalDamage * (float) Math.sqrt(subtendedAngle / 360f);
-                                    float empDamage = totalEmp * (float) Math.sqrt(subtendedAngle / 360f);
                                     Vector2f p1 = new Vector2f(
                                             origin.x + radius * (float) Math.cos(collisionAngles.get(a) * Misc.RAD_PER_DEG),
                                             origin.y + radius * (float) Math.sin(collisionAngles.get(a) * Misc.RAD_PER_DEG));
                                     Vector2f p2 = new Vector2f(
                                             origin.x + radius * (float) Math.cos(collisionAngles.get(b) * Misc.RAD_PER_DEG),
                                             origin.y + radius * (float) Math.sin(collisionAngles.get(b) * Misc.RAD_PER_DEG));
+                                    List<Vector2f> points = new ArrayList<>();
                                     if (entity.getShield().isWithinArc(p1)) {
-                                        engine.applyDamage(entity, entity, p1, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                                        points.add(p1);
                                     }
                                     if (entity.getShield().isWithinArc(p2)) {
-                                        engine.applyDamage(entity, entity, p2, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                                        points.add(p2);
+                                    }
+                                    if (!points.isEmpty()) {
+                                        damageList.add(new Pair<>((float) Math.sqrt(subtendedAngle / 360f), points));
                                     }
                                 }
                             }
@@ -163,22 +164,30 @@ public abstract class EngineUtils {
                         float subtendedAngle = Math.abs(MathUtils.angleDiff(collisionAngles.get(a), collisionAngles.get(b)));
 
                         if (subtendedAngle > 0f) {
-                            float damage = totalDamage * (float) Math.sqrt(subtendedAngle / 360f);
-                            float empDamage = totalEmp * (float) Math.sqrt(subtendedAngle / 360f);
                             Vector2f p1 = new Vector2f(
                                     origin.x + radius * (float) Math.cos(collisionAngles.get(a) * Misc.RAD_PER_DEG),
                                     origin.y + radius * (float) Math.sin(collisionAngles.get(a) * Misc.RAD_PER_DEG));
                             Vector2f p2 = new Vector2f(
                                     origin.x + radius * (float) Math.cos(collisionAngles.get(b) * Misc.RAD_PER_DEG),
                                     origin.y + radius * (float) Math.sin(collisionAngles.get(b) * Misc.RAD_PER_DEG));
+                            List<Vector2f> points = new ArrayList<>();
                             if (entity.getShield() == null || !entity.getShield().isWithinArc(p1)) {
-                                engine.applyDamage(entity, entity, p1, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                                points.add(p1);
                             }
                             if (entity.getShield() == null || !entity.getShield().isWithinArc(p2)) {
-                                engine.applyDamage(entity, entity, p2, damage / 2f, damageType, empDamage / 2f, bypassShields, dealsSoftFlux, source, playSound);
+                                points.add(p2);
+                            }
+                            if (!points.isEmpty()) {
+                                damageList.add(new Pair<>((float) Math.sqrt(subtendedAngle / 360f), points));
                             }
                         }
                     }
+                }
+            }
+
+            for (Pair<Float, List<Vector2f>> entry : damageList) {
+                for (Vector2f pt : entry.two) {
+                    engine.applyDamage(entity, entity, pt, totalDamage * 0.5f * entry.one, damageType, totalEmp * 0.5f * entry.one, bypassShields, dealsSoftFlux, source, playSound);
                 }
             }
         }

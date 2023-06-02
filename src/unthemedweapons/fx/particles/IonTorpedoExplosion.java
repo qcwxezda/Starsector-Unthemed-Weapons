@@ -53,4 +53,15 @@ public abstract class IonTorpedoExplosion {
         emitter.alphaShift(-0.5f, -0.5f);
         return emitter;
     }
+
+    public static void makeExplosion(Vector2f loc, float angle) {
+        Particles.burst(core(loc), 100);
+
+        Emitter ringEmitter = IonTorpedoExplosion.ring(loc, angle);
+        Particles.burst(ringEmitter, 5);
+        ringEmitter.facing(35f, 55f);
+        Particles.burst(ringEmitter, 5);
+
+        Particles.stream(empArcs(loc), 1, 15, 1f);
+    }
 }

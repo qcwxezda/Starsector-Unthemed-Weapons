@@ -6,6 +6,7 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.PlanetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.util.Misc;
+import org.lwjgl.util.vector.Vector2f;
 import unthemedweapons.util.MathUtils;
 
 public class MissileCacheScript implements EveryFrameScript {
@@ -47,6 +48,10 @@ public class MissileCacheScript implements EveryFrameScript {
         if (time >= timeToReveal) {
             cache.setCircularOrbit(star, MathUtils.randBetween(0f, 360f), star.getRadius() * 0.75f, 2f);
             revealed = true;
+        }
+        else if (Misc.random.nextFloat() <= 0.5f*amount) {
+            Vector2f randomLocation =  MathUtils.randomPointInRing(new Vector2f(), 1000000f, 1000000f);
+            cache.setFixedLocation(randomLocation.x, randomLocation.y);
         }
     }
 }

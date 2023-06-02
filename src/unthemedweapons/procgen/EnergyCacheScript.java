@@ -5,7 +5,9 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.impl.campaign.terrain.PulsarBeamTerrainPlugin;
+import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
+import unthemedweapons.util.MathUtils;
 
 import java.util.List;
 
@@ -46,18 +48,24 @@ public class EnergyCacheScript implements EveryFrameScript {
                 break;
             }
         }
+
         if (isInBeam && !isInOriginalLocation) {
             cache.setFixedLocation(originalLocation.x, originalLocation.y);
             isInOriginalLocation = true;
         }
         else if (!isInBeam && isInOriginalLocation) {
-            cache.setFixedLocation(1000000f, 1000000f);
             // Clear course if target is the (now "invisible") cache
             SectorEntityToken courseTarget = Global.getSector().getUIData().getCourseTarget();
             if (cache.equals(courseTarget)) {
                 Global.getSector().getCampaignUI().clearLaidInCourse();
             }
             isInOriginalLocation = false;
+        }
+
+        // Periodically move to random location so people don't actually try to fly to 1000000, 1000000...
+        if (!isInBeam && Misc.random.nextFloat() <= 0.5f*amount) {
+            Vector2f randomLocation =  MathUtils.randomPointInRing(new Vector2f(), 1000000f, 1000000f);
+            cache.setFixedLocation(randomLocation.x, randomLocation.y);
         }
     }
 }
