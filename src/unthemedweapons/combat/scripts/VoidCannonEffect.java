@@ -16,6 +16,7 @@ public class VoidCannonEffect implements OnFireEffectPlugin {
         float spread = weapon.getCurrSpread();
         int numProjectiles = weapon.getSpec().getBurstSize();
         float spreadIncrement = spread / (numProjectiles - 1);
+        weapon.getAmmoTracker().addOneAmmo(); // counteract the automatic deduction
         for (float x = -spread / 2f; x <= spread / 2f; x += spreadIncrement) {
             engine.spawnProjectile(
                     proj.getSource(),
@@ -25,8 +26,11 @@ public class VoidCannonEffect implements OnFireEffectPlugin {
                     weapon.getCurrAngle() + x,
                     proj.getSource().getVelocity()
             );
+            weapon.getAmmoTracker().deductOneAmmo();
+            if (weapon.getAmmo() <= 0) {
+                break;
+            }
         }
-        weapon.getAmmoTracker().setAmmo(Math.max(0, weapon.getAmmo() - numProjectiles + 1));
         weapon.setRemainingCooldownTo(weapon.getCooldown());
         weapon.setRefireDelay(weapon.getCooldown());
     }

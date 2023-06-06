@@ -56,7 +56,7 @@ public class AngleApproachMissileAI extends BaseGuidedMissileAI {
         float velError = MathUtils.angleDiff(desiredAngle, velAngle);
 
         if (Math.abs(velError) < 90f && Math.abs(velError) > 8f) {
-            desiredAngle += velError;
+            desiredAngle += Math.signum(velError) * Math.min(Math.abs(velError), 10f);
         }
 
         missile.giveCommand(ShipCommand.ACCELERATE);

@@ -22,6 +22,8 @@ public class EnergyCacheScript implements EveryFrameScript {
         this.cache = cache;
         this.pulsarPlugins = pulsarPlugins;
         originalLocation = new Vector2f(cache.getLocation());
+        Vector2f randomLocation =  MathUtils.randomPointInRing(new Vector2f(), 1000000f, 1000000f);
+        cache.setFixedLocation(randomLocation.x, randomLocation.y);
     }
 
     @Override

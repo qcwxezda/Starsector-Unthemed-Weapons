@@ -208,7 +208,7 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
                 missile.giveCommand(turnData.command);
             }
             else {
-                missile.giveCommand(smoothTurnExt(targetAngle/* + velError * Math.min(1f, Misc.getDistance(target.getLocation(), missile.getLocation()) / moveSpeed)*/, true).command);
+                missile.giveCommand(smoothTurnExt(targetAngle + Math.signum(velError) * Math.min(Math.abs(velError), 10f)/* + velError * Math.min(1f, Misc.getDistance(target.getLocation(), missile.getLocation()) / moveSpeed)*/, false).command);
             }//turnTowardTarget(interceptAngle + velError);
         }
         else if (Math.abs(velError) > 3f) {

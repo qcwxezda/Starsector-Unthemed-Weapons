@@ -1,7 +1,7 @@
 {
     "displayName": "Elite",
     "fluxCapacitors": 0,
-    "fluxVents": 24,
+    "fluxVents": 26,
     "hullId": "conquest",
     "hullMods": [
         "missleracks",

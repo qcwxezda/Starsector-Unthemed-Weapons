@@ -157,7 +157,7 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
 
             quality = 1.8f * sizeFrac * MathUtils.randBetween(0.7f, 1.25f, random);
             averageSMods = 4f * sizeFrac * sizeFrac * MathUtils.randBetween(0.9f, 1.25f, random) - 1f;
-            numOfficers = 10f * sizeFrac * MathUtils.randBetween(0.8f, 1.4f, random);
+            numOfficers = 13f * sizeFrac * MathUtils.randBetween(0.8f, 1.2f, random);
             maxOfficerLevel = Math.min(7f, 9f * sizeFrac * MathUtils.randBetween(0.8f, 1.25f, random));
 
             if (fleet.getInflater() instanceof DefaultFleetInflater) {
@@ -178,8 +178,8 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
     }
 
     private void generateFleetForEnergyCache(CampaignFleetAPI fleet, Random random) {
-        List<String> radiantSkills = Arrays.asList(Skills.DAMAGE_CONTROL, Skills.TARGET_ANALYSIS, Skills.IMPACT_MITIGATION, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.HELMSMANSHIP, Skills.SYSTEMS_EXPERTISE);
-        List<Integer> radiantEliteSkills = Arrays.asList( 0, 2, 3, 4, 5);
+        List<String> radiantSkills = Arrays.asList(Skills.GUNNERY_IMPLANTS, Skills.TARGET_ANALYSIS, Skills.IMPACT_MITIGATION, Skills.COMBAT_ENDURANCE, Skills.ORDNANCE_EXPERTISE, Skills.HELMSMANSHIP, Skills.SYSTEMS_EXPERTISE);
+        List<Integer> radiantEliteSkills = Arrays.asList( 1, 2, 3, 4, 5);
         PersonAPI commander = CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, radiantSkills, radiantEliteSkills, random);
         commander.getStats().setSkipRefresh(true);
         commander.getStats().setSkillLevel(Skills.BEST_OF_THE_BEST, 1);
@@ -188,13 +188,13 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
         commander.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
         commander.getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1);
         commander.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
-        commander.getStats().setSkillLevel(Skills.HULL_RESTORATION, 1);
+        commander.getStats().setSkillLevel(Skills.CARRIER_GROUP, 1);
         commander.getStats().setSkipRefresh(false);
         fleet.setCommander(commander);
         CampaignUtils.addToFleet(fleet, "wpnxt_radiant_Cache", null, commander).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
 
-        List<String> paragonSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.ENERGY_WEAPON_MASTERY, Skills.IMPACT_MITIGATION);
-        List<Integer> paragonEliteSkills = Arrays.asList(0, 2, 3, 5, 6);
+        List<String> paragonSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.COMBAT_ENDURANCE, Skills.IMPACT_MITIGATION);
+        List<Integer> paragonEliteSkills = Arrays.asList(0, 1, 2, 3, 6);
         int paragonCount = 1;
         for (int i = 0; i < paragonCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_paragon_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, paragonSkills, paragonEliteSkills, random)).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);

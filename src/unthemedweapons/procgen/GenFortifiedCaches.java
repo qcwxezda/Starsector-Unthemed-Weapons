@@ -30,7 +30,7 @@ public abstract class GenFortifiedCaches {
         tagsToSkip.add(Tags.THEME_HIDDEN);
     }
 
-    public static float minCacheSize = 22f, maxCacheSize = 60f;
+    public static float minCacheSize = 27f, maxCacheSize = 60f;
     public static float mediumSizeThreshold = 30f, largeSizeThreshold = 40f, hugeSizeThreshold = 50f;
     public static float maxCacheSizeXPMultiplier = 20f;
     public static float baseCacheValue = 5000f, maxCacheSizeValueMultiplier = 79f;
@@ -124,10 +124,10 @@ public abstract class GenFortifiedCaches {
     }
 
     public static void addCache(StarSystemAPI system, WeightedRandomPicker<FactionAPI> factionPicker) {
-        // 37.7% chance of small cache
-        // 34.6% chance of medium cache
-        // 20.8% chance of large cache
-        // 6.9% chance of huge cache
+        // 17.4% chance of small cache
+        // 45.9% chance of medium cache
+        // 27.5% chance of large cache
+        // 9.2% chance of huge cache
         float size = Math.min(MathUtils.randBetween(minCacheSize, maxCacheSize), MathUtils.randBetween(minCacheSize, maxCacheSize));
         CacheSize cacheSize = CacheSize.getSize(size);
         CustomCampaignEntityAPI cache = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(system, "wpnxt_fortified_cache",null, null);
@@ -210,8 +210,8 @@ public abstract class GenFortifiedCaches {
                 break;
         }
 
-        // Strength from 10 to 300 DP
-        float defenderStrength = 10f * (1f + (float)Math.pow(sizeFrac, 1.5f)*29f);
+        // Strength from 20 to 320 DP
+        float defenderStrength = 20f * (1f + (float)Math.pow(sizeFrac, 1.25f)*15f);
         DefenderDataOverride ddo = new DefenderDataOverride(factionPicker.pick().getId(), 1f, defenderStrength * 0.8f, defenderStrength * 1.2f, 30);
         switch (cacheSize) {
             case SMALL:

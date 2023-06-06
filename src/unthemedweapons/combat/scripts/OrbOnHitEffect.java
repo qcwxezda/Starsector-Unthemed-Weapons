@@ -16,12 +16,14 @@ import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 @SuppressWarnings("unused")
 public class OrbOnHitEffect implements OnHitEffectPlugin {
 
+    public static float empDamage = 500f;
+
     public void onHit(DamagingProjectileAPI projectile, CombatEntityAPI target,
                       Vector2f point, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
 
         if (!(target instanceof ShipAPI)) return;
-        if (!shieldHit && Misc.random.nextFloat() < 0.5f) {
-            float emp = 2f * projectile.getEmpAmount();
+        if (!shieldHit) {
+            float emp = empDamage;
             float dam = 0;
             engine.spawnEmpArcPierceShields(
                     projectile.getSource(), point, projectile, target,

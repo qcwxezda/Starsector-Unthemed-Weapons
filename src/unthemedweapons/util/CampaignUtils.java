@@ -2,6 +2,7 @@ package unthemedweapons.util;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
+import com.fs.starfarer.api.campaign.CustomCampaignEntityAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
@@ -14,9 +15,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.loading.VariantSource;
 import unthemedweapons.procgen.GenSpecialCaches;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public abstract class CampaignUtils {
     public static PersonAPI createOfficer(String factionId, String personality, List<String> skills, List<Integer> eliteSkillIndices, Random random) {
@@ -72,14 +71,17 @@ public abstract class CampaignUtils {
     }
 
     public static void generateFleetForEnergyCache(CampaignFleetAPI fleet, Random random) {
-        List<String> radiantSkills = Arrays.asList(Skills.DAMAGE_CONTROL, Skills.TARGET_ANALYSIS, Skills.IMPACT_MITIGATION, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.COMBAT_ENDURANCE, Skills.SYSTEMS_EXPERTISE);
-        List<Integer> radiantEliteSkills = Arrays.asList( 0, 2, 3, 4, 5);
+        List<String> radiantSkills = Arrays.asList(Skills.ENERGY_WEAPON_MASTERY, Skills.TARGET_ANALYSIS, Skills.IMPACT_MITIGATION, Skills.GUNNERY_IMPLANTS, Skills.ORDNANCE_EXPERTISE, Skills.HELMSMANSHIP, Skills.SYSTEMS_EXPERTISE);
+        List<Integer> radiantEliteSkills = Arrays.asList( 0, 1, 2, 4, 5);
         PersonAPI commander = CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, radiantSkills, radiantEliteSkills, random);
         commander.getStats().setSkipRefresh(true);
         commander.getStats().setSkillLevel(Skills.BEST_OF_THE_BEST, 1);
-        commander.getStats().setSkillLevel(Skills.CARRIER_GROUP, 1);
+        commander.getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 1);
         commander.getStats().setSkillLevel(Skills.FLUX_REGULATION, 1);
         commander.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
+        commander.getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1);
+        commander.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
+        commander.getStats().setSkillLevel(Skills.HULL_RESTORATION, 1);
         commander.getStats().setSkipRefresh(false);
         CampaignUtils.addToFleet(fleet, "wpnxt_radiant_Cache", null, commander).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
 
@@ -89,41 +91,16 @@ public abstract class CampaignUtils {
         for (int i = 0; i < paragonCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_paragon_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, paragonSkills, paragonEliteSkills, random)).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
         }
-//
-//        int shrikeCount = 15;
-//        for (int i = 0; i < shrikeCount; i++) {
-//            CampaignUtils.addToFleet(fleet, "wpnxt_shrike_Cache", null, null);
-//        }
 
-//        List<String> tempestSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.COMBAT_ENDURANCE, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.TARGET_ANALYSIS, Skills.MISSILE_SPECIALIZATION);
-//        List<Integer> tempestEliteSkills = Arrays.asList(0, 2, 3, 4, 5);
-//        int tempestCount = 9;
-//        for (int i = 0; i < tempestCount; i++) {
-//            CampaignUtils.addToFleet(fleet, "wpnxt_tempest_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, tempestSkills, tempestEliteSkills, random));
-//        }
-
-//        List<String> apogeeSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.COMBAT_ENDURANCE, Skills.MISSILE_SPECIALIZATION);
-//        List<Integer> apogeeEliteSkills = Arrays.asList(0, 1, 2, 3, 6);
-//        int apogeeCount = 10;
-//        for (int i = 0; i < apogeeCount; i++) {
-//            CampaignUtils.addToFleet(fleet, "wpnxt_apogee_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, apogeeSkills, apogeeEliteSkills, random));
-//        }
-////
         List<String> medusaSkills = Arrays.asList(Skills.COMBAT_ENDURANCE, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.SYSTEMS_EXPERTISE, Skills.ENERGY_WEAPON_MASTERY);
         List<Integer> medusaEliteSkills = Arrays.asList(1, 2, 3, 4 ,6);
         int medusaCount = 9;
         for (int i = 0; i < medusaCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_medusa_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, medusaSkills, medusaEliteSkills, random));
         }
-//
-        List<String> omenSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.FIELD_MODULATION, Skills.GUNNERY_IMPLANTS, Skills.SYSTEMS_EXPERTISE, Skills.COMBAT_ENDURANCE, Skills.POINT_DEFENSE, Skills.MISSILE_SPECIALIZATION);
-        List<Integer> omenEliteSkills = Arrays.asList( 0, 1, 2, 5, 6);
-        int officeredOmenCount = 0;
-        int unofficeredOmenCount = 9;
-        for (int i = 0; i < officeredOmenCount; i++) {
-            CampaignUtils.addToFleet(fleet, "wpnxt_omen_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, omenSkills, omenEliteSkills, random));
-        }
-        for (int i = 0; i < unofficeredOmenCount; i++) {
+
+        int omenCount = 8;
+        for (int i = 0; i < omenCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_omen_Cache", null ,null);
         }
     }
@@ -226,6 +203,28 @@ public abstract class CampaignUtils {
                     System.out.println(system.getName());
                 }
             }
+        }
+    }
+
+    public static void findLargestCaches() {
+        List<SectorEntityToken> caches = new ArrayList<>();
+        for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+            for (SectorEntityToken entity : system.getCustomEntities()) {
+                if ("wpnxt_fortified_cache".equals(entity.getCustomEntitySpec().getId())) {
+                    caches.add(entity);
+                }
+            }
+        }
+        Collections.sort(caches, new Comparator<SectorEntityToken>() {
+            @Override
+            public int compare(SectorEntityToken o1, SectorEntityToken o2) {
+                return Float.compare(o2.getRadius(), o1.getRadius());
+            }
+        });
+
+        System.out.println("Total number of caches: " + caches.size());
+        for (int i = 0; i < Math.min(caches.size(), 10); i++) {
+            System.out.println(caches.get(i).getStarSystem() + ": " + caches.get(i).getRadius());
         }
     }
 }

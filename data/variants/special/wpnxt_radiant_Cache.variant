@@ -1,6 +1,6 @@
 {
     "displayName": "Experimental",
-    "fluxCapacitors": 8,
+    "fluxCapacitors": 0,
     "fluxVents": 55,
     "hullId": "wpnxt_mod_radiant",
     "hullMods": [
@@ -11,7 +11,8 @@
         "hardenedshieldemitter",
         "heavyarmor",
         "magazines",
-        "autorepair"
+        "autorepair",
+        "turretgyros"
     ],
     "permaMods": [
         "solar_shielding",
