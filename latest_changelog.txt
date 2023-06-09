@@ -1,3 +1,12 @@
+Additions:
+
+Added a utility module. Currently, affects the refit screen:
+- Displays modified weapon stats inside the refit screen, based on the ship being refitted
+- Displays modified weapon ranges in the weapon selection picker
+- Displays modified total flux cost
+- Limitation: does not affect fighter wings or fighter weapons
+- Limitation: does not affect weapon group flux cost displays in the weapon group selector
+
 Fixes:
 
 Fixed an issue with custom collision projectiles that caused them to impact the source ship's modules.
