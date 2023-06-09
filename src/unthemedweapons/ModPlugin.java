@@ -23,7 +23,7 @@ public class ModPlugin extends BaseModPlugin {
                 listeners.addListener(refitModifier, true);
             }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to add refit tab listener; consider setting enableQoL to false in wpnxt_mod_settings.json", e);
+            throw new RuntimeException("Failed to add refit tab listener", e);
         }
     }
 
