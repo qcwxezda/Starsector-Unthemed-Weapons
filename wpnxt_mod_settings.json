@@ -4,4 +4,7 @@
 
   # Whether fortified caches should peroidically be regenerated
   "regenerateFortifiedCaches": false,
+
+  # Whether QoL stuff should be enabled
+  "enableQoL": true
 }

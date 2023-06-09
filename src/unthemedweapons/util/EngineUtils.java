@@ -15,6 +15,30 @@ import java.util.*;
 public abstract class EngineUtils {
     public final static float maxRangeUseGrid = 300f;
 
+    /** If the argument is a ship, returns that ship.
+     *  If the argument is a wing, returns the wing's source ship.
+     *  If the argument is a module, returns the module's base ship/station. */
+    public static ShipAPI getBaseShip(ShipAPI shipOrModule) {
+        if (shipOrModule == null) {
+            return null;
+        }
+        if (shipOrModule.isStationModule()) {
+            ShipAPI base = null;
+            if (shipOrModule.getParentStation() == null) {
+                // If the module has no parent station but has a fleet member,
+                // just return the module itself
+                if (shipOrModule.getFleetMember() != null) {
+                    base = shipOrModule;
+                }
+            }
+            else {
+                base = getBaseShip(shipOrModule.getParentStation());
+            }
+            return base;
+        }
+        return shipOrModule;
+    }
+
     public static boolean isFighter(CombatEntityAPI entity) {
         return entity instanceof ShipAPI && ((ShipAPI) entity).isFighter();
     }

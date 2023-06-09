@@ -1,6 +1,7 @@
 package unthemedweapons;
 
 import com.fs.starfarer.api.BaseModPlugin;
+import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.PluginPick;
 import com.fs.starfarer.api.campaign.CampaignPlugin;
@@ -8,17 +9,18 @@ import com.fs.starfarer.api.campaign.GenericPluginManagerAPI;
 import com.fs.starfarer.api.campaign.listeners.ListenerManagerAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.loading.*;
-import com.fs.starfarer.api.util.Misc;
 import org.json.JSONObject;
 import unthemedweapons.campaign.FortifiedCacheRegenerator;
+import unthemedweapons.campaign.RefitTabListenerAndScript;
 import unthemedweapons.campaign.ShipRecoveryWeaponsRemover;
 import unthemedweapons.combat.ai.*;
 import unthemedweapons.procgen.CacheDefenderPlugin;
 import unthemedweapons.procgen.GenFortifiedCaches;
 import unthemedweapons.procgen.GenSpecialCaches;
-import unthemedweapons.util.CampaignUtils;
 
 import java.awt.*;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.*;
 
 @SuppressWarnings("unused")
@@ -211,10 +213,12 @@ public class ModPlugin extends BaseModPlugin {
         //CampaignUtils.generateFleetForEnergyCache(Global.getSector().getPlayerFleet(), Misc.random);
         float cacheFreq;
         boolean regenerateCaches;
+        boolean qolEnabled;
         try {
             JSONObject json = Global.getSettings().loadJSON("wpnxt_mod_settings.json");
             cacheFreq = (float) json.getDouble("fortifiedCachesPerSystem");
             regenerateCaches = json.getBoolean("regenerateFortifiedCaches");
+            qolEnabled = json.getBoolean("enableQoL");
         } catch (Exception e) {
             throw new RuntimeException("Could not load wpnxt_mod_settings.json: " + e, e);
         }
@@ -235,6 +239,17 @@ public class ModPlugin extends BaseModPlugin {
                 listeners.addListener(regenerator, true);
             }
             Global.getSector().addTransientListener(regenerator);
+        }
+        if (qolEnabled) {
+            try {
+                EveryFrameScript refitModifier = (EveryFrameScript) getClassLoader().loadClass("unthemedweapons.campaign.RefitTabListenerAndScript").newInstance();
+                Global.getSector().addTransientScript(refitModifier);
+                if (!listeners.hasListenerOfClass(RefitTabListenerAndScript.class)) {
+                    listeners.addListener(refitModifier, true);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to add refit tab listener; consider setting enableQoL to false in wpnxt_mod_settings.json", e);
+            }
         }
 
         GenericPluginManagerAPI plugins = Global.getSector().getGenericPlugins();
@@ -269,5 +284,49 @@ public class ModPlugin extends BaseModPlugin {
 
     private interface MakeMissilePlugin {
         MissileAIPlugin make(MissileAPI missile);
+    }
+
+
+    private static final String[] reflectionWhitelist = new String[] {
+            "unthemedweapons.campaign.RefitTabListenerAndScript",
+            "unthemedweapons.util.ReflectionUtils",
+            "unthemedweapons.util.DynamicWeaponStats"
+    };
+
+    private static ReflectionEnabledClassLoader getClassLoader() {
+        URL url = ModPlugin.class.getProtectionDomain().getCodeSource().getLocation();
+        return new ReflectionEnabledClassLoader(url, ModPlugin.class.getClassLoader());
+    }
+
+    public static class ReflectionEnabledClassLoader extends URLClassLoader {
+
+        public ReflectionEnabledClassLoader(URL url, ClassLoader parent) {
+            super(new URL[] {url}, parent);
+        }
+
+        @Override
+        public Class<?> loadClass(String name) throws ClassNotFoundException {
+            if (name.startsWith("java.lang.reflect")) {
+                return ClassLoader.getSystemClassLoader().loadClass(name);
+            }
+            return super.loadClass(name);
+        }
+
+        @Override
+        public Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+            Class<?> c = findLoadedClass(name);
+            if (c != null) {
+                return c;
+            }
+            // Be the defining classloader for all classes in the reflection whitelist
+            // For classes defined by this loader, classes in java.lang.reflect will be loaded directly
+            // by the system classloader, without the intermediate delegations.
+            for (String str : reflectionWhitelist) {
+                if (name.startsWith(str)) {
+                    return findClass(name);
+                }
+            }
+            return super.loadClass(name, resolve);
+        }
     }
 }

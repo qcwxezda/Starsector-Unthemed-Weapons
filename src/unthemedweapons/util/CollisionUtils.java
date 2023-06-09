@@ -27,8 +27,8 @@ public abstract class CollisionUtils {
         if (CollisionClass.NONE.equals(entity.getCollisionClass())) return false;
         // Ignore phased ships
         if (entity instanceof ShipAPI && ((ShipAPI) entity).isPhased()) return false;
-        // Always ignore source
-        if (entity.equals(source)) return false;
+        // Always ignore source and source modules
+        if (entity instanceof ShipAPI && EngineUtils.getBaseShip((ShipAPI) entity).equals(EngineUtils.getBaseShip(source))) return false;
         // Always ignore friendly fighters and missiles
         if (entity.getOwner() == owner && (o instanceof MissileAPI || EngineUtils.isFighter(entity))) return false;
         // Ignore all friendlies if friendly fire is off

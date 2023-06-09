@@ -1,67 +1,7 @@
-Fortified Caches:
-- Greatly increased the chances of finding larger caches
-- Greatly reduced the chance of finding small caches
-- Slightly decreased default total amount
-- Slightly increased average number of officers in defending fleets
-- Slightly increased DP of defending fleets (from 10-300 to 20-320)
-- All of the above except officer count only applies on new game
-Sprawl MRM:
-- damage 350 -> 300
-- refire delay 12s -> 10s
-- reload time 30s -> 25s
-Paralyzer Rocket Launcher:
-- ammo 80 -> 100
-Bloom Autolauncher:
-- OP cost 15 -> 14
-Stinger Swarm Battery:
-- No longer auto-targets fighters (added STRIKE, USE_VS_FRIGATES)
-Ion Storm GLMRS:
-- Removed base EMP damage
-- Energy damage 50 -> 75
-- Flux/shot 100 -> 75
-- Now has 100% chance to arc on hull or armor hits
-Spiker SRM:
-- OP 4 -> 5
-- Regen time 6s -> 7s
-- damage 60 -> 70
-- Chargedown 0.8s -> 1.3s
-Voidcannon:
-- no longer has STRIKE, USE_VS_FRIGATE tags
-- damage 6x300 -> 5x360, same flux efficiency
-- ammo 36 -> 25 (6 shots -> 5 shots)
-- spread 15 -> 20
-- recharge time 24s -> 36s
-Bolt Repeater:
-- ammo 28 -> 20
-Enhanced Tactical Laser:
-- flux/second 135 -> 120
-Dispersion PD Laser:
-- OP 12 -> 11
-Ultra Blaster:
-- OP 20 -> 18
-Boltstorm:
-- OP 18 -> 20
-- range 750 -> 800
-Chaos Pulser:
-- Flux cost 200 -> 210
-Void Ray:
-- Flux cost 500/s -> 550/s
-- OP 32 -> 30
-Splintergun:
-- OP 4 -> 5
-- Damage 240 -> 300
-- Flux cost 60 -> 120
-- Refire delay 0.5s -> 1s
-- Min spread 0 -> 10
-- Max spread 10 -> 20
-Railburst Rifle:
-- OP 5 -> 6
-Demolisher Cannon:
-- OP 6 -> 7
-Mortar Screen:
-- Range 450 -> 500
-- Flux cost 25 -> 30
-Helios Artillery:
-- OP 27 -> 25
-[REDACTED]:
-- range 900 -> 1000
+Fixes:
+
+Fixed an issue with custom collision projectiles that caused them to impact the source ship's modules.
+
+Changes:
+
+Ultra Blaster: lowered volume
