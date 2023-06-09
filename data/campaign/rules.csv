@@ -1,9 +1,0 @@
-id,trigger,conditions,script,text,options,notes,,
-wpnxt_automatedDefensesReplacer,TriggerAutomatedDefenses,$wpnxt_fortifiedCacheFlag,wpnxt_CacheDefenderInteraction,"As your $shipOrFleet moves closer, your comms officer notifies you that multiple sensor contacts have been picked up by short-range scans.
-
-Your comms requests are met with silence. Whoever -- or whatever -- is in charge of this fleet clearly has no desire to talk.",,,,
-wpnxt_prePerformSalvage,DialogOptionSelected,"$option == salPerform
-$wpnxt_fortifiedCacheFlag",wpnxt_PrePerformSalvage,,,,,
-wpnxt_salvageProceed,DialogOptionSelected,$option == wpnxt_proceedWithSalvage,SalvageEntity performSalvage,,,,,
-# Prevent normal BeginFleetEncounter triggers from happening (e.g. Luddic Path tithe)
-wpnxt_consumeFleetEncounter,BeginFleetEncounter,$wpnxt_cacheDefenseFleet score:10000,,,,

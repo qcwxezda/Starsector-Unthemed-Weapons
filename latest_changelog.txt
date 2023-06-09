@@ -1,7 +1,0 @@
-Fixes:
-
-Fixed an issue with custom collision projectiles that caused them to impact the source ship's modules.
-
-Changes:
-
-Ultra Blaster: lowered volume

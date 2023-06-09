@@ -1,11 +1,11 @@
 {
     "masterVersionFile":"https://raw.githubusercontent.com/qcwxezda/Starsector-Unthemed-Weapons/master/unthemedweapons.version",
-    "modName":"Unthemed Weapons Collection",
+    "modName":"Unthemed Weapons Utilities",
     "modThreadId":27074,
     "modVersion":
     {
         "major":0,
-        "minor":5,
-        "patch":4,
+        "minor":6,
+        "patch":0,
     },
 }
