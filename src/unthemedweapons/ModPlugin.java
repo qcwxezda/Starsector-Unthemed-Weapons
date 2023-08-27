@@ -1,9 +1,6 @@
 package unthemedweapons;
 
-import com.fs.starfarer.api.BaseModPlugin;
-import com.fs.starfarer.api.EveryFrameScript;
-import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.PluginPick;
+import com.fs.starfarer.api.*;
 import com.fs.starfarer.api.campaign.CampaignPlugin;
 import com.fs.starfarer.api.campaign.GenericPluginManagerAPI;
 import com.fs.starfarer.api.campaign.listeners.ListenerManagerAPI;
@@ -128,6 +125,13 @@ public class ModPlugin extends BaseModPlugin {
     @Override
     public void onApplicationLoad() {
         particleEngineEnabled = Global.getSettings().getModManager().isModEnabled("particleengine");
+        if (particleEngineEnabled) {
+            String versionString = Global.getSettings().getModManager().getModSpec("particleengine").getVersion();
+            String[] version = versionString.split("\\.");
+            if (Integer.parseInt(version[0]) < 1 && Integer.parseInt(version[1]) < 5) {
+                throw new RuntimeException("Particle Engine is enabled but out of date. Get the latest version here: https://fractalsoftworks.com/forum/index.php?topic=26453.0.");
+            }
+        }
         // Populate custom missile AI
         customMissiles.clear();
         customMissiles.put("wpnxt_energytorpedo_shot", new MakeMissilePlugin() {

@@ -37,6 +37,8 @@ public class SplinterBatteryEffect implements EveryFrameWeaponEffectPlugin, OnFi
     @Override
     public void init(WeaponAPI weapon) {
         heatGlowRenderer = new GlowRenderer(weapon, true);
-        Global.getCombatEngine().addLayeredRenderingPlugin(heatGlowRenderer);
+        if (Global.getCombatEngine() != null) {
+            Global.getCombatEngine().addLayeredRenderingPlugin(heatGlowRenderer);
+        }
     }
 }

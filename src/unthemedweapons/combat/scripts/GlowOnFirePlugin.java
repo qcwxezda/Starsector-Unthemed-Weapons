@@ -21,10 +21,13 @@ public class GlowOnFirePlugin implements OnFireEffectPlugin, EveryFrameWeaponEff
 
     @Override
     public void init(WeaponAPI weapon) {
+        this.weapon = weapon;
         boolean hasBarrel = weapon.getBarrelSpriteAPI() != null;
         heatGlowRenderer = new GlowRenderer(weapon, hasBarrel);
-        Global.getCombatEngine().addLayeredRenderingPlugin(heatGlowRenderer);
-        this.weapon = weapon;
+
+        if (Global.getCombatEngine() != null) {
+            Global.getCombatEngine().addLayeredRenderingPlugin(heatGlowRenderer);
+        }
     }
 
     public float getDecayAmountPerSecond() {

@@ -1,16 +1,8 @@
-Additions:
+Changes:
 
-Added a utility module. Currently, affects the refit screen:
-- Displays modified weapon stats inside the refit screen, based on the ship being refitted
-- Displays modified weapon ranges in the weapon selection picker
-- Displays modified total flux cost
-- Limitation: does not affect fighter wings or fighter weapons
-- Limitation: does not affect weapon group flux cost displays in the weapon group selector
+- Now throws a runtime exception if Particle Engine is enabled but out of date (requires at least version 0.5, if enabled).
 
 Fixes:
 
-Fixed an issue with custom collision projectiles that caused them to impact the source ship's modules.
-
-Changes:
-
-Ultra Blaster: lowered volume
+- Fixed a bug where currently mounted weapon's updated range wasn't showing if no other weapons were available
+- Fixed weapons with custom glow effects crashing if combat engine hasn't been initialized and player immediately enters refit screen upon loading a save

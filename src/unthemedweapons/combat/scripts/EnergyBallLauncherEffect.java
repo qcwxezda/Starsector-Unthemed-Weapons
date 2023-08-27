@@ -321,7 +321,10 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
         projRenderer = new EnergyBallRenderer(weapon, this);
         ((ProjectileWeaponSpecAPI) weapon.getSpec()).setChargeTime(chargeTime);
         weapon.ensureClonedSpec();
-        Global.getCombatEngine().addLayeredRenderingPlugin(projRenderer);
+
+        if (Global.getCombatEngine() != null) {
+            Global.getCombatEngine().addLayeredRenderingPlugin(projRenderer);
+        }
     }
 
     /** Maps (0, 1) to (1, fullChargeDamageMultiplier) */
