@@ -228,7 +228,6 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
     }
 
     private void updateWeaponPickerRanges(WeaponSlotAPI slot) {
-        System.out.println("Updating weapon picker ranges!");
         // Look for all children and sub-children that are buttons
         List<ButtonAPI> buttons = new ArrayList<>();
         Object innerPanel = ReflectionUtils.invokeMethod(wpd, "getInnerPanel");

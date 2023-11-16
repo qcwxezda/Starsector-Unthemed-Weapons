@@ -1,8 +1,2 @@
-Changes:
-
-- Now throws a runtime exception if Particle Engine is enabled but out of date (requires at least version 0.5, if enabled).
-
 Fixes:
-
-- Fixed a bug where currently mounted weapon's updated range wasn't showing if no other weapons were available
-- Fixed weapons with custom glow effects crashing if combat engine hasn't been initialized and player immediately enters refit screen upon loading a save
+-Removed an extraneous "Updating weapon picker ranges" System.out.println call
