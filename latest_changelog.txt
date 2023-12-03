@@ -1,2 +1,3 @@
 Fixes:
--Removed an extraneous "Updating weapon picker ranges" System.out.println call
+- Fixed issue where engine.applyDamage calls were using the target ship as the damage param; now properly uses the projectile that did the damage
+- Removed an extraneous "Updating weapon picker ranges" System.out.println call

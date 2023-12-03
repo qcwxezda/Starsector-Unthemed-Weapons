@@ -107,7 +107,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
             CombatEntityAPI target = collisionData.entity;
             float targetPrevFlux = target instanceof ShipAPI ? ((ShipAPI) target).getFluxTracker().getCurrFlux() : 0f;
 
-            applyDamage(target, target, collisionData.point, proj.getDamageAmount(), data, engine, true);
+            applyDamage(proj, target, collisionData.point, proj.getDamageAmount(), data, engine, true);
 
             // Pass through everything it destroys
             if (target.getHitpoints() <= 0f && !(target instanceof ShipAPI)) {
@@ -252,7 +252,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
             if (dist > explosionRadius) continue;
             float damage = proj.getDamageAmount() * 0.5f + proj.getDamageAmount() * 0.5f * (explosionRadius - dist) / explosionRadius;
 
-            applyDamage(entity, entity, pair.one, damage, data, engine, false);
+            applyDamage(proj, entity, pair.one, damage, data, engine, false);
         }
 
         if (ModPlugin.particleEngineEnabled) {

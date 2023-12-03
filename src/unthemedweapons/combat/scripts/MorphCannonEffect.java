@@ -135,7 +135,7 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
         // If shield hit, apply kinetic damage equal to K + 0.25*HE
         if (shieldHit) {
             engine.applyDamage(
-                    target,
+                    proj,
                     target,
                     pt,
                     kDamage + 0.25f*hDamage,
@@ -151,7 +151,7 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
         // hull damage is HE + KE
         else {
             engine.applyDamage(
-                    target,
+                    proj,
                     target,
                     pt,
                     hDamage + 0.25f*kDamage,
@@ -162,7 +162,7 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
                     proj.getSource(),
                     true);
             engine.applyDamage(
-                    target,
+                    proj,
                     target,
                     pt,
                     0.75f*kDamage,

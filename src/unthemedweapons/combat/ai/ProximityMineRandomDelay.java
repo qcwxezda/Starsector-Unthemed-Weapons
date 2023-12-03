@@ -101,7 +101,7 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
                 explosionSpec.getMaxDamage(),
                 0f,
                 explosionSpec.getDamageType(),
-                missile.getSource(),
+                missile,
                 hitTarget == null ? null : Collections.singleton(hitTarget),
                 engine);
         Global.getSoundPlayer().playSound(explosionSpec.getSoundSetId(), 0.95f + MathUtils.randBetween(0f, 0.05f), 1f, missile.getLocation(), new Vector2f());

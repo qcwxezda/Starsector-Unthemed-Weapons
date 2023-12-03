@@ -211,7 +211,7 @@ public abstract class EngineUtils {
 
             for (Pair<Float, List<Vector2f>> entry : damageList) {
                 for (Vector2f pt : entry.two) {
-                    engine.applyDamage(entity, entity, pt, totalDamage * 0.5f * entry.one, damageType, totalEmp * 0.5f * entry.one, bypassShields, dealsSoftFlux, source, playSound);
+                    engine.applyDamage(projSource, entity, pt, totalDamage * 0.5f * entry.one, damageType, totalEmp * 0.5f * entry.one, bypassShields, dealsSoftFlux, source, playSound);
                 }
             }
         }
@@ -420,8 +420,9 @@ public abstract class EngineUtils {
     }
 
     /** Deals damage instantaneously. Used in cluster mine so multiple mines don't explode on the same already-dead target */
-    public static void spawnInstantaneousExplosion(Vector2f loc, float radius, float damageAmount, float empAmount, DamageType damageType, ShipAPI source, Set<CombatEntityAPI> alreadyDamaged, CombatEngineAPI engine) {
+    public static void spawnInstantaneousExplosion(Vector2f loc, float radius, float damageAmount, float empAmount, DamageType damageType, DamagingProjectileAPI projSource, Set<CombatEntityAPI> alreadyDamaged, CombatEngineAPI engine) {
         Iterator<Object> itr = engine.getAllObjectGrid().getCheckIterator(loc, 2f*radius, 2f*radius);
+        ShipAPI source = projSource.getSource();
         if (alreadyDamaged == null) {
             alreadyDamaged = new HashSet<>();
         }

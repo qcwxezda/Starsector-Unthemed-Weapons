@@ -17,7 +17,7 @@ public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, Dama
             // modifyDamageDealt happens before onHit, therefore
             // proj damage is the base damage and not twice the base damage
             engine.applyDamage(
-                    target,
+                    proj,
                     target,
                     pt,
                     proj.getDamageAmount(),

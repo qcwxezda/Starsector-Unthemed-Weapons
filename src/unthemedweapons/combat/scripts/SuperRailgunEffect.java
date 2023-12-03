@@ -138,7 +138,7 @@ public class SuperRailgunEffect extends GlowOnFirePlugin {
             proj.getVelocity().set(new Vector2f(data.initialVelocity.x * (1f - speedLossDuringHit), data.initialVelocity.y * (1f - speedLossDuringHit)));
 
             engine.applyDamage(
-                    target,
+                    proj,
                     target,
                     closest.point,
                     proj.getDamageAmount(),

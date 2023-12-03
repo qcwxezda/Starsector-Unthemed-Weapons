@@ -114,6 +114,7 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
                 // pt is inside shield, proj.getLocation() is outside
                 if (Misc.getDistance(pt, loc) <= effectRadius && CollisionUtils.rayCollisionCheckShield(proj.getLocation(), loc, tgt.getShield()) == null) {
                     combatEngine.applyDamage(
+                            proj,
                             tgt,
                             loc,
                             pair.two.getDamage(),
