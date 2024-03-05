@@ -202,6 +202,13 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
         Object innerPanel = ReflectionUtils.invokeMethod(wpd, "getInnerPanel");
         List<?> wpdChildren = (List<?>) ReflectionUtils.invokeMethod(innerPanel, "getChildrenNonCopy");
         for (Object child : wpdChildren) {
+            if (child instanceof ButtonAPI) {
+                if (firstModifiedButton == child) {
+                    return;
+                }
+                updateWeaponPickerRanges(slot);
+                return;
+            }
             if (child instanceof UIPanelAPI) {
                 try {
                     List<?> innerPanelChildren = (List<?>) ReflectionUtils.invokeMethodNoCatch(child, "getItems");
@@ -225,14 +232,18 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
         List<ButtonAPI> buttons = new ArrayList<>();
         Object innerPanel = ReflectionUtils.invokeMethod(wpd, "getInnerPanel");
         List<?> wpdChildren = (List<?>) ReflectionUtils.invokeMethod(innerPanel, "getChildrenNonCopy");
+        boolean isFirst = false;
         for (Object child : wpdChildren) {
             if (child instanceof ButtonAPI) {
                 buttons.add((ButtonAPI) child);
+                if (!isFirst) {
+                    firstModifiedButton = (ButtonAPI) child;
+                    isFirst = true;
+                }
             }
             if (child instanceof UIPanelAPI) {
                 try {
                     List<?> innerPanelChildren = (List<?>) ReflectionUtils.invokeMethodNoCatch(child, "getItems");
-                    boolean isFirst = false;
                     for (Object subChild : innerPanelChildren) {
                         if (subChild instanceof ButtonAPI) {
                             buttons.add((ButtonAPI) subChild);
@@ -469,7 +480,6 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
         }
     }
 
-    /** Taken from CargoTooltipFactory */
     private String formatNumber(float number, float sigFigsReference, boolean forceTruncateInt) {
         if (forceTruncateInt) {
             return Integer.toString((int) number);
