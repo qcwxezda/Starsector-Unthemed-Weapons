@@ -4,6 +4,7 @@ import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.listeners.ListenerManagerAPI;
+import com.fs.starfarer.launcher.ModManager;
 import unthemedweapons.campaign.RefitTabListenerAndScript;
 
 import java.net.URL;
@@ -11,6 +12,14 @@ import java.net.URLClassLoader;
 
 @SuppressWarnings("unused")
 public class ModPlugin extends BaseModPlugin {
+
+    @Override
+    public void onApplicationLoad() {
+        ModManager manager = ModManager.getInstance();
+        if (manager.isModEnabled("unthemedweapons")) {
+            throw new RuntimeException("Both Unthemed Weapons Collection and Unthemed Weapons Utilities are enabled! Disable one or the other.");
+        }
+    }
 
     @Override
     public void onGameLoad(boolean newGame) {
