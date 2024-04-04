@@ -1,3 +1,4 @@
-Fixes:
-- Fixed issue where engine.applyDamage calls were using the target ship as the damage param; now properly uses the projectile that did the damage
-- Removed an extraneous "Updating weapon picker ranges" System.out.println call
+0.6.3:
+- Fixed Oblivion Spear sometimes dealing its damage twice if multiple were installed on one ship
+- Fixed weapons with "limited charges" text not showing modified charges
+- Fixed weapon caches potentially showing up in THEME_CORE and THEME_HIDDEN worlds

@@ -50,7 +50,7 @@ public abstract class GenFortifiedCaches {
     public static WeightedRandomPicker<StarSystemAPI> getSystemPicker(Random random) {
         WeightedRandomPicker<StarSystemAPI> systemPicker = new WeightedRandomPicker<>(random);
         for (StarSystemAPI system : Global.getSector().getStarSystems()) {
-            Set<String> blacklist = tagsToSkip;
+            Set<String> blacklist = new HashSet<>(tagsToSkip);
             blacklist.retainAll(system.getTags());
             if (!blacklist.isEmpty()) {
                 continue;
