@@ -46,9 +46,16 @@ public class ProximityMineRandomDelay implements ProximityFuseAIAPI, MissileAIPl
             updatedDamage = true;
         }
 
-        if (!missile.didDamage() && (missile.isFading()
-                || EngineUtils.isEntityNearby(missile.getLocation(), null, range, vsMissileRange, false, proxChecker))) {
-            explode(null);
+        if (!missile.didDamage()) {
+            if (missile.isFading()) {
+                explode(null);
+                return;
+            }
+            if (EngineUtils.isEntityNearby(missile.getLocation(), null, range, vsMissileRange, false, proxChecker)) {
+                if (Misc.random.nextFloat() <= amount * 30f) {
+                    explode(null);
+                }
+            }
         }
 
         if (missile.getVelocity().length() > missile.getMaxSpeed() && slowToMaxSpeed) {

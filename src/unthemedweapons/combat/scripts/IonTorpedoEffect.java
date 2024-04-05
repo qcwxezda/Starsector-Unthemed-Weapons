@@ -21,7 +21,7 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
     private static final float effectRadius = 250f;
     private static final int maxTargets = 100;
     private static final float effectChance = 0.5f;
-    private static final float energyDamageSmall = 250f, energyDamageMedium = 500f, energyDamageLarge = 1000f, energyDamageEngine = 500f;
+    private static final float energyDamageSmall = 200f, energyDamageMedium = 400f, energyDamageLarge = 800f, energyDamageEngine = 400f;
 
     private enum DisabledType {
         NONE,

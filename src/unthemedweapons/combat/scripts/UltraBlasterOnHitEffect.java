@@ -11,31 +11,30 @@ import java.awt.*;
 @SuppressWarnings("unused")
 public class UltraBlasterOnHitEffect implements OnHitEffectPlugin {
 
-    private static final float effectRadius = 120f;
-    private static final float effectArc = 90f;
+    private static final float effectRadius = 60f;
+    private static final float effectArc = 75f;
     private static final float explosionRadius = 80f;
 
     private static final int minExplosionCount = 5;
-    private static final int maxExplosionCount = 10;
+    private static final int maxExplosionCount = 5;
     private static final float explosionDamage = 150f;
 
     @Override
     public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
 
         // Doesn't trigger on missile impacts
-        if (target instanceof MissileAPI) {
+        if (!(target instanceof ShipAPI)) {
             return;
         }
 
-        // Doesn't trigger on shield hits
-        if (damageResult.getDamageToHull() <= 0 && damageResult.getDamageToPrimaryArmorCell() <= 0) {
-            return;
-        }
-
-        int numExplosions = Misc.random.nextInt(maxExplosionCount - minExplosionCount + 1) + minExplosionCount;
+        float numExplosions = Misc.random.nextInt(maxExplosionCount - minExplosionCount + 1) + minExplosionCount;
         if (proj.isFading()) {
             numExplosions *= proj.getBrightness();
         }
+        if (shieldHit) {
+            numExplosions *= ((ShipAPI) target).getHardFluxLevel();
+        }
+
         for (int i = 0; i < numExplosions; i++) {
             Vector2f explosionLocation = new Vector2f(proj.getLocation());
             // sqrt for uniform distribution on the circular segment
@@ -43,7 +42,6 @@ public class UltraBlasterOnHitEffect implements OnHitEffectPlugin {
             float angleOffset = (float) Math.PI / 180 * (proj.getFacing() + Misc.random.nextFloat() * effectArc - effectArc / 2);
             explosionLocation.x += locOffset * (float) Math.cos(angleOffset);
             explosionLocation.y += locOffset * (float) Math.sin(angleOffset);
-
             DamagingExplosionSpec spec = new DamagingExplosionSpec(
                     0.5f,
                     explosionRadius,

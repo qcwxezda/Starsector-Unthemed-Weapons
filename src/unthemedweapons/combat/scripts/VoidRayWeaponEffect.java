@@ -17,10 +17,10 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
     static float beamAngleSpeed = 20f;
     static float maxWidth = 18f;
     /** Per second */
-    static float fullChargeGrowRate = 1.5f;
+    static float fullChargeGrowRate = 1f;
 
     /** Amount of damage to transfer to full strength first beam per second. Approximate */
-    static float transferPerSecond = 0.2f;
+    static float transferPerSecond = 0.15f;
 
     /** Need both spreads and angleOffsets since angleOffsets is shared between every voidray weapon */
     float spread = 0f;
@@ -108,7 +108,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
         if (source == null || source.getVariant().hasHullMod(HullMods.HIGH_SCATTER_AMP)) {
             return;
         }
-        beam.getDamage().setForceHardFlux(Misc.random.nextFloat() < beam.getSource().getHardFluxLevel());
+        beam.getDamage().setForceHardFlux(Misc.random.nextFloat() < Math.min(0.5f, beam.getSource().getHardFluxLevel()));
     }
 
     @Override

@@ -1,0 +1,9 @@
+{
+  "nexerelin": {
+    "mining_weapon_strengths": {
+      "wpnxt_ultrablaster": 20,
+      "wpnxt_mininglasermk2":3,
+      "wpnxt_miniblaster":5
+    }
+  }
+}

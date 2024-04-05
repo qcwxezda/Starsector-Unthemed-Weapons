@@ -12,7 +12,7 @@ public class SplinterBatteryEffect implements EveryFrameWeaponEffectPlugin, OnFi
     static final float timeToMaxBonus = 10f;
     float timeSinceLastFired = 0f;
     static final float timeUntilDecay = 2f;
-    static final float decayRate = 0.2f;
+    static final float decayRate = 0.4f;
     GlowRenderer heatGlowRenderer;
 
     @Override

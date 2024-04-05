@@ -1,4 +1,35 @@
 0.6.3:
-- Fixed Oblivion Spear sometimes dealing its damage twice if multiple were installed on one ship
+- Added Ultra Blaster, Mining Laser Mk.2, and Light Mining Blaster as Nexerelin-capable mining weapons
+- Cluster Mine Launcher: Ammo 10 -> 8, split arc 30 -> 45, added slight randomness to explosion trigger
+- Electron Torpedo: reduced damage to disabled components by 25%
+- Spiker SRM: Burst DPS 112 -> 93.3, OP 5 -> 6
+- Bloom Torpedo: Ammo 1 -> 2, OP 2 -> 3
+- Bloom Autolauncher: Max ammo 2 -> 3
+- Ion Storm GMLRS: Flux / shot 75 -> 50
+- Stinger Swarm Battery: Range 1600 -> 1800, Refire 12s -> 10s
+- Voidcannon: efficiency 0.33 -> 0.3
+- Bolt Repeater, Boltgun, Bolt Streamer: efficiency 1 -> 0.9
+- Bolt Streamer: DPS 269 -> 249
+- Needle Driver: Range 750 -> 800,
+fire rate 1.8s -> 2s,
+removed EMP damage from projectiles,
+reduced explosion damage to 25 per / 400 max (down from 50 per / 500 max),
+added equal EMP damage to explosions,
+projectiles now immediately explode if >=16 are attached at once.
+- Graviton Array: OP 22 -> 20
+- Void Ray: Capped hard flux proportion at 50%, somewhat increased time damage takes to go from 350x5 to 1750x1 post beam convergence
+- Ultra Blaster: number of secondary explosions fixed at 5, now has a chance of triggering when hitting shields depending on target's hard flux level
+- Splintergun: greatly improved accuracy
+- Heavy Railburst flux efficiency 0.9 -> 1
+- Heavy Demolisher flux efficiency 1.25 -> 1.2, OP 13 -> 14, ammo 8 -> 6
+- Demolisher Cannon flux efficiency 1.25 -> 1.2, ammo 4 -> 3
+- Spreadfire Cannon flux efficiency 0.8 -> 0.7, range 850 -> 700, damage 80 -> 75, ammo 50 -> 60, OP 14 -> 12, spread 24 -> 30, slightly lowered fire rate
+- Mortar Screen max spread 25 -> 15, OP 8 -> 7, changed role to Anti Armor (wasn't really great against fighters)
+- Pummeler damage 450 -> 175, fire rate 2/s -> 5/s, flux efficiency 0.28 -> 0.26, fire rate decays faster after not firing
+- Rail Ballista damage 900 -> 600, OP 30 -> 27, damage / second and flux efficiency unchanged
+- [REDACTED] damage 800 -> 900, DPS 400 -> 360, efficiency 1 -> 1.2
+- [REDACTED] flux/shot 4000 -> 3000
+- [REDACTED] damage 750 -> 800, DPS 625 -> 533.3, efficiency 1 -> 1.2, full charge damage 12000 -> 10000, charge flux/s 750 -> 600
+- Fixed [REDACTED] sometimes dealing its damage twice if multiple were installed on one ship
 - Fixed weapons with "limited charges" text not showing modified charges
 - Fixed weapon caches potentially showing up in THEME_CORE and THEME_HIDDEN worlds

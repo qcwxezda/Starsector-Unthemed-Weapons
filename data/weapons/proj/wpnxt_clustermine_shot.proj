@@ -30,7 +30,7 @@
     "spawnCount":3,
     "spawnSpec":"wpnxt_clusterlauncher_spawn",
     "evenSpread":false,
-    "arc":30, # Everything below this line is not used
+    "arc":45, # Everything below this line is not used
     "splitRange":0,
     "splitRangeRange":0,
     "minTimeToSplit":100, # Don't use the native MIRV behavior
