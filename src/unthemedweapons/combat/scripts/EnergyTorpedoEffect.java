@@ -1,17 +1,15 @@
 package unthemedweapons.combat.scripts;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
-import particleengine.Particles;
 import unthemedweapons.ModPlugin;
 import unthemedweapons.combat.plugins.Action;
 import unthemedweapons.combat.plugins.ActionPlugin;
+import unthemedweapons.fx.particles.BloomTrail;
 import unthemedweapons.fx.particles.Explosion;
-import unthemedweapons.fx.particles.emitters.BloomTrailEmitter;
 import unthemedweapons.util.EngineUtils;
 
 import java.awt.*;
@@ -82,16 +80,8 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
         if (ModPlugin.particleEngineEnabled) {
-            final MissileAPI missile = (MissileAPI) proj;
-            Particles.stream(
-                    new BloomTrailEmitter(missile, particleScale), 2, particlesPerSecond, -1f,
-                    new Particles.StreamAction<BloomTrailEmitter>() {
-                        @Override
-                        public boolean apply(BloomTrailEmitter emitter) {
-                            return Global.getCombatEngine().isEntityInPlay(missile);
-                        }
-                    });
-            missile.setEmpResistance(empResistance);
+            BloomTrail.makeTrail((MissileAPI) proj, particleScale, particlesPerSecond);
+            ((MissileAPI) proj).setEmpResistance(empResistance);
         }
     }
 }

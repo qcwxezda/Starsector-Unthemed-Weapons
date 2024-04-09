@@ -1,3 +1,5 @@
+0.6.5:
+- Fixed unintentional hard dependency on Particle Engine
 0.6.4:
 - Updated some sprites
 - Updated some visuals
