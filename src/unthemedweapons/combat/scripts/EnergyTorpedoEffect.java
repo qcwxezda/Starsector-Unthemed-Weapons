@@ -81,7 +81,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
         if (ModPlugin.particleEngineEnabled) {
             BloomTrail.makeTrail((MissileAPI) proj, particleScale, particlesPerSecond);
-            ((MissileAPI) proj).setEmpResistance(empResistance);
         }
+        ((MissileAPI) proj).setEmpResistance(empResistance);
     }
 }
