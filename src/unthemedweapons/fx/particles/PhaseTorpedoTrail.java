@@ -12,7 +12,7 @@ public abstract class PhaseTorpedoTrail {
         Emitter emitter = Particles.initialize(loc, "graphics/fx/smoke32.png");
         emitter.color(0.98f, 0.53f, 0.69f, 0.12f);
         emitter.randomHSVA(30f, 0f, 0f, 0f);
-        emitter.saturationShift(-0.24f, -0.3f);
+        emitter.saturationShift(-0.12f, -0.15f);
         emitter.velocity(-90f, -80f, 0f, 0f);
         emitter.size(20f, 30f, 10f, 15f);
         emitter.growthRate(8f, 12f, 8f, 12f);
@@ -20,7 +20,7 @@ public abstract class PhaseTorpedoTrail {
         emitter.life(3f, 3.5f);
         emitter.facing(0, 360f);
         emitter.turnRate(-5f, 5f);
-        emitter.sinusoidalMotionY(amp, amp*1.5f, 0.5f, 0.5f, 0f, 0f);
+        emitter.sinusoidalMotionY(amp*0.5f, amp*0.75f, 0.5f, 0.5f, 0f, 0f);
         return emitter;
     }
 

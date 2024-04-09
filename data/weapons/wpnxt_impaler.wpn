@@ -5,7 +5,7 @@
   "size":"MEDIUM",
   "turretSprite":"graphics/weapons/missile/wpnxt_impaler_turret.png",
   "hardpointSprite":"graphics/weapons/missile/wpnxt_impaler_hardpoint.png",
-  "hardpointOffsets":[25, -10, 25, -5, 25, 0, 25, 5, 25, 10],
+  "hardpointOffsets":[23, -8, 23, -4, 23, 0, 23, 4, 23, 8],
   "turretOffsets":[19, -10, 19, -5, 19, 0, 19, 5, 19, 10],
   "hardpointAngleOffsets":[-4, -2, 0, 2, 4],
   "turretAngleOffsets":[-4, -2, 0, 2, 4],

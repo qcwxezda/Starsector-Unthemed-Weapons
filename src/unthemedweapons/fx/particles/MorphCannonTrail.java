@@ -16,11 +16,11 @@ public abstract class MorphCannonTrail {
 
         float initialSize = 9f;
         Pair<Float, Float> growthRateAcc = MathUtils.getRateAndAcceleration(initialSize, initialSize, initialSize*1.5f, life);
-        emitter.size(initialSize * 3f, initialSize * 4f, initialSize * 0.9f, initialSize * 1.1f);
-        emitter.growthRate(0f, 0f, growthRateAcc.one * 0.9f, growthRateAcc.one * 1.1f);
-        emitter.growthAcceleration(0f, 0f, growthRateAcc.two * 0.9f, growthRateAcc.two * 1.1f);
+        emitter.size(initialSize * 6f, initialSize * 6.6f, initialSize * 0.9f, initialSize );
+        emitter.growthRate(0f, 0f, growthRateAcc.one * 0.9f, growthRateAcc.one);
+        emitter.growthAcceleration(0f, 0f, growthRateAcc.two * 0.9f, growthRateAcc.two);
 
-        emitter.circleOffset(0f, 3f);
+        emitter.circleOffset(0f, 1f);
         emitter.offset(-20f, 0f, 0f, 0f);
 //                Vector2f perp = source.getVelocity();
 //                Utils.safeNormalize(perp);
@@ -41,7 +41,7 @@ public abstract class MorphCannonTrail {
                     emitter.setAxis(source.getVelocity());
                 }
 
-                emitter.facing(-10f, 10f);
+                emitter.facing(-3f, 3f);
 
 //                // Want the angle to match the projectile's facing rather than velocity
 //                float angleDiff = Utils.angleDiff(source.getFacing(), Misc.getAngleInDegrees(source.getVelocity()));

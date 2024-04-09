@@ -1,7 +1,6 @@
 package unthemedweapons.fx.particles.emitters;
 
 import com.fs.starfarer.api.combat.CombatEntityAPI;
-import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.BaseIEmitter;
@@ -22,11 +21,6 @@ public class MuzzleFlashEmitter extends BaseIEmitter {
         minSize = 20f;
         maxSize = 30f;
         velocityScale = 1f;
-    }
-
-    @Override
-    public SpriteAPI getSprite() {
-        return particleengine.Utils.getLoadedSprite("graphics/fx/particlealpha64sq.png");
     }
 
     public MuzzleFlashEmitter anchor(CombatEntityAPI anchor) {

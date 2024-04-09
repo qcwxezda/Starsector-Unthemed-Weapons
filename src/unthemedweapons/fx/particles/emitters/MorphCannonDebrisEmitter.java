@@ -1,6 +1,5 @@
 package unthemedweapons.fx.particles.emitters;
 
-import com.fs.starfarer.api.graphics.SpriteAPI;
 import org.lwjgl.util.vector.Vector2f;
 import particleengine.BaseIEmitter;
 import particleengine.ParticleData;
@@ -24,11 +23,6 @@ public class MorphCannonDebrisEmitter extends BaseIEmitter {
     public MorphCannonDebrisEmitter location(Vector2f location) {
         this.location.set(location);
         return this;
-    }
-
-    @Override
-    public SpriteAPI getSprite() {
-        return particleengine.Utils.getLoadedSprite("graphics/fx/particlealpha64sq.png");
     }
 
     @Override

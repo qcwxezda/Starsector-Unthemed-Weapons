@@ -48,8 +48,8 @@
       "glowAlternateColor":[80,60,200,255],
       "type":"GLOW" # GLOW or SMOKE; additive or regular blend mode
     },
-    "width":15.0,
-    "length":45.0,
+    "width":18.0,
+    "length":75.0,
     "angle":180.0}],
   "onFireEffect":"unthemedweapons.combat.scripts.EnergyTorpedoLargeEffect"
 }

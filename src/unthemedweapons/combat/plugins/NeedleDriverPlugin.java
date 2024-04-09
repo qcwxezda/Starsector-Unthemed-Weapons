@@ -14,12 +14,14 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class NeedleDriverPlugin extends BaseEveryFrameCombatPlugin {
-    static final float lingerTime = 12f;
+    static final float lingerTime = 15f;
 
-    static final float maxExplosionRadius = 160f;
-    static final float explosionRadiusPer = 10f;
-    static final float maxExplosionDamage = 400;
+    static final float maxExplosionRadius = 140f;
+    static final float explosionRadiusPer = 7f;
+    static final float maxExplosionDamage = 500;
     static final float explosionDamagePer = 25f;
+    static final int maxAttachments = 20;
+
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
 
@@ -53,7 +55,7 @@ public class NeedleDriverPlugin extends BaseEveryFrameCombatPlugin {
 
             if (!attachments.isEmpty() &&
                     (attachments.getFirst().proj.getElapsed() >= lingerTime ||
-                            attachments.size() * explosionDamagePer >= maxExplosionDamage ||
+                            attachments.size() >= maxAttachments ||
                             ship.isPhased() ||
                             !ship.isAlive())) {
 
