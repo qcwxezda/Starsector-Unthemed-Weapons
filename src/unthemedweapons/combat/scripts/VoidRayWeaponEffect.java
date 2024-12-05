@@ -28,6 +28,8 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
     float convergeLevel = 0f;
     /** Per second, as fraction of remaining convergence arc */
     float convergeLevelRate = 0.8f;
+    /** This multiplier only affects the non-primary beams, so to get the true damage multiplier multiply (1-mult) by 4/5 */
+    float convergeDamageMult = 1.625f;
 
     List<Float> angleOffsets = new ArrayList<>();
     List<Float> randomFloats = new ArrayList<>();
@@ -64,7 +66,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
                 beam.getDamage().setDamage(damage * (1 - transferPerSecond * amount));
             }
             BeamAPI firstBeam = weapon.getBeams().get(0);
-            firstBeam.getDamage().setDamage(firstBeam.getDamage().getBaseDamage() + totalDamageTransferred);
+            firstBeam.getDamage().setDamage(firstBeam.getDamage().getBaseDamage() + totalDamageTransferred * convergeDamageMult);
             for (BeamAPI beam : weapon.getBeams()) {
                 beam.setWidth(Math.min(maxWidth, beam.getWidth() + fullChargeGrowRate * amount));
             }
