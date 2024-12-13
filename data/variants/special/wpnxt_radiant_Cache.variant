@@ -1,6 +1,6 @@
 {
     "displayName": "Experimental",
-    "fluxCapacitors": 0,
+    "fluxCapacitors": 17,
     "fluxVents": 55,
     "hullId": "wpnxt_mod_radiant",
     "hullMods": [
@@ -10,19 +10,18 @@
         "targetingunit",
         "hardenedshieldemitter",
         "heavyarmor",
-        "magazines",
         "autorepair",
         "turretgyros"
     ],
     "permaMods": [
         "solar_shielding",
         "autorepair",
-        "armoredweapons"
+        "turretgyros"
     ],
     "sMods": [
         "solar_shielding",
         "autorepair",
-        "armoredweapons"
+        "turretgyros"
     ],
     "variantId": "wpnxt_radiant_Cache",
     "weaponGroups": [
@@ -30,8 +29,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 000": "autopulse",
-                "WS 001": "autopulse"
+                "WS 000": "wpnxt_boltstorm",
+                "WS 001": "wpnxt_boltstorm"
             }
         },
         {
@@ -61,10 +60,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 009": "pdburst",
-                "WS 011": "pdburst",
-                "WS 016": "pdburst",
-                "WS 018": "pdburst"
+                "WS 010": "pdburst",
+                "WS 017": "pdburst"
             }
         }
     ]

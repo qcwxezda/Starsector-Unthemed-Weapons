@@ -2,7 +2,6 @@ package unthemedweapons.util;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
-import com.fs.starfarer.api.campaign.CustomCampaignEntityAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
@@ -71,8 +70,8 @@ public abstract class CampaignUtils {
     }
 
     public static void generateFleetForEnergyCache(CampaignFleetAPI fleet, Random random) {
-        List<String> radiantSkills = Arrays.asList(Skills.ENERGY_WEAPON_MASTERY, Skills.TARGET_ANALYSIS, Skills.IMPACT_MITIGATION, Skills.GUNNERY_IMPLANTS, Skills.ORDNANCE_EXPERTISE, Skills.HELMSMANSHIP, Skills.SYSTEMS_EXPERTISE);
-        List<Integer> radiantEliteSkills = Arrays.asList( 0, 1, 2, 4, 5);
+        List<String> radiantSkills = Arrays.asList(Skills.GUNNERY_IMPLANTS, Skills.TARGET_ANALYSIS, Skills.IMPACT_MITIGATION, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.HELMSMANSHIP, Skills.SYSTEMS_EXPERTISE);
+        List<Integer> radiantEliteSkills = Arrays.asList( 1, 2, 3, 5, 6);
         PersonAPI commander = CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, radiantSkills, radiantEliteSkills, random);
         commander.getStats().setSkipRefresh(true);
         commander.getStats().setSkillLevel(Skills.BEST_OF_THE_BEST, 1);
@@ -81,12 +80,13 @@ public abstract class CampaignUtils {
         commander.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
         commander.getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1);
         commander.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
-        commander.getStats().setSkillLevel(Skills.HULL_RESTORATION, 1);
-        commander.getStats().setSkipRefresh(false);
+        commander.getStats().setSkillLevel(Skills.CARRIER_GROUP, 1);
+//        commander.getStats().setSkipRefresh(false);
+//        fleet.setCommander(commander);
         CampaignUtils.addToFleet(fleet, "wpnxt_radiant_Cache", null, commander).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
 
-        List<String> paragonSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.ENERGY_WEAPON_MASTERY, Skills.IMPACT_MITIGATION);
-        List<Integer> paragonEliteSkills = Arrays.asList(0, 2, 3, 5, 6);
+        List<String> paragonSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.GUNNERY_IMPLANTS, Skills.COMBAT_ENDURANCE, Skills.IMPACT_MITIGATION);
+        List<Integer> paragonEliteSkills = Arrays.asList(0, 1, 2, 3, 6);
         int paragonCount = 1;
         for (int i = 0; i < paragonCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_paragon_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, paragonSkills, paragonEliteSkills, random)).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
@@ -112,34 +112,38 @@ public abstract class CampaignUtils {
         commander.getStats().setSkipRefresh(true);
         commander.getStats().setSkillLevel(Skills.BEST_OF_THE_BEST, 1);
         commander.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
+        commander.getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 1);
+        commander.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
         commander.getStats().setSkillLevel(Skills.FIGHTER_UPLINK, 1);
         commander.getStats().setSkillLevel(Skills.CARRIER_GROUP, 1);
+        commander.getStats().setSkillLevel(Skills.DERELICT_CONTINGENT, 1);
         commander.getStats().setSkipRefresh(false);
-        CampaignUtils.addToFleet(fleet, "wpnxt_pegasus_Cache", null, commander);
+        fleet.setCommander(commander);
+        CampaignUtils.addToFleet(fleet, "wpnxt_pegasus_Cache", null, commander).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
 
         List<String> conquestSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.MISSILE_SPECIALIZATION, Skills.BALLISTIC_MASTERY, Skills.FIELD_MODULATION, Skills.IMPACT_MITIGATION, Skills.GUNNERY_IMPLANTS);
         List<Integer> conquestEliteSkills = Arrays.asList(0, 1, 2, 4, 5);
-        int conquestCount = 1;
+        int conquestCount = 2;
         for (int i = 0; i < conquestCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_conquest_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, conquestSkills, conquestEliteSkills, random));
         }
 
         List<String> gryphonSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.MISSILE_SPECIALIZATION, Skills.SYSTEMS_EXPERTISE, Skills.COMBAT_ENDURANCE, Skills.FIELD_MODULATION, Skills.IMPACT_MITIGATION);
         List<Integer> gryphonEliteSkills = Arrays.asList(0, 2, 4, 5, 6);
-        int gryphonCount = 3;
+        int gryphonCount = 4;
         for (int i = 0; i < gryphonCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_gryphon_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, gryphonSkills, gryphonEliteSkills, random));
         }
 
-        int heronCount = 4;
+        int heronCount = 6;
         for (int i = 0; i < heronCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_heron_Cache", null, null);
         }
 
         List<String> vigilanceSkills = Arrays.asList(Skills.HELMSMANSHIP, Skills.TARGET_ANALYSIS, Skills.MISSILE_SPECIALIZATION, Skills.COMBAT_ENDURANCE, Skills.FIELD_MODULATION, Skills.GUNNERY_IMPLANTS, Skills.ORDNANCE_EXPERTISE);
         List<Integer> vigilianceEliteSkills = Arrays.asList(0, 2, 4, 5, 6);
-        int officeredVigilanceCount = 6;
-        int unofficeredVigilanceCount = 4;
+        int officeredVigilanceCount = 5;
+        int unofficeredVigilanceCount = 7;
 
         for (int i = 0; i < officeredVigilanceCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_vigilance_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.STEADY, vigilanceSkills, vigilianceEliteSkills, random));
@@ -157,9 +161,13 @@ public abstract class CampaignUtils {
         commander.getStats().setSkipRefresh(true);
         commander.getStats().setSkillLevel(Skills.BEST_OF_THE_BEST, 1);
         commander.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
+        commander.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
         commander.getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 1);
+        commander.getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1);
+        commander.getStats().setSkillLevel(Skills.TACTICAL_DRILLS, 1);
         commander.getStats().setSkillLevel(Skills.FLUX_REGULATION, 1);
         commander.getStats().setSkipRefresh(false);
+        fleet.setCommander(commander);
         CampaignUtils.addToFleet(fleet, "wpnxt_invictus_Cache", null, commander);
 //        FleetMemberAPI flagship = fleet.getFleetData().addFleetMember("wpnxt_invictus_Cache");
 //        flagship.setCaptain(commander);
@@ -172,7 +180,7 @@ public abstract class CampaignUtils {
         List<Integer> retributionEliteSkills = Arrays.asList(0, 2, 3, 4, 6);
         int retributionCount = 2;
         for (int i = 0; i < retributionCount; i++) {
-            CampaignUtils.addToFleet(fleet, "wpnxt_retribution_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.RECKLESS, retributionSkills, retributionEliteSkills, random));
+            CampaignUtils.addToFleet(fleet, "wpnxt_retribution_Cache", null, CampaignUtils.createOfficer(Factions.MERCENARY, Personalities.RECKLESS, retributionSkills, retributionEliteSkills, random)).getVariant().addTag(Tags.VARIANT_ALWAYS_RECOVERABLE);
         }
 
         List<String> eradicatorSkills = Arrays.asList(Skills.SYSTEMS_EXPERTISE, Skills.MISSILE_SPECIALIZATION, Skills.IMPACT_MITIGATION, Skills.FIELD_MODULATION, Skills.ORDNANCE_EXPERTISE, Skills.BALLISTIC_MASTERY, Skills.TARGET_ANALYSIS);
@@ -193,7 +201,6 @@ public abstract class CampaignUtils {
         for (int i = 0; i < unofficeredLasherCount; i++) {
             CampaignUtils.addToFleet(fleet, "wpnxt_lasher_Cache", null, null);
         }
-
     }
 
     public static void findSpecialCaches() {

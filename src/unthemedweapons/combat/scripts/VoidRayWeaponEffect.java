@@ -28,8 +28,8 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
     float convergeLevel = 0f;
     /** Per second, as fraction of remaining convergence arc */
     float convergeLevelRate = 0.8f;
-    /** This multiplier only affects the non-primary beams, so to get the true damage multiplier multiply (1-mult) by 4/5 */
-    float convergeDamageMult = 1.625f;
+    /** This multiplier only affects the non-primary beams, so to get the true damage multiplier multiply (mult-1) by 4/5 */
+    float convergeDamageMult = 1.375f;
 
     List<Float> angleOffsets = new ArrayList<>();
     List<Float> randomFloats = new ArrayList<>();

@@ -19,7 +19,7 @@ public class BoltStormEffect implements OnFireEffectPlugin, EveryFrameWeaponEffe
 
         proj.getTailEnd().set(v);
 
-        phase += 2f * Math.PI / (shotsPerCycle);
+        phase += (float) (2f * Math.PI / (shotsPerCycle));
 
         hasntFiredDuration = 0f;
     }

@@ -6,8 +6,8 @@ public class EnergyTorpedoLargeEffect extends EnergyTorpedoEffect {
     public EnergyTorpedoLargeEffect() {
         minSpawnDistance = 80f;
         maxSpawnDistance = 150f;
-        minDelay = 1f;
-        maxDelay = 2f;
+        minDelay = 0.8f;
+        maxDelay = 1.6f;
         numSpawns = 6;
         angleDeviation = 20f;
         empResistance = 100;

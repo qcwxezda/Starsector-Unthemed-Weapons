@@ -34,7 +34,9 @@ public class SuperRailgunEffect extends GlowOnFirePlugin {
     public void init(WeaponAPI weapon) {
         glowRenderer2 = new GlowRenderer(weapon, true);
         glowRenderer2.setRenderColor(chargeGlowColor);
-        Global.getCombatEngine().addLayeredRenderingPlugin(glowRenderer2);
+        if (Global.getCombatEngine() != null) {
+            Global.getCombatEngine().addLayeredRenderingPlugin(glowRenderer2);
+        }
         super.init(weapon);
     }
 

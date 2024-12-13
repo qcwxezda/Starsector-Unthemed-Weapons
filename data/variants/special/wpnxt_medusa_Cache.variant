@@ -1,7 +1,7 @@
 {
     "displayName": "Elite",
-    "fluxCapacitors": 6,
-    "fluxVents": 20,
+    "fluxCapacitors": 3,
+    "fluxVents": 15,
     "hullId": "medusa",
     "hullMods": [
         "extendedshieldemitter",
@@ -9,7 +9,8 @@
         "hardenedshieldemitter",
         "converted_hangar",
         "frontemitter",
-        "hardened_subsystems"
+        "hardened_subsystems",
+        "targetingunit",
     ],
     "permaMods": [
         "extendedshieldemitter",

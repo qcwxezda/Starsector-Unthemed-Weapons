@@ -1,12 +1,25 @@
-0.6.6 (dev):
+0.6.6:
+- (New game only) slightly reduced fortified cache spawn rate
+- Megabloom projector: reduced secondary explosion delay by 20%
 - Void ray:
-base damage 1750 -> 1125
-damage now gradually increases by up to 1.5x when beam is converged
+base damage 1750 -> 1250
+flux cost 550 -> 500
+damage now slowly increases by up to 1.3x when beam is converged
 - Graviton array:
-beam speed multiplied by 5
+beam speed multiplied by 3
 max ammo 9 -> 10, gain 5 ammo at a time
 - Chaos pulser:
 flux/shot 210 -> 200
+- Boltstorm:
+reduced spread by 25%
+- Needle driver:
+Damage 220 -> 180
+DPS 122 -> 120
+fire rate 1/1.8s -> 1/1.5s
+efficiency 1.6 -> 1.5
+- Fixed/adjusted some variants
+- Fixed issue with getBeamWeaponFluxCostMult being applied twice
+- Fixed rare crash with rail ballista if refit screen was queued to be opened before loading finished
 0.6.5:
 - Fixed unintentional hard dependency on Particle Engine
 0.6.4:

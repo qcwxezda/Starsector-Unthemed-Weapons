@@ -1,6 +1,6 @@
 {
     "displayName": "Elite",
-    "fluxCapacitors": 17,
+    "fluxCapacitors": 42,
     "fluxVents": 55,
     "hullId": "paragon",
     "hullMods": [
@@ -30,8 +30,8 @@
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS 001": "plasma",
-                "WS 002": "plasma"
+                "WS 001": "wpnxt_boltstorm",
+                "WS 002": "wpnxt_boltstorm"
             }
         },
         {

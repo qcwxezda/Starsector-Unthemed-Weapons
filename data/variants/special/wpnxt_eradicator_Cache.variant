@@ -1,6 +1,6 @@
 {
     "displayName": "Elite",
-    "fluxCapacitors": 12,
+    "fluxCapacitors": 16,
     "fluxVents": 30,
     "hullId": "eradicator",
     "hullMods": [
