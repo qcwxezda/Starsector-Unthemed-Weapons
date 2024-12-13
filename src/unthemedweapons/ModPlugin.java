@@ -24,7 +24,6 @@ public class ModPlugin extends BaseModPlugin {
     @Override
     public void onGameLoad(boolean newGame) {
         ListenerManagerAPI listeners = Global.getSector().getListenerManager();
-
         try {
             EveryFrameScript refitModifier = (EveryFrameScript) getClassLoader().loadClass("unthemedweapons.campaign.RefitTabListenerAndScript").newInstance();
             Global.getSector().addTransientScript(refitModifier);

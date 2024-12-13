@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Unthemed Weapons Collection:jar">
+    <output-path>$PROJECT_DIR$/jars</output-path>
+    <root id="archive" name="UnthemedWeaponsCollection.jar">
+      <element id="module-output" name="Unthemed Weapons Collection" />
+    </root>
+  </artifact>
+</component>
