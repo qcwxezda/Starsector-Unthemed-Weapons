@@ -780,7 +780,8 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
             valueLabel.setHighlightColors(highlightColor);
         }
         // Special case: the limited ammo (x) text should also be replaced, this has no name
-        else if (valueLabel.getText().contains("imited ammo (")) {
+        else if (valueLabel.getText().contains("imited ammo (")
+                || valueLabel.getText().contains("imited charges (")) {
             int actualAmmo = (int) stats.maxAmmo();
             int baseAmmo = spec.getMaxAmmo();
             if (actualAmmo != baseAmmo) {
