@@ -2,7 +2,7 @@
 	"id":"unthemedweaponsutils",
 	"name":"Unthemed Weapons Utilities",
 	"author":"qcwxezda",
-	"version":"0.6.2",
+	"version":"0.6.3",
 	"description":"Contains just the utility features of Unthemed Weapons Collection. (Note: Unthemed Weapons Collection contains this mod, so do not use both in tandem.)",
     "gameVersion": "0.97a-RC11",
 	"utility": true,
