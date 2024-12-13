@@ -121,19 +121,19 @@ public class DynamicWeaponStats {
             if (spec.isInterruptibleBurst()) {
                 burstSize = 1;
             }
-            fluxRatio = weapon.getFluxCostToFire() * getFluxCostMult(weapon) / burstSize / ((ProjectileWeaponSpecAPI) spec).getEnergyPerShot();
+            fluxRatio = weapon.getFluxCostToFire() / burstSize / ((ProjectileWeaponSpecAPI) spec).getEnergyPerShot();
         }
         else {
             if (weapon.isBurstBeam()) {
                 float totalTime = spec.getBurstDuration() + weapon.getCooldown();
                 totalTime += (float) ReflectionUtils.invokeMethod(spec, "getChargeupTime");
-                fluxRatio = weapon.getFluxCostToFire() * getFluxCostMult(weapon) / (totalTime) / spec.getDerivedStats().getFluxPerSecond();
+                fluxRatio = weapon.getFluxCostToFire() / (totalTime) / spec.getDerivedStats().getFluxPerSecond();
                 float origDelay = totalTime;
                 float newDelay = totalTime - weapon.getCooldown() + weapon.getCooldown() / getRoFMult(weapon);
                 rofMult = origDelay / newDelay;
             }
             else {
-                fluxRatio = weapon.getFluxCostToFire() * getFluxCostMult(weapon) / spec.getDerivedStats().getFluxPerSecond();
+                fluxRatio = weapon.getFluxCostToFire() / spec.getDerivedStats().getFluxPerSecond();
             }
         }
 
@@ -226,17 +226,4 @@ public class DynamicWeaponStats {
         }
         return mult;
     }
-
-    // Anything that's a StatBonus should already be taken into account,
-    // anything that's a MutableStat needs to be manually incorporated
-    // getBeamWeaponFluxCostMult is just a multiplier!
-    private static float getFluxCostMult(WeaponAPI weapon) {
-        MutableShipStatsAPI stats = weapon.getShip().getMutableStats();
-        float mult = 1f;
-        if (weapon.isBeam()) {
-            mult *= stats.getBeamWeaponFluxCostMult().getModifiedValue();
-        }
-        return mult;
-    }
-
 }
