@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b84812f-51a0-4539-b95e-33f91438196a" name="Changes" comment="add idea files, update refit handler from main mod">
-      <change beforePath="$PROJECT_DIR$/src/unthemedweapons/util/DynamicWeaponStats.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unthemedweapons/util/DynamicWeaponStats.java" afterDir="false" />
+    <list default="true" id="5b84812f-51a0-4539-b95e-33f91438196a" name="Changes" comment="Update DynamicWeaponStats">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/UnthemedWeaponsUtilities.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,21 +44,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;utilsonly&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Chen_/Documents/Starsector/mods/Unthemed Weapons Collection&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "utilsonly",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Chen_/Documents/Starsector/mods/Unthemed Weapons Collection",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
+    <configuration name="Run Starsector" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../jdk-23+7" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.fs.starfarer.StarfarerLauncher" />
+      <module name="Unthemed Weapons Collection" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../../starsector-core" />
+      <method v="2">
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="UnthemedWeaponsUtilities" />
+        </option>
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -84,6 +106,15 @@
       <updated>1734124677306</updated>
       <workItem from="1734124679425" duration="198000" />
     </task>
+    <task id="LOCAL-00001" summary="Update DynamicWeaponStats">
+      <option name="closed" value="true" />
+      <created>1734125036994</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1734125036994</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,6 +122,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add idea files, update refit handler from main mod" />
-    <option name="LAST_COMMIT_MESSAGE" value="add idea files, update refit handler from main mod" />
+    <MESSAGE value="Update DynamicWeaponStats" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update DynamicWeaponStats" />
   </component>
 </project>
