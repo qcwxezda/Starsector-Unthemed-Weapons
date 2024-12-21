@@ -8,4 +8,6 @@
         "minor":6,
         "patch":6,
     },
+    "directDownloadURL":"https://github.com/qcwxezda/Starsector-Unthemed-Weapons/releases/latest/download/Unthemed.Weapons.Utilities.zip",
+    "changelogURL":"https://raw.githubusercontent.com/qcwxezda/Starsector-Unthemed-Weapons/master/changelog.txt"
 }
