@@ -40,6 +40,7 @@ public class wpnxt_CacheDefenderInteraction extends BaseCommandPlugin {
         final CampaignFleetAPI defenders = memory.getFleet("$defenderFleet");
         if (defenders == null) return false;
 
+        defenders.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_REP_IMPACT, true);
         dialog.setInteractionTarget(defenders);
 
         final FleetInteractionDialogPluginImpl.FIDConfig config = new FleetInteractionDialogPluginImpl.FIDConfig();
@@ -147,8 +148,8 @@ public class wpnxt_CacheDefenderInteraction extends BaseCommandPlugin {
 
                 float playerContribMult = context.computePlayerContribFraction();
 
-                List<SalvageEntityGenDataSpec.DropData> dropRandom = new ArrayList<SalvageEntityGenDataSpec.DropData>();
-                List<SalvageEntityGenDataSpec.DropData> dropValue = new ArrayList<SalvageEntityGenDataSpec.DropData>();
+                List<SalvageEntityGenDataSpec.DropData> dropRandom = new ArrayList<>();
+                List<SalvageEntityGenDataSpec.DropData> dropValue = new ArrayList<>();
 
                 float valueMultFleet = Global.getSector().getPlayerFleet().getStats().getDynamic().getValue(Stats.BATTLE_SALVAGE_MULT_FLEET);
                 float valueModShips = context.getSalvageValueModPlayerShips();

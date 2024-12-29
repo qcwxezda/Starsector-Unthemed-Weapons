@@ -127,13 +127,13 @@ public class DynamicWeaponStats {
             if (weapon.isBurstBeam()) {
                 float totalTime = spec.getBurstDuration() + weapon.getCooldown();
                 totalTime += (float) ReflectionUtils.invokeMethod(spec, "getChargeupTime");
-                fluxRatio = weapon.getFluxCostToFire() / (totalTime) / spec.getDerivedStats().getFluxPerSecond();
+                fluxRatio = weapon.getFluxCostToFire() / (totalTime) / baseFluxPerSecond;
                 float origDelay = totalTime;
                 float newDelay = totalTime - weapon.getCooldown() + weapon.getCooldown() / getRoFMult(weapon);
                 rofMult = origDelay / newDelay;
             }
             else {
-                fluxRatio = weapon.getFluxCostToFire() / spec.getDerivedStats().getFluxPerSecond();
+                fluxRatio = weapon.getFluxCostToFire() / baseFluxPerSecond;
             }
         }
 

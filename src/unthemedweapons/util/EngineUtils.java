@@ -16,12 +16,21 @@ public abstract class EngineUtils {
     public final static float maxRangeUseGrid = 300f;
 
     /** If the argument is a ship, returns that ship.
-     *  If the argument is a wing, returns the wing's source ship.
      *  If the argument is a module, returns the module's base ship/station. */
     public static ShipAPI getBaseShip(ShipAPI shipOrModule) {
+        return getBaseShip(shipOrModule, new HashSet<ShipAPI>());
+    }
+
+    public static ShipAPI getBaseShip(ShipAPI shipOrModule, Set<ShipAPI> seenShips) {
         if (shipOrModule == null) {
             return null;
         }
+        if (seenShips.contains(shipOrModule)) {
+            // Early exit to prevent infinite loop, this should never happen though
+            // as ships shouldn't be parent modules of themselves or their own parent modules, etc.
+            return shipOrModule;
+        }
+        seenShips.add(shipOrModule);
         if (shipOrModule.isStationModule()) {
             ShipAPI base = null;
             if (shipOrModule.getParentStation() == null) {
@@ -32,7 +41,7 @@ public abstract class EngineUtils {
                 }
             }
             else {
-                base = getBaseShip(shipOrModule.getParentStation());
+                base = getBaseShip(shipOrModule.getParentStation(), seenShips);
             }
             return base;
         }

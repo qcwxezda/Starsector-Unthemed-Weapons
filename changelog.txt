@@ -1,3 +1,6 @@
+0.6.7 (dev):
+- Added MemFlags.MEMORY_KEY_NO_REP_IMPACT to cache defender fleets.
+- Handled possible (but which should never happen) cyclic station-module chain.
 0.6.6:
 - (New game only) slightly reduced fortified cache spawn rate
 - Megabloom projector: reduced secondary explosion delay by 20%
