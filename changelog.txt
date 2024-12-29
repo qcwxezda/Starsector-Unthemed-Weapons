@@ -1,5 +1,5 @@
 0.6.7 (dev):
-- Added MemFlags.MEMORY_KEY_NO_REP_IMPACT to cache defender fleets.
+- Added a reputation plugin that forces no reputation change from cache defender fleets.
 - Handled possible (but which should never happen) cyclic station-module chain.
 0.6.6:
 - (New game only) slightly reduced fortified cache spawn rate

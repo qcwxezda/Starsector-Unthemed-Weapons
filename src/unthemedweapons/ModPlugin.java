@@ -7,6 +7,7 @@ import com.fs.starfarer.api.campaign.listeners.ListenerManagerAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.loading.*;
 import org.json.JSONObject;
+import unthemedweapons.campaign.CampaignPluginImpl;
 import unthemedweapons.campaign.FortifiedCacheRegenerator;
 import unthemedweapons.campaign.RefitTabListenerAndScript;
 import unthemedweapons.campaign.ShipRecoveryWeaponsRemover;
@@ -212,9 +213,13 @@ public class ModPlugin extends BaseModPlugin {
         }
     }
 
+
     @Override
     public void onGameLoad(boolean newGame) {
         //CampaignUtils.generateFleetForEnergyCache(Global.getSector().getPlayerFleet(), Misc.random);
+
+        Global.getSector().registerPlugin(new CampaignPluginImpl());
+
         float cacheFreq;
         boolean regenerateCaches;
         boolean qolEnabled;

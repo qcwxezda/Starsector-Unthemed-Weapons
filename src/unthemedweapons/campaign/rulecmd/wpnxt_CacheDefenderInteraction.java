@@ -40,7 +40,6 @@ public class wpnxt_CacheDefenderInteraction extends BaseCommandPlugin {
         final CampaignFleetAPI defenders = memory.getFleet("$defenderFleet");
         if (defenders == null) return false;
 
-        defenders.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_REP_IMPACT, true);
         dialog.setInteractionTarget(defenders);
 
         final FleetInteractionDialogPluginImpl.FIDConfig config = new FleetInteractionDialogPluginImpl.FIDConfig();
