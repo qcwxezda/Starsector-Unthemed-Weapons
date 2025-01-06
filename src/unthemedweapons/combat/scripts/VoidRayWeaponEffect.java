@@ -1,15 +1,13 @@
 package unthemedweapons.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.impl.campaign.ids.HullMods;
-import com.fs.starfarer.api.util.Misc;
 import unthemedweapons.util.MathUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
-public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, WeaponEffectPluginWithInit, BeamEffectPlugin, EveryFrameWeaponEffectPluginWithAdvanceAfter {
+public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, WeaponEffectPluginWithInit, EveryFrameWeaponEffectPluginWithAdvanceAfter {
 
     static float maxSpread = 9f;
 
@@ -19,8 +17,14 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
     /** Per second */
     static float fullChargeGrowRate = 1f;
 
-    /** Amount of damage to transfer to full strength first beam per second. Approximate */
-    static float transferPerSecond = 0.15f;
+    /** Amount of damage to transfer to full strength first beam per second. */
+    static float transferPerSecond = 0.1f;
+    static float transferSecondsElapsed = 0f;
+    final static float MAX_ADDITIONAL_ARMOR_DAMAGE = 1000f;
+    final static float ARMOR_DAMAGE_MULTIPLIER = 3f;
+    final static String TRANSFER_DAMAGE_KEY = "wpnxt_voidRayTransfer";
+    final static String ARMOR_DAMAGE_KEY = "wpnxt_voidRayExtraDamage";
+    final static String BASE_ARMOR_DAMAGE_MULTIPLIER_KEY = "wpnxt_voidRayArmorDamageMultiplier";
 
     /** Need both spreads and angleOffsets since angleOffsets is shared between every voidray weapon */
     float spread = 0f;
@@ -43,6 +47,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
         if (weapon.getChargeLevel() <= 0f) {
             spread = maxSpread;
             convergeLevel = 0f;
+            transferSecondsElapsed = 0f;
             if (!randomizedSpreads) {
                 for (int i = 0; i < angleOffsets.size(); i++) {
                     randomFloats.set(i, MathUtils.randBetween(0f, 6.28f));
@@ -58,17 +63,39 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
 
         // Weapon is at max charge, slowly transfer damage to the first beam (makes it slowly stronger against armor)
         if (convergeLevel >= 1f) {
-            float totalDamageTransferred = 0f;
-            for (int i = 1; i < weapon.getBeams().size(); i++) {
+            transferSecondsElapsed += amount;
+            float transferProgress = Math.min(1f, transferSecondsElapsed * transferPerSecond);
+            int numBeams = weapon.getBeams().size();
+            for (int i = 1; i < numBeams; i++) {
                 BeamAPI beam = weapon.getBeams().get(i);
-                float damage = beam.getDamage().getBaseDamage();
-                totalDamageTransferred += damage * transferPerSecond * amount;
-                beam.getDamage().setDamage(damage * (1 - transferPerSecond * amount));
+                beam.getDamage().getModifier().modifyMult(TRANSFER_DAMAGE_KEY, 1f - transferProgress);
             }
             BeamAPI firstBeam = weapon.getBeams().get(0);
-            firstBeam.getDamage().setDamage(firstBeam.getDamage().getBaseDamage() + totalDamageTransferred * convergeDamageMult);
-            for (BeamAPI beam : weapon.getBeams()) {
-                beam.setWidth(Math.min(maxWidth, beam.getWidth() + fullChargeGrowRate * amount));
+            firstBeam.getDamage().getModifier().modifyPercent(TRANSFER_DAMAGE_KEY, 100f * (numBeams - 1) * transferProgress);
+
+            if (firstBeam.getDamage().getDpsDuration() > 0f) {
+                CombatEntityAPI target = firstBeam.getDamageTarget();
+                boolean hitHull = target instanceof ShipAPI && (target.getShield() == null || !target.getShield().isWithinArc(firstBeam.getTo()));
+                if (hitHull) {
+                    ShipAPI ship = (ShipAPI) target;
+                    int[] xy = ship.getArmorGrid().getCellAtLocation(firstBeam.getTo());
+                    float baseDamage = firstBeam.getDamage().getBaseDamage();
+                    if (xy != null) {
+                        float armor = ship.getMutableStats().getEffectiveArmorBonus()
+                                .computeEffective(15f * ship.getArmorGrid().getArmorValue(xy[0], xy[1]));
+                        armor = Math.max(armor, ship.getArmorGrid().getArmorRating() * ship.getMutableStats().getMinArmorFraction().getModifiedValue());
+                        firstBeam.getDamage().getModifier().modifyMult(BASE_ARMOR_DAMAGE_MULTIPLIER_KEY, 10f / 15f);
+                        firstBeam.getDamage().getModifier().modifyPercent(
+                                ARMOR_DAMAGE_KEY,
+                                100f * 15f / 10f * transferProgress * Math.min(MAX_ADDITIONAL_ARMOR_DAMAGE, ARMOR_DAMAGE_MULTIPLIER * armor) / baseDamage);
+                    }
+                } else {
+                    firstBeam.getDamage().getModifier().unmodify(ARMOR_DAMAGE_KEY);
+                    firstBeam.getDamage().getModifier().unmodify(BASE_ARMOR_DAMAGE_MULTIPLIER_KEY);
+                }
+                for (BeamAPI beam : weapon.getBeams()) {
+                    beam.setWidth(Math.min(maxWidth, beam.getWidth() + fullChargeGrowRate * amount));
+                }
             }
             return;
         }
@@ -93,24 +120,6 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
         for (int i = 0; i < angleOffsets.size(); i++) {
             angleOffsets.set(i, 0f);
         }
-    }
-
-    @Override
-    public void advance(float amount, CombatEngineAPI engine, BeamAPI beam) {
-        // Ignore frames where the beam didn't do any damage
-        if (beam.getDamage().getDpsDuration() <= 0) {
-            return;
-        }
-        // Not a ship ==> no shields
-        CombatEntityAPI target = beam.getDamageTarget();
-        if (!(target instanceof ShipAPI)) {
-            return;
-        }
-        ShipAPI source = beam.getSource();
-        if (source == null || source.getVariant().hasHullMod(HullMods.HIGH_SCATTER_AMP)) {
-            return;
-        }
-        beam.getDamage().setForceHardFlux(Misc.random.nextFloat() < Math.min(0.5f, beam.getSource().getHardFluxLevel()));
     }
 
     @Override

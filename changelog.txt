@@ -1,4 +1,21 @@
 0.6.7 (dev):
+- Electron-class torpedo: hard capped total damage to 5000
+- Bloom autolauncher: flux/shot 1500 -> 1000
+- Paralyzer rocket launcher:
+    - Ammo 100 -> 80
+    - Damage 160 -> 150
+    - Nominal EMP damage 500 -> 100, arc damage unchanged
+- Stinger swarm battery: ammo 280 -> 210
+- Ion storm GMLRS:
+    - Proj speed 500 -> 350
+    - Now has 300 ammo cap, doesn't recharge
+    - Removed flux cost
+    - OP 24 -> 20
+- Void ray:
+    - DPS 1250 -> 1500
+    - Removed hard flux effect
+    - Removed 30% extra damage from sustained fire
+    - When converged and hitting hull or armor, beam now deals between 1000 and 2000 frag DPS depending on target's armor at point of contact
 - Added a reputation plugin that forces no reputation change from cache defender fleets.
 - Handled possible (but which should never happen) cyclic station-module chain.
 0.6.6:

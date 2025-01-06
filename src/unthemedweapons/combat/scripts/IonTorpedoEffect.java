@@ -13,6 +13,7 @@ import unthemedweapons.util.TargetChecker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -22,6 +23,7 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
     private static final int maxTargets = 100;
     private static final float effectChance = 0.5f;
     private static final float energyDamageSmall = 200f, energyDamageMedium = 400f, energyDamageLarge = 800f, energyDamageEngine = 400f;
+    private static final float maxTotalDamage = 5000f;
 
     private enum DisabledType {
         NONE,
@@ -101,6 +103,8 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
                 }
             }
 
+            Collections.shuffle(damageLocs);
+
             if (tgt instanceof MissileAPI) {
                 MissileAPI missile = (MissileAPI) tgt;
                 ShipEngineControllerAPI engineController = missile.getEngineController();
@@ -109,6 +113,7 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
                 }
             }
 
+            float totalDamage = 0f;
             for (Pair<Vector2f, DisabledType> pair : damageLocs) {
                 Vector2f loc = pair.one;
                 // pt is inside shield, proj.getLocation() is outside
@@ -126,6 +131,8 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
                             false
                     );
                 }
+                totalDamage += pair.two.getDamage();
+                if (totalDamage >= maxTotalDamage) break;
             }
         }
     }

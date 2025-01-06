@@ -15,6 +15,7 @@ public class IonRocketEffect implements OnHitEffectPlugin {
 
     private static final int maxArcs = 3;
     private static final float arcRange = 150f;
+    private static final float baseEMP = 500f;
 
 
     @Override
@@ -44,7 +45,7 @@ public class IonRocketEffect implements OnHitEffectPlugin {
             engine.spawnEmpArc(proj.getSource(), pt, proj, entity,
                     DamageType.ENERGY,
                     0f, // damage
-                    proj.getEmpAmount(), // emp
+                    5f * proj.getEmpAmount(), // emp
                     100000f, // max range
                     "tachyon_lance_emp_impact",
                     20f, // thickness

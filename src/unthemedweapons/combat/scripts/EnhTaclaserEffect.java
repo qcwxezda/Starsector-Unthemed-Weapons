@@ -14,7 +14,7 @@ public class EnhTaclaserEffect implements BeamEffectPluginWithReset {
     @Override
     public void advance(float amount, CombatEngineAPI engine, BeamAPI beam) {
         // Ignore frames where the beam does no damage
-        if (beam.getDamage().getDpsDuration() <= 0) {
+        if (beam.getDamage().getDpsDuration() <= 0f) {
             return;
         }
 

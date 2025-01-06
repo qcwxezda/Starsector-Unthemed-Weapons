@@ -6,7 +6,6 @@
   "collisionClass":"RAY",
   "collisionClassByFighter":"RAY_FIGHTER",
   "everyFrameEffect":"unthemedweapons.combat.scripts.VoidRayWeaponEffect",
-  "beamEffect":"unthemedweapons.combat.scripts.VoidRayWeaponEffect",
   "turretSprite":"graphics/weapons/energy/wpnxt_voidray_turret.png",
   "turretGlowSprite":"graphics/weapons/energy/wpnxt_voidray_turret_glow.png",
   "hardpointSprite":"graphics/weapons/energy/wpnxt_voidray_hardpoint.png",
