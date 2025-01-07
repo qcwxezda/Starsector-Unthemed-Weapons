@@ -1,4 +1,4 @@
-0.6.7 (dev):
+0.6.7:
 - Electron-class torpedo: hard capped total damage to 5000
 - Bloom autolauncher: flux/shot 1500 -> 1000
 - Paralyzer rocket launcher:
@@ -7,7 +7,7 @@
     - Nominal EMP damage 500 -> 100, arc damage unchanged
 - Stinger swarm battery: ammo 280 -> 210
 - Ion storm GMLRS:
-    - Proj speed 500 -> 350
+    - Proj speed 500 -> 400
     - Now has 300 ammo cap, doesn't recharge
     - Removed flux cost
     - OP 24 -> 20
