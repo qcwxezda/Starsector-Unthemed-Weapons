@@ -93,11 +93,7 @@ public class ReflectionUtils {
                 argClasses[i] = float.class;
             }
         }
-        Method method = isDeclaredAndHidden ? o.getClass().getDeclaredMethod(methodName, argClasses) : o.getClass().getMethod(methodName, argClasses);
-        if (isDeclaredAndHidden) {
-            method.setAccessible(true);
-        }
-        return method.invoke(o, args);
+        return invokeMethodNoCatchExtWithClasses(o, methodName, isDeclaredAndHidden, argClasses, args);
     }
 
     public static Object invokeMethodNoCatchExtWithClasses(Object o, String methodName, boolean isDeclaredAndHidden, Class<?>[] classes, Object[] args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {

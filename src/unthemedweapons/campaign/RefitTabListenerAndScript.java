@@ -280,8 +280,7 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
                 List<?> rendererChildren = (List<?>) ReflectionUtils.invokeMethod(rendererPanel, "getChildrenNonCopy");
 
                 for (Object child : rendererChildren) {
-                    if (child instanceof LabelAPI) {
-                        LabelAPI label = (LabelAPI) child;
+                    if (child instanceof LabelAPI label) {
                         // Found the range label
                         if (label.getText().contains("range ")) {
                             WeaponAPI weapon = Global.getCombatEngine().createFakeWeapon(selectedShip, spec.getWeaponId());
