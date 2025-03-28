@@ -3,7 +3,7 @@
     "skinHullId":"wpnxt_mod_radiant",
     "hullDesignation":"Battleship",
     "hullName":"Radiant(?)",
-    "tags":["restricted"],
+    "tags":["restricted", "invisible_in_codex"],
     "removeHints":["UNBOARDABLE"],
     "descriptionPrefix": "This ship is nearly entirely automated. There are no crew quarters, no walkways, and certainly nowhere for a commanding officer to be stationed. However, all of its subsystems have been modified to allow for remote control via transmission of encrypted command signals from an interface that can only be described as \"needlessly obtuse\". Clearly, another specimen from the depths of the Tri-Tachyon Corporation.",
     "tech":"Unknown",
