@@ -4,6 +4,7 @@ import com.fs.starfarer.api.combat.*;
 import unthemedweapons.util.MathUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -117,9 +118,7 @@ public class VoidRayWeaponEffect implements EveryFrameWeaponEffectPlugin, Weapon
     @Override
     public void advanceAfter(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
         // Reset the spec's angle offsets. Unsure if necessary
-        for (int i = 0; i < angleOffsets.size(); i++) {
-            angleOffsets.set(i, 0f);
-        }
+        Collections.fill(angleOffsets, 0f);
     }
 
     @Override

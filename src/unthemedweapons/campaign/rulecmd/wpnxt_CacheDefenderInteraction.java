@@ -85,8 +85,7 @@ public class wpnxt_CacheDefenderInteraction extends BaseCommandPlugin {
 
                 //Global.getSector().getCampaignUI().clearMessages();
 
-                if (plugin.getContext() instanceof FleetEncounterContext) {
-                    FleetEncounterContext context = (FleetEncounterContext) plugin.getContext();
+                if (plugin.getContext() instanceof FleetEncounterContext context) {
                     if (context.didPlayerWinEncounterOutright()) {
 
                         SalvageGenFromSeed.SDMParams p = new SalvageGenFromSeed.SDMParams();

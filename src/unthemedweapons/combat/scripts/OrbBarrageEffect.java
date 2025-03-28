@@ -10,16 +10,14 @@ public class OrbBarrageEffect implements EveryFrameWeaponEffectPlugin, OnFireEff
     private float offset = 180f;
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
-        if (!(proj instanceof MissileAPI)) {
+        if (!(proj instanceof MissileAPI missile)) {
             return;
         }
 
-        MissileAPI missile = (MissileAPI) proj;
-        if (!(missile.getUnwrappedMissileAI() instanceof AngleApproachMissileAI)) {
+        if (!(missile.getUnwrappedMissileAI() instanceof AngleApproachMissileAI ai)) {
             return;
         }
 
-        AngleApproachMissileAI ai = (AngleApproachMissileAI)  missile.getUnwrappedMissileAI();
         ai.setApproachOffset(offset);
         offset -= Math.signum(offset) * (180f / (weapon.getSpec().getBurstSize() - 1));
         offset *= -1;

@@ -68,12 +68,10 @@ public class ReshaperAI implements ShipSystemAIScript {
 
             while (projectiles.hasNext()) {
                 Object o = projectiles.next();
-                if (!(o instanceof DamagingProjectileAPI)) continue;
+                if (!(o instanceof DamagingProjectileAPI proj)) continue;
 
-                DamagingProjectileAPI proj = (DamagingProjectileAPI) o;
                 boolean checkDamage = false;
-                if (o instanceof MissileAPI) {
-                    MissileAPI missile = (MissileAPI) o;
+                if (o instanceof MissileAPI missile) {
                     // Trust that guided missiles will reach their target
                     if (missile.isGuided() && missile.getOwner() != ship.getOwner()) {
                         checkDamage = true;

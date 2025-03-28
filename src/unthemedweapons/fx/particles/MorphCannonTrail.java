@@ -28,33 +28,30 @@ public abstract class MorphCannonTrail {
 //                Vector2f.sub(source.getVelocity(), perp, perp);
 //                emitter.velocity(perp, perp);
 
-        Particles.stream(emitter, 1, 100f, 100f, new Particles.StreamAction<Emitter>() {
-            @Override
-            public boolean apply(Emitter emitter) {
-                emitter.setLocation(source.getLocation());
+        Particles.stream(emitter, 1, 100f, 100f, emitter1 -> {
+            emitter1.setLocation(source.getLocation());
 
-                // Velocity is 0 on first frame for whatever reason
-                if (source.getVelocity().lengthSquared() <= 0f) {
-                    emitter.setAxis(source.getFacing());
-                }
-                else {
-                    emitter.setAxis(source.getVelocity());
-                }
+            // Velocity is 0 on first frame for whatever reason
+            if (source.getVelocity().lengthSquared() <= 0f) {
+                emitter1.setAxis(source.getFacing());
+            }
+            else {
+                emitter1.setAxis(source.getVelocity());
+            }
 
-                emitter.facing(-3f, 3f);
+            emitter1.facing(-3f, 3f);
 
 //                // Want the angle to match the projectile's facing rather than velocity
 //                float angleDiff = Utils.angleDiff(source.getFacing(), Misc.getAngleInDegrees(source.getVelocity()));
 //                emitter.facing(angleDiff - 10f, angleDiff + 10f);
-                float ratio = Math.min(1f, source.getElapsed() /  maxLife);
-                emitter.color(1f - ratio * 0.1f, 0.25f + ratio * 0.6f, 0.25f + ratio * 0.5f, 0.75f * source.getBrightness());
+            float ratio = Math.min(1f, source.getElapsed() /  maxLife);
+            emitter1.color(1f - ratio * 0.1f, 0.25f + ratio * 0.6f, 0.25f + ratio * 0.5f, 0.75f * source.getBrightness());
 
-                float elapsed = Global.getCombatEngine().getElapsedInLastFrame();
-                float dist = source.getVelocity().length() * elapsed;
-                emitter.offset(-dist, 0f, 0f, 0f);
+            float elapsed = Global.getCombatEngine().getElapsedInLastFrame();
+            float dist = source.getVelocity().length() * elapsed;
+            emitter1.offset(-dist, 0f, 0f, 0f);
 
-                return !source.didDamage() && Global.getCombatEngine().isEntityInPlay(source);
-            }
+            return !source.didDamage() && Global.getCombatEngine().isEntityInPlay(source);
         });
     }
 }

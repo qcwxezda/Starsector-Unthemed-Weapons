@@ -109,8 +109,7 @@ public class MorphCannonEffect extends GlowOnFirePlugin implements DamageDealtMo
 
     @Override
     public String modifyDamageDealt(Object param, CombatEntityAPI target, DamageAPI damage, Vector2f pt, boolean shieldHit) {
-        if (param instanceof DamagingProjectileAPI) {
-            DamagingProjectileAPI proj = (DamagingProjectileAPI) param;
+        if (param instanceof DamagingProjectileAPI proj) {
             if (proj.getCustomData() != null && proj.getCustomData().containsKey(morphDataKey)) {
                 // Set the damage to a small number; it will be correctly applied in the onHit function
                 // Don't set it to 0 because shieldHit doesn't register for hits that deal less than 1 damage!

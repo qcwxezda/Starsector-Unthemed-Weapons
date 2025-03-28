@@ -12,8 +12,7 @@ public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, Dama
 
     @Override
     public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
-        if (shieldHit && target instanceof ShipAPI) {
-            ShipAPI ship = (ShipAPI) target;
+        if (shieldHit && target instanceof ShipAPI ship) {
             // modifyDamageDealt happens before onHit, therefore
             // proj damage is the base damage and not twice the base damage
             engine.applyDamage(
@@ -44,8 +43,7 @@ public class SpikerEffect implements OnFireEffectPlugin, OnHitEffectPlugin, Dama
 
     @Override
     public String modifyDamageDealt(Object param, CombatEntityAPI target, DamageAPI damage, Vector2f pt, boolean shieldHit) {
-        if (shieldHit && param instanceof MissileAPI) {
-            MissileAPI missile = (MissileAPI) param;
+        if (shieldHit && param instanceof MissileAPI missile) {
             if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals(weaponId)) {
                 // Halve the damage and apply the other half as soft flux
                 damage.setDamage(0.5f * damage.getBaseDamage());

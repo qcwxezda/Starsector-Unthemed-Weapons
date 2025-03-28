@@ -7,7 +7,6 @@ import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import org.lwjgl.util.vector.Vector2f;
 import unthemedweapons.ModPlugin;
-import unthemedweapons.combat.plugins.Action;
 import unthemedweapons.combat.plugins.ActionPlugin;
 
 import java.util.*;
@@ -18,7 +17,7 @@ public abstract class EngineUtils {
     /** If the argument is a ship, returns that ship.
      *  If the argument is a module, returns the module's base ship/station. */
     public static ShipAPI getBaseShip(ShipAPI shipOrModule) {
-        return getBaseShip(shipOrModule, new HashSet<ShipAPI>());
+        return getBaseShip(shipOrModule, new HashSet<>());
     }
 
     public static ShipAPI getBaseShip(ShipAPI shipOrModule, Set<ShipAPI> seenShips) {
@@ -93,8 +92,7 @@ public abstract class EngineUtils {
                 }
             }
             else {
-                if (entity instanceof ShipAPI) {
-                    ShipAPI ship = (ShipAPI) entity;
+                if (entity instanceof ShipAPI ship) {
                     if (ship.getShield() != null) {
                         List<Float> collisionAngles = new ArrayList<>();
                         List<Vector2f> collisionPoints = new ArrayList<>();
@@ -346,18 +344,16 @@ public abstract class EngineUtils {
             Iterator<Object> itr = engine.getAllObjectGrid().getCheckIterator(location, 2f*maxRange, 2f*maxRange);
             while (itr.hasNext()) {
                 Object o = itr.next();
-                if (o instanceof ShipAPI) {
-                    ShipAPI ship = (ShipAPI) o;
+                if (o instanceof ShipAPI ship) {
                     float dist = getDistWithEntity(location, ship, considerRadius);
                     if (dist <= maxRange && checker.check(ship) && (smallestToNote == null || ship.getHullSize().compareTo(smallestToNote) >= 0)) {
-                        shipsAndMissiles.add(new Pair<CombatEntityAPI, Float>(ship, dist));
+                        shipsAndMissiles.add(new Pair<>(ship, dist));
                     }
                 }
-                else if (o instanceof MissileAPI && includeMissiles) {
-                    MissileAPI missile = (MissileAPI) o;
+                else if (o instanceof MissileAPI missile && includeMissiles) {
                     float dist = getDistWithEntity(location, missile, considerRadius);
                     if (dist <= maxRange && checker.check(missile)) {
-                        shipsAndMissiles.add(new Pair<CombatEntityAPI, Float>(missile, dist));
+                        shipsAndMissiles.add(new Pair<>(missile, dist));
                     }
                 }
             }
@@ -366,24 +362,19 @@ public abstract class EngineUtils {
             for (ShipAPI ship : engine.getShips()) {
                 float dist = getDistWithEntity(location, ship, considerRadius);
                 if (dist <= maxRange && checker.check(ship) && (smallestToNote == null || ship.getHullSize().compareTo(smallestToNote) >= 0)) {
-                    shipsAndMissiles.add(new Pair<CombatEntityAPI, Float>(ship, dist));
+                    shipsAndMissiles.add(new Pair<>(ship, dist));
                 }
             }
             if (includeMissiles) {
                 for (MissileAPI missile : engine.getMissiles()) {
                     float dist = getDistWithEntity(location, missile, considerRadius);
                     if (dist <= maxRange && checker.check(missile)) {
-                        shipsAndMissiles.add(new Pair<CombatEntityAPI, Float>(missile, dist));
+                        shipsAndMissiles.add(new Pair<>(missile, dist));
                     }
                 }
             }
         }
-        Collections.sort(shipsAndMissiles, new Comparator<Pair<CombatEntityAPI, Float>>() {
-            @Override
-            public int compare(Pair<CombatEntityAPI, Float> p1, Pair<CombatEntityAPI, Float> p2) {
-                return Float.compare(p1.two, p2.two);
-            }
-        });
+        shipsAndMissiles.sort((p1, p2) -> Float.compare(p1.two, p2.two));
 
         List<CombatEntityAPI> kNearest = new ArrayList<>();
         for (int i = 0; i < Math.min(k, shipsAndMissiles.size()); i++) {
@@ -405,9 +396,8 @@ public abstract class EngineUtils {
         Iterator<Object> itr = Global.getCombatEngine().getAllObjectGrid().getCheckIterator(location, 2f*maxRange, 2f*maxRange);
         while (itr.hasNext()) {
             Object obj = itr.next();
-            if (!(obj instanceof CombatEntityAPI)) continue;
+            if (!(obj instanceof CombatEntityAPI entity)) continue;
 
-            CombatEntityAPI entity = (CombatEntityAPI) obj;
             if (!checker.check(entity)) {
                 continue;
             }
@@ -418,8 +408,7 @@ public abstract class EngineUtils {
                 return true;
             }
 
-            if (entity instanceof ShipAPI) {
-                ShipAPI ship = (ShipAPI) entity;
+            if (entity instanceof ShipAPI ship) {
                 if (dist <= maxShipRange && (smallestToNote == null || ship.getHullSize().compareTo(smallestToNote) >= 0)) {
                     return true;
                 }
@@ -475,12 +464,7 @@ public abstract class EngineUtils {
         dummyProj.setMinePrimed(true);
         dummyProj.setUntilMineExplosion(0f);
         dummyProj.setMineExplosionRange(fakeRadius);
-        ActionPlugin.queueAction(new Action() {
-            @Override
-            public void perform() {
-                Global.getCombatEngine().removeEntity(dummyProj);
-            }
-        }, dur);
+        ActionPlugin.queueAction(() -> Global.getCombatEngine().removeEntity(dummyProj), dur);
     }
 
     /** targetPoint could be target.getLocation(), or could account for target leading, etc. */

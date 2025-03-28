@@ -54,7 +54,7 @@ public class ModPlugin extends BaseModPlugin {
         String weaponId = weapon.getId();
 
         if ("wpnxt_energyballlauncher".equals(weaponId)) {
-            return new PluginPick<AutofireAIPlugin>(new EnergyBallLauncherAI(weapon), CampaignPlugin.PickPriority.MOD_SPECIFIC);
+            return new PluginPick<>(new EnergyBallLauncherAI(weapon), CampaignPlugin.PickPriority.MOD_SPECIFIC);
         }
         return null;
     }
@@ -135,54 +135,14 @@ public class ModPlugin extends BaseModPlugin {
         }
         // Populate custom missile AI
         customMissiles.clear();
-        customMissiles.put("wpnxt_energytorpedo_shot", new MakeMissilePlugin() {
-            @Override
-            public MissileAIPlugin make(MissileAPI missile) {
-                return new LeadingMissileAI(missile, 1.2f);
-            }
-        });
-        customMissiles.put("wpnxt_spike_shot", new MakeMissilePlugin() {
-            @Override
-            public MissileAIPlugin make(MissileAPI missile) {
-                return new LeadingMissileAI(missile, 1.2f);
-            }
-        });
-        customMissiles.put("wpnxt_energytorpedolarge_shot", new MakeMissilePlugin() {
-            @Override
-            public MissileAIPlugin make(MissileAPI missile) {
-                return new LeadingMissileAI(missile, 1.2f);
-            }
-        });
-        customMissiles.put("wpnxt_minispiker_shot", new MakeMissilePlugin() {
-            @Override
-            public MissileAIPlugin make(MissileAPI missile) {
-                return new LOSMissileAI(missile, 1.2f);
-            }
-        });
-        customMissiles.put("wpnxt_impaler_shot", new MakeMissilePlugin() {
-            @Override
-            public MissileAIPlugin make(MissileAPI missile) {
-                return new AngleApproachMissileAI(missile, 1.2f, 5f);
-            }
-        });
-        customMissiles.put("wpnxt_orb_shot", new MakeMissilePlugin() {
-            @Override
-            public MissileAIPlugin make(MissileAPI missile) {
-                return new AngleApproachMissileAI(missile, 1.2f, 2f);
-            }
-        });
-        customMissiles.put("wpnxt_clustermine_spawn", new MakeMissilePlugin() {
-            @Override
-            public MissileAIPlugin make(MissileAPI missile) {
-                return new ProximityMineRandomDelay(missile, 0.2f);
-            }
-        });
-        customMissiles.put("wpnxt_phasetorpedo_shot", new MakeMissilePlugin() {
-            @Override
-            public MissileAIPlugin make(MissileAPI missile) {
-                return new PhaseTorpedoAI(missile, 1.2f);
-            }
-        });
+        customMissiles.put("wpnxt_energytorpedo_shot", missile -> new LeadingMissileAI(missile, 1.2f));
+        customMissiles.put("wpnxt_spike_shot", missile -> new LeadingMissileAI(missile, 1.2f));
+        customMissiles.put("wpnxt_energytorpedolarge_shot", missile -> new LeadingMissileAI(missile, 1.2f));
+        customMissiles.put("wpnxt_minispiker_shot", missile -> new LOSMissileAI(missile, 1.2f));
+        customMissiles.put("wpnxt_impaler_shot", missile -> new AngleApproachMissileAI(missile, 1.2f, 5f));
+        customMissiles.put("wpnxt_orb_shot", missile -> new AngleApproachMissileAI(missile, 1.2f, 2f));
+        customMissiles.put("wpnxt_clustermine_spawn", missile -> new ProximityMineRandomDelay(missile, 0.2f));
+        customMissiles.put("wpnxt_phasetorpedo_shot", missile -> new PhaseTorpedoAI(missile, 1.2f));
 
         addDumbfireMirv("wpnxt_clusterminelauncher", "wpnxt_clustermine_shot");
         addDumbfireMirv("wpnxt_clusterlauncherbig", "wpnxt_clusterminebig_shot");
@@ -191,14 +151,12 @@ public class ModPlugin extends BaseModPlugin {
         if (particleEngineEnabled) {
             for (WeaponSpecAPI spec : Global.getSettings().getAllWeaponSpecs()) {
                 Object o = spec.getProjectileSpec();
-                if (o instanceof ProjectileSpecAPI) {
-                    ProjectileSpecAPI pSpec = (ProjectileSpecAPI) o;
+                if (o instanceof ProjectileSpecAPI pSpec) {
                     if (replaceExplosionWithParticles.contains(pSpec.getId())) {
                         pSpec.setHitGlowRadius(0f);
                     }
                 }
-                if (o instanceof MissileSpecAPI) {
-                    MissileSpecAPI mSpec = (MissileSpecAPI) o;
+                if (o instanceof MissileSpecAPI mSpec) {
                     if (replaceExplosionWithParticles.contains(mSpec.getHullSpec().getHullId())) {
                         mSpec.setUseHitGlowWhenDealingDamage(false);
                         DamagingExplosionSpec eSpec = mSpec.getExplosionSpec();
@@ -276,19 +234,14 @@ public class ModPlugin extends BaseModPlugin {
         final float splitArc = (float) clusterBehaviorJSON.optDouble("arc", 0);
         final boolean evenSpread = clusterBehaviorJSON.optBoolean("evenSpread", false);
         final String spawnSpec = clusterBehaviorJSON.optString("spawnSpec", "");
-        customMissiles.put(projSpec, new MakeMissilePlugin() {
-            @Override
-            public MissileAIPlugin make(MissileAPI missile) {
-                return new DumbfireTimedMirv(
-                        missile,
-                        spawnSpec,
-                        numShots,
-                        timeToSplit,
-                        splitArc,
-                        evenSpread
-                );
-            }
-        });
+        customMissiles.put(projSpec, missile -> new DumbfireTimedMirv(
+                missile,
+                spawnSpec,
+                numShots,
+                timeToSplit,
+                splitArc,
+                evenSpread
+        ));
     }
 
     private interface MakeMissilePlugin {

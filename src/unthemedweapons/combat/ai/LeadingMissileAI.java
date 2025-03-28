@@ -57,18 +57,8 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
             tA = T3;
             if (calculateResultingOffset) {
                 final float fTheta = theta*Misc.RAD_PER_DEG, fAlpha = alpha*Misc.RAD_PER_DEG, fT1 = T1;
-                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return fTheta * x + 1f / 6f * fAlpha * (x - fT1) * (x - fT1) * (x - fT1);
-                    }
-                }, T1, T2);
-                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return 0.5f * fTheta * x + 0.5f * fAlpha * (float) Math.sqrt(-fTheta / fAlpha) * (x - T2) * (x - T2) - 1f / 6f * fAlpha * (x - T2) * (x - T2) * (x - T2);
-                    }
-                }, T2, T3);
+                IA += MathUtils.applyAtLimits(x -> fTheta * x + 1f / 6f * fAlpha * (x - fT1) * (x - fT1) * (x - fT1), T1, T2);
+                IA += MathUtils.applyAtLimits(x -> 0.5f * fTheta * x + 0.5f * fAlpha * (float) Math.sqrt(-fTheta / fAlpha) * (x - T2) * (x - T2) - 1f / 6f * fAlpha * (x - T2) * (x - T2) * (x - T2), T2, T3);
             }
         }
         else {
@@ -79,24 +69,9 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
             tA = T4;
             if (calculateResultingOffset) {
                 final float fTheta = theta*Misc.RAD_PER_DEG, fAlpha = alpha*Misc.RAD_PER_DEG, fw = w*Misc.RAD_PER_DEG, fT1 = T1;
-                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return fTheta * x + 1f / 6f * fAlpha * (x - fT1) * (x - fT1) * (x - fT1);
-                    }
-                }, T1, T2);
-                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return fTheta * x + 0.5f * fAlpha * TW * TW * x + 0.5f * fw * (x - T2) * (x - T2);
-                    }
-                }, T2, T3);
-                IA += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return fTheta * x + 0.5f * fAlpha * TW * TW * x + 2f * fw * TH * x + 0.5f * fw * (x - T3) * (x - T3) + 1f / 6f * fAlpha * (x - T3) * (x - T3) * (x - T3);
-                    }
-                }, T3, T4);
+                IA += MathUtils.applyAtLimits(x -> fTheta * x + 1f / 6f * fAlpha * (x - fT1) * (x - fT1) * (x - fT1), T1, T2);
+                IA += MathUtils.applyAtLimits(x -> fTheta * x + 0.5f * fAlpha * TW * TW * x + 0.5f * fw * (x - T2) * (x - T2), T2, T3);
+                IA += MathUtils.applyAtLimits(x -> fTheta * x + 0.5f * fAlpha * TW * TW * x + 2f * fw * TH * x + 0.5f * fw * (x - T3) * (x - T3) + 1f / 6f * fAlpha * (x - T3) * (x - T3) * (x - T3), T3, T4);
             }
         }
 
@@ -115,18 +90,8 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
             tW = T2;
             if (calculateResultingOffset && tW < tA) {
                 final float fTheta = theta*Misc.RAD_PER_DEG, fAlpha = alpha*Misc.RAD_PER_DEG, fw = w;
-                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return fTheta * x + 0.5f * fw * x * x + 1f / 6f * fAlpha * x * x * x;
-                    }
-                }, 0f, T);
-                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return fTheta * x + fw * T * x + 0.5f * fAlpha * T * T * x + 0.5f * wT * (x - T) * (x - T) - 1f / 6f * fAlpha * (x - T) * (x - T) * (x - T);
-                    }
-                }, T, T2);
+                IW += MathUtils.applyAtLimits(x -> fTheta * x + 0.5f * fw * x * x + 1f / 6f * fAlpha * x * x * x, 0f, T);
+                IW += MathUtils.applyAtLimits(x -> fTheta * x + fw * T * x + 0.5f * fAlpha * T * T * x + 0.5f * wT * (x - T) * (x - T) - 1f / 6f * fAlpha * (x - T) * (x - T) * (x - T), T, T2);
             }
         }
         else {
@@ -140,24 +105,9 @@ public class LeadingMissileAI extends BaseGuidedMissileAI {
 
             if (calculateResultingOffset && tW < tA) {
                 final float fTheta = theta*Misc.RAD_PER_DEG, fAlpha = alpha*Misc.RAD_PER_DEG, fw = w*Misc.RAD_PER_DEG, fW = W*Misc.RAD_PER_DEG;
-                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return fTheta * x + 0.5f * fw * x * x + 1f / 6f * fAlpha * x * x * x;
-                    }
-                }, 0f, fT1);
-                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return fTheta * x + fw * fT1 * x + 0.5f * fAlpha * fT1 * fT1 * x + 0.5f * fW * (x - fT1) * (x - fT1);
-                    }
-                }, fT1, T2);
-                IW += MathUtils.applyAtLimits(new MathUtils.Function() {
-                    @Override
-                    public float apply(float x) {
-                        return fTheta * x + fw * fT1 * x + 0.5f * fAlpha * fT1 * fT1 * x + 0.5f * fW * (x - fT1) * (x - fT1) - 1f / 6f * fAlpha * (x - T2) * (x - T2) * (x - T2);
-                    }
-                }, T2, T3);
+                IW += MathUtils.applyAtLimits(x -> fTheta * x + 0.5f * fw * x * x + 1f / 6f * fAlpha * x * x * x, 0f, fT1);
+                IW += MathUtils.applyAtLimits(x -> fTheta * x + fw * fT1 * x + 0.5f * fAlpha * fT1 * fT1 * x + 0.5f * fW * (x - fT1) * (x - fT1), fT1, T2);
+                IW += MathUtils.applyAtLimits(x -> fTheta * x + fw * fT1 * x + 0.5f * fAlpha * fT1 * fT1 * x + 0.5f * fW * (x - fT1) * (x - fT1) - 1f / 6f * fAlpha * (x - T2) * (x - T2) * (x - T2), T2, T3);
             }
         }
 

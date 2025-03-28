@@ -19,12 +19,11 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
     public void onHit(DamagingProjectileAPI proj, CombatEntityAPI target, Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
 
         // Only care about ships, must be full damage shot
-        if (proj.isFading() || !(target instanceof ShipAPI)) {
+        if (proj.isFading() || !(target instanceof ShipAPI ship)) {
             return;
         }
 
         // Don't attach to fighters
-        ShipAPI ship = (ShipAPI) target;
         if (ship.isFighter() || !ship.isAlive()) {
             return;
         }
@@ -62,7 +61,7 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
         //noinspection unchecked
         HashMap<ShipAPI, LinkedList<AttachData>> attachDataMap = (HashMap<ShipAPI, LinkedList<AttachData>>) engine.getCustomData().get(attachDataKey);
         if (!attachDataMap.containsKey(ship)) {
-            attachDataMap.put(ship, new LinkedList<AttachData>());
+            attachDataMap.put(ship, new LinkedList<>());
         }
 
         attachDataMap.get(ship).add(new AttachData(spawn, offset, adjustAmount, proj.getFacing(), ship.getFacing()));

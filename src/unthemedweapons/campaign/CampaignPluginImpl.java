@@ -23,10 +23,9 @@ public class CampaignPluginImpl extends BaseCampaignPlugin {
         InteractionDialogAPI dialog = Global.getSector().getCampaignUI().getCurrentInteractionDialog();
         if (dialog == null) return null;
         SectorEntityToken token = dialog.getInteractionTarget();
-        if (!(token instanceof CampaignFleetAPI)) return null;
-        CampaignFleetAPI fleet = (CampaignFleetAPI) token;
+        if (!(token instanceof CampaignFleetAPI fleet)) return null;
         if (!fleet.getMemoryWithoutUpdate().contains(CacheDefenderPlugin.cacheDefenseFleetKey)) return null;
-        return new PluginPick<ReputationActionResponsePlugin>(
+        return new PluginPick<>(
                 new ReputationActionResponsePlugin() {
                     @Override
                     public ReputationAdjustmentResult handlePlayerReputationAction(Object action, String factionId) {

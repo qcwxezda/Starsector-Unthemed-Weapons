@@ -27,8 +27,7 @@ public class ReshaperStats extends BaseShipSystemScript {
     boolean isActive = false;
 
     public void apply(MutableShipStatsAPI stats, final String id, State state, float effectLevel) {
-        if (!(stats.getEntity() instanceof ShipAPI)) return;
-        ShipAPI ship = (ShipAPI) stats.getEntity();
+        if (!(stats.getEntity() instanceof ShipAPI ship)) return;
 
         ship.fadeToColor(KEY_SHIP, new Color(64,96,128,255), 0.1f, 0.1f, effectLevel);
         //ship.fadeToColor(KEY_SHIP, new Color(100,100,100,255), 0.1f, 0.1f, effectLevel);
@@ -62,8 +61,7 @@ public class ReshaperStats extends BaseShipSystemScript {
 
 
     public void unapply(MutableShipStatsAPI stats, String id) {
-        if (!(stats.getEntity() instanceof ShipAPI)) return;
-        ShipAPI ship = (ShipAPI) stats.getEntity();
+        if (!(stats.getEntity() instanceof ShipAPI ship)) return;
 
         stats.getFluxDissipation().unmodify(id);
         ship.removeListenerOfClass(ReshaperDamageModifier.class);

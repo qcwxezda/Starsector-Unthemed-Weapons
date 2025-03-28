@@ -36,15 +36,12 @@ public abstract class GenFortifiedCaches {
     public static float baseCacheValue = 5000f, maxCacheSizeValueMultiplier = 79f;
     public static float systemWeightPenaltyPerCache = 0.3f;
     public static String getCacheStringBySize(CacheSize size) {
-        switch (size) {
-            case SMALL:
-                return "Small Fortified Cache";
-            case LARGE:
-                return "Large Fortified Cache";
-            case HUGE:
-                return "Huge Fortified Cache";
-            default: return "Fortified Cache";
-        }
+        return switch (size) {
+            case SMALL -> "Small Fortified Cache";
+            case LARGE -> "Large Fortified Cache";
+            case HUGE -> "Huge Fortified Cache";
+            default -> "Fortified Cache";
+        };
     }
 
     public static WeightedRandomPicker<StarSystemAPI> getSystemPicker(Random random) {
@@ -637,15 +634,12 @@ public abstract class GenFortifiedCaches {
         }
 
         public int getSizeOrdinal() {
-            switch (this) {
-                case SMALL:
-                    return 0;
-                case LARGE:
-                    return 2;
-                case HUGE:
-                    return 3;
-                default: return 1;
-            }
+            return switch (this) {
+                case SMALL -> 0;
+                case LARGE -> 2;
+                case HUGE -> 3;
+                default -> 1;
+            };
         }
     }
 }

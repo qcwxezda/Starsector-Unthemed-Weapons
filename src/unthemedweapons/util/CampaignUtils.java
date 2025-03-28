@@ -222,12 +222,7 @@ public abstract class CampaignUtils {
                 }
             }
         }
-        Collections.sort(caches, new Comparator<SectorEntityToken>() {
-            @Override
-            public int compare(SectorEntityToken o1, SectorEntityToken o2) {
-                return Float.compare(o2.getRadius(), o1.getRadius());
-            }
-        });
+        caches.sort((o1, o2) -> Float.compare(o2.getRadius(), o1.getRadius()));
 
         System.out.println("Total number of caches: " + caches.size());
         for (int i = 0; i < Math.min(caches.size(), 10); i++) {

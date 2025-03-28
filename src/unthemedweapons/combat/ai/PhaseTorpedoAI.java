@@ -17,7 +17,7 @@ public class PhaseTorpedoAI extends BaseGuidedMissileAI {
     private float hpCheckpoint, pendingDamage = 0f;
     private static final float minJumpRange = 150f, maxJumpRange = 300f;
     private static final float maxDamageTakenPerSecond = 1200f;
-    private float fixedFacing = 0f;
+    private float fixedFacing;
 
     public PhaseTorpedoAI(MissileAPI missile, float maxSeekRangeFactor) {
         super(missile, maxSeekRangeFactor);
@@ -63,15 +63,10 @@ public class PhaseTorpedoAI extends BaseGuidedMissileAI {
             }
 
             if (seek) {
-                Collections.sort(jumpDestinations, new Comparator<Vector2f>() {
-                    @Override
-                    public int compare(Vector2f v1, Vector2f v2) {
-                        return Float.compare(
-                                Misc.getDistance(v1, target.getLocation()),
-                                Misc.getDistance(v2, target.getLocation())
-                        );
-                    }
-                });
+                jumpDestinations.sort((v1, v2) -> Float.compare(
+                        Misc.getDistance(v1, target.getLocation()),
+                        Misc.getDistance(v2, target.getLocation())
+                ));
             }
             else {
                 Collections.shuffle(jumpDestinations);
@@ -81,9 +76,8 @@ public class PhaseTorpedoAI extends BaseGuidedMissileAI {
             List<CombatEntityAPI> validCollisions = new ArrayList<>();
             while (objItr.hasNext()) {
                 Object o = objItr.next();
-                if (!(o instanceof CombatEntityAPI)) continue;
+                if (!(o instanceof CombatEntityAPI entity)) continue;
 
-                CombatEntityAPI entity = (CombatEntityAPI) o;
                 if (entity.getOwner() == missile.getOwner()) continue;
                 if (entity instanceof DamagingProjectileAPI) continue;
                 if (entity instanceof ShipAPI && ((ShipAPI) entity).isPhased()) continue;

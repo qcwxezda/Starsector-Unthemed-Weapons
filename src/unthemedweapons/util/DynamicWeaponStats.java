@@ -32,12 +32,12 @@ public class DynamicWeaponStats {
             bonuses[1] += stats.getBeamWeaponDamageMult().getPercentMod();
             bonuses[2] *= stats.getBeamWeaponDamageMult().getMult();
         }
-        MutableStat relevantStat = null;
-        switch (weapon.getType()) {
-            case BALLISTIC: relevantStat = stats.getBallisticWeaponDamageMult(); break;
-            case ENERGY: relevantStat = stats.getEnergyWeaponDamageMult(); break;
-            case MISSILE: relevantStat = stats.getMissileWeaponDamageMult(); break;
-        }
+        MutableStat relevantStat = switch (weapon.getType()) {
+            case BALLISTIC -> stats.getBallisticWeaponDamageMult();
+            case ENERGY -> stats.getEnergyWeaponDamageMult();
+            case MISSILE -> stats.getMissileWeaponDamageMult();
+            default -> null;
+        };
 
         if (relevantStat != null) {
             bonuses[0] += relevantStat.getFlatMod();

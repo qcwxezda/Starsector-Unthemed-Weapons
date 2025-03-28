@@ -10,16 +10,14 @@ public class ImpalerEffect implements EveryFrameWeaponEffectPlugin, OnFireEffect
     private float offset = 60f;
     @Override
     public void onFire(DamagingProjectileAPI proj, WeaponAPI weapon, CombatEngineAPI engine) {
-        if (!(proj instanceof MissileAPI)) {
+        if (!(proj instanceof MissileAPI missile)) {
             return;
         }
 
-        MissileAPI missile = (MissileAPI) proj;
-        if (!(missile.getUnwrappedMissileAI() instanceof AngleApproachMissileAI)) {
+        if (!(missile.getUnwrappedMissileAI() instanceof AngleApproachMissileAI ai)) {
             return;
         }
 
-        AngleApproachMissileAI ai = (AngleApproachMissileAI)  missile.getUnwrappedMissileAI();
         ai.setApproachOffset( offset + MathUtils.randBetween(-20f, 20f));
         offset -= 45f;
     }

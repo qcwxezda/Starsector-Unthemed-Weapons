@@ -18,7 +18,7 @@ public class EnhTaclaserEffect implements BeamEffectPluginWithReset {
             return;
         }
 
-        if (!(beam.getDamageTarget() instanceof ShipAPI)) {
+        if (!(beam.getDamageTarget() instanceof ShipAPI target)) {
             // Beam is no longer hitting the target; clear affectedShip
             if (affectedShip != null) {
                 modifyBeamCount(affectedShip, -1);
@@ -27,7 +27,6 @@ public class EnhTaclaserEffect implements BeamEffectPluginWithReset {
             return;
         }
 
-        ShipAPI target = (ShipAPI) beam.getDamageTarget();
         if (!target.getCustomData().containsKey(customDataKey)) {
             target.setCustomData(customDataKey, 0);
         }

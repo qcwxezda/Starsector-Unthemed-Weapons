@@ -159,8 +159,7 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
             numOfficers = 13f * sizeFrac * MathUtils.randBetween(0.8f, 1.2f, random);
             maxOfficerLevel = Math.min(7f, 9f * sizeFrac * MathUtils.randBetween(0.8f, 1.25f, random));
 
-            if (fleet.getInflater() instanceof DefaultFleetInflater) {
-                DefaultFleetInflater inflater = (DefaultFleetInflater) fleet.getInflater();
+            if (fleet.getInflater() instanceof DefaultFleetInflater inflater) {
                 DefaultFleetInflaterParams params = (DefaultFleetInflaterParams) inflater.getParams();
                 params.averageSMods = averageSMods < 0f ? null : (int) averageSMods;
                 params.quality = quality;
@@ -317,8 +316,7 @@ public class CacheDefenderPlugin extends BaseGenericPlugin implements SalvageGen
 
     @Override
     public int getHandlingPriority(Object params) {
-        if (!(params instanceof SDMParams)) return -1;
-        SDMParams p = (SDMParams) params;
+        if (!(params instanceof SDMParams p)) return -1;
 
         if (p.entity == null) {
             return -1;

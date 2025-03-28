@@ -117,8 +117,7 @@ public class EnergyBallLauncherEffect implements EveryFrameWeaponEffectPluginWit
             if (target instanceof DamagingProjectileAPI) {
                 continue;
             }
-            if (target instanceof ShipAPI) {
-                ShipAPI ship = (ShipAPI) target;
+            if (target instanceof ShipAPI ship) {
                 // Pass through fighters
                 if (ship.isFighter()) {
                     continue;

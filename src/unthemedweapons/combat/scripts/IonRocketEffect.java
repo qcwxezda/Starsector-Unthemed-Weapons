@@ -5,7 +5,6 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import org.lwjgl.util.vector.Vector2f;
 import unthemedweapons.util.EngineUtils;
-import unthemedweapons.util.TargetChecker;
 
 import java.awt.*;
 import java.util.Collection;
@@ -27,19 +26,15 @@ public class IonRocketEffect implements OnHitEffectPlugin {
                 false,
                 arcRange,
                 true,
-                new TargetChecker() {
-                    @Override
-                    public boolean check(CombatEntityAPI entity) {
-                        // The EMP won't arc through shields so don't waste an arc trying
-                        if (entity instanceof ShipAPI) {
-                            ShipAPI ship = (ShipAPI) entity;
-                            if (ship.getShield() != null && ship.getShield().isWithinArc(proj.getLocation())) {
-                                return false;
-                            }
+                entity -> {
+                    // The EMP won't arc through shields so don't waste an arc trying
+                    if (entity instanceof ShipAPI ship) {
+                        if (ship.getShield() != null && ship.getShield().isWithinArc(proj.getLocation())) {
+                            return false;
                         }
-                        return entity != null && Global.getCombatEngine().isEntityInPlay(entity) && entity.getHitpoints() > 0 && entity.getOwner() != proj.getOwner() && entity.getOwner() != 100;
                     }
-            });
+                    return entity != null && Global.getCombatEngine().isEntityInPlay(entity) && entity.getHitpoints() > 0 && entity.getOwner() != proj.getOwner() && entity.getOwner() != 100;
+                });
 
         for (CombatEntityAPI entity : nearest) {
             engine.spawnEmpArc(proj.getSource(), pt, proj, entity,

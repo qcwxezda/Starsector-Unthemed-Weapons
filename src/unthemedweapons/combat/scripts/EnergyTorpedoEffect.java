@@ -6,7 +6,6 @@ import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import unthemedweapons.ModPlugin;
-import unthemedweapons.combat.plugins.Action;
 import unthemedweapons.combat.plugins.ActionPlugin;
 import unthemedweapons.fx.particles.BloomTrail;
 import unthemedweapons.fx.particles.Explosion;
@@ -29,7 +28,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
         float offset = Misc.random.nextFloat() * 360f;
 
         final DamagingExplosionSpec spec = ((MissileAPI) proj).getSpec().getExplosionSpec();
-        List<CombatEntityAPI> thisAsList = Collections.singletonList((CombatEntityAPI) proj);
+        List<CombatEntityAPI> thisAsList = Collections.singletonList(proj);
 
         if (ModPlugin.particleEngineEnabled) {
             addExplosionVisual(pt, spec.getRadius());
@@ -53,20 +52,11 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
             Vector2f.add(spawnLoc, dirVec, spawnLoc);
             final float delay = minDelay + Misc.random.nextFloat() * (maxDelay - minDelay);
 
-            ActionPlugin.queueAction(new Action() {
-
-                @Override
-                public void perform() {
-                    engine.spawnEmpArcVisual(pt, null, spawnLoc, null, 5f, empFringe, empCore);
-                }
-            }, delay / 2f);
-            ActionPlugin.queueAction(new Action() {
-                @Override
-                public void perform() {
-                    engine.spawnDamagingExplosion(spec, proj.getSource(), spawnLoc);
-                    if (ModPlugin.particleEngineEnabled) {
-                        addExplosionVisual(spawnLoc, spec.getRadius());
-                    }
+            ActionPlugin.queueAction(() -> engine.spawnEmpArcVisual(pt, null, spawnLoc, null, 5f, empFringe, empCore), delay / 2f);
+            ActionPlugin.queueAction(() -> {
+                engine.spawnDamagingExplosion(spec, proj.getSource(), spawnLoc);
+                if (ModPlugin.particleEngineEnabled) {
+                    addExplosionVisual(spawnLoc, spec.getRadius());
                 }
             }, delay);
             offset = (offset + 360f / numSpawns) % 360f;

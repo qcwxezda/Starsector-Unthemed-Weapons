@@ -7,7 +7,6 @@ import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
-import unthemedweapons.combat.plugins.Action;
 import unthemedweapons.combat.plugins.ActionPlugin;
 
 @SuppressWarnings("unused")
@@ -54,12 +53,9 @@ public class OrbOnHitEffect implements OnHitEffectPlugin {
                 bonus.value++;
             }
             final MutableStat.StatMod finalBonus = bonus;
-            ActionPlugin.queueAction(new Action() {
-                @Override
-                public void perform() {
-                    if (finalBonus != null) {
-                        finalBonus.value--;
-                    }
+            ActionPlugin.queueAction(() -> {
+                if (finalBonus != null) {
+                    finalBonus.value--;
                 }
             }, hitTime);
         }

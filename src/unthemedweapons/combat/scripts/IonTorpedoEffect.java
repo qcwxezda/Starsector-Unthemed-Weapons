@@ -33,18 +33,13 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
         ENGINE;
 
         private float getDamage() {
-            switch (this) {
-                case SMALL:
-                    return energyDamageSmall;
-                case MEDIUM:
-                    return energyDamageMedium;
-                case LARGE:
-                    return energyDamageLarge;
-                case ENGINE:
-                    return energyDamageEngine;
-                default:
-                    return 0f;
-            }
+            return switch (this) {
+                case SMALL -> energyDamageSmall;
+                case MEDIUM -> energyDamageMedium;
+                case LARGE -> energyDamageLarge;
+                case ENGINE -> energyDamageEngine;
+                default -> 0f;
+            };
         }
     }
 
@@ -68,8 +63,7 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
             // Boolean term is true if the weapon or engine is already disabled
             List<Pair<Vector2f, DisabledType>> damageLocs = new ArrayList<>();
 
-            if (tgt instanceof ShipAPI) {
-                ShipAPI ship = (ShipAPI) tgt;
+            if (tgt instanceof ShipAPI ship) {
                 ShipEngineControllerAPI engineController = ship.getEngineController();
                 // Apply EMP damage to each engine if applicable
                 if (engineController != null) {
@@ -86,17 +80,11 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
                     DisabledType type = DisabledType.NONE;
                     if (Misc.random.nextFloat() <= effectChance) {
                         if (weapon.isDisabled()) {
-                            switch (weapon.getSlot().getSlotSize()) {
-                                case SMALL:
-                                    type = DisabledType.SMALL;
-                                    break;
-                                case MEDIUM:
-                                    type = DisabledType.MEDIUM;
-                                    break;
-                                case LARGE:
-                                    type = DisabledType.LARGE;
-                                    break;
-                            }
+                            type = switch (weapon.getSlot().getSlotSize()) {
+                                case SMALL -> DisabledType.SMALL;
+                                case MEDIUM -> DisabledType.MEDIUM;
+                                case LARGE -> DisabledType.LARGE;
+                            };
                         }
                     }
                     damageLocs.add(new Pair<>(weapon.getLocation(), type));
@@ -105,8 +93,7 @@ public class IonTorpedoEffect implements OnHitEffectPlugin {
 
             Collections.shuffle(damageLocs);
 
-            if (tgt instanceof MissileAPI) {
-                MissileAPI missile = (MissileAPI) tgt;
+            if (tgt instanceof MissileAPI missile) {
                 ShipEngineControllerAPI engineController = missile.getEngineController();
                 if (engineController != null) {
                     damageLocs.add(new Pair<>(missile.getLocation(), engineController.isFlamedOut() ? DisabledType.ENGINE : DisabledType.NONE));

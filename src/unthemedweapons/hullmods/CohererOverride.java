@@ -60,10 +60,6 @@ public class CohererOverride extends BaseHullMod {
         }
     }
 
-    public String getDescriptionParam(int index, HullSize hullSize) {
-        return null;
-    }
-
     @Override
     public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
         return false;

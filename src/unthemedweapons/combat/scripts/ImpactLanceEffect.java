@@ -2,7 +2,6 @@ package unthemedweapons.combat.scripts;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.combat.GravitonBeamEffect;
-import unthemedweapons.combat.plugins.Action;
 import unthemedweapons.combat.plugins.ActionPlugin;
 
 import java.util.HashSet;
@@ -32,19 +31,13 @@ public class ImpactLanceEffect implements EveryFrameWeaponEffectPluginWithAdvanc
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
         // Add current targets to the set of affected ships
         for (BeamAPI beam : weapon.getBeams()) {
-            if (beam.getDamage().getDpsDuration() <= 0f || !(beam.getDamageTarget() instanceof ShipAPI)) {
+            if (beam.getDamage().getDpsDuration() <= 0f || !(beam.getDamageTarget() instanceof ShipAPI target)) {
                 continue;
             }
 
-            final ShipAPI target = (ShipAPI) beam.getDamageTarget();
             if (!affectedShips.contains(target)) {
                 affectedShips.add(target);
-                ActionPlugin.queueAction(new Action() {
-                    @Override
-                    public void perform() {
-                        affectedShips.remove(target);
-                    }
-                }, debuffDuration);
+                ActionPlugin.queueAction(() -> affectedShips.remove(target), debuffDuration);
             }
         }
     }

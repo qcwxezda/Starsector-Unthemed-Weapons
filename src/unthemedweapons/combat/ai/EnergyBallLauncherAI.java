@@ -36,8 +36,7 @@ public class EnergyBallLauncherAI implements AutofireAIPlugin {
         if (target == null || !engine.isEntityInPlay(target)) {
             return false;
         }
-        if (!(target instanceof ShipAPI)) return false;
-        ShipAPI ship = (ShipAPI) target;
+        if (!(target instanceof ShipAPI ship)) return false;
 
         if (ship.isHulk() || ship.getOwner() == firingShip.getOwner() || ship.getOwner() == 100 || ship.isPhased()) {
             return false;

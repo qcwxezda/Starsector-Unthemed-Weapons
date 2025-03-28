@@ -7,7 +7,6 @@ import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import unthemedweapons.ModPlugin;
-import unthemedweapons.combat.plugins.Action;
 import unthemedweapons.combat.plugins.ActionPlugin;
 import unthemedweapons.fx.particles.Explosion;
 import unthemedweapons.fx.particles.PhaseTorpedoTrail;
@@ -39,25 +38,20 @@ public class PhaseTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugin
 
         for (float radius = explosionSpeed * timeBetweenHits, time = timeBetweenHits; radius <= spec.getRadius(); radius += explosionSpeed * timeBetweenHits, time += timeBetweenHits) {
             final float finalRadius = radius;
-            ActionPlugin.queueAction(new Action() {
-                @Override
-                public void perform() {
-                    EngineUtils.applyDamageOnRing(
-                            pt,
-                            finalRadius,
-                            true,
-                            true,
-                            null,
-                            ringDamage*proj.getDamageAmount(),
-                            DamageType.HIGH_EXPLOSIVE,
-                            0f,
-                            false,
-                            false,
-                            proj,
-                            true
-                    );
-                }
-            }, time);
+            ActionPlugin.queueAction(() -> EngineUtils.applyDamageOnRing(
+                    pt,
+                    finalRadius,
+                    true,
+                    true,
+                    null,
+                    ringDamage*proj.getDamageAmount(),
+                    DamageType.HIGH_EXPLOSIVE,
+                    0f,
+                    false,
+                    false,
+                    proj,
+                    true
+            ), time);
         }
     }
 
