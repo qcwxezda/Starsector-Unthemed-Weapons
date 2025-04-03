@@ -2,27 +2,39 @@ package unthemedweapons.campaign;
 
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.CampaignUIAPI;
 import com.fs.starfarer.api.campaign.CoreUIAPI;
 import com.fs.starfarer.api.campaign.CoreUITabId;
 import com.fs.starfarer.api.campaign.listeners.CoreUITabListener;
+import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
+import com.fs.starfarer.api.combat.CombatEngineAPI;
+import com.fs.starfarer.api.combat.EveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.input.InputEventAPI;
+import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.ui.ButtonAPI;
 import com.fs.starfarer.api.ui.LabelAPI;
 import com.fs.starfarer.api.ui.UIPanelAPI;
+import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.combat.CombatEngine;
 import com.fs.starfarer.coreui.refit.ModPickerDialogV3;
+import com.fs.starfarer.title.TitleScreenState;
 import com.fs.starfarer.ui.impl.CargoTooltipFactory;
+import com.fs.state.AppDriver;
 import com.fs.util.container.Pair;
 import com.fs.starfarer.coreui.refit.WeaponPickerDialog;
 import com.fs.starfarer.ui.impl.StandardTooltipV2Expandable;
+import unthemedweapons.ModPlugin;
 import unthemedweapons.util.DynamicWeaponStats;
 import unthemedweapons.util.ReflectionUtils;
 
 import java.awt.*;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -30,7 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameScript {
+public class RefitTabListenerAndScript extends BaseEveryFrameCombatPlugin implements CoreUITabListener, EveryFrameScript {
     private boolean insideRefitScreen = false;
     private WeaponPickerDialog wpd = null;
     private ShipAPI selectedShip = null;
@@ -38,7 +50,6 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
     private StandardTooltipV2Expandable currTooltip = null; // Pressing CTRL when picking a weapon
     private StandardTooltipV2Expandable activeTooltip = null; // Selected weapon when picking a weapon
     private ButtonAPI firstModifiedButton = null; // Keep track of the first modified button to know when the weapons list changes
-    private final Map<String, WeaponAPI> weaponMap = new HashMap<>(); // Map between weapon slot ids and actual weapons
     private int lastWeaponDialogIndex = -1;
 
     private static String wpdSlotFieldName = null;
@@ -69,40 +80,14 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
         return true;
     }
 
-    @Override
-    public void advance(float v) {
-        if (!insideRefitScreen) return;
-        if (Global.getSector() == null || Global.getSector().getCampaignUI() == null) return;
-
-        CampaignUIAPI ui = Global.getSector().getCampaignUI();
-        if (!CoreUITabId.REFIT.equals(ui.getCurrentCoreTab())) {
-            insideRefitScreen = false;
-            return;
-        }
-        // Due to a bug, if the player ESCs out of the refit screen in a market, the core tab is still shown as REFIT
-        // even though it's been closed. To combat this, check if the savedOptionList is empty. If it is, we're still
-        // in the refit screen; otherwise, we've ESCed out of the refit screen.
-        else if (ui.getCurrentInteractionDialog() != null
-                && ui.getCurrentInteractionDialog().getOptionPanel() != null
-                && !ui.getCurrentInteractionDialog().getOptionPanel().getSavedOptionList().isEmpty()) {
-            insideRefitScreen = false;
-            return;
-        }
-
-        CoreUIAPI core = (CoreUIAPI) ReflectionUtils.getCoreUI();
+    private void advance(UIPanelAPI screenPanel, UIPanelAPI core, UIPanelAPI currentCoreTab) {
         // Update the selected ship and repopulate the weapon mapping if the selected ship has changed
-        if (updateSelectedShip(core) && selectedShip != null) {
-            weaponMap.clear();
-            for (WeaponAPI weapon : selectedShip.getAllWeapons()) {
-                weaponMap.put(weapon.getSlot().getId(), weapon);
-            }
-        }
-        updateTotalWeaponFluxDisplayIfNeeded(core);
+        updateSelectedShip(currentCoreTab);
+        updateTotalWeaponFluxDisplayIfNeeded(core, currentCoreTab);
 
         // Try to get the hovered-over tooltip
         // This exists inside the campaign UI's "screenpanel"
         // and is some inner class of CargoTooltipFactory
-        UIPanelAPI screenPanel = (UIPanelAPI) ReflectionUtils.getField(ui, "screenPanel");
         List<?> screenPanelChildren = (List<?>) ReflectionUtils.invokeMethod(screenPanel, "getChildrenNonCopy");
         for (Object child : screenPanelChildren) {
             if (child.getClass().getEnclosingClass() == CargoTooltipFactory.class) {
@@ -196,6 +181,84 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
         }
     }
 
+    @Override
+    public void init(CombatEngineAPI engine) {
+        if (!(getClass().getClassLoader() instanceof ModPlugin.ReflectionEnabledClassLoader)) {
+            try {
+                Class<?> cls = ModPlugin.getClassLoader().loadClass("unthemedweapons.campaign.RefitTabListenerAndScript");
+                MethodHandles.Lookup lookup = MethodHandles.lookup();
+                MethodHandle mh = lookup.findConstructor(cls, MethodType.methodType(void.class));
+                EveryFrameCombatPlugin refitModifier = (EveryFrameCombatPlugin) mh.invoke();
+                CombatEngine.getInstance().addPlugin(refitModifier);
+
+                CombatEngine.getInstance().removePlugin(this);
+            }
+            catch (Throwable e) {
+                throw new RuntimeException("Failed to add refit tab listener; consider setting enableQoL to false in wpnxt_mod_settings.json", e);
+            }
+        }
+    }
+
+    @Override
+    public void advance(float amount, List<InputEventAPI> events) {
+        // Refit screen only shows up in combat in missions
+        var currentState = AppDriver.getInstance().getCurrentState();
+        if (!(currentState instanceof TitleScreenState)) return;
+
+        // Wrong classloader, will crash on reflection
+        if (!(getClass().getClassLoader() instanceof ModPlugin.ReflectionEnabledClassLoader)) return;
+
+        UIPanelAPI screenPanel = (UIPanelAPI) ReflectionUtils.getField(currentState, "screenPanel");
+        // Find a child that is an instance of CoreUIAPI
+        UIPanelAPI coreUI = null;
+        List<?> children = (List<?>) ReflectionUtils.invokeMethod(screenPanel, "getChildrenNonCopy");
+        for (Object child : children) {
+            List<?> subChildren = (List<?>) ReflectionUtils.invokeMethod(child, "getChildrenNonCopy");
+            if (subChildren != null && subChildren.get(0) instanceof CoreUIAPI) {
+                coreUI = (UIPanelAPI) subChildren.get(0);
+                break;
+            }
+        }
+        if (coreUI == null) return;
+        Object currentTabData = ReflectionUtils.invokeMethod(coreUI, "getCurrentTabData");
+        UIPanelAPI currentTab = null;
+        for (Field field : currentTabData.getClass().getDeclaredFields()) {
+            if (UIPanelAPI.class.isAssignableFrom(field.getType())) {
+                currentTab = (UIPanelAPI) ReflectionUtils.getField(currentTabData, field.getName());
+                break;
+            }
+        }
+
+        if (currentTab == null) return;
+        advance(screenPanel, screenPanel, currentTab);
+    }
+
+    @Override
+    public void advance(float amount) {
+        if (!insideRefitScreen) return;
+        if (Global.getSector() == null || Global.getSector().getCampaignUI() == null) return;
+
+        var ui = Global.getSector().getCampaignUI();
+        if (!CoreUITabId.REFIT.equals(ui.getCurrentCoreTab())) {
+            insideRefitScreen = false;
+            return;
+        }
+        // Due to a bug, if the player ESCs out of the refit screen in a market, the core tab is still shown as REFIT
+        // even though it's been closed. To combat this, check if the savedOptionList is empty. If it is, we're still
+        // in the refit screen; otherwise, we've ESCed out of the refit screen.
+        else if (ui.getCurrentInteractionDialog() != null
+                && ui.getCurrentInteractionDialog().getOptionPanel() != null
+                && !ui.getCurrentInteractionDialog().getOptionPanel().getSavedOptionList().isEmpty()) {
+            insideRefitScreen = false;
+            return;
+        }
+
+        UIPanelAPI screenPanel = (UIPanelAPI) ReflectionUtils.getField(ui, "screenPanel");
+        UIPanelAPI core = ReflectionUtils.getCoreUI();
+        UIPanelAPI currentCoreTab = (UIPanelAPI) ReflectionUtils.invokeMethod(core, "getCurrentTab");
+        advance(screenPanel, core, currentCoreTab);
+    }
+
     private void updateWeaponPickerRangesIfNeeded(WeaponSlotAPI slot) {
         if (selectedShip == null) return;
 
@@ -281,6 +344,31 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
 
                 for (Object child : rendererChildren) {
                     if (child instanceof LabelAPI label) {
+                        float textHeight = label.getPosition().getHeight();
+                        // Found the OP label
+                        if (textHeight == 24f) {
+                            int baseOP = Math.round(spec.getOrdnancePointCost(null));
+                            int newOP = Math.round(spec.getOrdnancePointCost(Global.getSector().getPlayerStats(), selectedShip.getMutableStats()));
+                            String baseOPString = Integer.toString(baseOP);
+                            String newOPString = Integer.toString(newOP);
+                            boolean cannotEquip = Misc.getNegativeHighlightColor().equals(label.getColor());
+                            if (baseOP != newOP) {
+                                String newText = "(" + newOPString + ")";
+                                label.setText(baseOPString + " " + newText);
+                                label.setHighlight(baseOPString.length(), label.getText().length());
+                                if (cannotEquip) {
+                                    label.setColor(Misc.getGrayColor());
+                                    label.setHighlightColor(darkRedColor);
+                                }
+                                else {
+                                    label.setHighlightColor(baseOP < newOP ? redColor : greenColor);
+                                }
+                                ReflectionUtils.invokeMethod(label, "autoSize");
+                            }
+                            else if (cannotEquip) {
+                                label.setColor(darkRedColor);
+                            }
+                        }
                         // Found the range label
                         if (label.getText().contains("range ")) {
                             WeaponAPI weapon = Global.getCombatEngine().createFakeWeapon(selectedShip, spec.getWeaponId());
@@ -321,31 +409,29 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
         }
     }
 
-    /** Returns whether the ship display changed */
-    private boolean updateSelectedShip(CoreUIAPI core) {
+    /**
+     * Returns whether the ship display changed
+     */
+    private void updateSelectedShip(UIPanelAPI currentCoreTab) {
         ShipAPI newShip;
         try {
-            Object currentTab = ReflectionUtils.invokeMethodNoCatch(core, "getCurrentTab");
-            Object refitPanel = ReflectionUtils.invokeMethodNoCatch(currentTab, "getRefitPanel");
+            Object refitPanel = ReflectionUtils.invokeMethodNoCatch(currentCoreTab, "getRefitPanel");
             Object shipDisplay = ReflectionUtils.invokeMethodNoCatch(refitPanel, "getShipDisplay");
             newShip = (ShipAPI) ReflectionUtils.invokeMethodNoCatch(shipDisplay, "getShip");
         }
         catch (Exception e) {
             newShip = null;
         }
-        boolean changed = selectedShip != newShip;
         selectedShip = newShip;
-        return changed;
     }
 
-    private void updateTotalWeaponFluxDisplayIfNeeded(CoreUIAPI core) {
+    private void updateTotalWeaponFluxDisplayIfNeeded(UIPanelAPI core, UIPanelAPI currentCoreTab) {
         if (selectedShip == null) return;
 
         // There are two possible places for the flux display to be: either in the refit panel's getModDisplay,
         // or in a ModPickerDialogV3; the latter will overwrite the former
 
-        Object currentTab = ReflectionUtils.invokeMethod(core, "getCurrentTab");
-        Object refitPanel = ReflectionUtils.invokeMethod(currentTab, "getRefitPanel");
+        Object refitPanel = ReflectionUtils.invokeMethod(currentCoreTab, "getRefitPanel");
         Object modDisplay = ReflectionUtils.invokeMethod(refitPanel, "getModDisplay");
 
         List<?> coreChildren = (List<?>) ReflectionUtils.invokeMethod(core, "getChildrenNonCopy");
@@ -502,25 +588,21 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
         float diff = actual - base;
         if (Math.abs(diff) > 0.01f) {
             String additionalText = "(" + formatNumber(actual, base, forceTruncateInt) + ")";
-//            String additionalText = "(" +
-//                    (diff < 0f ? "-" : "+") +
-//                    formatNumber(Math.abs(diff), true) +
-//                    ")";
             sb.append(" ").append(additionalText);
             highlights.add(additionalText);
             highlightColors.add((diff < 0f && !reverseColors) || (diff > 0f && reverseColors) ? redColor : greenColor);
         }
     }
 
-    private TextWithModifier generateModifierText(float base, float baseSustained, float actual, float actualSustained, boolean reverseColors, boolean forceTruncateInt) {
+    private TextWithModifier generateModifierText(float base, float baseSustained, float actual, float actualSustained, boolean reverseColors) {
         StringBuilder sb = new StringBuilder();
         List<String> highlights = new ArrayList<>();
         List<Color> highlightColors = new ArrayList<>();
-        sb.append(formatNumber(base, actual, forceTruncateInt));
-        makeAdditionalText(base, actual, sb, highlights, highlightColors, reverseColors, forceTruncateInt);
+        sb.append(formatNumber(base, actual, false));
+        makeAdditionalText(base, actual, sb, highlights, highlightColors, reverseColors, false);
         sb.append(" (");
-        sb.append(formatNumber(baseSustained, actualSustained, forceTruncateInt));
-        makeAdditionalText(baseSustained, actualSustained, sb, highlights, highlightColors, reverseColors, forceTruncateInt);
+        sb.append(formatNumber(baseSustained, actualSustained, false));
+        makeAdditionalText(baseSustained, actualSustained, sb, highlights, highlightColors, reverseColors, false);
         sb.append(")");
         return new TextWithModifier(sb.toString(), highlights.toArray(new String[0]), highlightColors.toArray(new Color[0]));
     }
@@ -553,13 +635,6 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
         else {
             return new Pair<>(Float.parseFloat(text.substring(0, index)), text.substring(index));
         }
-    }
-
-    private Pair<Float, Float> parseSustainedText(String text) {
-        int lIndex = text.indexOf('('), rIndex = text.indexOf(')');
-        return new Pair<>(
-                Float.parseFloat(text.substring(0, lIndex)),
-                Float.parseFloat(text.substring(lIndex+1, rIndex)));
     }
 
     private void setSlot(WeaponAPI weapon, WeaponSlotAPI slot) {
@@ -595,6 +670,18 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
         Pair<Float, String> split;
         float orig;
         switch (name) {
+            case "Ordnance points":
+                int baseOP = Math.round(spec.getOrdnancePointCost(null));
+                int modifiedOP = Math.round(spec.getOrdnancePointCost(Global.getSector().getPlayerStats(), selectedShip.getMutableStats()));
+                newText = generateModifierText(baseOP, modifiedOP, true, true);
+                break;
+            case "Hitpoints":
+                if (spec.getProjectileSpec() instanceof MissileSpecAPI mSpec) {
+                    var baseHitpoints = mSpec.getHullSpec().getHitpoints();
+                    float actualHitpoints = selectedShip.getMutableStats().getMissileHealthBonus().computeEffective(baseHitpoints);
+                    newText = generateModifierText(baseHitpoints, actualHitpoints, false, false);
+                }
+                break;
             case "Range":
                 newText = generateModifierText(spec.getMaxRange(), stats.range(), false, false);
                 break;
@@ -612,48 +699,12 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
                 }
                 break;
             case "Damage / second":
-//                orig = Float.parseFloat(valueLabel.getText());
-//                modified = orig * getDamageMult(weapon);
-//                rofMult = 1f;
-//                if (spec instanceof ProjectileWeaponSpecAPI) {
-//                    rofMult = getRoFMult(weapon);
-//                }
-//                else if (weapon.isBurstBeam()) {
-//                    // Burst beam: rate of fire multiplier only affects cooldown, not burst duration
-//                    // Total refire delay is getBurstDuration() + getCooldown() + getChargeupTime, getChargeupTime is not exposed
-//                    float origDelay = spec.getBurstDuration() + weapon.getCooldown();
-//                    origDelay += (float) ReflectionUtils.invokeMethod(spec, "getChargeupTime");
-//                    float newDelay = spec.getBurstDuration() + weapon.getCooldown() / getRoFMult(weapon);
-//                    newDelay += (float) ReflectionUtils.invokeMethod(spec, "getChargeupTime");
-//                    rofMult = origDelay / newDelay;
-//                }
-//                modified *= rofMult;
-//                newText = generateModifierText(orig, modified, false, false);
                 newText = generateModifierText(spec.getDerivedStats().getDps(), stats.dpsData().dps, false, false);
                 break;
             case "Damage / second (sustained)":
-//                sustainedPair = parseSustainedText(valueLabel.getText());
-//                orig = sustainedPair.one;
-//                origSustained = sustainedPair.two;
-//                rofMult = 1f;
-//                if (spec instanceof ProjectileWeaponSpecAPI) {
-//                    rofMult = getRoFMult(weapon);
-//                }
-//                else if (weapon.isBurstBeam()) {
-//                    // Burst beam: rate of fire multiplier only affects cooldown, not burst duration
-//                    // Total refire delay is getBurstDuration() + getCooldown() + getChargeupTime, getChargeupTime is not exposed
-//                    float origDelay = spec.getBurstDuration() + weapon.getCooldown();
-//                    origDelay += (float) ReflectionUtils.invokeMethod(spec, "getChargeupTime");
-//                    float newDelay = spec.getBurstDuration() + weapon.getCooldown() / getRoFMult(weapon);
-//                    newDelay += (float) ReflectionUtils.invokeMethod(spec, "getChargeupTime");
-//                    rofMult = origDelay / newDelay;
-//                }
-//                modified = orig * getDamageMult(weapon) * rofMult;
-//                modifiedSustained = origSustained * getDamageMult(weapon) * getAmmoRegenRateMult(weapon);
-//                newText = generateModifierText(orig, origSustained, modified, modifiedSustained, false, false);
                 // Rename the label because it's too long
                 ReflectionUtils.invokeMethod(grid, "updateRowText", i, j, "D/s (sustained)");
-                newText = generateModifierText(spec.getDerivedStats().getDps(), spec.getDerivedStats().getSustainedDps(), stats.dpsData().dps, stats.dpsData().dpsSustained, false, false);
+                newText = generateModifierText(spec.getDerivedStats().getDps(), spec.getDerivedStats().getSustainedDps(), stats.dpsData().dps, stats.dpsData().dpsSustained, false);
                 break;
             case "Flux / second":
                 newText = generateModifierText(spec.getDerivedStats().getFluxPerSecond(), stats.fluxData().fluxPerSecond, true, false);
@@ -666,8 +717,8 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
                         spec.getDerivedStats().getSustainedFluxPerSecond(),
                         stats.fluxData().fluxPerSecond,
                         stats.fluxData().fluxPerSecondSustained,
-                        true,
-                        false);
+                        true
+                );
                 break;
             case "Flux / shot":
                 orig = spec instanceof ProjectileWeaponSpecAPI ? ((ProjectileWeaponSpecAPI) spec).getEnergyPerShot() : 0f;
@@ -676,85 +727,6 @@ public class RefitTabListenerAndScript implements CoreUITabListener, EveryFrameS
             case "Flux / non-EMP damage": case "Flux / damage":
                 newText = generateModifierText(spec.getDerivedStats().getFluxPerDam(), stats.fluxData().fluxPerDamage, true, false);
                 break;
-//            case "Flux / second": case "Flux / shot": case "Flux / non-EMP damage": case "Flux / damage":
-//                orig = Float.parseFloat(valueLabel.getText());
-//                rofMult = getRoFMult(weapon);
-//                if (spec instanceof ProjectileWeaponSpecAPI) {
-//                    int burstSize = spec.getBurstSize();
-//                    if (spec.isInterruptibleBurst()) {
-//                        burstSize = 1;
-//                    }
-//                    modified = orig * weapon.getFluxCostToFire() * getFluxCostMult(weapon) / burstSize / ((ProjectileWeaponSpecAPI) spec).getEnergyPerShot();
-//                    if (name.equals("Flux / second")) {
-//                        modified *= rofMult;
-//                    }
-//                }
-//                else {
-//                    if (weapon.isBurstBeam()) {
-//                        float totalTime = spec.getBurstDuration() + weapon.getCooldown();
-//                        totalTime += (float) ReflectionUtils.invokeMethod(spec, "getChargeupTime");
-//                        modified = orig * weapon.getFluxCostToFire() * getFluxCostMult(weapon) / (totalTime) / spec.getDerivedStats().getFluxPerSecond();
-//                        float origDelay = totalTime;
-//                        float newDelay = totalTime - weapon.getCooldown() + weapon.getCooldown() / getRoFMult(weapon);
-//                        rofMult = origDelay / newDelay;
-//                        if (name.equals("Flux / second")) {
-//                            modified *= rofMult;
-//                        }
-//                    }
-//                    else {
-//                        modified = orig * weapon.getFluxCostToFire() * getFluxCostMult(weapon) / spec.getDerivedStats().getFluxPerSecond();
-//                    }
-//                    if (!weapon.isBeam() && name.equals("Flux / second")) {
-//                        modified *= rofMult;
-//                    }
-//                }
-//                if (name.equals("Flux / damage") || name.equals("Flux / non-EMP damage")) {
-//                    modified /= getDamageMult(weapon);
-//                }
-//                newText = generateModifierText(orig, modified, true, false);
-//                break;
-//            case "Flux / second (sustained)":
-//                // Rename the label because it's too long
-//                ReflectionUtils.invokeMethod(grid, "updateRowText", i, j, "F/s (sustained)");
-//                sustainedPair = parseSustainedText(valueLabel.getText());
-//                orig = sustainedPair.one;
-//                origSustained = sustainedPair.two;
-//                rofMult = getRoFMult(weapon);
-//                float regenMult = getAmmoRegenRateMult(weapon);
-//                if (spec instanceof ProjectileWeaponSpecAPI) {
-//                    int burstSize = spec.getBurstSize();
-//                    if (spec.isInterruptibleBurst()) {
-//                        burstSize = 1;
-//                    }
-//                    float ratio = (weapon.getFluxCostToFire() * getFluxCostMult(weapon) / burstSize) / ((ProjectileWeaponSpecAPI) spec).getEnergyPerShot();
-//                    modified = orig * ratio;
-//                    modifiedSustained = origSustained * ratio;
-//                    modified *= rofMult;
-//                    modifiedSustained *= regenMult;
-//                }
-//                else {
-//                    if (weapon.isBurstBeam()) {
-//                        float totalTime = spec.getBurstDuration() + weapon.getCooldown();
-//                        totalTime += (float) ReflectionUtils.invokeMethod(spec, "getChargeupTime");
-//                        float ratio = weapon.getFluxCostToFire() * getFluxCostMult(weapon) / (totalTime) / spec.getDerivedStats().getFluxPerSecond();
-//                        float origDelay = totalTime;
-//                        float newDelay = totalTime - weapon.getCooldown() + weapon.getCooldown() / getRoFMult(weapon);
-//                        rofMult = origDelay / newDelay;
-//                        modified = orig * ratio * rofMult;
-//                        modifiedSustained = origSustained * ratio;
-//                        modifiedSustained *= regenMult;
-//                    }
-//                    else {
-//                        float ratio = weapon.getFluxCostToFire() * getFluxCostMult(weapon) / spec.getDerivedStats().getFluxPerSecond();
-//                        modified = ratio * orig;
-//                        modifiedSustained = ratio * origSustained;
-//                    }
-//                    if (!weapon.isBeam()) {
-//                        modified *= rofMult;
-//                    }
-//                }
-//                newText = generateModifierText(orig, origSustained, modified, modifiedSustained, true, false);
-//                break;
             case "Max charges": case "Max ammo": case "Charges": case "Ammo":
                 newText = generateModifierText(spec.getMaxAmmo(), stats.maxAmmo(), false, true);
                 break;

@@ -7,6 +7,9 @@ import com.fs.starfarer.api.campaign.listeners.ListenerManagerAPI;
 import com.fs.starfarer.launcher.ModManager;
 import unthemedweapons.campaign.RefitTabListenerAndScript;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -25,12 +28,15 @@ public class ModPlugin extends BaseModPlugin {
     public void onGameLoad(boolean newGame) {
         ListenerManagerAPI listeners = Global.getSector().getListenerManager();
         try {
-            EveryFrameScript refitModifier = (EveryFrameScript) getClassLoader().loadClass("unthemedweapons.campaign.RefitTabListenerAndScript").newInstance();
+            Class<?> cls = getClassLoader().loadClass("unthemedweapons.campaign.RefitTabListenerAndScript");
+            MethodHandles.Lookup lookup = MethodHandles.lookup();
+            MethodHandle mh = lookup.findConstructor(cls, MethodType.methodType(void.class));
+            EveryFrameScript refitModifier = (EveryFrameScript) mh.invoke();
             Global.getSector().addTransientScript(refitModifier);
             if (!listeners.hasListenerOfClass(RefitTabListenerAndScript.class)) {
                 listeners.addListener(refitModifier, true);
             }
-        } catch (Exception e) {
+        } catch (Throwable e) {
             throw new RuntimeException("Failed to add refit tab listener", e);
         }
     }
@@ -41,7 +47,7 @@ public class ModPlugin extends BaseModPlugin {
             "unthemedweapons.util.DynamicWeaponStats"
     };
 
-    private static ReflectionEnabledClassLoader getClassLoader() {
+    public static ReflectionEnabledClassLoader getClassLoader() {
         URL url = ModPlugin.class.getProtectionDomain().getCodeSource().getLocation();
         return new ReflectionEnabledClassLoader(url, ModPlugin.class.getClassLoader());
     }

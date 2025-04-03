@@ -1,0 +1,5 @@
+{
+  "plugins": {
+    "wpnxt_refit_script":  "unthemedweapons.campaign.RefitTabListenerAndScript"
+  }
+}
