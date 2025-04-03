@@ -1,3 +1,12 @@
+0.7.1:
+- Utilities:
+    - Now shows base and updated missile HP.
+    - Now shows base and updated OP cost for weapons.
+        - Note: since bright orange highlight is used to denote "can equip, but OP cost is increased", the color of "cannot equip" has been changed to dark orange.
+    - Now works on title screen missions.
+- Adjusted a variant to compensate for adjusted OP costs in 0.98.
+- Replaced usages of the (deprecated in Java 17) Class.newInstance method.
+
 0.7.0:
 - Recompiled for Java 17
 - Updated to game version 0.98a.

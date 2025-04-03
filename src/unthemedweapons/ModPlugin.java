@@ -17,6 +17,9 @@ import unthemedweapons.procgen.GenFortifiedCaches;
 import unthemedweapons.procgen.GenSpecialCaches;
 
 import java.awt.*;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
@@ -28,6 +31,9 @@ public class ModPlugin extends BaseModPlugin {
     public static boolean particleEngineEnabled = false;
     private static final Set<String> replaceExplosionWithParticles = new HashSet<>();
     public static final String initializerKey = "wpnxt_wasInitialized";
+    public static float CACHE_FREQ;
+    public static boolean REGENERATE_CACHES;
+    public static boolean QOL_ENABLED;
 
     static {
         replaceExplosionWithParticles.add("wpnxt_energytorpedo_shot");
@@ -59,72 +65,17 @@ public class ModPlugin extends BaseModPlugin {
         return null;
     }
 
-//    @Override
-//    public void onApplicationLoad() {
-//        // Add the relevant tags to weapon, fighter, and ship specs
-//        // If adding tags to every spec breaks something, there is an alternative option: write an extension of, e.g. WeaponBlueprintItemPlugin and make a duplicate special item in special_items.csv with that plugin
-//        // However, this has the issue that it doesn't work for fighter LPCs, where the resolution to specific LPC is hard-coded
-//        addTagsToSpecs();
-//    }
-//
-//    @Override
-//    public void onDevModeF8Reload() {
-//        addTagsToSpecs();
-//    }
-//
-//    private void addTagsToSpecs() {
-//        for (WeaponSpecAPI spec : Global.getSettings().getAllWeaponSpecs()) {
-//            switch (spec.getSize()) {
-//                case SMALL:
-//                    spec.addTag(Tags.TAG_WEAPON_SMALL);
-//                    break;
-//                case MEDIUM:
-//                    spec.addTag(Tags.TAG_WEAPON_MEDIUM);
-//                    break;
-//                case LARGE:
-//                    spec.addTag(Tags.TAG_WEAPON_LARGE);
-//                    break;
-//            }
-//        }
-//        for (FighterWingSpecAPI spec : Global.getSettings().getAllFighterWingSpecs()) {
-//            float op = spec.getOpCost(null);
-//            if (op <= 5f) {
-//                spec.addTag(Tags.TAG_FIGHTER_UNDER5OP);
-//            }
-//            else if (op <= 10f) {
-//                spec.addTag(Tags.TAG_FIGHTER_5TO10OP);
-//            }
-//            else if (op <= 20f) {
-//                spec.addTag(Tags.TAG_FIGHTER_10TO20OP);
-//            }
-//            else {
-//                spec.addTag(Tags.TAG_FIGHTER_OVER20OP);
-//            }
-//        }
-//        for (ShipHullSpecAPI spec : Global.getSettings().getAllShipHullSpecs()) {
-//            if (!spec.isBaseHull()) continue;
-//            switch (spec.getHullSize()) {
-//                case DEFAULT:
-//                case FIGHTER:
-//                    break;
-//                case FRIGATE:
-//                    spec.addTag(Tags.TAG_FRIGATE);
-//                    break;
-//                case DESTROYER:
-//                    spec.addTag(Tags.TAG_DESTROYER);
-//                    break;
-//                case CRUISER:
-//                    spec.addTag(Tags.TAG_CRUISER);
-//                    break;
-//                case CAPITAL_SHIP:
-//                    spec.addTag(Tags.TAG_CAPITAL);
-//                    break;
-//            }
-//        }
-//    }
-
     @Override
     public void onApplicationLoad() {
+        try {
+            JSONObject json = Global.getSettings().loadJSON("wpnxt_mod_settings.json");
+            CACHE_FREQ = (float) json.getDouble("fortifiedCachesPerSystem");
+            REGENERATE_CACHES = json.getBoolean("regenerateFortifiedCaches");
+            QOL_ENABLED = json.getBoolean("enableQoL");
+        } catch (Exception e) {
+            throw new RuntimeException("Could not load wpnxt_mod_settings.json: " + e, e);
+        }
+
         particleEngineEnabled = Global.getSettings().getModManager().isModEnabled("particleengine");
         if (particleEngineEnabled) {
             String versionString = Global.getSettings().getModManager().getModSpec("particleengine").getVersion();
@@ -174,22 +125,9 @@ public class ModPlugin extends BaseModPlugin {
 
     @Override
     public void onGameLoad(boolean newGame) {
-        //CampaignUtils.generateFleetForEnergyCache(Global.getSector().getPlayerFleet(), Misc.random);
-
         Global.getSector().registerPlugin(new CampaignPluginImpl());
 
-        float cacheFreq;
-        boolean regenerateCaches;
-        boolean qolEnabled;
-        try {
-            JSONObject json = Global.getSettings().loadJSON("wpnxt_mod_settings.json");
-            cacheFreq = (float) json.getDouble("fortifiedCachesPerSystem");
-            regenerateCaches = json.getBoolean("regenerateFortifiedCaches");
-            qolEnabled = json.getBoolean("enableQoL");
-        } catch (Exception e) {
-            throw new RuntimeException("Could not load wpnxt_mod_settings.json: " + e, e);
-        }
-        int numCaches = (int) (Global.getSector().getStarSystems().size() * cacheFreq);
+        int numCaches = (int) (Global.getSector().getStarSystems().size() * CACHE_FREQ);
 
         if (!Global.getSector().getPersistentData().containsKey(initializerKey)) {
             // Ensure the initialization only happens once
@@ -200,21 +138,24 @@ public class ModPlugin extends BaseModPlugin {
         }
 
         ListenerManagerAPI listeners = Global.getSector().getListenerManager();
-        if (regenerateCaches) {
+        if (REGENERATE_CACHES) {
             FortifiedCacheRegenerator regenerator = new FortifiedCacheRegenerator(numCaches, false);
             if (!listeners.hasListenerOfClass(FortifiedCacheRegenerator.class)) {
                 listeners.addListener(regenerator, true);
             }
             Global.getSector().addTransientListener(regenerator);
         }
-        if (qolEnabled) {
+        if (QOL_ENABLED) {
             try {
-                EveryFrameScript refitModifier = (EveryFrameScript) getClassLoader().loadClass("unthemedweapons.campaign.RefitTabListenerAndScript").newInstance();
+                Class<?> cls = getClassLoader().loadClass("unthemedweapons.campaign.RefitTabListenerAndScript");
+                MethodHandles.Lookup lookup = MethodHandles.lookup();
+                MethodHandle mh = lookup.findConstructor(cls, MethodType.methodType(void.class));
+                EveryFrameScript refitModifier = (EveryFrameScript) mh.invoke();
                 Global.getSector().addTransientScript(refitModifier);
                 if (!listeners.hasListenerOfClass(RefitTabListenerAndScript.class)) {
                     listeners.addListener(refitModifier, true);
                 }
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 throw new RuntimeException("Failed to add refit tab listener; consider setting enableQoL to false in wpnxt_mod_settings.json", e);
             }
         }
@@ -255,7 +196,7 @@ public class ModPlugin extends BaseModPlugin {
             "unthemedweapons.util.DynamicWeaponStats"
     };
 
-    private static ReflectionEnabledClassLoader getClassLoader() {
+    public static ReflectionEnabledClassLoader getClassLoader() {
         URL url = ModPlugin.class.getProtectionDomain().getCodeSource().getLocation();
         return new ReflectionEnabledClassLoader(url, ModPlugin.class.getClassLoader());
     }

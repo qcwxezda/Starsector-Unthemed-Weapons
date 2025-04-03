@@ -2,9 +2,9 @@
 	"id":"unthemedweapons",
 	"name":"Unthemed Weapons Collection",
 	"author":"qcwxezda",
-	"version":"0.7.0",
+	"version":"0.7.1",
 	"description":"Adds various weapons to the game. Adds fortified caches. Adds secrets.\n\nNote: soft dependency on Particle Engine. Will run without, but some visual effects will be missing.",
-    "gameVersion": "0.98a-RC5",
+    "gameVersion": "0.98a-RC7",
 	"jars": ["jars/UnthemedWeaponsCollection.jar"],
 	"modPlugin":"unthemedweapons.ModPlugin"
 }

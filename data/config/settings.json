@@ -12,6 +12,7 @@
   },
 
   "plugins": {
+    "wpnxt_refit_script":  "unthemedweapons.campaign.RefitTabListenerAndScript",
     "wpnxt_needledriver_plugin": "unthemedweapons.combat.plugins.NeedleDriverPlugin",
     "wpnxt_combat_plugin": "unthemedweapons.combat.plugins.ActionPlugin"
   }

@@ -1,7 +1,7 @@
 {
     "displayName": "Elite",
     "fluxCapacitors": 30,
-    "fluxVents": 4,
+    "fluxVents": 10,
     "hullId": "heron",
     "hullMods": [
         "expanded_deck_crew",
