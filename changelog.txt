@@ -1,3 +1,8 @@
+0.7.2:
+- Utilities:
+    - Removed a check that caused utils not to work on RAT settlements.
+    - Added support for MIRV sub-projectile hitpoints.
+
 0.7.1:
 - Utilities:
     - Now shows base and updated missile HP.
