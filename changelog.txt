@@ -1,0 +1,78 @@
+0.7.2:
+- Utilities:
+    - Removed a check that caused utils not to work on RAT settlements.
+    - Added support for MIRV sub-projectile hitpoints.
+
+0.7.1:
+- Utilities:
+    - Now shows base and updated missile HP.
+    - Now shows base and updated OP cost for weapons.
+        - Note: since bright orange highlight is used to denote "can equip, but OP cost is increased", the color of "cannot equip" has been changed to dark orange.
+    - Now works on title screen missions.
+- Adjusted a variant to compensate for adjusted OP costs in 0.98.
+- Replaced usages of the (deprecated in Java 17) Class.newInstance method.
+
+0.7.0:
+- Recompiled for Java 17
+- Updated to game version 0.98a.
+- Made some stuff invisible_in_codex.
+
+0.6.7:
+- Electron-class torpedo: hard capped total damage to 5000
+- Bloom autolauncher: flux/shot 1500 -> 1000
+- Paralyzer rocket launcher:
+    - Ammo 100 -> 80
+    - Damage 160 -> 150
+    - Nominal EMP damage 500 -> 100, arc damage unchanged
+- Stinger swarm battery: ammo 280 -> 210
+- Ion storm GMLRS:
+    - Proj speed 500 -> 400
+    - Now has 300 ammo cap, doesn't recharge
+    - Removed flux cost
+    - OP 24 -> 20
+- Void ray:
+    - DPS 1250 -> 1500
+    - Removed hard flux effect
+    - Removed 30% extra damage from sustained fire
+    - When converged and hitting hull or armor, beam now deals between 1000 and 2000 frag DPS depending on target's armor at point of contact
+- Added a reputation plugin that forces no reputation change from cache defender fleets.
+- Handled possible (but which should never happen) cyclic station-module chain.
+0.6.6:
+- (New game only) slightly reduced fortified cache spawn rate
+- Megabloom projector: reduced secondary explosion delay by 20%
+- Void ray:
+base damage 1750 -> 1250
+flux cost 550 -> 500
+damage now slowly increases by up to 1.3x when beam is converged
+- Graviton array:
+beam speed multiplied by 3
+max ammo 9 -> 10, gain 5 ammo at a time
+- Chaos pulser:
+flux/shot 210 -> 200
+- Boltstorm:
+reduced spread by 25%
+- Needle driver:
+Damage 220 -> 180
+DPS 122 -> 120
+fire rate 1/1.8s -> 1/1.5s
+efficiency 1.6 -> 1.5
+- Fixed/adjusted some variants
+- Fixed issue with getBeamWeaponFluxCostMult being applied twice
+- Fixed rare crash with rail ballista if refit screen was queued to be opened before loading finished
+0.6.5:
+- Fixed unintentional hard dependency on Particle Engine
+0.6.4:
+- Updated some sprites
+- Updated some visuals
+- All bolt weapons: lowered volume, reduced projectile size
+- Boltgun: DPS 70 -> 80
+- Bolt Repeater: Ammo 20 -> 30
+- Light Mining Blaster: each bolt now does 50 scripted damage to armor
+- Needle Driver:
+linger time 12s -> 15s,
+fire rate 2s -> 1.8s,
+max damage 400 -> 500, max attachments 16 -> 20
+- Ultra Blaster: fire rate 1/5s -> 1/6s
+- Ion Storm GMLRS: added 250 EMP damage on hit, EMP arc damage 500 -> 1000,
+now only has a chance to spawn an arc on hull/armor hits depending on number of previous hits within 3 seconds,
+fire rate 1/25s -> 1/20s

@@ -11,7 +11,6 @@ import com.fs.starfarer.api.combat.EveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
-import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
@@ -41,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class RefitTabListenerAndScript extends BaseEveryFrameCombatPlugin implements CoreUITabListener, EveryFrameScript {
     private boolean insideRefitScreen = false;
@@ -246,12 +246,12 @@ public class RefitTabListenerAndScript extends BaseEveryFrameCombatPlugin implem
         // Due to a bug, if the player ESCs out of the refit screen in a market, the core tab is still shown as REFIT
         // even though it's been closed. To combat this, check if the savedOptionList is empty. If it is, we're still
         // in the refit screen; otherwise, we've ESCed out of the refit screen.
-        else if (ui.getCurrentInteractionDialog() != null
-                && ui.getCurrentInteractionDialog().getOptionPanel() != null
-                && !ui.getCurrentInteractionDialog().getOptionPanel().getSavedOptionList().isEmpty()) {
-            insideRefitScreen = false;
-            return;
-        }
+//        else if (ui.getCurrentInteractionDialog() != null
+//                && ui.getCurrentInteractionDialog().getOptionPanel() != null
+//                && !ui.getCurrentInteractionDialog().getOptionPanel().getSavedOptionList().isEmpty()) {
+//            insideRefitScreen = false;
+//            return;
+//        }
 
         UIPanelAPI screenPanel = (UIPanelAPI) ReflectionUtils.getField(ui, "screenPanel");
         UIPanelAPI core = ReflectionUtils.getCoreUI();
@@ -676,11 +676,24 @@ public class RefitTabListenerAndScript extends BaseEveryFrameCombatPlugin implem
                 newText = generateModifierText(baseOP, modifiedOP, true, true);
                 break;
             case "Hitpoints":
-                if (spec.getProjectileSpec() instanceof MissileSpecAPI mSpec) {
-                    var baseHitpoints = mSpec.getHullSpec().getHitpoints();
-                    float actualHitpoints = selectedShip.getMutableStats().getMissileHealthBonus().computeEffective(baseHitpoints);
-                    newText = generateModifierText(baseHitpoints, actualHitpoints, false, false);
-                }
+                var pattern = Pattern.compile("(?<!x)\\b\\d+");
+                var text = valueLabel.getText();
+                var matcher = pattern.matcher(text);
+                List<String> highlights = new ArrayList<>();
+                List<Color> highlightColors = new ArrayList<>();
+                newText = new TextWithModifier(
+                        matcher.replaceAll(res -> {
+                            int base = Integer.parseInt(res.group());
+                            float actual = selectedShip.getMutableStats().getMissileHealthBonus().computeEffective(base);
+                            if ((int) actual == base) return "" + base;
+                            String actualText = "(" + formatNumber(actual, base, true) + ")";
+                            highlights.add(actualText);
+                            highlightColors.add(actual > base ? greenColor : redColor);
+                            boolean followedByX = text.length() > matcher.end() && text.charAt(matcher.end()) == 'x';
+                            return base + " " + actualText + (followedByX ? " " : "");
+                        }),
+                        highlights.toArray(new String[0]),
+                        highlightColors.toArray(new Color[0]));
                 break;
             case "Range":
                 newText = generateModifierText(spec.getMaxRange(), stats.range(), false, false);
