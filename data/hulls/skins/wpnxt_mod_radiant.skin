@@ -32,7 +32,7 @@
             "type": "HYBRID"
         }
     },
-    "maxSpeed":55,
+    "maxSpeed":50,
     "ordnancePoints":400,
     "engineSlotChanges": {
         "0": {

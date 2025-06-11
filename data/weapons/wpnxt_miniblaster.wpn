@@ -2,6 +2,7 @@
   "id":"wpnxt_miniblaster",
   "specClass":"projectile",
   "type":"ENERGY",
+  "mountTypeOverride":"HYBRID",
   "size":"SMALL",
   "turretSprite":"graphics/weapons/energy/wpnxt_miniblaster_turret.png",
   "turretGlowSprite":"graphics/weapons/energy/wpnxt_miniblaster_turret_glow.png",

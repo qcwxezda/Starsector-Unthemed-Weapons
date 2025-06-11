@@ -27,7 +27,8 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
     public void onHit(final DamagingProjectileAPI proj, CombatEntityAPI target, final Vector2f pt, boolean shieldHit, ApplyDamageResultAPI damageResult, final CombatEngineAPI engine) {
         float offset = Misc.random.nextFloat() * 360f;
 
-        final DamagingExplosionSpec spec = ((MissileAPI) proj).getSpec().getExplosionSpec();
+        final DamagingExplosionSpec spec = ((MissileAPI) proj).getSpec().getExplosionSpec().clone();
+        spec.setMaxDamage(proj.getDamageAmount());
         List<CombatEntityAPI> thisAsList = Collections.singletonList(proj);
 
         if (ModPlugin.particleEngineEnabled) {
@@ -54,7 +55,7 @@ public class EnergyTorpedoEffect implements OnHitEffectPlugin, OnFireEffectPlugi
 
             ActionPlugin.queueAction(() -> engine.spawnEmpArcVisual(pt, null, spawnLoc, null, 5f, empFringe, empCore), delay / 2f);
             ActionPlugin.queueAction(() -> {
-                engine.spawnDamagingExplosion(spec, proj.getSource(), spawnLoc);
+                var explosion = engine.spawnDamagingExplosion(spec, proj.getSource(), spawnLoc);
                 if (ModPlugin.particleEngineEnabled) {
                     addExplosionVisual(spawnLoc, spec.getRadius());
                 }

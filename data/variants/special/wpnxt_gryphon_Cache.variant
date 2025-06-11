@@ -1,6 +1,6 @@
 {
     "displayName": "Elite",
-    "fluxCapacitors": 18,
+    "fluxCapacitors": 15,
     "fluxVents": 20,
     "hullId": "gryphon",
     "hullMods": [

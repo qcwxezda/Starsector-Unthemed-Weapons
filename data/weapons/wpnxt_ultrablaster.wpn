@@ -2,6 +2,7 @@
   "id":"wpnxt_ultrablaster",
   "specClass":"projectile",
   "type":"ENERGY",
+  "mountTypeOverride":"HYBRID",
   "size":"LARGE",
   "turretSprite":"graphics/weapons/energy/wpnxt_ultrablaster_turret.png",
   "turretGlowSprite":"graphics/weapons/energy/wpnxt_ultrablaster_turret_glow.png",

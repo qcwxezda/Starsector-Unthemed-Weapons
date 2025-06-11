@@ -64,7 +64,7 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
             attachDataMap.put(ship, new LinkedList<>());
         }
 
-        attachDataMap.get(ship).add(new AttachData(spawn, offset, adjustAmount, proj.getFacing(), ship.getFacing()));
+        attachDataMap.get(ship).add(new AttachData(spawn, offset, adjustAmount, proj.getFacing(), ship.getFacing(), proj.getDamageAmount() / proj.getBaseDamageAmount()));
     }
 
     public static class AttachData {
@@ -72,18 +72,20 @@ public class NeedleDriverEffect implements OnHitEffectPlugin  {
         public Vector2f offset;
         public float facing;
         public float initialShipAngle;
+        public float damageRatio;
 
         // Move the projectile a bit in the opposite direction so that it doesn't appear
         // completely embedded in the ship; this amount is recorded so that the original
         // hit location (known to be in bounds of the target ship) can be recomputed
         public float adjustAmount;
 
-        AttachData(DamagingProjectileAPI proj, Vector2f offset, float adjustAmount, float facing, float initialShipAngle) {
+        public AttachData(DamagingProjectileAPI proj, Vector2f offset, float adjustAmount, float facing, float initialShipAngle, float damageRatio) {
             this.proj = proj;
             this.offset = offset;
             this.facing = facing;
             this.initialShipAngle = initialShipAngle;
             this.adjustAmount = adjustAmount;
+            this.damageRatio = damageRatio;
         }
     }
 }

@@ -2,6 +2,7 @@
   "specClass":"beam",
   "id":"wpnxt_mininglasermk2",
   "type":"ENERGY",
+  "mountTypeOverride":"HYBRID",
   "size":"SMALL",
   "collisionClass":"RAY",
   "beamEffect":"unthemedweapons.combat.scripts.LimitedAmmoBeamEffect",

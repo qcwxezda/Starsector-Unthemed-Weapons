@@ -166,14 +166,17 @@ public class ReshaperStats extends BaseShipSystemScript {
 
         public HullArmorData getHullArmorNSecondsAgo(float n) {
             assert(n <= secondsToTrack);
-            int index = (int) ((n - trackingInterval.getElapsed()) / secondsPerInterval);
+            float elapsed = trackingInterval.getElapsed();
+            elapsed = Math.min(elapsed, secondsPerInterval);
+            elapsed = Math.max(elapsed, 0.00001f);
+            int index = (int) ((n - elapsed) / secondsPerInterval);
             float[][] grid1 = index < 0 ? ship.getArmorGrid().getGrid() : hullArmorData.get(index).armor;
             float hull1 = index < 0 ? ship.getHitpoints() : hullArmorData.get(index).hull;
             float[][] grid2 = hullArmorData.get(index + 1).armor;
             float hull2 = hullArmorData.get(index + 1).hull;
             float interpolationAmount =
-                    index < 0 ? n / trackingInterval.getElapsed()
-                            : ((n - trackingInterval.getElapsed()) % secondsPerInterval) / secondsPerInterval;
+                    index < 0 ? n / elapsed
+                            : ((n - elapsed) % secondsPerInterval) / secondsPerInterval;
             float[][] interpolatedArmor = new float[grid1.length][grid1[0].length];
             float interpolatedHull = MathUtils.interpolate(hull1, hull2, interpolationAmount);
             for (int i = 0; i < grid1.length; i++) {
