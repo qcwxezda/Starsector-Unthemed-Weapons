@@ -2,9 +2,9 @@
 	"id":"unthemedweaponsutils",
 	"name":"Unthemed Weapons Utilities",
 	"author":"qcwxezda",
-	"version":"0.7.2",
+	"version":"0.7.4",
 	"description":"Contains just the utility features of Unthemed Weapons Collection. (Note: Unthemed Weapons Collection contains this mod, so do not use both in tandem.)",
-    "gameVersion": "0.98a-RC7",
+    "gameVersion": "0.98a-RC8",
 	"utility": true,
 	"jars": ["jars/UnthemedWeaponsCollection.jar"],
 	"modPlugin":"unthemedweapons.ModPlugin"

@@ -1,3 +1,46 @@
+0.7.4:
+- (New game only) Fortified caches are less likely to spawn in the same system as each other.
+- (New game only) Reduced the default number of fortified cache spawns by ~33%.
+- You can now order your second-in-command to handle fortified caches if your fleet is much stronger (2.5x the fleet points, modified by officers, S-mods, and d-mods).
+- Added high-tech skins for light mining blaster and mining laser mk2 (ultra blaster is already a neutral color and doesn't need a skin).
+- Bloom torpedoes: damage 650 -> 600, HP 800 -> 700.
+
+0.7.3:
+- Chaos pulser:
+    - Halved inaccuracy, hardpoints now negate the jitter effect
+    - Efficiency back to ~0.9
+    - Reduced max damage to 400
+    - Reduced average damage
+    - OP 25 -> 24
+- Mining laser mk2, Light mining blaster, Ultra blaster
+    - Changed mount type from energy to hybrid
+    - (You're welcome, whoever was complaining on GitHub and forums about this)
+- Voidcannon: OP 8 -> 10
+- Spreadfire cannon:
+    - damage/shot 75 -> 85
+    - seconds/reload 2.5 -> 3
+- Mortar screen: halved spread per shot
+- Light vulcan: OP 1 -> 2
+- Megabloom projector:
+    - ammo 12 -> 10
+    - max speed 200 -> 225
+    - damage 1000 -> 900
+    - secondary explosions now inherit primary explosion's damage modifiers
+- Bloom auto/launcher:
+    - damage 750 -> 650
+    - secondary explosions now inherit primary explosion's damage modifiers
+- Needle driver:
+    - explosions now inherit base projectile's damage modifiers
+- Ion storm GMLRS: ammo 300 -> 200
+- [REDACTED]:
+    - ammo regen 1/40s -> 1/30s
+    - refire delay 30s -> 10s
+- [REDACTED]:
+    - flux efficiency 1.2 -> 1
+- [REDACTED]:
+    - slightly reduced speed
+- Fixed a rare crash that could happen with [REDACTED]'s ship system with an extreme combat speed multiplier, like x12.
+
 0.7.2:
 - Utilities:
     - Removed a check that caused utils not to work on RAT settlements.
