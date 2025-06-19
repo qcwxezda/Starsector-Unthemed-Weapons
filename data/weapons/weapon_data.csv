@@ -58,13 +58,13 @@ Stinger Swarm Battery,wpnxt_spikebarrage,2,0.5,6000,1800,,265,,30,8,25,210,,,ENE
 Blink Torpedo Launcher,wpnxt_phasetorpedo,3,,500000,2500,,2500,,500,6,35,1,0.03333333,1,HIGH_EXPLOSIVE,3000,,,10,,,,,,,,150,150,20,3600,,,"DO_NOT_AIM, STRIKE","strike20, missile25, restricted, no_drop, invisible_in_codex",,Unknown,,Guided Torpedo,Special,Special,,,Produces a large secondary explosion that deals additional area-based high-explosive damage.,,,,TRUE,40
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Medium Missile
-Bloom Autolauncher,wpnxt_energytorpedomed,3,0.25,2500,1500,,650,,30,15,14,3,0.05,1,ENERGY,1000,,,10,,,,,,,,250,200,8.5,800,,,"DO_NOT_AIM, DO_NOT_CONSERVE, STRIKE, USE_VS_FRIGATES, FIRE_WHEN_INEFFICIENT","strike14, missile14, rare_bp, hist1t, merc",,,,Guided Torpedo,Slow,Excellent,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 650,,,TRUE,30
+Bloom Autolauncher,wpnxt_energytorpedomed,3,0.25,2500,1500,,600,,30,15,14,3,0.05,1,ENERGY,1000,,,10,,,,,,,,250,200,8.5,700,,,"DO_NOT_AIM, DO_NOT_CONSERVE, STRIKE, USE_VS_FRIGATES, FIRE_WHEN_INEFFICIENT","strike14, missile14, rare_bp, hist1t, merc",,,,Guided Torpedo,Slow,Excellent,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 600,,,TRUE,30
 Sprawl MRM,wpnxt_impaler,2,0.5,1500,1800,,300,,25,18,12,20,0.2,5,HIGH_EXPLOSIVE,,,,10,,,,,,,,250,100,9,200,,,DO_NOT_AIM,"missile10, he10, rare_bp, hist1t, merc",,,,Anti Armor,Slow,Excellent,,,,,,,,33
 Paralyzer Rocket Launcher,wpnxt_ionrocket,2,0.5,2000,1500,,150,100,30,20,12,80,,,KINETIC,,,,1,,,,,,,,600,200,3,225,,,,"rocket12, strike8, rare_bp, hist1t, merc",,,,Suppression,Very Fast,None,,,"On hit, spawns up to %s arcs that target nearby enemies, each dealing %s EMP damage.",3 | 500,,,,36
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Small Missile
-Bloom-class Torpedo,wpnxt_energytorpedo,2,0.5,500,1500,,650,,30,15,3,2,,,ENERGY,,,,5,,,,,,,,250,200,8.5,800,,,"DO_NOT_AIM, STRIKE, USE_VS_FRIGATES","strike10, missile2, missile_bp, ind, merc",,,,Guided Torpedo,Slow,Excellent,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 650,,,TRUE,29
+Bloom-class Torpedo,wpnxt_energytorpedo,2,0.5,500,1500,,600,,30,15,3,2,,,ENERGY,,,,5,,,,,,,,250,200,8.5,700,,,"DO_NOT_AIM, STRIKE, USE_VS_FRIGATES","strike10, missile2, missile_bp, ind, merc",,,,Guided Torpedo,Slow,Excellent,,,"On hit, spawns %s additional explosions nearby, each dealing %s energy damage.",5 | 600,,,TRUE,29
 Spiker SRM,wpnxt_minispiker,1,0.75,400,1200,,70,,10,45,6,12,0.571429,4,KINETIC,,,,1.8,4,0.4,,,,,,450,50,5,50,,,"DO_NOT_AIM, DO_NOT_CONSERVE","missile1, kinetic4, missile_bp, ind, merc",,,,Anti Shield,Fast,Good,,,Deals an additional %s soft flux damage on shield hits.,100%,,,,32
 Cluster Mine Launcher,wpnxt_clusterminelauncher,1,0.75,600,1000,,600,,50,30,3,8,,,HIGH_EXPLOSIVE,,,,5,,,,,,,,200,200,10,500,, ,"ANTI_FTR, PD","he4, utility4, missile_bp, ind, merc",,,,Anti Fighter,Very Slow,None,,,,,,,TRUE,35
 ,wpnxt_clusterlauncher_spawn,,,,1200,,250,,,,,,,,HIGH_EXPLOSIVE,,,,,,,,,,,,250,250,5,250,,,SYSTEM,,,,,,,,,,,,,,,35.1

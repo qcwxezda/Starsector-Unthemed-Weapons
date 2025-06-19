@@ -34,7 +34,7 @@ public abstract class GenFortifiedCaches {
     public static float mediumSizeThreshold = 30f, largeSizeThreshold = 40f, hugeSizeThreshold = 50f;
     public static float maxCacheSizeXPMultiplier = 20f;
     public static float baseCacheValue = 5000f, maxCacheSizeValueMultiplier = 79f;
-    public static float systemWeightPenaltyPerCache = 0.3f;
+    public static float systemWeightPenaltyPerCache = 0.6f;
     public static String getCacheStringBySize(CacheSize size) {
         return switch (size) {
             case SMALL -> "Small Fortified Cache";

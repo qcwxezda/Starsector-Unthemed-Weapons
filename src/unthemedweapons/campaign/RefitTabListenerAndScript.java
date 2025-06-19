@@ -214,7 +214,7 @@ public class RefitTabListenerAndScript extends BaseEveryFrameCombatPlugin implem
         List<?> children = (List<?>) ReflectionUtils.invokeMethod(screenPanel, "getChildrenNonCopy");
         for (Object child : children) {
             List<?> subChildren = (List<?>) ReflectionUtils.invokeMethod(child, "getChildrenNonCopy");
-            if (subChildren != null && subChildren.get(0) instanceof CoreUIAPI) {
+            if (subChildren != null && !subChildren.isEmpty() && subChildren.get(0) instanceof CoreUIAPI) {
                 coreUI = (UIPanelAPI) subChildren.get(0);
                 break;
             }
