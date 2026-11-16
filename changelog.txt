@@ -1,3 +1,6 @@
+0.7.5:
+- Version change to 0.98.5a-RC7.
+
 0.7.4:
 - (New game only) Fortified caches are less likely to spawn in the same system as each other.
 - (New game only) Reduced the default number of fortified cache spawns by ~33%.
