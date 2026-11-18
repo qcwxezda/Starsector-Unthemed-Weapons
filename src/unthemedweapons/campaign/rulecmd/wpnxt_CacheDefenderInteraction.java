@@ -126,9 +126,9 @@ public class wpnxt_CacheDefenderInteraction extends BaseCommandPlugin {
             protected void updateEngagementChoice(boolean withText) {
                 super.updateEngagementChoice(withText);
                 if (isPlayerFleetMuchStronger(defenders) && !memory.contains(GenSpecialCaches.cacheKey) && !dialog.getOptionPanel().hasOption(FleetInteractionDialogPluginImpl.OptionId.AUTORESOLVE_PURSUE)) {
-                    dialog.getOptionPanel().removeOption(FleetInteractionDialogPluginImpl.OptionId.LEAVE);
                     String tooltipText = getString("tooltipPursueAutoresolve");
                     dialog.getOptionPanel().addOption("Order your second-in-command to handle it", FleetInteractionDialogPluginImpl.OptionId.AUTORESOLVE_PURSUE, tooltipText);
+                    dialog.getOptionPanel().removeOption(FleetInteractionDialogPluginImpl.OptionId.LEAVE);
                     dialog.getOptionPanel().addOption("Leave", FleetInteractionDialogPluginImpl.OptionId.LEAVE, null);
                     dialog.getOptionPanel().setShortcut(FleetInteractionDialogPluginImpl.OptionId.LEAVE, Keyboard.KEY_ESCAPE, false, false, false, true);
                 }

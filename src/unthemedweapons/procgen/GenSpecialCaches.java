@@ -336,6 +336,7 @@ public abstract class GenSpecialCaches {
         String uniqueWeaponId =  WeaponAPI.WeaponType.BALLISTIC.equals(weaponType) ? "wpnxt_morphcannon" : WeaponAPI.WeaponType.ENERGY.equals(weaponType) ? "wpnxt_energyballlauncher" : "wpnxt_phasetorpedo";
         SalvageEntityGenDataSpec.DropData uniqueWeaponDrop = new SalvageEntityGenDataSpec.DropData();
         uniqueWeaponDrop.addWeapon(uniqueWeaponId, 1f);
+        uniqueWeaponDrop.unaffectedByExtMode = true;
         uniqueWeaponDrop.chances = uniqueWeaponCount;
         cache.addDropRandom(uniqueWeaponDrop);
         SalvageEntityGenDataSpec.DropData randomWeapons = new SalvageEntityGenDataSpec.DropData();
